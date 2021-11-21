@@ -56,7 +56,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <a href="#">View Plots</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-wrench"></i>
+          <i className="fa fa-tree"></i>
           <a href="#">Crop Monitoring</a>
         </div>
         <div className="sidebar__link">
