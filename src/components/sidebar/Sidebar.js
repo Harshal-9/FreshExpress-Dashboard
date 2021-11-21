@@ -7,7 +7,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
       <div className="sidebar__title">
         <div className="sidebar__img">
           <img src={logo} alt="logo" />
-          <h1>Codersbite</h1>
+          <h1>Fresh Express</h1>
         </div>
         <i
           onClick={() => closeSidebar()}
@@ -22,45 +22,57 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-home"></i>
           <a href="#">Dashboard</a>
         </div>
-        <h2>MNG</h2>
+        <h2>Admin Profile</h2>
         <div className="sidebar__link">
-          <i className="fa fa-user-secret" aria-hidden="true"></i>
-          <a href="https://csdd4.csb.app/">Admin Management</a>
+          <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+          <a href="#">View profile</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-building-o"></i>
-          <a href="#">Company Management</a>
+          <i className="fa fa-user-plus" aria-hidden="true"></i>
+          <a href="#">Add new Admin</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-user-o" aria-hidden="true"></i>
+          <a href="#">Add new Farmer</a>
+        </div>
+
+        <h2>Daily Diary</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-plus"></i>
+          <a href="https://csdd4.csb.app/">Add New</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-info"></i>
+          <a href="#">View Diary</a>
+        </div>
+
+        <h2>All Farmers</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-user-circle" aria-hidden="true"></i>
+          <a href="https://csdd4.csb.app/">Farmer Profile</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-street-view"></i>
+          <a href="#">View Plots</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-wrench"></i>
-          <a href="#">Employee Management</a>
+          <a href="#">Crop Monitoring</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-archive"></i>
-          <a href="#">Warehouse</a>
+          <i className="fa fa-line-chart"></i>
+          <a href="#">Reports</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-handshake-o"></i>
-          <a href="#">Contracts</a>
-        </div>
-        <h2>LEAVE</h2>
-        <div className="sidebar__link">
-          <i className="fa fa-question"></i>
-          <a href="#">Requests</a>
+          <i className="fa fa-image"></i>
+          <a href="#">MRL Monitoring</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-sign-out"></i>
-          <a href="#">Leave Policy</a>
+          <i className="fa fa-file-text"></i>
+          <a href="#">Seasonal Reports</a>
         </div>
-        <div className="sidebar__link">
-          <i className="fa fa-calendar-check-o"></i>
-          <a href="#">Special Days</a>
-        </div>
-        <div className="sidebar__link">
-          <i className="fa fa-files-o"></i>
-          <a href="#">Apply for leave</a>
-        </div>
-        <h2>PAYROLL</h2>
+
+        {/* <h2>Crop Monitoring</h2>
         <div className="sidebar__link">
           <i className="fa fa-money"></i>
           <a href="#">Payroll</a>
@@ -68,11 +80,53 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <div className="sidebar__link">
           <i className="fa fa-briefcase"></i>
           <a href="#">Paygrade</a>
+        </div> */}
+        {/* <div className="sidebar__logout">
+          <i className="fa fa-power-off"></i>
+          <a href="#">Log out</a>
+        </div> */}
+        {/* <h2>Reports</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-money"></i>
+          <a href="#">Payroll</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-briefcase"></i>
+          <a href="#">Paygrade</a>
+        </div> */}
+        {/* <div className="sidebar__logout">
+          <i className="fa fa-power-off"></i>
+          <a href="#">Log out</a>
+        </div> */}
+
+        {/* <h2>MRL Monitoring</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-money"></i>
+          <a href="#">Payroll</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-briefcase"></i>
+          <a href="#">Paygrade</a>
+        </div> */}
+        {/* <div className="sidebar__logout">
+          <i className="fa fa-power-off"></i>
+          <a href="#">Log out</a>
+        </div> */}
+
+        <h2>Resource Broadasting</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-newspaper-o"></i>
+          <a href="#">New Broadast</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-book"></i>
+          <a href="#">Past Broadcasts</a>
         </div>
         <div className="sidebar__logout">
           <i className="fa fa-power-off"></i>
           <a href="#">Log out</a>
         </div>
+
       </div>
     </div>
   );
