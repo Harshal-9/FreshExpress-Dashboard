@@ -1,0 +1,26 @@
+/* Farmer Profile Styles */
+
+.FarmerProfile
+{
+    width: 100%;
+}
+
+.FarmerSelectDiv,.PlotSelectDiv
+{
+    margin: 10px;
+    display: inline-block;
+    width: 45%;
+}
+
+.FarmerProfileLabel {
+  text-align: left;
+  display: inline-block;
+  width: 150px;
+  color: green;
+  font-size: large;
+}
+
+.FarmerSelect,.PlotSelect {
+  width: 100%;
+  display: inline-block;
+}

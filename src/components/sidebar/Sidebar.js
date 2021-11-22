@@ -49,7 +49,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <h2>All Farmers</h2>
         <div className="sidebar__link">
           <i className="fa fa-user-circle" aria-hidden="true"></i>
-          <a href="https://csdd4.csb.app/">Farmer Profile</a>
+          <a href="/FarmerProfile">Farmer Profile</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-street-view"></i>
