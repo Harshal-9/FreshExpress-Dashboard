@@ -3,13 +3,25 @@ import Select from "react-select";
 import "./FarmerProfile.css";
 function FarmerProfile() {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabledPlot, setIsDisabledPlot] = useState(true);
 
+  // Function to handle edit of FarmerData form
   function handleEdit(event) {
     event.preventDefault();
     if (isDisabled) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
+    }
+  }
+
+  // Function to handle edit of PlotData form
+  function handleEditPlot(event) {
+    event.preventDefault();
+    if (isDisabledPlot) {
+      setIsDisabledPlot(false);
+    } else {
+      setIsDisabledPlot(true);
     }
   }
 
@@ -87,13 +99,124 @@ function FarmerProfile() {
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
-              {isDisabled ? null : <button>Save Changes</button>}
+              {isDisabled ? null : (
+                <button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setIsDisabled(true);
+                  }}
+                >
+                  Save Changes
+                </button>
+              )}
             </form>
           </div>
         </div>
       </div>
       <hr />
       <br />
+
+      <div
+        className="MyCardColumn"
+        style={{ display: "inline-block", margin: "10px" }}
+      >
+        <div className="MyCard">
+          <div style={{ display: "inline-block" }}>
+            <div style={{ textAlign: "right" }}>
+              <i
+                className="fa fa-edit fa-lg"
+                aria-hidden="true"
+                onClick={handleEditPlot}
+              ></i>
+            </div>
+            <form>
+              <div style={{ display: "inline-block", marginRight: "85px" }}>
+                <label className="FarmerProfileLabel">Plot Number : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Variety : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Soil Type : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Plot Area : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Map Link : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Latitude : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Longitude : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">
+                  Crop Spacing (Betweeen two Rows) :{" "}
+                </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+              </div>
+              <div style={{ display: "inline-block" }}>
+                <label className="FarmerProfileLabel">MH Code : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Village : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Taluka : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">District : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Pin Code : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Tags : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">Notes : </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+                <label className="FarmerProfileLabel">
+                  Crop Spacing (Betweeen two crops ) :{" "}
+                </label>
+                <input type="text" disabled={isDisabledPlot} size="50"></input>
+                <br />
+                <br />
+              </div>
+              <br />
+            </form>
+            {isDisabledPlot ? null : (
+              <button
+                onClick={(event) => {
+                  event.preventDefault();
+                  setIsDisabledPlot(true);
+                }}
+              >
+                Save Changes
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
