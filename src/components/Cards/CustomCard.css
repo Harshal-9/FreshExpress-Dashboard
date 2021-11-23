@@ -6,8 +6,9 @@
 .MyCardColumn {
   /* float: left; */
   width: 100%;
-  padding: 0 10px;
+  /* padding: 0 10px; */
   display: inline-block;
+  text-align: center;
 }
 
 /* Remove extra left and right margins, due to padding */

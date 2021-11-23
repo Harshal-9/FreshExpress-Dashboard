@@ -56,13 +56,13 @@ function FarmerProfile() {
       <br />
       <div
         className="MyCardColumn"
-        style={{ display: "inline-block", margin: "10px" }}
+        style={{ display: "inline-block" }}
       >
         <div className="MyCard">
           <img
             src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
             width="250px"
-            height="250px"
+            height="300px"
             alt="FarmerImg"
             style={{ display: "inline-block", margin: "10px" }}
           ></img>
@@ -99,6 +99,10 @@ function FarmerProfile() {
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
+              <label className="FarmerProfileLabel">Farm Link : </label>
+              <input type="text" disabled={isDisabled} size="100"></input>
+              <br />
+              <br />
               {isDisabled ? null : (
                 <button
                   onClick={(event) => {
@@ -118,7 +122,7 @@ function FarmerProfile() {
 
       <div
         className="MyCardColumn"
-        style={{ display: "inline-block", margin: "10px" }}
+        style={{ display: "inline-block"}}
       >
         <div className="MyCard">
           <div style={{ display: "inline-block" }}>
