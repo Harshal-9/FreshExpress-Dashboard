@@ -52,6 +52,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <a href="/FarmerProfile">Farmer Profile</a>
         </div>
         <div className="sidebar__link">
+          <i className="fa fa-user-circle" aria-hidden="true"></i>
+          <a href="/ViewAllFarmers">All Farmers</a>
+        </div>
+        <div className="sidebar__link">
           <i className="fa fa-street-view"></i>
           <a href="#">View Plots</a>
         </div>

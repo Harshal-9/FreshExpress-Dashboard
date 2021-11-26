@@ -5,6 +5,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./components/Cards/CustomCard.css";
 import FarmerProfile from "./components/main/FarmerProfile";
+import ViewAllFarmers from "./components/main/ViewAllFarmers";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -22,6 +23,9 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/FarmerProfile" element={<FarmerProfile />} />
+        </Routes>
+        <Routes>
+          <Route path="/ViewAllFarmers" element={<ViewAllFarmers />} />
         </Routes>
       </Router>
     </div>
