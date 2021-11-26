@@ -91,7 +91,7 @@ function FarmerProfile() {
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
-              <label className="FarmerProfileLabel">GCN Number : </label>
+              <label className="FarmerProfileLabel">GGN Number : </label>
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
@@ -99,7 +99,7 @@ function FarmerProfile() {
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
-              <label className="FarmerProfileLabel">Farm Link : </label>
+              <label className="FarmerProfileLabel">Farm Map Link : </label>
               <input type="text" disabled={isDisabled} size="100"></input>
               <br />
               <br />
@@ -151,7 +151,7 @@ function FarmerProfile() {
                 <input type="text" disabled={isDisabledPlot} size="50"></input>
                 <br />
                 <br />
-                <label className="FarmerProfileLabel">Map Link : </label>
+                <label className="FarmerProfileLabel">Plot Location Link : </label>
                 <input type="text" disabled={isDisabledPlot} size="50"></input>
                 <br />
                 <br />
@@ -164,7 +164,7 @@ function FarmerProfile() {
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">
-                  Crop Spacing (Betweeen two Rows) :{" "}
+                  Crop :{" "}
                 </label>
                 <input type="text" disabled={isDisabledPlot} size="50"></input>
                 <br />
@@ -200,7 +200,7 @@ function FarmerProfile() {
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">
-                  Crop Spacing (Betweeen two crops ) :{" "}
+                  Crop Spacing :{" "}
                 </label>
                 <input type="text" disabled={isDisabledPlot} size="50"></input>
                 <br />
