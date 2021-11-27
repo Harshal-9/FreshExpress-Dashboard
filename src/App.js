@@ -1,12 +1,12 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./components/Cards/CustomCard.css";
-import FarmerProfile from "./components/main/FarmerProfile";
-import ViewAllFarmers from "./components/main/ViewAllFarmers";
-
+import FarmerProfile from "./components/FarmerProfileSection/FarmerProfile";
+import ViewAllFarmers from "./components/FarmerProfileSection/ViewAllFarmers";
+import AddNewFarmer from "./components/FarmerProfileSection/AddNewFarmer";
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -22,10 +22,14 @@ const App = () => {
       <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
       <Router>
         <Routes>
-          <Route path="/FarmerProfile" element={<FarmerProfile />} />
-        </Routes>
-        <Routes>
-          <Route path="/ViewAllFarmers" element={<ViewAllFarmers />} />
+          <Route exact path="/FarmerProfile" element={<FarmerProfile />} />
+          <Route exact path="/ViewAllFarmers" element={<ViewAllFarmers />} />
+          <Route
+            exact
+            path="/FarmerProfile/:MHCodeFromParams"
+            element={<FarmerProfile flg="1" />}
+          />
+          <Route exact path="/NewFarmer" element={<AddNewFarmer />} />
         </Routes>
       </Router>
     </div>

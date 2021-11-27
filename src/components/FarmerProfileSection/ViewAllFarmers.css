@@ -1,0 +1,36 @@
+div.AllFarmersScroll {
+  margin: 4px, 4px;
+  padding: 4px;
+  /* background-color: #c0eec0; */
+  width: 1200px;
+  overflow: auto;
+  white-space: nowrap;
+  height: 600px;
+}
+
+.AllFarmersScroll table {
+  border-collapse: collapse;
+  /* border-style: solid; */
+  background-color: #c0eec0;
+}
+
+.AllFarmersScroll td {
+  border-style: solid;
+  text-align: center;
+  border-color: white;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.AllFarmersHeaderRow td {
+  padding: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  background-color: #63f163;
+}
+
+.IndividualFarmerRow:hover {
+  background-color: rgb(226, 226, 104);
+  cursor: pointer;
+}

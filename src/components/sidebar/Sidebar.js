@@ -33,7 +33,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user-o" aria-hidden="true"></i>
-          <a href="#">Add new Farmer</a>
+          <a href="/NewFarmer">Add new Farmer</a>
         </div>
 
         <h2>Daily Diary</h2>
@@ -130,7 +130,6 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-power-off"></i>
           <a href="#">Log out</a>
         </div>
-
       </div>
     </div>
   );
