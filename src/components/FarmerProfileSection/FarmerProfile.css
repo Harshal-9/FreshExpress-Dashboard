@@ -1,15 +1,14 @@
 /* Farmer Profile Styles */
 
-.FarmerProfile
-{
-    width: 100%;
+.FarmerProfile {
+  width: 100%;
 }
 
-.FarmerSelectDiv,.PlotSelectDiv
-{
-    margin: 10px;
-    display: inline-block;
-    width: 45%;
+.FarmerSelectDiv,
+.PlotSelectDiv {
+  margin: 10px;
+  display: inline-block;
+  width: 45%;
 }
 
 .FarmerProfileLabel {
@@ -20,7 +19,13 @@
   font-size: large;
 }
 
-.FarmerSelect,.PlotSelect {
+.FarmerSelect,
+.PlotSelect {
   width: 100%;
   display: inline-block;
+}
+
+.FarmerProfileLink:hover {
+  cursor: pointer;
+  background-color: rgb(173, 222, 250);
 }

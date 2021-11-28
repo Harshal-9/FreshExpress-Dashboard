@@ -254,12 +254,23 @@ function FarmerProfile(props) {
               <br />
               <br />
               <label className="FarmerProfileLabel">Farm Map Link : </label>
-              <input
-                type="url"
-                disabled={isDisabled}
-                size="100"
-                value={farmerAllData.farmMap}
-              ></input>
+              {isDisabled ? (
+                <a href={farmerAllData.farmMap}>
+                  <input
+                    type="url"
+                    disabled={true}
+                    size="100"
+                    value={farmerAllData.farmMap}
+                    className="FarmerProfileLink"
+                  ></input>
+                </a>
+              ) : (
+                <input
+                  type="url"
+                  size="100"
+                  value={farmerAllData.farmMap}
+                ></input>
+              )}
               <br />
               <br />
               {isDisabled ? null : (
@@ -331,12 +342,23 @@ function FarmerProfile(props) {
                 <label className="FarmerProfileLabel">
                   Plot Location Link :
                 </label>
-                <input
-                  type="text"
-                  disabled={isDisabledPlot}
-                  size="50"
-                  value={plotAllData.address.mapLink}
-                ></input>
+                {isDisabledPlot ? (
+                  <a href={plotAllData.address.mapLink}>
+                    <input
+                      type="text"
+                      disabled={true}
+                      size="50"
+                      value={plotAllData.address.mapLink}
+                      className="FarmerProfileLink"
+                    ></input>
+                  </a>
+                ) : (
+                  <input
+                    type="text"
+                    size="50"
+                    value={plotAllData.address.mapLink}
+                  ></input>
+                )}
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">Latitude : </label>
