@@ -56,10 +56,12 @@ function FarmerProfile(props) {
     farmerId: "",
   });
 
+  const [cropSpacingString, setCropSpacingString] = useState("");
+
   const [plotAllData, setPlotAllData] = useState({
     farmInformation: {},
     address: { coordinates: {} },
-    other: { tags: "" },
+    other: { tags: [] },
     cropSpacing: { betweenTwoCrops: "", betweenTwoRows: "" },
   });
 
@@ -77,7 +79,7 @@ function FarmerProfile(props) {
           // console.log("Recived by MHCode", data.data, data.data.length);
           if (data.data.length) {
             let receivedData = data.data[0];
-            console.log("Recived by MHCode", receivedData);
+            // console.log("Recived by MHCode", receivedData);
             setFarmerAllData({
               ...receivedData.personalInformation,
               farmerId: receivedData._id,
@@ -103,7 +105,7 @@ function FarmerProfile(props) {
       .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
-        console.log("Data Here :", Data);
+        // console.log("Data Here :", Data);
         setAllFarmers(Data);
       })
       .catch((err) => {
@@ -124,7 +126,6 @@ function FarmerProfile(props) {
             getOptionLabel={(option) => option.farmerName}
             getOptionValue={(option) => option.farmerID}
             onChange={(opt) => {
-              console.log({ FarmerID: opt.farmerID, plot: opt.plot });
               setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
             }}
           />
@@ -146,17 +147,15 @@ function FarmerProfile(props) {
             getOptionValue={(option) => option.MHCode}
             className="PlotSelect"
             onChange={(event) => {
-              console.log(event.MHCode);
               axios
                 .get(
                   "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
                     event.MHCode
                 )
                 .then((data) => {
-                  console.log("Recived by MHCode", data.data, data.data.length);
+                  // console.log("Recived by MHCode", data.data, data.data.length);
                   if (data.data.length) {
                     let receivedData = data.data[0];
-                    // console.log("Recived by MHCode", receivedData.personalInformation);
                     setFarmerAllData({
                       ...receivedData.personalInformation,
                       farmerId: receivedData._id,
@@ -167,9 +166,7 @@ function FarmerProfile(props) {
                         receivedData.plots[i].farmInformation.MHCode ===
                         event.MHCode
                       ) {
-                        // console.log("Matched");
                         setPlotAllData({ ...receivedData.plots[i] });
-                        // console.log(receivedData.plots[i]);
                       }
                     }
                   }
@@ -322,9 +319,8 @@ function FarmerProfile(props) {
                     event.preventDefault();
                     setIsDisabled(true);
 
-                    console.log("Farmer all data", farmerAllData);
                     const { farmerId, ...tempObj } = farmerAllData;
-                    console.log("Sending Data", tempObj, farmerId);
+                    // console.log("Sending Data", tempObj, farmerId);
 
                     axios
                       .post(
@@ -370,6 +366,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.plotNumber}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.plotNumber = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -379,6 +380,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.variety}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.variety = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -388,15 +394,26 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.soilType}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.soilType = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">Plot Area : </label>
                 <input
-                  type="text"
+                  type="number"
+                  style={{ width: "71%" }}
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.plotArea}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.plotArea = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -418,6 +435,11 @@ function FarmerProfile(props) {
                     type="text"
                     size="40"
                     value={plotAllData.address.mapLink}
+                    onChange={(event) => {
+                      const prevData = { ...plotAllData };
+                      prevData.address.mapLink = event.target.value;
+                      setPlotAllData(prevData);
+                    }}
                   ></input>
                 )}
                 <br />
@@ -428,6 +450,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.coordinates.latitude}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.coordinates.latitude = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -437,6 +464,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.coordinates.longitude}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.coordinates.longitude = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -446,6 +478,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.crop}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.crop = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -457,6 +494,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.farmInformation.MHCode}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.farmInformation.MHCode = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -466,6 +508,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.village}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.village = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -475,6 +522,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.taluka}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.taluka = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -484,15 +536,26 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.district}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.district = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">Pin Code : </label>
                 <input
-                  type="text"
+                  type="number"
+                  style={{ width: "71%" }}
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.address.pincode}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.address.pincode = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -502,6 +565,11 @@ function FarmerProfile(props) {
                   disabled={isDisabledPlot}
                   size="40"
                   value={plotAllData.other.tags.toString()}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.other.tags = event.target.value.split(",");
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -510,25 +578,40 @@ function FarmerProfile(props) {
                   type="text"
                   disabled={isDisabledPlot}
                   size="40"
-                  value={
-                    plotAllData.other.notes
-                      ? plotAllData.other.notes
-                      : "No Notes"
-                  }
+                  value={plotAllData.other.notes ? plotAllData.other.notes : ""}
+                  onChange={(event) => {
+                    const prevData = { ...plotAllData };
+                    prevData.other.notes = event.target.value;
+                    setPlotAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
                 <label className="FarmerProfileLabel">Crop Spacing : </label>
-                <input
-                  type="text"
-                  disabled={isDisabledPlot}
-                  size="40"
-                  value={
-                    plotAllData.cropSpacing.betweenTwoRows +
-                    " X " +
-                    plotAllData.cropSpacing.betweenTwoCrops
-                  }
-                ></input>
+                {isDisabledPlot ? (
+                  <input
+                    type="text"
+                    disabled={isDisabledPlot}
+                    size="40"
+                    value={
+                      plotAllData.cropSpacing.betweenTwoRows
+                        ? plotAllData.cropSpacing.betweenTwoRows +
+                          " X " +
+                          plotAllData.cropSpacing.betweenTwoCrops
+                        : ""
+                    }
+                  ></input>
+                ) : (
+                  <input
+                    type="text"
+                    disabled={isDisabledPlot}
+                    size="40"
+                    value={cropSpacingString}
+                    onChange={(event) => {
+                      setCropSpacingString(event.target.value);
+                    }}
+                  ></input>
+                )}
                 <br />
                 <br />
               </div>
@@ -538,7 +621,49 @@ function FarmerProfile(props) {
               <button
                 onClick={(event) => {
                   event.preventDefault();
+
+                  // validating crop spacing
+                  const str = cropSpacingString;
+                  const prevData = { ...plotAllData };
+                  if (str.includes("X")) {
+                    const arr = str.split("X");
+                    if (isNaN(arr[0].trim()) || isNaN(arr[1].trim())) {
+                      alert("Enter crop spacing in number X number format");
+                      return;
+                    }
+                    prevData.cropSpacing.betweenTwoRows = arr[0].trim();
+                    prevData.cropSpacing.betweenTwoCrops = arr[1].trim();
+                  } else if (str.includes("x")) {
+                    const arr = str.split("x");
+                    if (isNaN(arr[0].trim()) || isNaN(arr[1].trim())) {
+                      alert("Enter crop spacing in number X number format");
+                      return;
+                    }
+                    prevData.cropSpacing.betweenTwoRows = arr[0].trim();
+                    prevData.cropSpacing.betweenTwoCrops = arr[1].trim();
+                  } else if (str === "") {
+                  } else {
+                    alert("Enter crop spacing in aXb format");
+                    return;
+                  }
+                  setPlotAllData(prevData);
+
+                  // Disabling all inputs on clicking button
                   setIsDisabledPlot(true);
+                  console.log("Data of plot to submit : ", plotAllData);
+
+                  axios
+                    .post(
+                      "https://immense-beach-88770.herokuapp.com/farmers/plots/edit/" +
+                        plotAllData._id,
+                      plotAllData
+                    )
+                    .then((res) => {
+                      console.log("res", res);
+                    })
+                    .catch((err) => {
+                      console.log("err", err);
+                    });
                 }}
               >
                 Save Changes
