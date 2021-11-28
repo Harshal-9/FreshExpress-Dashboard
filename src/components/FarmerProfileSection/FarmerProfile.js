@@ -9,6 +9,12 @@ function FarmerProfile(props) {
   const { MHCodeFromParams } = useParams();
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDisabledPlot, setIsDisabledPlot] = useState(true);
+  const [allFarmers, setAllFarmers] = useState({
+    farmerID: "None",
+    plot: [],
+    farmerName: "None",
+  });
+  const [selectedFarmer, setSelectedFarmer] = useState({});
 
   // Function to handle edit of FarmerData form
   function handleEdit(event) {
@@ -89,6 +95,16 @@ function FarmerProfile(props) {
           console.log("Error:", err);
         });
     }
+    axios
+      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .then((res) => {
+        let Data = [...res.data];
+        console.log("Data Here :", Data);
+        setAllFarmers(Data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   }, []);
 
   return (
@@ -98,24 +114,63 @@ function FarmerProfile(props) {
         <div className="FarmerSelectDiv">
           <h2>Select Farmer:</h2>
           <Select
-            options={[
-              { label: "one", value: 1 },
-              { label: "two", value: 2 },
-              { label: "three", value: 3 },
-            ]}
+            options={allFarmers}
             className="FarmerSelect"
+            getOptionLabel={(option) => option.farmerName}
+            getOptionValue={(option) => option.farmerID}
+            onChange={(opt) => {
+              console.log({ FarmerID: opt.farmerID, plot: opt.plot });
+              setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
+            }}
           />
         </div>
 
         <div className="PlotSelectDiv">
           <h2>Select Plot:</h2>
           <Select
-            options={[
-              { label: "one", value: 1 },
-              { label: "two", value: 2 },
-              { label: "three", value: 3 },
-            ]}
+            options={selectedFarmer.plot}
+            getOptionLabel={(option) =>
+              "(" +
+              option.plot +
+              ") " +
+              option.farmerName +
+              " - " +
+              option.MHCode
+            }
+            getOptionValue={(option) => option.MHCode}
             className="PlotSelect"
+            onChange={(event) => {
+              console.log(event.MHCode);
+              axios
+                .get(
+                  "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
+                    event.MHCode
+                )
+                .then((data) => {
+                  console.log("Recived by MHCode", data.data, data.data.length);
+                  if (data.data.length) {
+                    let receivedData = data.data[0];
+                    // console.log("Recived by MHCode", receivedData.personalInformation);
+                    setFarmerAllData({
+                      ...receivedData.personalInformation,
+                    });
+
+                    for (let i = 0; i < receivedData.plots.length; i++) {
+                      if (
+                        receivedData.plots[i].farmInformation.MHCode ===
+                        event.MHCode
+                      ) {
+                        // console.log("Matched");
+                        setPlotAllData({ ...receivedData.plots[i] });
+                        // console.log(receivedData.plots[i]);
+                      }
+                    }
+                  }
+                })
+                .catch((err) => {
+                  console.log("Error:", err);
+                });
+            }}
           />
         </div>
       </div>
@@ -200,7 +255,7 @@ function FarmerProfile(props) {
               <br />
               <label className="FarmerProfileLabel">Farm Map Link : </label>
               <input
-                type="text"
+                type="url"
                 disabled={isDisabled}
                 size="100"
                 value={farmerAllData.farmMap}
