@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ViewAllFarmers.css";
+import Select from "react-select";
 
 function SingleFarmerRow(props) {
   let farmerData = props;
@@ -66,8 +67,17 @@ function ViewAllFarmers() {
   }, []);
 
   return (
-    <div>
+    <div className="viewAllFarmersMainDiv">
+      <br />
       <h2>ALL FARMERS</h2>
+      <br />
+      <Select className="filter" placeholder="Search Farmer Name" />
+      <Select className="filter" placeholder="Search GGN" />
+      <Select className="filter" placeholder="Search MHCode" />
+      <Select className="filter" placeholder="Search Village" />
+      <Select className="filter" placeholder="Search Tags" />
+      <br />
+      <br />
       <div class="AllFarmersScroll">
         <table>
           <tr className="AllFarmersHeaderRow">

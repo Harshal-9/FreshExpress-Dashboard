@@ -16,16 +16,24 @@
   display: inline-block;
   width: 150px;
   color: green;
-  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
 }
 
 .FarmerSelect,
 .PlotSelect {
   width: 100%;
   display: inline-block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .FarmerProfileLink:hover {
   cursor: pointer;
-  background-color: rgb(173, 222, 250);
+  /* background-color: rgb(173, 222, 250); */
+  background-color: #b7e999;
+}
+
+input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
 }

@@ -1,3 +1,8 @@
+.viewAllFarmersMainDiv {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
 div.AllFarmersScroll {
   margin: 4px, 4px;
   padding: 4px;
@@ -33,4 +38,9 @@ div.AllFarmersScroll {
 .IndividualFarmerRow:hover {
   background-color: rgb(226, 226, 104);
   cursor: pointer;
+}
+
+.filter {
+  width: 50%;
+  display: inline-block;
 }

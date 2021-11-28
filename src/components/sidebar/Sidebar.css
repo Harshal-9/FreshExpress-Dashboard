@@ -42,7 +42,7 @@
   margin-top: 15px;
   margin-bottom: 5px;
   padding: 0 10px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .sidebar__link {
@@ -64,7 +64,7 @@
 .sidebar__link > a {
   text-decoration: none;
   color: #a5aaad;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .sidebar__link > i {
@@ -81,7 +81,7 @@
 .sidebar__logout > a {
   text-decoration: none;
   color: #e65061;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
