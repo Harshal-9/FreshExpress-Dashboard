@@ -46,13 +46,13 @@ function FarmerProfile(props) {
 
   // Doing for MH code
   const [farmerAllData, setFarmerAllData] = useState({
-    name: "Harshal Kodgire",
-    familyName: "Harshal Kodgire",
-    mobileNumber: "8485016578",
-    emailId: "a@b",
-    GGN: "G123",
-    consultantName: "Rutwik Sawant",
-    farmMap: "https://abc.com",
+    name: "",
+    familyName: "",
+    mobileNumber: "",
+    emailId: "",
+    GGN: "",
+    consultantName: "",
+    farmMap: "",
   });
 
   const [plotAllData, setPlotAllData] = useState({
