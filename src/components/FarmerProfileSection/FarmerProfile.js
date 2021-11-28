@@ -249,7 +249,7 @@ function FarmerProfile(props) {
                 type="text"
                 disabled={isDisabled}
                 size="100"
-                value={plotAllData.other.consultantName}
+                value={farmerAllData.consultantName}
               ></input>
               <br />
               <br />
@@ -449,7 +449,11 @@ function FarmerProfile(props) {
                   type="text"
                   disabled={isDisabledPlot}
                   size="50"
-                  value={plotAllData.other.notes}
+                  value={
+                    plotAllData.other.notes
+                      ? plotAllData.other.notes
+                      : "No Notes"
+                  }
                 ></input>
                 <br />
                 <br />
