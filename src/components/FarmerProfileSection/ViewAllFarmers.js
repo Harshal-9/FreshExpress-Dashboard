@@ -9,12 +9,11 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { MultiSelect } from "react-multi-select-component";
 
+// Below functions for adding search icon in reactselect
 library.add(faSearch);
-
 const CaretDownIcon = () => {
   return <FontAwesomeIcon icon="search" />;
 };
-
 const DropdownIndicator = (props) => {
   return (
     <components.DropdownIndicator {...props}>
@@ -23,6 +22,7 @@ const DropdownIndicator = (props) => {
   );
 };
 
+// Single row component
 function SingleFarmerRow(props) {
   let farmerData = props;
 
@@ -57,8 +57,12 @@ function SingleFarmerRow(props) {
 
 function ViewAllFarmers() {
   const navigate = useNavigate();
-  const [allFarmersArray, setAllFarmersArray] = useState([]);
 
+  // useStates for Array of components for allFarmerData and filteredData
+  const [allFarmersArray, setAllFarmersArray] = useState([]);
+  const [filteredArray, setFilteredArray] = useState([]);
+
+  // useStates for multiSelect filters selected value array
   const [selectedMultiSelectVillage, setSelectedMultiSelectVillage] = useState(
     []
   );
@@ -67,6 +71,7 @@ function ViewAllFarmers() {
     []
   );
 
+  // Object to save all fiters data i.e options for all reactselect recieved from db
   const [allFiltersData, setAllFiltersData] = useState({
     GGN: [],
     farmerName: [],
@@ -76,7 +81,40 @@ function ViewAllFarmers() {
     tag: [],
   });
 
+  // function to handle farmerName filter
+  function handleFarmerFilter(event) {
+    const tempArr = [];
+    for (let i = 0; i < allFarmersArray.length; i++) {
+      if (allFarmersArray[i].props.personalInformation.name === event.label)
+        tempArr.push(allFarmersArray[i]);
+    }
+    setFilteredArray(tempArr);
+  }
+
+  // function to handle GGN filter
+  function handleGGNFilter(event) {
+    const tempArr = [];
+    for (let i = 0; i < allFarmersArray.length; i++) {
+      if (allFarmersArray[i].props.personalInformation.GGN === event.label)
+        tempArr.push(allFarmersArray[i]);
+    }
+    setFilteredArray(tempArr);
+  }
+
+  // function to handle GGN filter
+  function handleMHCodeFilter(event) {
+    const tempArr = [];
+    for (let i = 0; i < allFarmersArray.length; i++) {
+      if (
+        allFarmersArray[i].props.plotData.farmInformation.MHCode === event.label
+      )
+        tempArr.push(allFarmersArray[i]);
+    }
+    setFilteredArray(tempArr);
+  }
+
   useEffect(() => {
+    // for getting all farmers from backend
     axios
       .get("https://immense-beach-88770.herokuapp.com/farmers")
       .then((data) => {
@@ -84,8 +122,18 @@ function ViewAllFarmers() {
 
         for (let i = 0; i < receivedData.length; i++) {
           for (let j = 0; j < receivedData[i].plots.length; j++) {
-            // console.log(receivedData[i]);
+            // setting AllFarmerArray initally to all data
             setAllFarmersArray((arr) =>
+              arr.concat(
+                <SingleFarmerRow
+                  personalInformation={receivedData[i].personalInformation}
+                  plotData={receivedData[i].plots[j]}
+                />
+              )
+            );
+
+            // setting filteredArray initally to all data
+            setFilteredArray((arr) =>
               arr.concat(
                 <SingleFarmerRow
                   personalInformation={receivedData[i].personalInformation}
@@ -99,10 +147,12 @@ function ViewAllFarmers() {
       .catch((err) => {
         console.log(err);
       });
+
+    // for getting all fiters data from backend
     axios
       .get("https://immense-beach-88770.herokuapp.com/filters")
       .then((data) => {
-        console.log("Data", data.data[0]);
+        // console.log("Data", data.data[0]);
         setAllFiltersData(data.data[0]);
 
         const recievedObj = data.data[0];
@@ -117,14 +167,14 @@ function ViewAllFarmers() {
         };
         for (let item in recievedObj) {
           for (let arrItem in recievedObj[item]) {
-            console.log(recievedObj[item][arrItem], item);
+            // console.log(recievedObj[item][arrItem], item);
             makeDataForOptions[item].push({
               label: recievedObj[item][arrItem],
               value: recievedObj[item][arrItem],
             });
           }
         }
-        console.log("makeDataForOptions", makeDataForOptions);
+        // console.log("makeDataForOptions", makeDataForOptions);
         setAllFiltersData(makeDataForOptions);
       })
       .catch((err) => {
@@ -143,18 +193,21 @@ function ViewAllFarmers() {
         placeholder="Search Farmer Name"
         components={{ DropdownIndicator }}
         options={allFiltersData.farmerName}
+        onChange={handleFarmerFilter}
       />
       <Select
         className="searching"
         placeholder="Search GGN"
         components={{ DropdownIndicator }}
         options={allFiltersData.GGN}
+        onChange={handleGGNFilter}
       />
       <Select
         className="searching"
         placeholder="Search MHCode"
         components={{ DropdownIndicator }}
         options={allFiltersData.MHCode}
+        onChange={handleMHCodeFilter}
       />
       <br />
       <br />
@@ -193,7 +246,7 @@ function ViewAllFarmers() {
       />
       <br />
       <br />
-      <div class="AllFarmersScroll">
+      <div className="AllFarmersScroll">
         <table>
           <tr className="AllFarmersHeaderRow">
             <td>Name</td>
@@ -209,7 +262,7 @@ function ViewAllFarmers() {
             <td>Crop Spacing</td>
             <td>Tags</td>
           </tr>
-          {allFarmersArray}
+          {filteredArray}
         </table>
       </div>
     </div>
