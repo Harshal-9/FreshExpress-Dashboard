@@ -3,6 +3,8 @@ import Select from "react-select";
 import "./FarmerProfile.css";
 import axios from "axios";
 import { useParams } from "react-router";
+import { ToastContainer } from "react-toastify";
+import UpdateSuccessToast from "../Toasts/UpdateSuccessToast";
 
 function FarmerProfile(props) {
   // console.log("props", props);
@@ -332,6 +334,7 @@ function FarmerProfile(props) {
                       )
                       .then((res) => {
                         console.log("Response", res);
+                        UpdateSuccessToast();
                       })
                       .catch((err) => {
                         console.log("Error", err);
@@ -347,7 +350,6 @@ function FarmerProfile(props) {
       </div>
       <hr />
       <br />
-
       <div className="MyCardColumn" style={{ display: "inline-block" }}>
         <div className="MyCard">
           <div style={{ display: "inline-block" }}>
@@ -660,6 +662,7 @@ function FarmerProfile(props) {
                     )
                     .then((res) => {
                       console.log("res", res);
+                      UpdateSuccessToast();
                     })
                     .catch((err) => {
                       console.log("err", err);
@@ -672,6 +675,7 @@ function FarmerProfile(props) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
