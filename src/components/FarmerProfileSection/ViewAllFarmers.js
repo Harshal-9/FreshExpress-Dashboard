@@ -2,7 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ViewAllFarmers.css";
-import Select from "react-select";
+
+import Select, { components } from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faSearch);
+
+const CaretDownIcon = () => {
+  return <FontAwesomeIcon icon="search" />;
+};
+
+const DropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <CaretDownIcon />
+    </components.DropdownIndicator>
+  );
+};
 
 function SingleFarmerRow(props) {
   let farmerData = props;
@@ -71,9 +89,23 @@ function ViewAllFarmers() {
       <br />
       <h2>ALL FARMERS</h2>
       <br />
-      <Select className="filter" placeholder="Search Farmer Name" />
-      <Select className="filter" placeholder="Search GGN" />
-      <Select className="filter" placeholder="Search MHCode" />
+      <Select
+        className="searching"
+        placeholder="Search Farmer Name"
+        components={{ DropdownIndicator }}
+      />
+      <Select
+        className="searching"
+        placeholder="Search GGN"
+        components={{ DropdownIndicator }}
+      />
+      <Select
+        className="searching"
+        placeholder="Search MHCode"
+        components={{ DropdownIndicator }}
+      />
+      <br />
+      <br />
       <Select className="filter" placeholder="Search Village" />
       <Select className="filter" placeholder="Search Tags" />
       <br />
