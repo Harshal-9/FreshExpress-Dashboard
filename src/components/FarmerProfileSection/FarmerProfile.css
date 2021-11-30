@@ -20,6 +20,15 @@
   font-size: 15px;
 }
 
+.FarmerProfileLabel2 {
+  text-align: left;
+  display: inline-block;
+  width: 170px;
+  color: green;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+}
+
 .FarmerSelect,
 .PlotSelect {
   width: 100%;

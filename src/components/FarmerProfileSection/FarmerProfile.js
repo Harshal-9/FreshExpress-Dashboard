@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { FailureToast } from "../Toasts/AllToasts";
 import FarmerPersonalInfo from "./FarmerPersonalInfoCard";
 import FarmerPlotDataCard from "./FarmerPlotDataCard";
+import FarmerSeasonalDataCard from "./FarmerSeasonDataCard";
 
 function FarmerProfile(props) {
   const { MHCodeFromParams } = useParams();
@@ -173,6 +174,8 @@ function FarmerProfile(props) {
         sendBackPlotAllData={sendBackPlotAllData}
       />
       <hr />
+      <br />
+      <FarmerSeasonalDataCard />
       <br />
       <ToastContainer />
     </div>
