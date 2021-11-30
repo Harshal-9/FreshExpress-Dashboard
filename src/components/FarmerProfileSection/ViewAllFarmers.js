@@ -71,6 +71,11 @@ function ViewAllFarmers() {
     []
   );
 
+  // useStates for selected values
+  const [selectedFarmerValue, setSelectedFarmerValue] = useState(null);
+  const [selectedGGNValue, setSelectedGGNValue] = useState(null);
+  const [selectedMHCodeValue, setSelectedMHCodeValue] = useState(null);
+
   // Object to save all fiters data i.e options for all reactselect recieved from db
   const [allFiltersData, setAllFiltersData] = useState({
     GGN: [],
@@ -260,21 +265,44 @@ function ViewAllFarmers() {
         placeholder="Search Farmer Name"
         components={{ DropdownIndicator }}
         options={allFiltersData.farmerName}
-        onChange={handleFarmerFilter}
+        value={selectedFarmerValue}
+        onChange={(event) => {
+          setSelectedFarmerValue(event);
+          // Farmer ko select kiya toh baki dono ko clear karne ke liye
+          setSelectedGGNValue(null);
+          setSelectedMHCodeValue(null);
+          handleFarmerFilter(event);
+        }}
       />
       <Select
         className="searching"
         placeholder="Search GGN"
         components={{ DropdownIndicator }}
         options={allFiltersData.GGN}
-        onChange={handleGGNFilter}
+        value={selectedGGNValue}
+        onChange={(event) => {
+          setSelectedGGNValue(event);
+          // GGN ko select kiya toh baki dono ko clear karne ke liye
+          setSelectedFarmerValue(null);
+          setSelectedMHCodeValue(null);
+
+          handleGGNFilter(event);
+        }}
       />
       <Select
         className="searching"
         placeholder="Search MHCode"
         components={{ DropdownIndicator }}
         options={allFiltersData.MHCode}
-        onChange={handleMHCodeFilter}
+        value={selectedMHCodeValue}
+        onChange={(event) => {
+          setSelectedMHCodeValue(event);
+          // MHCode ko select kiya toh baki dono ko clear karne ke liye
+          setSelectedFarmerValue(null);
+          setSelectedGGNValue(null);
+
+          handleMHCodeFilter(event);
+        }}
       />
       <br />
       <br />
@@ -316,7 +344,20 @@ function ViewAllFarmers() {
       <button className="applyFilterButton" onClick={handleFilterIntersection}>
         Apply
       </button>
-      <button className="applyFilterClearButton">Clear</button>
+      <button
+        className="applyFilterClearButton"
+        onClick={() => {
+          setFilteredArray(allFarmersArray);
+          setSelectedMultiSelectVillage([]);
+          setSelectedMultiSelectVariety([]);
+          setSelectedMultiSelectTag([]);
+          setSelectedFarmerValue(null);
+          setSelectedGGNValue(null);
+          setSelectedMHCodeValue(null);
+        }}
+      >
+        Clear
+      </button>
       <br />
       <br />
       <div className="AllFarmersScroll">

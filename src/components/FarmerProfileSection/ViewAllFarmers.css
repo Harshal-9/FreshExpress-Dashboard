@@ -45,6 +45,7 @@ div.AllFarmersScroll {
   margin-left: 1.5%;
   margin-right: 1.5%;
   display: inline-block;
+  background-color: #c0eec0;
 }
 
 .searching {
@@ -52,6 +53,7 @@ div.AllFarmersScroll {
   margin-right: 1.5%;
   margin-left: 1.5%;
   display: inline-block;
+  background-color: #c0eec0;
 }
 
 .applyFilterClearButton,
@@ -59,9 +61,7 @@ div.AllFarmersScroll {
   margin: 0 1.5%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
-  /* background-color: #cc4233; */
   background-color: #265acc;
-
   border: none;
   color: white;
   /* color: black; */
@@ -72,4 +72,10 @@ div.AllFarmersScroll {
   font-size: 16px;
   border-radius: 5%;
   cursor: pointer;
+}
+
+.applyFilterClearButton:hover,
+.applyFilterButton:hover {
+  background-color: #63f163;
+  color: black;
 }
