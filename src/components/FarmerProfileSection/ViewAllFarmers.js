@@ -113,6 +113,73 @@ function ViewAllFarmers() {
     setFilteredArray(tempArr);
   }
 
+  // function to handle all filters Intersection
+  function handleFilterIntersection(event) {
+    let tempTagArray = [];
+    let tempVillageArray = [];
+    let tempVarietyArray = [];
+
+    // pushing all farmers with selected village in tempVillageArray
+    for (let i = 0; i < selectedMultiSelectVillage.length; i++) {
+      for (let j = 0; j < allFarmersArray.length; j++) {
+        if (
+          selectedMultiSelectVillage[i].value ===
+          allFarmersArray[j].props.plotData.address.village
+        ) {
+          tempVillageArray.push(allFarmersArray[j]);
+        }
+      }
+    }
+
+    // pushing all farmers with selected variety in tempVillageArray
+    for (let i = 0; i < selectedMultiSelectVariety.length; i++) {
+      for (let j = 0; j < allFarmersArray.length; j++) {
+        if (
+          selectedMultiSelectVariety[i].value ===
+          allFarmersArray[j].props.plotData.farmInformation.variety
+        ) {
+          tempVarietyArray.push(allFarmersArray[j]);
+        }
+      }
+    }
+
+    // pushing all farmers with selected tags in tempTagArray
+    for (let i = 0; i < selectedMultiSelectTag.length; i++) {
+      for (let j = 0; j < allFarmersArray.length; j++) {
+        if (
+          allFarmersArray[j].props.plotData.other.tags.includes(
+            selectedMultiSelectTag[i].value
+          ) &&
+          !tempTagArray.includes(allFarmersArray[j])
+        ) {
+          tempTagArray.push(allFarmersArray[j]);
+        }
+      }
+    }
+
+    // If any filter is not selected then push all farmers in temp array of that filter
+    if (selectedMultiSelectVillage.length === 0)
+      tempVillageArray = [...allFarmersArray];
+
+    if (selectedMultiSelectVariety.length === 0)
+      tempVarietyArray = [...allFarmersArray];
+
+    if (selectedMultiSelectTag.length === 0)
+      tempTagArray = [...allFarmersArray];
+
+    console.log("Variety Based : ", tempVarietyArray);
+    console.log("Village Based : ", tempVillageArray);
+    console.log("Tag based : ", tempTagArray);
+
+    const intersectionData = [tempVillageArray, tempVarietyArray, tempTagArray];
+    const result = intersectionData.reduce((a, b) =>
+      a.filter((c) => b.includes(c))
+    );
+
+    console.log("FinalData", result);
+    setFilteredArray(result);
+  }
+
   useEffect(() => {
     // for getting all farmers from backend
     axios
@@ -226,16 +293,6 @@ function ViewAllFarmers() {
       />
       <MultiSelect
         className="filter"
-        options={allFiltersData.tag}
-        value={selectedMultiSelectTag}
-        onChange={setSelectedMultiSelectTag}
-        overrideStrings={{
-          selectSomeItems: "Filter Tags",
-          allItemsAreSelected: "All tags selected",
-        }}
-      />
-      <MultiSelect
-        className="filter"
         options={allFiltersData.variety}
         value={selectedMultiSelectVariety}
         onChange={setSelectedMultiSelectVariety}
@@ -244,6 +301,22 @@ function ViewAllFarmers() {
           allItemsAreSelected: "All varieties selected",
         }}
       />
+      <MultiSelect
+        className="filter"
+        options={allFiltersData.tag}
+        value={selectedMultiSelectTag}
+        onChange={setSelectedMultiSelectTag}
+        overrideStrings={{
+          selectSomeItems: "Filter Tags",
+          allItemsAreSelected: "All tags selected",
+        }}
+      />
+      <br />
+      <br />
+      <button className="applyFilterButton" onClick={handleFilterIntersection}>
+        Apply
+      </button>
+      <button className="applyFilterClearButton">Clear</button>
       <br />
       <br />
       <div className="AllFarmersScroll">

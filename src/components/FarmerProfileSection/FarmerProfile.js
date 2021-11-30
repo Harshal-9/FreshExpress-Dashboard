@@ -4,7 +4,7 @@ import "./FarmerProfile.css";
 import axios from "axios";
 import { useParams } from "react-router";
 import { ToastContainer } from "react-toastify";
-import UpdateSuccessToast from "../Toasts/UpdateSuccessToast";
+import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
 
 function FarmerProfile(props) {
   // console.log("props", props);
@@ -101,6 +101,7 @@ function FarmerProfile(props) {
         })
         .catch((err) => {
           console.log("Error:", err);
+          FailureToast();
         });
     }
     axios
@@ -112,6 +113,7 @@ function FarmerProfile(props) {
       })
       .catch((err) => {
         console.log("err", err);
+        FailureToast();
       });
   }, []);
 
@@ -175,6 +177,7 @@ function FarmerProfile(props) {
                 })
                 .catch((err) => {
                   console.log("Error:", err);
+                  FailureToast();
                 });
             }}
           />
@@ -338,6 +341,7 @@ function FarmerProfile(props) {
                       })
                       .catch((err) => {
                         console.log("Error", err);
+                        FailureToast();
                       });
                   }}
                 >
@@ -666,6 +670,7 @@ function FarmerProfile(props) {
                     })
                     .catch((err) => {
                       console.log("err", err);
+                      FailureToast();
                     });
                 }}
               >
