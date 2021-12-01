@@ -1,0 +1,46 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 50%;
+}
+
+.modal_content {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+  position: absolute;
+  width: 74.5%;
+
+  /* for scrollable */
+  /* margin: 4px, 4px;
+  padding: 4px;
+  overflow: auto;
+  white-space: nowrap;
+  height: 150px; */
+}
+
+.previousLinks {
+  margin: 4px, 4px;
+  padding: 4px;
+  overflow: auto;
+  white-space: nowrap;
+  height: 150px;
+}
+
+.linkLi {
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  width: 75%;
+}
+
+.close {
+  color: green;
+  float: right;
+}
+
+.close:hover {
+  color: rgb(67, 241, 67);
+  cursor: pointer;
+}

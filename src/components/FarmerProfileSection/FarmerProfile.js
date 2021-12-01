@@ -28,6 +28,11 @@ function FarmerProfile(props) {
     setPlotAllData(data);
   }
 
+  // function to get data from FarmerSeasonalDataCard
+  function sendBackSeasonalAllData(data) {
+    setSeasonalAllData(data);
+  }
+
   // Doing for MH code
   const [farmerAllData, setFarmerAllData] = useState({
     name: "",
@@ -46,6 +51,47 @@ function FarmerProfile(props) {
     other: { tags: [] },
     cropSpacing: { betweenTwoCrops: "", betweenTwoRows: "" },
   });
+
+  const dummyEmptySeasonalAllData = [
+    {
+      MRLResults: {
+        maxIndividual: "",
+        sum: "",
+        numberOfDetection: "",
+        redListChemicals: [],
+        MRLReportLink: "",
+      },
+      cropMilestoneDates: {
+        plantation: "",
+        foundationPruning: "",
+        fruitPruning: "",
+        readyToHarvest: "",
+        actualHarvest: "",
+      },
+      yield: {
+        exportTonnage: null,
+        localTonnage: null,
+      },
+      qualityJotforms: {
+        knittingQCLinks: [],
+        packingQCLinks: [],
+        FGQCLinks: [],
+        onArrivalQCLinks: [],
+        preharvestQCLink: "",
+        primaryIssueFaced: "",
+        invardQCLink: "",
+      },
+      farmerId: "",
+      plotId: "",
+      year: null,
+      primaryQualityIssuesFaced: [],
+      quality: "",
+    },
+  ];
+
+  const [seasonalAllData, setSeasonalAllData] = useState(
+    dummyEmptySeasonalAllData
+  );
 
   useEffect(() => {
     // console.log(MHCodeFromParams);
@@ -149,7 +195,26 @@ function FarmerProfile(props) {
                         receivedData.plots[i].farmInformation.MHCode ===
                         event.MHCode
                       ) {
+                        //setting plot data of selected plot
                         setPlotAllData({ ...receivedData.plots[i] });
+
+                        // fetching seasonal data of all years of a selected farmer's selected plot
+                        axios
+                          .get(
+                            "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
+                              receivedData.plots[i]._id
+                          )
+                          .then((data) => {
+                            // console.log("Seasonal data", data.data[0]);
+                            if (data.data.length) setSeasonalAllData(data.data);
+                            else {
+                              console.log(dummyEmptySeasonalAllData);
+                              setSeasonalAllData(dummyEmptySeasonalAllData);
+                            }
+                          })
+                          .catch((err) => {
+                            console.log("Error", err);
+                          });
                       }
                     }
                   }
@@ -175,7 +240,10 @@ function FarmerProfile(props) {
       />
       <hr />
       <br />
-      <FarmerSeasonalDataCard />
+      <FarmerSeasonalDataCard
+        seasonalAllData={seasonalAllData}
+        sendBackSeasonalAllData={sendBackSeasonalAllData}
+      />
       <br />
       <ToastContainer />
     </div>
