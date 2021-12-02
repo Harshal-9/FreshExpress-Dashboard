@@ -3,6 +3,8 @@ import Select from "react-select";
 import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
+  // console.log(props);
+
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
 
   const [seasonalAllDataReceived, setSeasonalAllDataReceived] = useState(
@@ -34,16 +36,40 @@ function FarmerSeasonalDataCard(props) {
     }
   }
 
+  function dataFromPopup(receivedData) {
+    console.log("Obtained here", receivedData);
+    let tempData = { ...seasonalAllDataReceived };
+
+    switch (receivedData.data) {
+      case "knittingQCLinks":
+        tempData.qualityJotforms.knittingQCLinks = receivedData.modifiedData;
+        setSeasonalAllDataReceived(tempData);
+        break;
+
+      case "onArrivalQCLinks":
+        tempData.qualityJotforms.onArrivalQCLinks = receivedData.modifiedData;
+        setSeasonalAllDataReceived(tempData);
+        break;
+
+      case "packingQCLinks":
+        tempData.qualityJotforms.packingQCLinks = receivedData.modifiedData;
+        setSeasonalAllDataReceived(tempData);
+        break;
+
+      case "FGQCLinks":
+        tempData.qualityJotforms.FGQCLinks = receivedData.modifiedData;
+        setSeasonalAllDataReceived(tempData);
+        break;
+
+      default:
+    }
+  }
+
   return (
     <div className="MyCardColumn" style={{ display: "inline-block" }}>
       <div className="MyCard" style={{ width: "98%" }}>
         <Select
           placeholder="Select a year"
-          // options={[
-          //   { label: "2019", value: "2019" },
-          //   { label: "2020", value: "2020" },
-          //   { label: "2021", value: "2021" },
-          // ]}
           options={getYears(props.seasonalAllData)}
           onChange={(event) => {
             // console.log(event);
@@ -75,11 +101,11 @@ function FarmerSeasonalDataCard(props) {
                 value={dateInString(
                   seasonalAllDataReceived.cropMilestoneDates.plantation
                 )}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.plotNumber = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.plantation = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -94,11 +120,12 @@ function FarmerSeasonalDataCard(props) {
                 value={dateInString(
                   seasonalAllDataReceived.cropMilestoneDates.foundationPruning
                 )}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.variety = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.foundationPruning =
+                    event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -111,11 +138,12 @@ function FarmerSeasonalDataCard(props) {
                 value={dateInString(
                   seasonalAllDataReceived.cropMilestoneDates.actualHarvest
                 )}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.variety = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.actualHarvest =
+                    event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -128,11 +156,11 @@ function FarmerSeasonalDataCard(props) {
                 value={dateInString(
                   seasonalAllDataReceived.cropMilestoneDates.fruitPruning
                 )}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.variety = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.fruitPruning = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -145,11 +173,12 @@ function FarmerSeasonalDataCard(props) {
                 value={dateInString(
                   seasonalAllDataReceived.cropMilestoneDates.readyToHarvest
                 )}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.variety = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.readyToHarvest =
+                    event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -160,11 +189,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.yield.localTonnage}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.MHCode = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.yield.localTonnage = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -178,11 +207,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.MRLResults.maxIndividual}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.farmInformation.MHCode = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.MRLResults.maxIndividual = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -193,11 +222,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.MRLResults.sum}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.address.village = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.MRLResults.sum = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -208,11 +237,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.MRLResults.numberOfDetection}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.address.village = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.MRLResults.numberOfDetection = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -224,11 +253,12 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.MRLResults.redListChemicals.toString()}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.address.village = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.MRLResults.redListChemicals =
+                    event.target.value.split(",");
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -238,11 +268,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.MRLResults.MRLReportLink}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.address.village = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.MRLResults.MRLReportLink = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -253,11 +283,11 @@ function FarmerSeasonalDataCard(props) {
                 disabled={isDisabledSeason}
                 size="40"
                 value={seasonalAllDataReceived.yield.exportTonnage}
-                // onChange={(event) => {
-                //   const prevData = { ...plotAllData };
-                //   prevData.address.village = event.target.value;
-                //   sendBackPlotAllData(prevData);
-                // }}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.yield.exportTonnage = event.target.value;
+                  sendBackSeasonalAllData(prevData);
+                }}
               ></input>
               <br />
               <br />
@@ -265,7 +295,21 @@ function FarmerSeasonalDataCard(props) {
             <hr />
             <div>
               {popupClicked ? (
-                <Popup toggle={togglePop} dataToPopup={sendToPopup} />
+                isDisabledSeason ? (
+                  <Popup
+                    toggle={togglePop}
+                    dataToPopup={sendToPopup}
+                    dataFromPopup={dataFromPopup}
+                    view={true}
+                  />
+                ) : (
+                  <Popup
+                    toggle={togglePop}
+                    dataToPopup={sendToPopup}
+                    dataFromPopup={dataFromPopup}
+                    view={false}
+                  />
+                )
               ) : null}
             </div>
             <div>
@@ -280,6 +324,7 @@ function FarmerSeasonalDataCard(props) {
                 <label className="FarmerProfileLabel2">Knitting QCLink :</label>
                 <input
                   type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
                   style={{ width: "377px", height: "18.4px" }}
                   onClick={() => {
                     setSendToPopup({
@@ -290,12 +335,6 @@ function FarmerSeasonalDataCard(props) {
                     togglePop();
                   }}
                   size="40"
-                  // value={plotAllData.farmInformation.MHCode}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
                 ></input>
                 <br />
                 <br />
@@ -304,6 +343,7 @@ function FarmerSeasonalDataCard(props) {
                 </label>
                 <input
                   type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
                   style={{ width: "377px", height: "18.4px" }}
                   onClick={() => {
                     setSendToPopup({
@@ -314,12 +354,6 @@ function FarmerSeasonalDataCard(props) {
                     togglePop();
                   }}
                   size="40"
-                  // value={plotAllData.farmInformation.MHCode}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
                 ></input>
                 <br />
                 <br />
@@ -329,11 +363,11 @@ function FarmerSeasonalDataCard(props) {
                   disabled={isDisabledSeason}
                   size="40"
                   value={seasonalAllDataReceived.qualityJotforms.invardQCLink}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
+                  onChange={(event) => {
+                    const prevData = { ...seasonalAllDataReceived };
+                    prevData.qualityJotforms.invardQCLink = event.target.value;
+                    sendBackSeasonalAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -347,11 +381,12 @@ function FarmerSeasonalDataCard(props) {
                   value={
                     seasonalAllDataReceived.qualityJotforms.preharvestQCLink
                   }
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
+                  onChange={(event) => {
+                    const prevData = { ...seasonalAllDataReceived };
+                    prevData.qualityJotforms.preharvestQCLink =
+                      event.target.value;
+                    sendBackSeasonalAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -361,6 +396,7 @@ function FarmerSeasonalDataCard(props) {
                 <label className="FarmerProfileLabel2">Packing QCLink : </label>
                 <input
                   type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
                   style={{ width: "377px", height: "18.4px" }}
                   onClick={() => {
                     setSendToPopup({
@@ -371,18 +407,13 @@ function FarmerSeasonalDataCard(props) {
                     togglePop();
                   }}
                   size="40"
-                  // value={plotAllData.farmInformation.MHCode}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
                 ></input>
                 <br />
                 <br />
                 <label className="FarmerProfileLabel2">FG QCLink : </label>
                 <input
                   type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
                   style={{ width: "377px", height: "18.4px" }}
                   onClick={() => {
                     setSendToPopup({
@@ -392,12 +423,6 @@ function FarmerSeasonalDataCard(props) {
                     togglePop();
                   }}
                   size="40"
-                  // value={plotAllData.farmInformation.MHCode}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
                 ></input>
                 <br />
                 <br />
@@ -411,25 +436,28 @@ function FarmerSeasonalDataCard(props) {
                   value={
                     seasonalAllDataReceived.qualityJotforms.primaryIssueFaced
                   }
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
+                  onChange={(event) => {
+                    const prevData = { ...seasonalAllDataReceived };
+                    prevData.qualityJotforms.primaryIssueFaced =
+                      event.target.value;
+                    sendBackSeasonalAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
-                <label className="FarmerProfileLabel2">Quality : </label>
+                <label className="FarmerProfileLabel2">Quality :</label>
                 <input
                   type="text"
                   disabled={isDisabledSeason}
                   size="40"
                   value={seasonalAllDataReceived.quality}
-                  // onChange={(event) => {
-                  //   const prevData = { ...plotAllData };
-                  //   prevData.farmInformation.MHCode = event.target.value;
-                  //   sendBackPlotAllData(prevData);
-                  // }}
+                  onChange={(event) => {
+                    const prevData = { ...seasonalAllDataReceived };
+                    // const prevData = seasonalAllDataReceived;
+                    console.log(event.target.value);
+                    prevData.quality = event.target.value;
+                    sendBackSeasonalAllData(prevData);
+                  }}
                 ></input>
                 <br />
                 <br />
@@ -446,11 +474,12 @@ function FarmerSeasonalDataCard(props) {
               size="40"
               style={{ width: "49%" }}
               value={seasonalAllDataReceived.primaryQualityIssuesFaced}
-              // onChange={(event) => {
-              //   const prevData = { ...plotAllData };
-              //   prevData.farmInformation.MHCode = event.target.value;
-              //   sendBackPlotAllData(prevData);
-              // }}
+              onChange={(event) => {
+                const prevData = { ...seasonalAllDataReceived };
+                prevData.primaryQualityIssuesFaced =
+                  event.target.value.split(",");
+                sendBackSeasonalAllData(prevData);
+              }}
             ></input>
             <br />
             <br />
@@ -460,6 +489,7 @@ function FarmerSeasonalDataCard(props) {
               onClick={(event) => {
                 event.preventDefault();
                 setIsDisabledSeason(true);
+                console.log(seasonalAllDataReceived);
               }}
             >
               Save Changes
