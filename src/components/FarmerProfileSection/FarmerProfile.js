@@ -113,16 +113,36 @@ function FarmerProfile(props) {
               farmerId: receivedData._id,
             });
 
-            for (let i = 0; i < receivedData.plots.length; i++) {
+            let i = 0;
+            for (i = 0; i < receivedData.plots.length; i++) {
               if (
                 receivedData.plots[i].farmInformation.MHCode ===
                 MHCodeFromParams
               ) {
                 // console.log("Matched");
+                console.log(receivedData.plots[i]);
                 setPlotAllData({ ...receivedData.plots[i] });
-                // console.log(receivedData.plots[i]);
+                break;
               }
             }
+
+            // fetching the seasonal data of plot from which we landed on profile page
+            axios
+              .get(
+                "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
+                  receivedData.plots[i]._id
+              )
+              .then((data) => {
+                // console.log("Seasonal data", data.data[0]);
+                if (data.data.length) setSeasonalAllData(data.data);
+                else {
+                  console.log(dummyEmptySeasonalAllData);
+                  setSeasonalAllData(dummyEmptySeasonalAllData);
+                }
+              })
+              .catch((err) => {
+                console.log("Error", err);
+              });
           }
         })
         .catch((err) => {

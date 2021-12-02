@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
+import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
 import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
@@ -493,12 +494,19 @@ function FarmerSeasonalDataCard(props) {
                 console.log(seasonalAllDataReceived);
                 //to send data back to farmer Profile
                 // sendBackSeasonalAllData([seasonalAllDataReceived]);
-                axios.post("https://immense-beach-88770.herokuapp.com/seasonalData/edit/" + seasonalAllDataReceived._id, seasonalAllDataReceived)
+                axios
+                  .post(
+                    "https://immense-beach-88770.herokuapp.com/seasonalData/edit/" +
+                      seasonalAllDataReceived._id,
+                    seasonalAllDataReceived
+                  )
                   .then((data) => {
                     console.log("updated", data);
+                    UpdateSuccessToast();
                   })
                   .catch((err) => {
                     console.log("Error", err);
+                    FailureToast();
                   });
               }}
             >
