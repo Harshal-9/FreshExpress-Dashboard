@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
 import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
-  // console.log(props);
+  // console.log("prop", props);
 
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
 
@@ -104,7 +105,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.plantation = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -124,7 +125,7 @@ function FarmerSeasonalDataCard(props) {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.foundationPruning =
                     event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -142,7 +143,7 @@ function FarmerSeasonalDataCard(props) {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.actualHarvest =
                     event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -159,7 +160,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.fruitPruning = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -177,7 +178,7 @@ function FarmerSeasonalDataCard(props) {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.readyToHarvest =
                     event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -192,7 +193,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.yield.localTonnage = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -210,7 +211,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.MRLResults.maxIndividual = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -225,7 +226,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.MRLResults.sum = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -240,7 +241,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.MRLResults.numberOfDetection = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -257,7 +258,7 @@ function FarmerSeasonalDataCard(props) {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.MRLResults.redListChemicals =
                     event.target.value.split(",");
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -271,7 +272,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.MRLResults.MRLReportLink = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -286,7 +287,7 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.yield.exportTonnage = event.target.value;
-                  sendBackSeasonalAllData(prevData);
+                  setSeasonalAllDataReceived(prevData);
                 }}
               ></input>
               <br />
@@ -366,7 +367,7 @@ function FarmerSeasonalDataCard(props) {
                   onChange={(event) => {
                     const prevData = { ...seasonalAllDataReceived };
                     prevData.qualityJotforms.invardQCLink = event.target.value;
-                    sendBackSeasonalAllData(prevData);
+                    setSeasonalAllDataReceived(prevData);
                   }}
                 ></input>
                 <br />
@@ -385,7 +386,7 @@ function FarmerSeasonalDataCard(props) {
                     const prevData = { ...seasonalAllDataReceived };
                     prevData.qualityJotforms.preharvestQCLink =
                       event.target.value;
-                    sendBackSeasonalAllData(prevData);
+                    setSeasonalAllDataReceived(prevData);
                   }}
                 ></input>
                 <br />
@@ -440,7 +441,7 @@ function FarmerSeasonalDataCard(props) {
                     const prevData = { ...seasonalAllDataReceived };
                     prevData.qualityJotforms.primaryIssueFaced =
                       event.target.value;
-                    sendBackSeasonalAllData(prevData);
+                    setSeasonalAllDataReceived(prevData);
                   }}
                 ></input>
                 <br />
@@ -456,7 +457,7 @@ function FarmerSeasonalDataCard(props) {
                     // const prevData = seasonalAllDataReceived;
                     console.log(event.target.value);
                     prevData.quality = event.target.value;
-                    sendBackSeasonalAllData(prevData);
+                    setSeasonalAllDataReceived(prevData);
                   }}
                 ></input>
                 <br />
@@ -478,7 +479,7 @@ function FarmerSeasonalDataCard(props) {
                 const prevData = { ...seasonalAllDataReceived };
                 prevData.primaryQualityIssuesFaced =
                   event.target.value.split(",");
-                sendBackSeasonalAllData(prevData);
+                setSeasonalAllDataReceived(prevData);
               }}
             ></input>
             <br />
@@ -490,6 +491,15 @@ function FarmerSeasonalDataCard(props) {
                 event.preventDefault();
                 setIsDisabledSeason(true);
                 console.log(seasonalAllDataReceived);
+                //to send data back to farmer Profile
+                // sendBackSeasonalAllData([seasonalAllDataReceived]);
+                axios.post("https://immense-beach-88770.herokuapp.com/seasonalData/edit/" + seasonalAllDataReceived._id, seasonalAllDataReceived)
+                  .then((data) => {
+                    console.log("updated", data);
+                  })
+                  .catch((err) => {
+                    console.log("Error", err);
+                  });
               }}
             >
               Save Changes
