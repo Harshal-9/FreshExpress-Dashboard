@@ -124,7 +124,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div>
         <div className="sidebar__link">
           <i className="fa fa-book"></i>
-          <a href="#">Past Broadcasts</a>
+          <a href="/BroadcastShowAll">Past Broadcasts</a>
         </div>
         <div className="sidebar__logout">
           <i className="fa fa-power-off"></i>

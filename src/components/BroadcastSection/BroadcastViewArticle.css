@@ -1,0 +1,47 @@
+
+.viewArticleMain {
+    padding-top: 20px;
+}
+
+.viewArticleFirst{
+    /* width:50%; */
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    /* border-style: solid; */
+    margin-right: 2%;
+    margin-left: 2%;
+    overflow-y:scroll
+}
+
+.viewArticleSecond {
+    display: inline-block;
+    width: 45%;
+    height: 70%;
+    margin-right: 2%;
+    margin-left: 2%;
+    overflow-y:scroll;
+    
+}
+.viewArticleImage{
+    margin: 20px;
+}
+.viewArticleFirstContent{
+    margin:20px;
+}
+.commentsFirst {
+    background-color: #bfdaf3;
+    margin-bottom:5px;
+}
+.commentsSecond {
+    margin-bottom:5px;
+}
+.viewArticleSecondContent{
+    border-style: solid;
+    margin: 10px;
+    /* height: 100%; */
+}
+.viewArticleSecondLabel{
+    display: inline-block;
+    width: 150px;
+}
