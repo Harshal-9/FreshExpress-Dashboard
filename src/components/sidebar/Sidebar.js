@@ -45,6 +45,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-info"></i>
           <a href="#">View Diary</a>
         </div>
+        <div className="sidebar__link">
+          <i className="fa fa-tasks" aria-hidden="true"></i>
+          <a href="/AllDiaries">All Diaries</a>
+        </div>
 
         <h2>All Farmers</h2>
         <div className="sidebar__link">

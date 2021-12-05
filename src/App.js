@@ -9,7 +9,7 @@ import ViewAllFarmers from "./components/FarmerProfileSection/ViewAllFarmers";
 import AddNewFarmer from "./components/FarmerProfileSection/AddNewFarmer";
 import BroadcastShowAll from "./components/BroadcastSection/BroadcastShowAll";
 import ViewArticle from "./components/BroadcastSection/BroadcastViewArticle";
-
+import AllDiaries from "./components/Dailydiary/AllDiaries";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -34,10 +34,13 @@ const App = () => {
             element={<FarmerProfile flg="1" />}
           />
           <Route exact path="/NewFarmer" element={<AddNewFarmer />} />
-          <Route exact path="/BroadcastShowAll" element={<BroadcastShowAll />} />
-          <Route exact path="/viewArticle" element={<ViewArticle/>} />
-
-
+          <Route
+            exact
+            path="/BroadcastShowAll"
+            element={<BroadcastShowAll />}
+          />
+          <Route exact path="/viewArticle" element={<ViewArticle />} />
+          <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
         </Routes>
       </Router>
     </div>
