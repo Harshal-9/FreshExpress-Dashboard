@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AllDiaries.css";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import axios from "axios";
+import { FailureToast } from "../Toasts/AllToasts";
 
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
@@ -34,6 +36,28 @@ const statusTypesArray = [
 ];
 
 function AllDiaries() {
+  const [allFarmers, setAllFarmers] = useState({
+    farmerID: "None",
+    plot: [],
+    farmerName: "None",
+  });
+  const [selectedFarmer, setSelectedFarmer] = useState({});
+
+  useEffect(() => {
+    // get request for getting farmer and his corresponding plots
+    axios
+      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .then((res) => {
+        let Data = [...res.data];
+        console.log("Data Here :", Data);
+        setAllFarmers(Data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+        FailureToast();
+      });
+  }, []);
+
   return (
     <div>
       <br />
@@ -41,10 +65,17 @@ function AllDiaries() {
         DAILY DIARY
       </h2>
       <br />
+
       <Select
         className="searchingAllDiaries"
         placeholder="Search Farmer Name"
         components={{ DropdownIndicator }}
+        options={allFarmers}
+        getOptionLabel={(option) => option.farmerName}
+        getOptionValue={(option) => option.farmerID}
+        onChange={(opt) => {
+          setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
+        }}
       />
       <button className="allDiariesButton">
         <i className="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add
@@ -52,16 +83,23 @@ function AllDiaries() {
       </button>
       <br />
       <br />
+
       <Select
         className="searchingAllDiaries"
         placeholder="Select Plot"
         components={{ DropdownIndicator }}
+        options={selectedFarmer.plot}
+        getOptionLabel={(option) =>
+          "(" + option.plot + ") " + option.farmerName + " - " + option.MHCode
+        }
+        getOptionValue={(option) => option.MHCode}
       />
       <button className="allDiariesButton">
         <i className="fa fa-download fa-lg" aria-hidden="true"></i> Export Excel
       </button>
       <br />
       <br />
+
       {/* <h2 style={{ marginLeft: "18.15px" }}>Filters</h2> */}
       <br />
       <div className="filtersDiv">
