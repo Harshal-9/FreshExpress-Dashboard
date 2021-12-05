@@ -135,7 +135,26 @@ function AllDiaries() {
       </div>
       <br />
       <br />
+      <div style={{ textAlign: "center" }}>
+        <button className="applyFilterButton">Apply</button>
+        <button
+          className="applyFilterClearButton"
+          onClick={() => {
+            // setFilteredArray(allFarmersArray);
+            // setSelectedMultiSelectVillage([]);
+            // setSelectedMultiSelectVariety([]);
+            // setSelectedMultiSelectTag([]);
+            // setSelectedFarmerValue(null);
+            // setSelectedGGNValue(null);
+            // setSelectedMHCodeValue(null);
+          }}
+        >
+          Clear
+        </button>
+      </div>
+      <br />
       <hr />
+
       <br />
       <div className="AllDiariesScroll">
         <table>
