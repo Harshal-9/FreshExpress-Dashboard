@@ -39,7 +39,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <h2>Daily Diary</h2>
         <div className="sidebar__link">
           <i className="fa fa-plus"></i>
-          <a href="https://csdd4.csb.app/">Add New</a>
+          <a href="https://c622p.csb.app/">Add New</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-info"></i>
