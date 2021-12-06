@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
-import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
 
 function AddNewFarmer() {
@@ -23,7 +26,7 @@ function AddNewFarmer() {
     // checking for duplicate MHCode
     for (let item in allMHCode) {
       if (allMHCode[item] === MHCode) {
-        alert("MHCode already exists");
+        CustomToast("MHCode already exists", "black", "#FFD700");
         return;
       }
     }
@@ -38,13 +41,19 @@ function AddNewFarmer() {
       // Avoiding insertion of duplicate GGN
       for (let item in allGGN) {
         if (allGGN[item].value === GGN) {
-          alert("GGN already exists select from the drop down or add new");
+          CustomToast(
+            "GGN already exists select from the drop down or add new",
+            "black",
+            "#FFD700"
+          );
+
           return;
         }
       }
 
       if (familyName === "") {
-        alert("Family Name should not be empty !");
+        CustomToast("Family Name should not be empty !", "black", "#FFD700");
+
         return;
       }
     }
@@ -108,14 +117,14 @@ function AddNewFarmer() {
 
     // checking if farmer not selected
     if (farmerName === null) {
-      alert("Select farmer !");
+      CustomToast("Select Farmer !", "black", "#FFD700");
       return;
     }
 
     // checking for duplicate MHCode
     for (let item in allMHCode) {
       if (allMHCode[item] === plotMHCode) {
-        alert("MHCode already exists");
+        CustomToast("MHCode already exists !", "black", "#FFD700");
         return;
       }
     }
