@@ -56,7 +56,7 @@ function FarmerPersonalInfoCard(props) {
             <label className="FarmerProfileLabel">Family Name : </label>
             <input
               type="text"
-              disabled={isDisabled}
+              disabled={true}
               size="80"
               value={farmerAllData.familyName}
               onChange={(event) => {
@@ -101,7 +101,7 @@ function FarmerPersonalInfoCard(props) {
             <label className="FarmerProfileLabel">GGN Number : </label>
             <input
               type="text"
-              disabled={isDisabled}
+              disabled={true}
               size="80"
               value={farmerAllData.GGN}
               onChange={(event) => {

@@ -162,7 +162,7 @@ function FarmerPlotDataCard(props) {
               <label className="FarmerProfileLabel">MH Code : </label>
               <input
                 type="text"
-                disabled={isDisabledPlot}
+                disabled={true}
                 size="40"
                 value={plotAllData.farmInformation.MHCode}
                 onChange={(event) => {
