@@ -84,3 +84,8 @@ div.AllDiariesScroll {
   height: 36px;
   width: 150px;
 }
+
+.IndividualDiaryRow:hover {
+  background-color: rgb(226, 226, 104);
+  cursor: pointer;
+}
