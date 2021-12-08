@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/FreshExpress-Dashboard/static/css/main.34b20fb2.chunk.css",
-    "main.js": "/FreshExpress-Dashboard/static/js/main.48043f9b.chunk.js",
-    "main.js.map": "/FreshExpress-Dashboard/static/js/main.48043f9b.chunk.js.map",
+    "main.js": "/FreshExpress-Dashboard/static/js/main.0525742e.chunk.js",
+    "main.js.map": "/FreshExpress-Dashboard/static/js/main.0525742e.chunk.js.map",
     "runtime-main.js": "/FreshExpress-Dashboard/static/js/runtime-main.8f881e1c.js",
     "runtime-main.js.map": "/FreshExpress-Dashboard/static/js/runtime-main.8f881e1c.js.map",
     "static/css/2.58a45539.chunk.css": "/FreshExpress-Dashboard/static/css/2.58a45539.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.58a45539.chunk.css",
     "static/js/2.c0f2a39b.chunk.js",
     "static/css/main.34b20fb2.chunk.css",
-    "static/js/main.48043f9b.chunk.js"
+    "static/js/main.0525742e.chunk.js"
   ]
 }
