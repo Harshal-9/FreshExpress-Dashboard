@@ -11,6 +11,7 @@ import BroadcastShowAll from "./components/BroadcastSection/BroadcastShowAll";
 import ViewArticle from "./components/BroadcastSection/BroadcastViewArticle";
 import NewBroadcast from "./components/BroadcastSection/NewBroadcast";
 
+import AllDiaries from "./components/Dailydiary/AllDiaries";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -41,6 +42,13 @@ const App = () => {
 
 
 
+          <Route
+            exact
+            path="/BroadcastShowAll"
+            element={<BroadcastShowAll />}
+          />
+          <Route exact path="/viewArticle" element={<ViewArticle />} />
+          <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
         </Routes>
       </Router>
     </div>
