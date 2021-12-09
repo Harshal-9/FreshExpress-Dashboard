@@ -120,7 +120,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <h2>Resource Broadasting</h2>
         <div className="sidebar__link">
           <i className="fa fa-newspaper-o"></i>
-          <a href="#">New Broadast</a>
+          <a href="/NewBroadcast">New Broadast</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-book"></i>

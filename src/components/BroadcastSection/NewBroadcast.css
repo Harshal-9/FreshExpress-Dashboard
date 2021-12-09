@@ -1,0 +1,30 @@
+.newBroadcast {
+    text-align: center;
+    margin: 20px;
+}
+.newBroadcastLabel {
+    display: inline-block;
+    width:170px;
+    color:red;
+    margin: 5px;
+    text-align: left;
+}
+
+.newBroadcastInput {
+    width:200px;
+    margin: 5px;
+}
+.newBroadcastInputTextArea {
+    width:200px;
+    margin: 5px;
+    resize: none;
+    height:20px;
+    margin-top: 7px;
+}
+.newBroadcastLabeltextArea {
+    display: inline-block;
+    width:170px;
+    color:red;
+    margin: 5px;
+    text-align: left;
+}
