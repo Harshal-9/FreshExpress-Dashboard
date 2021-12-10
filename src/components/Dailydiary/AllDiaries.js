@@ -109,7 +109,10 @@ function SingleDiaryRow(props) {
     <tr
       className="IndividualDiaryRow"
       onClick={() => {
-        navigate("/diary/" + diaryData.diaryId);
+        // navigate("/dairy/" + diaryData.diaryId);
+        navigate("/dairy/" + diaryData.diaryId, {
+          state: { farmerName: diaryData.farmerName },
+        });
       }}
     >
       <td>{diaryData.proposedDate.substring(0, 10)}</td>
@@ -319,7 +322,11 @@ function AllDiaries() {
         getOptionLabel={(option) => option.farmerName}
         getOptionValue={(option) => option.farmerID}
         onChange={(opt) => {
-          setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
+          setSelectedFarmer({
+            FarmerID: opt.farmerID,
+            plot: opt.plot,
+            FarmerName: opt.farmerName,
+          });
         }}
       />
       <button className="allDiariesButton">
@@ -376,6 +383,7 @@ function AllDiaries() {
                           data={tempArr[item]}
                           operation={item}
                           diaryId={receivedData[i]._id}
+                          farmerName={selectedFarmer.FarmerName}
                         />
                       )
                     );
@@ -388,6 +396,7 @@ function AllDiaries() {
                           data={tempArr[item]}
                           operation={item}
                           diaryId={receivedData[i]._id}
+                          farmerName={selectedFarmer.FarmerName}
                         />
                       )
                     );
