@@ -12,6 +12,7 @@ import ViewArticle from "./components/BroadcastSection/BroadcastViewArticle";
 import NewBroadcast from "./components/BroadcastSection/NewBroadcast";
 
 import AllDiaries from "./components/Dailydiary/AllDiaries";
+import SingleDiary from "./components/Dailydiary/SingleDiary";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -36,11 +37,13 @@ const App = () => {
             element={<FarmerProfile flg="1" />}
           />
           <Route exact path="/NewFarmer" element={<AddNewFarmer />} />
-          <Route exact path="/BroadcastShowAll" element={<BroadcastShowAll />} />
-          <Route exact path="/viewArticle" element={<ViewArticle/>} />
-          <Route exact path="/NewBroadcast" element={<NewBroadcast/>} />
-
-
+          <Route
+            exact
+            path="/BroadcastShowAll"
+            element={<BroadcastShowAll />}
+          />
+          <Route exact path="/viewArticle" element={<ViewArticle />} />
+          <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
 
           <Route
             exact
@@ -49,6 +52,11 @@ const App = () => {
           />
           <Route exact path="/viewArticle" element={<ViewArticle />} />
           <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
+          <Route
+            exact
+            path="/dairy/:dailyDiaryId"
+            element={<SingleDiary />}
+          ></Route>
         </Routes>
       </Router>
     </div>
