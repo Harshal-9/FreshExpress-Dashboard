@@ -3,11 +3,45 @@ import Select from "react-select";
 import "./BroadcastShowAll.css"
 import { useNavigate } from "react-router-dom";
 
-function BroadcastShowAll() {
+
+function BroadcastSingleCard() {
+  const navigate = useNavigate();
 
   function handleViewClick() {
     navigate("/viewArticle");
   }
+  return (
+    <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
+      <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
+        <div className="MyCard" style={{ width: "100%", height: "100%" }} >
+          <img
+            src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
+            width="300px"
+            height="150px"
+            alt="FarmerImg"
+            style={{ display: "inline-block", margin: "10px" }}
+          ></img>
+          <label className="broadcastLabel">Topic :</label>
+          <input type="text" />
+          <br />
+          <label className="broadcastLabel">Category :</label>
+          <input type="text" />
+          <br />
+          <label className="broadcastLabel">Date :</label>
+          <input type="text" />
+          <br />
+          <br />
+          <i class="fa fa-eye fa-2x" onClick={handleViewClick} style={{ marginRight: "5px", marginLeft: "160px" }}></i>
+          <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
+          <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BroadcastShowAll() {
+
 
   const category = [
     { value: 0, label: "Pest & Disease" },
@@ -27,9 +61,7 @@ function BroadcastShowAll() {
     { value: 1, label: "Upload Date" },
     { value: 2, label: "Number of Views" }
   ]
-  const navigate = useNavigate();
   return (
-
     <div className="cardBroadcastShowAll">
       <div className="broadcastAllFilter">
         <button className="broadcastAddButton">Add Article</button>
@@ -56,163 +88,13 @@ function BroadcastShowAll() {
         <label style={{ display: "inline-block", marginLeft: "850px", marginTop: "10px" }}>SORT BY : </label>
         <Select className="broadcastSelectSort" options={sort} />
       </div>
+      <BroadcastSingleCard/>
+      <BroadcastSingleCard/>
 
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" onClick={handleViewClick} style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
-      <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
-        <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
-          <div className="MyCard" style={{ width: "100%", height: "100%" }} >
-            <img
-              src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-              width="300px"
-              height="150px"
-              alt="FarmerImg"
-              style={{ display: "inline-block", margin: "10px" }}
-            ></img>
-            <label className="broadcastLabel">Topic :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Category :</label>
-            <input type="text" />
-            <br />
-            <label className="broadcastLabel">Date :</label>
-            <input type="text" />
-            <br />
-            <br />
-            <i class="fa fa-eye fa-2x" style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-            <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-            <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          </div>
-        </div>
-      </div>
+      <BroadcastSingleCard/>
+      <BroadcastSingleCard/>
+
+
     </div>
   );
 }

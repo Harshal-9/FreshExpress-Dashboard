@@ -1,0 +1,44 @@
+.CropMonitoringFarmerNamePlot {
+    width: 30%;
+  margin-right: 1.5%;
+  margin-left: 1%;
+  display: inline-block;
+  background-color: #cdd4ea;
+  border-radius:20%;
+}
+.cropMonitoringDate {
+    margin-left: 1%;
+    width:14%;
+    background-color: #cdd4ea;
+
+}
+.CropMonitoringTable  table{
+    border-collapse: collapse;
+  /* border-style: solid; */
+  background-color: #c0eec0;
+}
+.CropMonitoringTable td{
+    border-style: solid;
+    text-align: center;
+    border-color: white;
+    border-width: 1px;
+    padding: 10px;
+}
+.CropMonitoringRow td {
+    width:10%;
+    padding: 10px;
+  font-size: large;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: #5b7dc2;
+}
+.SingleTableRowCropMonitoring td {
+    width:10%;
+    padding: 10px;
+  font-size: large;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  background-color: #abbfe7;
+}

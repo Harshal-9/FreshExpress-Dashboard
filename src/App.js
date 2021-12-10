@@ -12,6 +12,8 @@ import ViewArticle from "./components/BroadcastSection/BroadcastViewArticle";
 import NewBroadcast from "./components/BroadcastSection/NewBroadcast";
 
 import AllDiaries from "./components/Dailydiary/AllDiaries";
+import CropMonitoring from "./components/CropMonitoring/CropMonitoring";
+import CropMonitoringViewEntry from "./components/CropMonitoring/CropMonitoringViewEntry";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -49,6 +51,10 @@ const App = () => {
           />
           <Route exact path="/viewArticle" element={<ViewArticle />} />
           <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
+          <Route exact path="/CropMonitoring" element={<CropMonitoring/>}></Route>
+          
+          <Route exact path="/CropMonitoringViewEntry" element={<CropMonitoringViewEntry/>}></Route>
+
         </Routes>
       </Router>
     </div>

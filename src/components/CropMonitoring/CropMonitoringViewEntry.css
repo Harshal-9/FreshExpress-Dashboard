@@ -1,0 +1,44 @@
+.CropMonitoringViewEntryFirst {
+    margin: 40px;
+    width:450px;
+    display: inline-block;
+}
+.CropMonitoringViewEntrySecond {
+    margin: 40px;
+    width:550px;
+    display: inline-block;
+}
+.CropMonitoringViewEntryTable table {
+    border-collapse: collapse;
+    /* border-style: solid; */
+    background-color: #c0eec0;
+}
+.CropMonitoringViewEntryTable td {
+    border-style: solid;
+    text-align: center;
+    border-color: white;
+    border-width: 1px;
+    padding: 10px;
+}
+.CropMonitoringViewEntryRow td {
+    width:10%;
+    padding: 10px;
+  font-size: large;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: #5b7dc2;
+}
+.SingleTableRowCropMonitoringViewEntryRow {
+    width:10%;
+    padding: 10px;
+  font-size: large;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  background-color: #abbfe7;
+}
+
+.l{
+    display: inline-block;
+}

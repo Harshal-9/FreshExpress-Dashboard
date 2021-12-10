@@ -65,11 +65,11 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div>
         <div className="sidebar__link">
           <i className="fa fa-tree"></i>
-          <a href="#">Crop Monitoring</a>
+          <a href="/CropMonitoring">Crop Monitoring</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-line-chart"></i>
-          <a href="#">Reports</a>
+          <a href="/CropMonitoringViewEntry">Reports</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-image"></i>

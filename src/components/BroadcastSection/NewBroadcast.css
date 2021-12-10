@@ -9,7 +9,12 @@
     margin: 5px;
     text-align: left;
 }
-
+.NewBroadcastSelect {
+    /* margin-left: 10px; */
+    margin-top: 10px;
+    width:33%;
+    display: inline-block;
+}
 .newBroadcastInput {
     width:200px;
     margin: 5px;
