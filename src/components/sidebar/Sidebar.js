@@ -41,10 +41,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-plus"></i>
           <a href="https://dzbt3.csb.app/">Add New</a>
         </div>
-        <div className="sidebar__link">
+        {/* <div className="sidebar__link">
           <i className="fa fa-info"></i>
           <a href="#">View Diary</a>
-        </div>
+        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-tasks" aria-hidden="true"></i>
           <a href="/AllDiaries">All Diaries</a>
@@ -59,10 +59,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-user-circle" aria-hidden="true"></i>
           <a href="/ViewAllFarmers">All Farmers</a>
         </div>
-        <div className="sidebar__link">
+        {/* <div className="sidebar__link">
           <i className="fa fa-street-view"></i>
           <a href="#">View Plots</a>
-        </div>
+        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-tree"></i>
           <a href="#">Crop Monitoring</a>
