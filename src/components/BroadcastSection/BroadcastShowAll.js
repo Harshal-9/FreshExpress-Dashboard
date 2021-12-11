@@ -6,7 +6,6 @@ import axios from "axios";
 
 
 function BroadcastSingleCard(props) {
-  console.log("props", props);
   const navigate = useNavigate();
   const data = props.data;
 
@@ -16,6 +15,16 @@ function BroadcastSingleCard(props) {
 
   }
 
+  function handleBroadcastDelete() {
+    axios.post("https://immense-beach-88770.herokuapp.com/broadcasts/delete/" + data._id)
+      .then((res) => {
+        console.log("res", res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
 
   return (
     <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
@@ -43,7 +52,7 @@ function BroadcastSingleCard(props) {
           <br />
           <br />
           <i className="fa fa-eye fa-2x" onClick={handleViewClick} style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-          <i className="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
+          <i className="fa fa-trash fa-2x" onClick={handleBroadcastDelete} style={{ marginRight: "5px", marginLeft: "15px" }}></i>
         </div>
       </div>
     </div>

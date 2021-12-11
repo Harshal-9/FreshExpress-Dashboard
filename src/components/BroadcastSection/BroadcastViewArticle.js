@@ -3,7 +3,25 @@ import "./BroadcastViewArticle.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function SingleComment() {
+function SingleChat(props) {
+    const { broadcastId } = useParams();
+    const [chat, setChat] = useState(props.chat);
+    const [isAnswerEditable, setIsAnswerEditable] = useState(() => props.chat.answer.length > 0 ? false : true);
+
+    function handleAnswerPost(event) {
+        event.preventDefault();
+        chat.adminName = "AdminName";
+        axios.post("https://immense-beach-88770.herokuapp.com/broadcasts/insertAnswer/" + broadcastId + "/" + chat._id, chat)
+            .then((res) => {
+                // console.log("res chat insert", res);
+                setIsAnswerEditable(false);
+            })
+            .catch((err) => {
+                console.log("err", err);
+                setIsAnswerEditable(true);
+            });
+    }
+
     return (
         <div>
             <div className="commentsFirst" >
@@ -16,10 +34,10 @@ function SingleComment() {
                 </div>
                 <div style={{ display: "inline-block" }}>
                     <label className="viewArticleSecondLabel" htmlFor="">Farmer Name :</label>
-                    <input type="text" disabled="true" />
+                    <input type="text" disabled="true" value={chat.farmerName} />
                     <br />
-                    <label className="viewArticleSecondLabel" htmlFor="">Question 1 :</label>
-                    <input type="text" disabled="true" />
+                    <label className="viewArticleSecondLabel" htmlFor="">Question :</label>
+                    <input type="text" disabled="true" value={chat.question} />
                 </div>
             </div>
             <div className="commentsSecond">
@@ -27,15 +45,21 @@ function SingleComment() {
                     <img
                         src="https://www.liegeairport.com/flexport/wp/wp-content/uploads/sites/3/2017/01/fresh-express-logo.jpg"
                         width="60px" alt=""
-
                     />
                 </div>
                 <div style={{ display: "inline-block" }}>
                     <label className="viewArticleSecondLabel" htmlFor="">Fresh Express :</label>
-                    <input type="text" disabled="true" />
+                    {/* //ToDo: to add admin name here automatically. */}
+                    <input type="text" disabled="true" value={chat.adminName.length === 0 ? "AdminName" : chat.adminName} />
                     <br />
                     <label className="viewArticleSecondLabel" htmlFor="">Reply :</label>
-                    <input type="text" disabled="true" />
+                    <input type="text" disabled={!isAnswerEditable} value={chat.answer}
+                        onChange={(event) => {
+                            const tempChat = { ...chat };
+                            tempChat.answer = event.target.value;
+                            setChat(tempChat);
+                        }} />
+                    {isAnswerEditable ? <button onClick={handleAnswerPost}>Post</button> : null}
                 </div>
             </div>
         </div>
@@ -45,7 +69,6 @@ function SingleComment() {
 function ViewArticle() {
 
     const tempObject = {
-
         analytics: {
             numberOfRecipients: 0,
             numberOfUniqueViews: 0
@@ -67,22 +90,63 @@ function ViewArticle() {
         //         answer: "",
         //     }
         // ],
-
     }
 
     const { broadcastId } = useParams();
+    const [farmersIdMapping, setFarmersIdMapping] = useState([]);
     const [broadcastData, setBroadcastData] = useState(tempObject);
-    console.log(broadcastId);
+    const [chatArray, setChatArray] = useState([]);
     useEffect(() => {
-        axios.get("https://immense-beach-88770.herokuapp.com/broadcasts/" + broadcastId).then((res) => {
-            console.log("result is here", res.data);
-            setBroadcastData(res.data);
-
-        }).catch((err) => {
-            console.log("Error is here", err);
-        })
-
+        axios.get("https://immense-beach-88770.herokuapp.com/broadcasts/" + broadcastId)
+            .then((res) => {
+                setBroadcastData(res.data);
+                const tempChatArray = [];
+                for (let i = 0; i < res.data.chats.length; i++) {
+                    tempChatArray.push(<SingleChat chat={res.data.chats[i]} />);
+                }
+                setChatArray(tempChatArray);
+            }).catch((err) => {
+                console.log("Error is here", err);
+            });
+        axios.get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+            .then((res) => {
+                const tempArray = [];
+                for (let i = 0; i < res.data.length; i++) {
+                    tempArray.push({
+                        id: res.data[i].farmerID,
+                        name: res.data[i].farmerName
+                    });
+                }
+                setFarmersIdMapping(tempArray);
+            })
+            .catch((err) => {
+                console.log("Error is here", err);
+            });
     }, []);
+
+    // to get farmers for its id
+    function getNameForFarmers(farmerId) {
+        const farmer = farmersIdMapping.find((mappingObject => mappingObject.id === farmerId));
+        return farmer ? farmer.name : "";
+    }
+    //have to do styling.
+    function getFarmersAndTags() {
+        const arrayToReturn = [];
+        if (broadcastData.tags.length > 0) {
+            const tags = broadcastData.tags;
+            for (let i = 0; i < tags.length; i++) {
+                arrayToReturn.push(<li>{tags[i]}</li>);
+            }
+        } else if (broadcastData.farmers.length > 0) {
+            const farmers = broadcastData.farmers;
+            for (let i = 0; i < farmers.length; i++) {
+                arrayToReturn.push(<li>{getNameForFarmers(farmers[i])}</li>);
+            }
+        }
+        return (
+            <ul>{arrayToReturn}</ul>
+        )
+    }
 
     return (
         <div className="viewArticleMain">
@@ -120,7 +184,7 @@ function ViewArticle() {
                     </p>
                     <div >
                         Sent To :&nbsp;
-                        {broadcastData.toAllFarmers ? <p style={{ display: "inline-block" }}>All Farmers</p> : null}
+                        {broadcastData.toAllFarmers ? <p style={{ display: "inline-block" }}>All Farmers</p> : getFarmersAndTags()}
                     </div>
 
                 </div>
@@ -128,8 +192,7 @@ function ViewArticle() {
             <div className="viewArticleSecond">
                 <h2 style={{ margin: "20px" }}>Comments/Questions</h2>
                 <div className="viewArticleSecondContent">
-                    <SingleComment />
-                    <SingleComment />
+                    {chatArray}
                 </div>
             </div>
         </div>

@@ -8,15 +8,17 @@ import { MultiSelect } from "react-multi-select-component";
 
 function NewBroadcast() {
     const [selected, setSelected] = useState("");
+    const [category, setCategory] = useState(null);
     const [checkBox, setCheckBox] = useState(false);
     const [dropdownFarmerArray, setDropdownFarmerArray] = useState([]);
-    const [dropdownTagsArray, setDropdowTagsArray] = useState([]);
+    const [dropdownTagsArray, setDropdownTagsArray] = useState([]);
     const [selectedFarmerArray, setSelectedFarmerArray] = useState([]);
     const [selectedTagsArray, setSelectedTagsArray] = useState([]);
+    const [dropdownCategories, setDropdownCategories] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
     const [finalData, setFinalData] = useState({
         topic: "",
-        category: "",
+        newCategory: "",
         description: "",
         link: "",
 
@@ -33,11 +35,18 @@ function NewBroadcast() {
         axios
             .get("https://immense-beach-88770.herokuapp.com/filters")
             .then((res) => {
-                const data = [];
+                //settings tags in dropdown
+                const tags = [];
                 for (let i = 0; i < res.data[0].tag.length; i++) {
-                    data.push({ value: res.data[0].tag[i], label: res.data[0].tag[i] });
+                    tags.push({ value: res.data[0].tag[i], label: res.data[0].tag[i] });
                 }
-                setDropdowTagsArray(data);
+                setDropdownTagsArray(tags);
+                //settings categories in dropdown
+                const categories = [];
+                for (let i = 0; i < res.data[0].broadcastCategory.length; i++) {
+                    categories.push({ value: res.data[0].broadcastCategory[i], label: res.data[0].broadcastCategory[i] });
+                }
+                setDropdownCategories(categories);
             })
             .catch((err) => {
                 console.log("err", err);
@@ -50,7 +59,6 @@ function NewBroadcast() {
                 const data = []; //to store options of farmer dropdown
                 for (let i = 0; i < res.data.length; i++) {
                     data.push({ value: res.data[i].farmerID, label: res.data[i].farmerName });
-
                 }
                 setDropdownFarmerArray(data);
             })
@@ -103,7 +111,7 @@ function NewBroadcast() {
             return;
         }
 
-        if (finalData.topic.length === 0 || finalData.category.length === 0 || finalData.description.length === 0) {
+        if (finalData.topic.length === 0 || finalData.description.length === 0) {
             alert("select all value");
             return;
         }
@@ -112,14 +120,25 @@ function NewBroadcast() {
             alert("select link or file");
             return;
         }
+
+        if (category === null && finalData.newCategory === "") {
+            alert("select  or enter category");
+            return;
+        }
         //to send data to backend
 
         const dataToSend = {
             "format": selected,
             "date": new Date().toISOString().substring(0, 10),
             "topic": finalData.topic,
-            "category": finalData.category,
             "description": finalData.description
+        }
+
+        if (category) {
+            dataToSend.category = category;
+        } else {
+            dataToSend.newCategory = finalData.newCategory;
+            dataToSend.category = finalData.newCategory;
         }
         if (checkBox) {
             dataToSend.toAllFarmers = checkBox;
@@ -139,16 +158,14 @@ function NewBroadcast() {
                 }
                 dataToSend.farmers = farmerArray;
             }
-
         }
         if (selected === "youtube")
             dataToSend.link = finalData.link;
         else {
             dataToSend.link = selectedFile.link;
             dataToSend.driveId = selectedFile.id;
-
         }
-        // console.log("data to send", dataToSend)
+        console.log("data to send", dataToSend)
         axios.post("https://immense-beach-88770.herokuapp.com/broadcasts", dataToSend)
             .then((res) => {
                 console.log("flag", res);
@@ -184,13 +201,24 @@ function NewBroadcast() {
                         setFinalData(tempObject);
                     }} />
                     <br />
-                    <label className="newBroadcastLabel">Enter Category :</label>
-                    <input type="text" className="newBroadcastInput" onChange={(event) => {
-                        const tempObject = { ...finalData };
-                        tempObject.category = event.target.value;
-                        setFinalData(tempObject);
-
-                    }} />
+                    <Select
+                        className="NewBroadcastSelect"
+                        options={dropdownCategories}
+                        placeholder="Select Category"
+                        onChange={(opt) => {
+                            setCategory(opt.value);
+                        }}
+                    />
+                    {!category ?
+                        <>
+                            <br />
+                            <label className="newBroadcastLabel">Enter Category :</label>
+                            <input type="text" className="newBroadcastInput" onChange={(event) => {
+                                const tempObject = { ...finalData };
+                                tempObject.newCategory = event.target.value;
+                                setFinalData(tempObject);
+                            }} />
+                        </> : null}
                     {selected === "youtube" ? (<>
                         <br />
                         <label className="newBroadcastLabel">Enter Youtube Link :</label>
