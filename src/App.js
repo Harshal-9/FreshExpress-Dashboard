@@ -44,7 +44,7 @@ const App = () => {
             path="/BroadcastShowAll"
             element={<BroadcastShowAll />}
           />
-          <Route exact path="/viewArticle" element={<ViewArticle />} />
+          <Route exact path="/viewArticle/:broadcastId" element={<ViewArticle />} />
           <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
 
           <Route
@@ -52,11 +52,11 @@ const App = () => {
             path="/BroadcastShowAll"
             element={<BroadcastShowAll />}
           />
-          <Route exact path="/viewArticle" element={<ViewArticle />} />
+          {/* <Route exact path="/viewArticle" element={<ViewArticle />} /> */}
           <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
-          <Route exact path="/CropMonitoring" element={<CropMonitoring/>}></Route>
-          
-          <Route exact path="/CropMonitoringViewEntry" element={<CropMonitoringViewEntry/>}></Route>
+          <Route exact path="/CropMonitoring" element={<CropMonitoring />}></Route>
+
+          <Route exact path="/CropMonitoringViewEntry" element={<CropMonitoringViewEntry />}></Route>
 
           <Route
             exact

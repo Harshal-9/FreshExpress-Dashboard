@@ -16,6 +16,12 @@
     display: inline-block;
     width:90px;
 }
+.broadcastLabelData {
+    width:100px;
+    margin-bottom: 10px;
+    text-align: left;
+    display: inline-block;
+}
 .broadcastAddButton{
     float: right;
     margin-right: 80px;

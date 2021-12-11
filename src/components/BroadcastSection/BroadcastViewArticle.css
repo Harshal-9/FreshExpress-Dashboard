@@ -12,9 +12,11 @@
     margin-right: 2%;
     margin-left: 2%;
     /* overflow-y:scroll */
+    vertical-align: top;
 }
 
 .viewArticleSecond {
+    vertical-align: top;
     display: inline-block;
     width: 45%;
     height: 70%;

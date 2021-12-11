@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./BroadcastShowAll.css"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
-function BroadcastSingleCard() {
+function BroadcastSingleCard(props) {
+  console.log("props", props);
   const navigate = useNavigate();
+  const data = props.data;
 
   function handleViewClick() {
-    navigate("/viewArticle");
+
+    navigate("/viewArticle/" + data._id);
+
   }
+
+
   return (
     <div style={{ display: "inline-block", width: "30%", height: "35%", margin: "10px" }}>
       <div className="MyCardColumn" style={{ display: "inline-block", width: "100%", height: "100%" }}>
@@ -22,18 +29,21 @@ function BroadcastSingleCard() {
             style={{ display: "inline-block", margin: "10px" }}
           ></img>
           <label className="broadcastLabel">Topic :</label>
-          <input type="text" />
+          <label className="broadcastLabelData">{data.topic}</label>
           <br />
           <label className="broadcastLabel">Category :</label>
-          <input type="text" />
+          <label className="broadcastLabelData">{data.category}</label>
           <br />
           <label className="broadcastLabel">Date :</label>
-          <input type="text" />
+
+          <label className="broadcastLabelData">{
+            new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+
+          }</label>
           <br />
           <br />
-          <i class="fa fa-eye fa-2x" onClick={handleViewClick} style={{ marginRight: "5px", marginLeft: "160px" }}></i>
-          <i class="fa fa-pencil-square-o fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
-          <i class="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
+          <i className="fa fa-eye fa-2x" onClick={handleViewClick} style={{ marginRight: "5px", marginLeft: "160px" }}></i>
+          <i className="fa fa-trash fa-2x" style={{ marginRight: "5px", marginLeft: "15px" }}></i>
         </div>
       </div>
     </div>
@@ -42,7 +52,7 @@ function BroadcastSingleCard() {
 
 function BroadcastShowAll() {
 
-
+  const [allBroadcastArray, setAllBroadcastArray] = useState([]);
   const category = [
     { value: 0, label: "Pest & Disease" },
     { value: 1, label: "Soil Nutrition" },
@@ -61,6 +71,26 @@ function BroadcastShowAll() {
     { value: 1, label: "Upload Date" },
     { value: 2, label: "Number of Views" }
   ]
+
+
+  useEffect(() => {
+    axios.get("https://immense-beach-88770.herokuapp.com/broadcasts")
+      .then((res) => {
+        // console.log("result is here", res);
+        const tempArray = [];
+        for (let i = 0; i < res.data.length; i++) {
+          tempArray.push(<BroadcastSingleCard
+            data={res.data[i]}
+          />)
+        }
+        // console.log("tempArray", tempArray);
+        setAllBroadcastArray(tempArray);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }, []);
+
+
   return (
     <div className="cardBroadcastShowAll">
       <div className="broadcastAllFilter">
@@ -88,11 +118,7 @@ function BroadcastShowAll() {
         <label style={{ display: "inline-block", marginLeft: "850px", marginTop: "10px" }}>SORT BY : </label>
         <Select className="broadcastSelectSort" options={sort} />
       </div>
-      <BroadcastSingleCard/>
-      <BroadcastSingleCard/>
-
-      <BroadcastSingleCard/>
-      <BroadcastSingleCard/>
+      {allBroadcastArray}
 
 
     </div>
