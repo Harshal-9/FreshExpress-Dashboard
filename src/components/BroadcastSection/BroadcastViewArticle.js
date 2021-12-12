@@ -100,6 +100,7 @@ function ViewArticle() {
         axios.get("https://immense-beach-88770.herokuapp.com/broadcasts/" + broadcastId)
             .then((res) => {
                 setBroadcastData(res.data);
+                console.log(res.data);
                 const tempChatArray = [];
                 for (let i = 0; i < res.data.chats.length; i++) {
                     tempChatArray.push(<SingleChat chat={res.data.chats[i]} />);
@@ -153,7 +154,24 @@ function ViewArticle() {
             <h1 style={{ textAlign: "center", margin: "10px", backgroundColor: "#bfdaf3" }}>Resource Base - View Article</h1>
             <div className="viewArticleFirst">
                 <div className="viewArticleImage">
-                    <img src="http://www.mailrail.net/images/broadcasting-img.png" alt="" width="100%" />
+                    {broadcastData.format === "jpg" ? <img
+                        src={
+                            "https://lh3.googleusercontent.com/d/" +
+                            broadcastData.driveId +
+                            "=s220?authuser=0"
+                        }
+                        alt="img"
+                        width="200px"
+                        height="150px"
+                    /> : broadcastData.format === "youtube" ? <iframe src="{broadcastData.link}" title="Yt linkk"></iframe>
+
+                        : <img src="https://tse1.mm.bing.net/th?id=OIP.xhxeTXXWYt1PQ8jk11ytAwHaKA&pid=Api&P=0&w=300&h=300"
+                            alt="img"
+                            width="200px"
+                            height="150px"
+                        />}
+
+
                 </div>
                 <div className="viewArticleFirstContent">
                     <h5 style={{ display: "inline-block" }}>Topic :&nbsp;</h5>
