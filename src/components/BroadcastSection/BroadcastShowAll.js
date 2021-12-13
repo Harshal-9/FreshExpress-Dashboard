@@ -107,98 +107,118 @@ function BroadcastSingleCard(props) {
 function BroadcastShowAll() {
 
 
-  // function handleFilterIntersection(event) {
-  //   let categoriesTempArr = [];
-  //   let formatTempArr = [];
-  //   let dateTempArr = [];
+  function handleFilterIntersection(event) {
+    let categoriesTempArr = [];
+    let formatTempArr = [];
+    let dateTempArr = [];
 
-  //   categoriesTempArr = filterByCategories();
-  //   formatTempArr = filterByFormat();
-  //   dateTempArr = filterByDate();
+    categoriesTempArr = filterByCategories();
+    formatTempArr = filterByFormat();
+    dateTempArr = filterByDate();
 
-  //   // If any filter is not selected then push all diaries in temp array of that filter
-  //   if (selectedCategory === null) categoriesTempArr = [...allBroadcastArray];
-  //   if (selectedFormat === null) formatTempArr = [...allBroadcastArray];
-  //   if (startDate === "" && endDate === "")
-  //     dateTempArr = [...allBroadcastArray];
+    // If any filter is not selected then push all diaries in temp array of that filter
+    if (selectedCategory === null) categoriesTempArr = [...allBroadcastArray];
+    if (selectedFormat === null) formatTempArr = [...allBroadcastArray];
+    if (startDate === "" && endDate === "")
+      dateTempArr = [...allBroadcastArray];
 
-  //   console.log("operation", categoriesTempArr);
-  //   console.log("status", formatTempArr);
-  //   console.log("proposedDate", dateTempArr);
 
-  //   // finding intersection
-  //   let finalData = [
-  //     categoriesTempArr,
-  //     formatTempArr,
-  //     dateTempArr,
-  //   ],
-  //     finalResult = finalData.reduce((a, b) => a.filter((c) => b.includes(c)));
+    // console.log("proposedDate", dateTempArr);
+    // console.log("Result", finalResult);
+    console.log("category", categoriesTempArr);
+    console.log("format", formatTempArr);
+    console.log("Date", dateTempArr);
+    // finding intersection
+    let finalData = [
+      categoriesTempArr,
+      formatTempArr,
+      dateTempArr,
+    ],
+      finalResult = finalData.reduce((a, b) => a.filter((c) => b.includes(c)));
 
-  //   console.log("Result", finalResult);
-  //   // setFilteredDiariesArray(finalResult);
-  // }
+    // console.log("Result", finalResult);
+    // console.log("category", categoriesTempArr);
+    // console.log("format", formatTempArr);
+    // console.log("Date", dateTempArr);
 
-  // // Filter by operation
-  // function filterByCategories() {
-  //   let tempArr = [];
-  //   console.log("All broadcast Array", allData);
-  //   console.log("Selected category : ", selectedCategory);
-  //   for (let i = 0; i < allData.length; i++) {
-  //     console.log("op", allData[i].category);
-  //     if (
-  //       selectedCategory &&
-  //       allData[i].category === selectedCategory.value
-  //     ) {
-  //       console.log("Hi");
-  //       tempArr.push(allData[i]);
-  //     }
-  //   }
-  //   // console.log("Temp", tempArr);
-  //   setFilteredBroadcastArray(tempArr);
-  //   return tempArr;
-  // }
 
-  // // Filter by Date
-  // function filterByDate() {
-  //   if (startDate === "" || endDate === "") return [];
-  //   const tempArray = [];
-  //   const newStartDate = new Date(startDate.substring(0, 10));
-  //   const newEndDate = new Date(endDate.substring(0, 10));
-  //   for (let i = 0; i < allData.length; i++) {
-  //     if (
-  //       newStartDate <=
-  //       new Date(allData[i].props.proposedDate.substring(0, 10)) &&
-  //       newEndDate >=
-  //       new Date(allData[i].props.proposedDate.substring(0, 10))
-  //     ) {
-  //       tempArray.push(allData[i]);
-  //     }
-  //   }
-  //   setFilteredBroadcastArray(tempArray);
-  //   // console.log("MYTemp", tempArray);
-  //   return tempArray;
-  // }
+    // setFilteredBroadcastArray(dateTempArr);
+    // setFilteredBroadcastArray(formatTempArr);
+    setFilteredBroadcastArray(finalResult);
 
-  // //Filter by status
-  // //Rutikesh Todo:
-  // function filterByFormat() {
-  //   //when state is not selected.
-  //   let tempArr = [];
-  //   console.log("Selected format : ", selectedFormat);
-  //   for (let i = 0; i < allData.length; i++) {
-  //     // console.log("op", allBroadcastArray[i].props.operation);
-  //     if (
-  //       selectedFormat &&
-  //       allData[i].format === selectedFormat.value
-  //     ) {
-  //       console.log("Hi");
-  //       tempArr.push(allData[i]);
-  //     }
-  //   }
-  //   // console.log("Temp", tempArr);
-  //   setFilteredBroadcastArray(tempArr);
-  //   return tempArr;
-  // }
+    console.log("filteredBroadcastArray", filteredBroadcastArray);
+  }
+
+  // Filter by operation
+  function filterByCategories() {
+    let tempArr = [];
+    if (!selectedCategory)
+      return tempArr;
+    console.log("All broadcast Array categories", allData);
+    console.log("Selected category : ", selectedCategory.label);
+    for (let i = 0; i < allData.length; i++) {
+      console.log("op category", allData[i].category);
+      if (
+        selectedCategory &&
+        allData[i].category === selectedCategory.label
+      ) {
+        console.log("Hi");
+        tempArr.push(<BroadcastSingleCard data={allData[i]} />);
+      }
+    }
+    console.log("Temp", tempArr);
+    // setFilteredBroadcastArray(tempArr);
+    return tempArr;
+  }
+
+  // Filter by Date
+  function filterByDate() {
+    if (startDate === "" || endDate === "") return [];
+    const tempArray = [];
+    const newStartDate = new Date(startDate.substring(0, 10));
+    const newEndDate = new Date(endDate.substring(0, 10));
+
+    for (let i = 0; i < allBroadcastArray.length; i++) {
+      console.log("Date is here", allBroadcastArray[i])
+
+      if (
+        newStartDate <=
+        new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
+        newEndDate >=
+        new Date(allBroadcastArray[i].props.data.date.substring(0, 10))
+      ) {
+        tempArray.push(allBroadcastArray[i]);
+      }
+    }
+    // setFilteredBroadcastArray(tempArray);
+    console.log("MYTemp", tempArray);
+    return tempArray;
+  }
+
+  //Filter by status
+  //Rutikesh Todo:
+  function filterByFormat() {
+    //when state is not selected.
+    let tempArr = [];
+    console.log("All broadcast Array", allData);
+
+    if (!selectedFormat)
+      return tempArr;
+    console.log("Selected format : ", selectedFormat.value);
+    for (let i = 0; i < allData.length; i++) {
+      console.log("op", allData[i].format);
+      if (
+        selectedFormat &&
+        allData[i].format === selectedFormat.value
+      ) {
+        console.log("Hi");
+        tempArr.push(<BroadcastSingleCard data={allData[i]} />);
+      }
+    }
+    console.log("Temp", tempArr);
+    // setFilteredBroadcastArray(tempArr);
+    return tempArr;
+  }
 
 
 
@@ -214,25 +234,26 @@ function BroadcastShowAll() {
 
 
   const [allBroadcastArray, setAllBroadcastArray] = useState([]);
-  // const [startDate, setStartDate] = useState("");
-  // const [endDate, setEndDate] = useState("");
-  // const [selectedCategory, setSelectedCategory] = useState(null);
-  // const [selectedFormat, setSelectedFormat] = useState(null);
-  // const [filteredBroadcastArray, setFilteredBroadcastArray] = useState([]);
-  // const [allData, setAllData] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedFormat, setSelectedFormat] = useState(null);
+  const [filteredBroadcastArray, setFilteredBroadcastArray] = useState([]);
+  const [allData, setAllData] = useState([]);
+  const [dropdownCategoryArray, setDropdownCategoryArray] = useState([]);
 
-  const category = [
-    { value: 0, label: "Pest & Disease" },
-    { value: 1, label: "Soil Nutrition" },
-    { value: 2, label: "Plant Health" },
-    { value: 3, label: "Good Practices" },
-    { value: 4, label: "Export Marketing" },
-    { value: 5, label: "Mangesh Bhaskar" },
-  ];
+  // const category = [
+  //   { value: 0, label: "Pest & Disease" },
+  //   { value: 1, label: "Soil Nutrition" },
+  //   { value: 2, label: "Plant Health" },
+  //   { value: 3, label: "Good Practices" },
+  //   { value: 4, label: "Export Marketing" },
+  //   { value: 5, label: "Mangesh Bhaskar" },
+  // ];
   const format = [
-    { value: 0, label: "PDF" },
-    { value: 1, label: "Youtube video" },
-    { value: 2, label: "JPG" },
+    { value: "pdf", label: "PDF" },
+    { value: "youtube", label: "Youtube video" },
+    { value: "jpg", label: "JPG" },
   ];
   const sort = [
     { value: 0, label: "Name" },
@@ -253,12 +274,22 @@ function BroadcastShowAll() {
         }
         // console.log("tempArray", tempArray);
         setAllBroadcastArray(tempArray);
-        // setFilteredBroadcastArray(temp);
-        // setAllData(temp);
+        setFilteredBroadcastArray(tempArray);
+        setAllData(temp);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    axios.get("https://immense-beach-88770.herokuapp.com/filters")
+      .then((res) => {
+        const tempCategory = [];
+        for (let i = 0; i < res.data[0].broadcastCategory.length; i++) {
+          tempCategory.push({ value: res.data[0].broadcastCategory[i], label: res.data[0].broadcastCategory[i] });
+        }
+        setDropdownCategoryArray(tempCategory);
+      })
+
   }, []);
 
   return (
@@ -274,11 +305,11 @@ function BroadcastShowAll() {
           type="date"
           id="myDate"
           name="myDate"
-        // value={startDate}
-        // onChange={(e) => {
-        //   // console.log(e.target.value);
-        //   setStartDate(e.target.value);
-        // }}
+          value={startDate}
+          onChange={(e) => {
+            // console.log(e.target.value);
+            setStartDate(e.target.value);
+          }}
         />
         <p style={{ display: "inline-block" }}> &nbsp; to &nbsp;</p>
         <input
@@ -286,30 +317,30 @@ function BroadcastShowAll() {
           type="date"
           id="myDate"
           name="myDate"
-        // value={endDate}
-        // onChange={(e) => {
-        //   // console.log(e.target.value);
-        //   setEndDate(e.target.value);
-        // }}
+          value={endDate}
+          onChange={(e) => {
+            // console.log(e.target.value);
+            setEndDate(e.target.value);
+          }}
         />
         <Select
           className="broadcastSelect"
-          options={category}
-        // value={selectedCategory}
-        // onChange={(e) => setSelectedCategory(e)}
+          options={dropdownCategoryArray}
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e)}
 
 
         />
         <Select
           className="broadcastSelect"
           options={format}
-        // value={selectedFormat}
-        // onChange={(e) => setSelectedFormat(e)}
+          value={selectedFormat}
+          onChange={(e) => setSelectedFormat(e)}
         />
       </div>
       <br /><br />
       <div style={{ textAlign: "center" }}>
-        {/* <button
+        <button
           className="applyFilterButton"
           onClick={() => handleFilterIntersection()}
         >
@@ -319,7 +350,7 @@ function BroadcastShowAll() {
         <button
           className="applyFilterClearButton"
           onClick={() => {
-            // setFilteredDiariesArray(allBroadcastArray);
+            setFilteredBroadcastArray(allBroadcastArray);
             setSelectedCategory(null);
             setSelectedFormat(null);
             setStartDate("");
@@ -327,7 +358,7 @@ function BroadcastShowAll() {
           }}
         >
           Clear
-        </button> */}
+        </button>
         <div style={{ paddingBottom: "50px" }}>
           <label
             style={{
@@ -340,7 +371,8 @@ function BroadcastShowAll() {
           </label>
           <Select className="broadcastSelectSort" options={sort} />
         </div>
-        {allBroadcastArray}
+
+        {filteredBroadcastArray}
       </div>
     </div>
   );
