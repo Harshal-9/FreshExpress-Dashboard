@@ -154,16 +154,16 @@ function BroadcastShowAll() {
     let tempArr = [];
     if (!selectedCategory)
       return tempArr;
-    console.log("All broadcast Array categories", allData);
+    console.log("All broadcast Array categories", allBroadcastArray);
     console.log("Selected category : ", selectedCategory.label);
-    for (let i = 0; i < allData.length; i++) {
-      console.log("op category", allData[i].category);
+    for (let i = 0; i < allBroadcastArray.length; i++) {
+      console.log("op category", allBroadcastArray[i].props.data.category);
       if (
         selectedCategory &&
-        allData[i].category === selectedCategory.label
+        allBroadcastArray[i].props.data.category === selectedCategory.label
       ) {
         console.log("Hi");
-        tempArr.push(<BroadcastSingleCard data={allData[i]} />);
+        tempArr.push(allBroadcastArray[i]);
       }
     }
     console.log("Temp", tempArr);
@@ -179,7 +179,7 @@ function BroadcastShowAll() {
     const newEndDate = new Date(endDate.substring(0, 10));
 
     for (let i = 0; i < allBroadcastArray.length; i++) {
-      console.log("Date is here", allBroadcastArray[i])
+      console.log("Date is here", allBroadcastArray[i].props.data)
 
       if (
         newStartDate <=
@@ -200,19 +200,19 @@ function BroadcastShowAll() {
   function filterByFormat() {
     //when state is not selected.
     let tempArr = [];
-    console.log("All broadcast Array", allData);
+    console.log("All broadcast Array", allBroadcastArray);
 
     if (!selectedFormat)
       return tempArr;
     console.log("Selected format : ", selectedFormat.value);
-    for (let i = 0; i < allData.length; i++) {
-      console.log("op", allData[i].format);
+    for (let i = 0; i < allBroadcastArray.length; i++) {
+      console.log("op", allBroadcastArray[i].props.data.format);
       if (
         selectedFormat &&
-        allData[i].format === selectedFormat.value
+        allBroadcastArray[i].props.data.format === selectedFormat.value
       ) {
         console.log("Hi");
-        tempArr.push(<BroadcastSingleCard data={allData[i]} />);
+        tempArr.push(allBroadcastArray[i]);
       }
     }
     console.log("Temp", tempArr);
@@ -239,7 +239,6 @@ function BroadcastShowAll() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [filteredBroadcastArray, setFilteredBroadcastArray] = useState([]);
-  const [allData, setAllData] = useState([]);
   const [dropdownCategoryArray, setDropdownCategoryArray] = useState([]);
 
   // const category = [
@@ -260,6 +259,10 @@ function BroadcastShowAll() {
     { value: 1, label: "Upload Date" },
     { value: 2, label: "Number of Views" },
   ];
+  const navigate = useNavigate();
+  function handleAddArticleButton() {
+    navigate("/NewBroadcast");
+  }
 
   useEffect(() => {
     axios
@@ -275,7 +278,6 @@ function BroadcastShowAll() {
         // console.log("tempArray", tempArray);
         setAllBroadcastArray(tempArray);
         setFilteredBroadcastArray(tempArray);
-        setAllData(temp);
       })
       .catch((err) => {
         console.log(err);
@@ -295,7 +297,7 @@ function BroadcastShowAll() {
   return (
     <div className="cardBroadcastShowAll">
       <div className="broadcastAllFilter">
-        <button className="broadcastAddButton">Add Article</button>
+        <button className="broadcastAddButton" onClick={handleAddArticleButton}>Add Article</button>
         <label htmlFor="myDate">Date Range </label>
         <label style={{ marginLeft: "310px" }}>Categories : </label>
         <label style={{ marginLeft: "150px" }}>Format : </label>
