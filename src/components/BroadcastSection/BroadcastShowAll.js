@@ -21,7 +21,7 @@ function BroadcastSingleCard(props) {
         data._id
       )
       .then((res) => {
-        console.log("res", res);
+        // console.log("res", res);
         window.location.reload();
       })
       .catch((err) => {
@@ -119,15 +119,10 @@ function BroadcastShowAll() {
     // If any filter is not selected then push all diaries in temp array of that filter
     if (selectedCategory === null) categoriesTempArr = [...allBroadcastArray];
     if (selectedFormat === null) formatTempArr = [...allBroadcastArray];
-    if (startDate === "" && endDate === "")
+    if (startDate === "" || endDate === "")
       dateTempArr = [...allBroadcastArray];
 
 
-    // console.log("proposedDate", dateTempArr);
-    // console.log("Result", finalResult);
-    console.log("category", categoriesTempArr);
-    console.log("format", formatTempArr);
-    console.log("Date", dateTempArr);
     // finding intersection
     let finalData = [
       categoriesTempArr,
@@ -135,18 +130,9 @@ function BroadcastShowAll() {
       dateTempArr,
     ],
       finalResult = finalData.reduce((a, b) => a.filter((c) => b.includes(c)));
-
-    // console.log("Result", finalResult);
-    // console.log("category", categoriesTempArr);
-    // console.log("format", formatTempArr);
-    // console.log("Date", dateTempArr);
-
-
-    // setFilteredBroadcastArray(dateTempArr);
-    // setFilteredBroadcastArray(formatTempArr);
+    //setting useState to intersected data
     setFilteredBroadcastArray(finalResult);
 
-    console.log("filteredBroadcastArray", filteredBroadcastArray);
   }
 
   // Filter by operation
@@ -154,20 +140,14 @@ function BroadcastShowAll() {
     let tempArr = [];
     if (!selectedCategory)
       return tempArr;
-    console.log("All broadcast Array categories", allBroadcastArray);
-    console.log("Selected category : ", selectedCategory.label);
     for (let i = 0; i < allBroadcastArray.length; i++) {
-      console.log("op category", allBroadcastArray[i].props.data.category);
       if (
         selectedCategory &&
         allBroadcastArray[i].props.data.category === selectedCategory.label
       ) {
-        console.log("Hi");
         tempArr.push(allBroadcastArray[i]);
       }
     }
-    console.log("Temp", tempArr);
-    // setFilteredBroadcastArray(tempArr);
     return tempArr;
   }
 
@@ -179,8 +159,6 @@ function BroadcastShowAll() {
     const newEndDate = new Date(endDate.substring(0, 10));
 
     for (let i = 0; i < allBroadcastArray.length; i++) {
-      console.log("Date is here", allBroadcastArray[i].props.data)
-
       if (
         newStartDate <=
         new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
@@ -190,37 +168,43 @@ function BroadcastShowAll() {
         tempArray.push(allBroadcastArray[i]);
       }
     }
-    // setFilteredBroadcastArray(tempArray);
-    console.log("MYTemp", tempArray);
     return tempArray;
   }
 
   //Filter by status
-  //Rutikesh Todo:
   function filterByFormat() {
     //when state is not selected.
     let tempArr = [];
-    console.log("All broadcast Array", allBroadcastArray);
 
     if (!selectedFormat)
       return tempArr;
-    console.log("Selected format : ", selectedFormat.value);
     for (let i = 0; i < allBroadcastArray.length; i++) {
-      console.log("op", allBroadcastArray[i].props.data.format);
       if (
         selectedFormat &&
         allBroadcastArray[i].props.data.format === selectedFormat.value
       ) {
-        console.log("Hi");
         tempArr.push(allBroadcastArray[i]);
       }
     }
-    console.log("Temp", tempArr);
-    // setFilteredBroadcastArray(tempArr);
     return tempArr;
   }
 
-
+  function handleSort(event) {
+    switch (event.value) {
+      case 0:
+        const tempArray1 = [...filteredBroadcastArray];
+        tempArray1.sort((a, b) => { return a.props.data.topic.localeCompare(b.props.data.topic) });
+        setFilteredBroadcastArray(tempArray1);
+        break;
+      case 1:
+        const tempArray2 = [...filteredBroadcastArray];
+        tempArray2.sort((a, b) => { return new Date(a.props.data.date) - new Date(b.props.data.date) });
+        setFilteredBroadcastArray(tempArray2);
+        break;
+      default:
+        console.log("Nothing selected");
+    }
+  }
 
 
 
@@ -268,14 +252,13 @@ function BroadcastShowAll() {
     axios
       .get("https://immense-beach-88770.herokuapp.com/broadcasts")
       .then((res) => {
-        console.log("result is here", res);
+        // console.log("result is here", res);
         const tempArray = [];
         const temp = [];
         for (let i = 0; i < res.data.length; i++) {
           tempArray.push(<BroadcastSingleCard data={res.data[i]} />);
           temp.push(res.data[i]);
         }
-        // console.log("tempArray", tempArray);
         setAllBroadcastArray(tempArray);
         setFilteredBroadcastArray(tempArray);
       })
@@ -321,7 +304,6 @@ function BroadcastShowAll() {
           name="myDate"
           value={endDate}
           onChange={(e) => {
-            // console.log(e.target.value);
             setEndDate(e.target.value);
           }}
         />
@@ -330,8 +312,6 @@ function BroadcastShowAll() {
           options={dropdownCategoryArray}
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e)}
-
-
         />
         <Select
           className="broadcastSelect"
@@ -371,7 +351,7 @@ function BroadcastShowAll() {
           >
             SORT BY :{" "}
           </label>
-          <Select className="broadcastSelectSort" options={sort} />
+          <Select className="broadcastSelectSort" options={sort} onChange={handleSort} />
         </div>
 
         {filteredBroadcastArray}
