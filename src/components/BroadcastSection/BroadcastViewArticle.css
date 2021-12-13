@@ -48,3 +48,7 @@
     display: inline-block;
     width: 150px;
 }
+.ScrollSentTo {
+        overflow-y:scroll;
+        height:100px;
+}

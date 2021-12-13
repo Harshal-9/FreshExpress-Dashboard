@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./BroadcastViewArticle.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import ReactPlayer from "react-player";
+
 
 function SingleChat(props) {
     const { broadcastId } = useParams();
@@ -136,12 +138,12 @@ function ViewArticle() {
         if (broadcastData.tags.length > 0) {
             const tags = broadcastData.tags;
             for (let i = 0; i < tags.length; i++) {
-                arrayToReturn.push(<li>{tags[i]}</li>);
+                arrayToReturn.push(<ul><li>{tags[i]}</li></ul>);
             }
         } else if (broadcastData.farmers.length > 0) {
             const farmers = broadcastData.farmers;
             for (let i = 0; i < farmers.length; i++) {
-                arrayToReturn.push(<li>{getNameForFarmers(farmers[i])}</li>);
+                arrayToReturn.push(<ul><li>{getNameForFarmers(farmers[i])}</li></ul>);
             }
         }
         return (
@@ -163,13 +165,23 @@ function ViewArticle() {
                         alt="img"
                         width="200px"
                         height="150px"
-                    /> : broadcastData.format === "youtube" ? <iframe src="{broadcastData.link}" title="Yt linkk"></iframe>
+                    /> : broadcastData.format === "youtube" ? <ReactPlayer
+                        width="200px"
+                        height="150px"
+                        url={broadcastData.link}
+                    />
 
-                        : <img src="https://tse1.mm.bing.net/th?id=OIP.xhxeTXXWYt1PQ8jk11ytAwHaKA&pid=Api&P=0&w=300&h=300"
-                            alt="img"
-                            width="200px"
-                            height="150px"
-                        />}
+                        : <iframe
+                            src={
+                                "https://drive.google.com/file/d/" +
+                                broadcastData.driveId +
+                                "/preview"
+                            }
+                            width="500"
+                            height="250"
+                            //   allow="autoplay"
+                            title="PDF"
+                        ></iframe>}
 
 
                 </div>
@@ -202,7 +214,11 @@ function ViewArticle() {
                     </p>
                     <div >
                         Sent To :&nbsp;
-                        {broadcastData.toAllFarmers ? <p style={{ display: "inline-block" }}>All Farmers</p> : getFarmersAndTags()}
+                        <br />
+                        <br />
+                        <div className="ScrollSentTo">
+                            {broadcastData.toAllFarmers ? <p style={{ display: "inline-block" }}>All Farmers</p> : getFarmersAndTags()}
+                        </div>
                     </div>
 
                 </div>
@@ -213,7 +229,7 @@ function ViewArticle() {
                     {chatArray}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
