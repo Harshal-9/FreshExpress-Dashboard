@@ -1,42 +1,44 @@
-
-
-.broadcastAllFilter{
-    margin: 20px;
-    padding-bottom: 30px;
+.broadcastAllFilter {
+  margin: 20px;
+  padding-bottom: 30px;
 }
-.broadcastSelect{
-    margin-left: 80px;
-    margin-top: 10px;
-    width:15%;
-    display: inline-block;
+.broadcastSelect {
+  margin-left: 80px;
+  margin-top: 10px;
+  width: 15%;
+  display: inline-block;
 }
-.broadcastLabel{
-    margin-bottom: 10px;
-    text-align: left;
-    display: inline-block;
-    width:90px;
+.broadcastLabel {
+  margin-bottom: 10px;
+  text-align: left;
+  display: inline-block;
+  width: 90px;
+  margin-right: 1px;
 }
 .broadcastLabelData {
-    width:100px;
-    margin-bottom: 10px;
-    text-align: left;
-    display: inline-block;
+  width: 200px;
+  margin-bottom: 10px;
+  text-align: left;
+  display: inline-block;
 }
-.broadcastAddButton{
-    float: right;
-    margin-right: 80px;
-    margin-top: 20px;
-    width: 150px;
-    height:30px;
-    font-size: large;
-    background-color: rgb(49, 197, 49);;
+.broadcastAddButton {
+  float: right;
+  margin-right: 80px;
+  margin-top: 20px;
+  width: 150px;
+  height: 30px;
+  font-size: large;
+  background-color: rgb(49, 197, 49);
 }
-.broadcastSelectSort{
-    width:15%;
-    float: right;
-    margin-right: 80px;
+.broadcastSelectSort {
+  width: 15%;
+  float: right;
+  margin-right: 80px;
 }
-.broadcastDate{
-    width:12%;
+.broadcastDate {
+  width: 12%;
 }
 
+.BroadcastShowAllIcon:hover {
+  cursor: pointer;
+}
