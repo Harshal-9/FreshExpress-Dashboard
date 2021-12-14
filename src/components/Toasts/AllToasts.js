@@ -8,7 +8,7 @@ function UpdateSuccessToast(msg) {
   if (msg) msgToShow = msg;
 
   toast.success(msgToShow, {
-    position: "top-center",
+    position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -26,7 +26,7 @@ function UpdateSuccessToast(msg) {
 // Error toast
 function FailureToast() {
   toast.error("Request Failed !", {
-    position: "top-center",
+    position: "top-right",
     autoClose: 2000,
     theme: "colored",
     hideProgressBar: false,
@@ -41,7 +41,7 @@ function FailureToast() {
 // Custom Error toast
 function CustomToast(msg, color, backgroundColor) {
   toast.error(msg, {
-    position: "top-center",
+    position: "top-right",
     autoClose: 2000,
     theme: "colored",
     hideProgressBar: false,

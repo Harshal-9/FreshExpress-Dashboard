@@ -49,6 +49,7 @@
     width: 150px;
 }
 .ScrollSentTo {
+        border-style:groove;
         overflow-y:scroll;
         height:100px;
 }

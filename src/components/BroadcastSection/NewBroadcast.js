@@ -79,7 +79,8 @@ function NewBroadcast() {
   const handleFileChange = (event) => {
     const handleChangeSelectedFile = event.target.files[0];
     const fd = new FormData();
-    fd.append("image", handleChangeSelectedFile, handleChangeSelectedFile.name);
+    if (handleChangeSelectedFile)
+      fd.append("image", handleChangeSelectedFile, handleChangeSelectedFile.name);
 
     // Getting link of uploaded image
     axios
@@ -88,7 +89,7 @@ function NewBroadcast() {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
         );
-        setSelectedFile({ link: res.data.link, id: res.data.id });
+        setSelectedFile({ link: res.data.link, id: res.data.id, name: handleChangeSelectedFile.name });
       })
       .catch((err) => {
         console.log("error", err);
@@ -104,6 +105,9 @@ function NewBroadcast() {
         },
       })
       .then((res) => {
+        UpdateSuccessToast(
+          "File deleted successfully !"
+        );
         setSelectedFile(null);
       })
       .catch((err) => {
@@ -181,10 +185,17 @@ function NewBroadcast() {
       .then((res) => {
         console.log("response", res);
         UpdateSuccessToast("New Article added successfully !");
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 2000);
+
+
       })
       .catch((err) => {
         console.log("err", err);
       });
+    // UpdateSuccessToast("Data Submitted successfully successfully !");
+
   }
 
   return (
@@ -258,48 +269,6 @@ function NewBroadcast() {
               />
             </>
           ) : null}
-
-          {selected === "pdf" ? (
-            <>
-              <br />
-              <label className="newBroadcastLabel">Choose PDF :</label>
-              <input
-                accept="application/pdf"
-                type="file"
-                className="newBroadcastInput"
-                onChange={handleFileChange}
-                // value={selectedFile ? selectedFile : null}
-              />
-              {selectedFile ? (
-                <i
-                  class="fa fa-trash fa-2x"
-                  style={{ marginRight: "5px", marginLeft: "15px" }}
-                  onClick={handleDelete}
-                ></i>
-              ) : null}
-            </>
-          ) : null}
-
-          {selected === "jpg" ? (
-            <>
-              <br />
-              <label className="newBroadcastLabel">Choose JPG :</label>
-              <input
-                accept="image/*"
-                type="file"
-                className="newBroadcastInput"
-                onChange={handleFileChange}
-              />
-              {selectedFile ? (
-                <i
-                  class="fa fa-trash fa-2x"
-                  style={{ marginRight: "5px", marginLeft: "15px" }}
-                  onClick={handleDelete}
-                ></i>
-              ) : null}
-            </>
-          ) : null}
-
           <br />
           <label className="newBroadcastLabeltextArea">
             Enter Description :
@@ -316,10 +285,60 @@ function NewBroadcast() {
               setFinalData(tempObject);
             }}
           ></textarea>
+
+          {selected === "pdf" ? (
+            <>
+              <br />
+              <label className="newBroadcastLabel">Choose PDF :</label>
+              <label htmlFor="selectFileInput" className={selectedFile ? "selectFileLabel" : "notSelectFileLabel"} >{selectedFile ? selectedFile.name : "Choose file"} </label>
+              <input
+                hidden="true"
+                id="selectFileInput"
+                accept="application/pdf"
+                type="file"
+                className="newBroadcastInput"
+                onChange={handleFileChange}
+                style={{ paddingRight: "10px", color: "transparent", width: "10%" }}
+              />
+              {selectedFile ? (
+                <i
+                  class="fa fa-trash fa-2x"
+                  style={{ marginLeft: "5px" }}
+                  onClick={handleDelete}
+                ></i>
+              ) : null}
+            </>
+          ) : null}
+
+          {selected === "jpg" ? (
+            <>
+              <br />
+              <label className="newBroadcastLabel">Choose JPG :</label>
+              <label htmlFor="selectFileInputImage" className={selectedFile ? "selectFileLabel" : "notSelectFileLabel"} >{selectedFile ? selectedFile.name : "Choose Image"} </label>
+
+              <input
+                hidden="true"
+                id="selectFileInputImage"
+                accept="image/*"
+                type="file"
+                className="newBroadcastInput"
+                onChange={handleFileChange}
+                style={{ paddingRight: "10px", color: "transparent", width: "10%" }}
+
+              />
+              {selectedFile ? (
+                <i
+                  class="fa fa-trash fa-2x"
+                  style={{ marginRight: "5px", marginLeft: "15px" }}
+                  onClick={handleDelete}
+                ></i>
+              ) : null}
+            </>
+          ) : null}
           <br />
           <input
             type="checkbox"
-            className="newBroadcastInput"
+            className="newBroadcastInputCheckBox"
             value={checkBox}
             onChange={() => {
               setCheckBox(!checkBox);
@@ -329,13 +348,9 @@ function NewBroadcast() {
           <br />
           {!checkBox ? (
             <>
-              {/* <Select className="NewBroadcastSelect" options={dropdownTagsArray} placeholder="Select Tags" />
-                        <br />
-                        <Select className="NewBroadcastSelect" options={format} placeholder="To whom" />
-                        <br /> */}
               {selectedFarmerArray.length === 0 ? (
                 <MultiSelect
-                  className="filter"
+                  className="broadcastNewFilter"
                   options={dropdownTagsArray}
                   value={selectedTagsArray}
                   onChange={setSelectedTagsArray}
@@ -350,7 +365,7 @@ function NewBroadcast() {
                   <br />
                   <br />
                   <MultiSelect
-                    className="filter"
+                    className="broadcastNewFilter"
                     options={dropdownFarmerArray}
                     value={selectedFarmerArray}
                     onChange={setSelectedFarmerArray}
@@ -365,7 +380,7 @@ function NewBroadcast() {
           ) : null}
           <br />
           <br />
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit} className="newBroadcastSubmit">Submit</button>
         </form>
       </div>
       <ToastContainer />
