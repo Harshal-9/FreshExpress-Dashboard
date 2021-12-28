@@ -73,7 +73,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div>
         <div className="sidebar__link">
           <i className="fa fa-image"></i>
-          <a href="#">MRL Monitoring</a>
+          <a href="/MRLMonitoring">MRL Monitoring</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-file-text"></i>

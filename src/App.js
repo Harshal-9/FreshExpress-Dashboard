@@ -16,6 +16,9 @@ import CropMonitoring from "./components/CropMonitoring/CropMonitoring";
 import CropMonitoringViewEntry from "./components/CropMonitoring/CropMonitoringViewEntry";
 import SingleDiary from "./components/Dailydiary/SingleDiary";
 
+import MRLMonitoring from "./components/MRLMonitoring/MRLMonitoring";
+import MRLMonitoringUpload from "./components/MRLMonitoring/MRLMonitoringUpload";
+
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -44,9 +47,12 @@ const App = () => {
             path="/BroadcastShowAll"
             element={<BroadcastShowAll />}
           />
-          <Route exact path="/viewArticle/:broadcastId" element={<ViewArticle />} />
+          <Route
+            exact
+            path="/viewArticle/:broadcastId"
+            element={<ViewArticle />}
+          />
           <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
-
           <Route
             exact
             path="/BroadcastShowAll"
@@ -54,14 +60,30 @@ const App = () => {
           />
           {/* <Route exact path="/viewArticle" element={<ViewArticle />} /> */}
           <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
-          <Route exact path="/CropMonitoring" element={<CropMonitoring />}></Route>
-
-          <Route exact path="/CropMonitoringViewEntry" element={<CropMonitoringViewEntry />}></Route>
-
+          <Route
+            exact
+            path="/CropMonitoring"
+            element={<CropMonitoring />}
+          ></Route>
+          <Route
+            exact
+            path="/CropMonitoringViewEntry"
+            element={<CropMonitoringViewEntry />}
+          ></Route>
           <Route
             exact
             path="/dairy/:dailyDiaryId"
             element={<SingleDiary />}
+          ></Route>
+          <Route
+            exact
+            path="/MRLMonitoring"
+            element={<MRLMonitoring />}
+          ></Route>
+          <Route
+            exact
+            path="/MRLMonitoringUpload"
+            element={<MRLMonitoringUpload />}
           ></Route>
         </Routes>
       </Router>

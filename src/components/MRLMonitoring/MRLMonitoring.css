@@ -1,0 +1,75 @@
+.MRLMonitoringSelect {
+  width: 30%;
+  margin-right: 1.5%;
+  margin-left: 1.5%;
+  display: inline-block;
+}
+
+.MRLMonitoringLabel {
+  text-align: left;
+  display: inline-block;
+  width: 170px;
+  color: #356bc7;
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+}
+
+div.MRLScroll {
+  margin: 4px, 4px;
+  padding: 4px;
+  width: 1200px;
+  overflow: auto;
+  white-space: nowrap;
+  height: 300px;
+}
+
+.MRLScroll table {
+  border-collapse: collapse;
+  background-color: #cdd4ea;
+}
+
+.MRLScroll td {
+  border-style: solid;
+  text-align: center;
+  border-color: white;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.MRLHeaderRow td {
+  padding: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  background-color: #4472c4;
+  color: white;
+}
+
+.MRLUploadButton {
+  margin-left: 70%;
+  margin-right: 1%;
+  height: 38px;
+  padding: 5px;
+  background-color: #31c531;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: medium;
+  color: black;
+}
+
+.MRLDeleteButton {
+  /* margin-left: 70%; */
+  height: 38px;
+  padding: 5px;
+  background-color: #f16758;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: medium;
+  /* color: white; */
+  color: black;
+}
+
+.MRLUploadButton:hover,
+.MRLDeleteButton:hover {
+  background-color: rgb(226, 226, 104);
+  cursor: pointer;
+}

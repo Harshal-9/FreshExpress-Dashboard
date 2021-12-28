@@ -80,7 +80,11 @@ function NewBroadcast() {
     const handleChangeSelectedFile = event.target.files[0];
     const fd = new FormData();
     if (handleChangeSelectedFile)
-      fd.append("image", handleChangeSelectedFile, handleChangeSelectedFile.name);
+      fd.append(
+        "image",
+        handleChangeSelectedFile,
+        handleChangeSelectedFile.name
+      );
 
     // Getting link of uploaded image
     axios
@@ -89,7 +93,11 @@ function NewBroadcast() {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
         );
-        setSelectedFile({ link: res.data.link, id: res.data.id, name: handleChangeSelectedFile.name });
+        setSelectedFile({
+          link: res.data.link,
+          id: res.data.id,
+          name: handleChangeSelectedFile.name,
+        });
       })
       .catch((err) => {
         console.log("error", err);
@@ -105,9 +113,7 @@ function NewBroadcast() {
         },
       })
       .then((res) => {
-        UpdateSuccessToast(
-          "File deleted successfully !"
-        );
+        UpdateSuccessToast("File deleted successfully !");
         setSelectedFile(null);
       })
       .catch((err) => {
@@ -188,14 +194,11 @@ function NewBroadcast() {
         setTimeout(() => {
           window.location.reload(true);
         }, 2000);
-
-
       })
       .catch((err) => {
         console.log("err", err);
       });
     // UpdateSuccessToast("Data Submitted successfully successfully !");
-
   }
 
   return (
@@ -290,7 +293,14 @@ function NewBroadcast() {
             <>
               <br />
               <label className="newBroadcastLabel">Choose PDF :</label>
-              <label htmlFor="selectFileInput" className={selectedFile ? "selectFileLabel" : "notSelectFileLabel"} >{selectedFile ? selectedFile.name : "Choose file"} </label>
+              <label
+                htmlFor="selectFileInput"
+                className={
+                  selectedFile ? "selectFileLabel" : "notSelectFileLabel"
+                }
+              >
+                {selectedFile ? selectedFile.name : "Choose file"}{" "}
+              </label>
               <input
                 hidden="true"
                 id="selectFileInput"
@@ -298,7 +308,11 @@ function NewBroadcast() {
                 type="file"
                 className="newBroadcastInput"
                 onChange={handleFileChange}
-                style={{ paddingRight: "10px", color: "transparent", width: "10%" }}
+                style={{
+                  paddingRight: "10px",
+                  color: "transparent",
+                  width: "10%",
+                }}
               />
               {selectedFile ? (
                 <i
@@ -314,17 +328,27 @@ function NewBroadcast() {
             <>
               <br />
               <label className="newBroadcastLabel">Choose JPG :</label>
-              <label htmlFor="selectFileInputImage" className={selectedFile ? "selectFileLabel" : "notSelectFileLabel"} >{selectedFile ? selectedFile.name : "Choose Image"} </label>
+              <label
+                htmlFor="selectFileInputImage"
+                className={
+                  selectedFile ? "selectFileLabel" : "notSelectFileLabel"
+                }
+              >
+                {selectedFile ? selectedFile.name : "Choose Image"}{" "}
+              </label>
 
               <input
                 hidden="true"
                 id="selectFileInputImage"
-                accept="image/*"
+                accept="image/png, image/jpg, image/jpeg"
                 type="file"
                 className="newBroadcastInput"
                 onChange={handleFileChange}
-                style={{ paddingRight: "10px", color: "transparent", width: "10%" }}
-
+                style={{
+                  paddingRight: "10px",
+                  color: "transparent",
+                  width: "10%",
+                }}
               />
               {selectedFile ? (
                 <i
@@ -380,7 +404,9 @@ function NewBroadcast() {
           ) : null}
           <br />
           <br />
-          <button onClick={handleSubmit} className="newBroadcastSubmit">Submit</button>
+          <button onClick={handleSubmit} className="newBroadcastSubmit">
+            Submit
+          </button>
         </form>
       </div>
       <ToastContainer />
