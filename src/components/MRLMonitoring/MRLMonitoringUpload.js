@@ -1,10 +1,35 @@
 import React, { useState } from "react";
 import "./MRLMonitoringUpload.css";
+import { CustomToast } from "../Toasts/AllToasts";
 import uploadImg from "../../assets/uploadImg.gif";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
 
 function MRLMonitoringUpload() {
   const [selectedFileName, setSelectedFileName] = useState("No File Selected");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const fd = new FormData();
+    fd.append(
+      "allMRLReports",
+      event.target.allMRLReportsFile.files[0],
+      event.target.allMRLReportsFile.files[0].name
+    );
+    axios
+      .post(
+        "https://immense-beach-88770.herokuapp.com/mrlReports/uploadCSV",
+        fd
+      )
+      .then((res) => {
+        CustomToast(res.data.message, "white", "#4CAF50");
+      })
+      .catch((err) => {
+        if (err.response) {
+          CustomToast(err.response.data.message, "white", "#FF3333");
+        }
+      });
+  }
 
   return (
     <div>
@@ -30,27 +55,7 @@ function MRLMonitoringUpload() {
         <br />
         <br />
         {/* <label className="MRLLabel">Select CSV File : </label> */}
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            console.log(event.target.allMRLReportsFile.files[0]);
-            console.log(event.target.allMRLReportsFile.files[0].name);
-            const fd = new FormData();
-            fd.append(
-              "allMRLReports",
-              event.target.allMRLReportsFile.files[0],
-              event.target.allMRLReportsFile.files[0].name
-            );
-            axios
-              .post("http://localhost:5000/mrlReports/uploadCSV", fd)
-              .then((res) => {
-                console.log("Res", res.data);
-              })
-              .catch((err) => {
-                console.log("Err", err);
-              });
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <label
             htmlFor="uploadedFile"
             className={
@@ -73,7 +78,7 @@ function MRLMonitoringUpload() {
             style={{ color: "transparent" }}
             onChange={(event) => {
               if (event.target.files[0]) {
-                console.log(event.target.files[0].name);
+                // console.log(event.target.files[0].name);
                 setSelectedFileName(event.target.files[0].name);
               } else setSelectedFileName("No File Selected");
             }}
@@ -82,7 +87,12 @@ function MRLMonitoringUpload() {
           <br />
           <button
             className="MRLMonitoringButton"
-            style={{ marginRight: "50px" }}
+            style={
+              selectedFileName === "No File Selected"
+                ? { backgroundColor: "gray", marginRight: "50px" }
+                : { marginRight: "50px" }
+            }
+            disabled={selectedFileName === "No File Selected" ? true : false}
             type="submit"
           >
             Upload
@@ -97,6 +107,7 @@ function MRLMonitoringUpload() {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
