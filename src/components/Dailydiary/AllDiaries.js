@@ -59,7 +59,7 @@ function SingleDiaryRow(props) {
 
   let rowsData = [];
   let i = 0;
-
+  // console.log(props.operation);
   switch (props.operation) {
     case "spraying":
       for (; i < diaryData.data.details.length; i++) {
@@ -354,7 +354,7 @@ function AllDiaries() {
             )
             .then((data) => {
               let receivedData = data.data;
-              // console.log("Response:", receivedData);
+              console.log("Response:", receivedData);
 
               setAllDiariesArray([]);
               setFilteredDiariesArray([]);
@@ -375,6 +375,7 @@ function AllDiaries() {
 
                 for (let item in tempArr) {
                   // setting all diaries in allDiariesArray
+                  // console.log(" int item " + item)
                   if (tempArr[item].details.length) {
                     setAllDiariesArray((arr) =>
                       arr.concat(

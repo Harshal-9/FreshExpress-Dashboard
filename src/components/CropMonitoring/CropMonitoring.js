@@ -1,18 +1,39 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router";
+import { ToastContainer } from "react-toastify";
+import { FailureToast } from "../Toasts/AllToasts";
 import Select from "react-select";
 import "./CropMonitoring.css";
 
-function SingleTableRowCropMonitoring() {
+function SingleTableRowCropMonitoring(props) {
+    let cropData = props;
+    let rowsData = [];
+    let i = 0;
+    console.log("hi " + props.operation);
+    switch (props.operation) {
+
+    }
     return (
-            <tr className="SingleTableRowCropMonitoring">
-                <td>Nikhil</td>
-                <td>Nikhil</td>
-                <td>Nikhil</td>
-                <td>Nikhil</td>
-            </tr>
+        <tr className="SingleTableRowCropMonitoring">
+            <td>Date</td>
+            <td>{props.operation}</td>
+            <td>Nikhil</td>
+            <td>Nikhil</td>
+        </tr>
     );
 }
 function CropMonitoring() {
+    const [allFarmersCrop, setAllFarmersCrop] = useState({
+        farmerID: "None",
+        plot: [],
+        farmerName: "None",
+    });
+    const [selectedFarmerCrop, setSelectedFarmerCrop] = useState({});
+    const [allCropMonitoring, setAllCropMonitoring] = useState([]);
+    const [filteredAllCropMonitoring, setFilteredAllCropMonitoring] = useState([]);
     const category = [
         { value: 0, label: "Pest & Disease" },
         { value: 1, label: "Soil Nutrition" },
@@ -38,6 +59,20 @@ function CropMonitoring() {
         { value: 1, label: "Wide Spread" },
         { value: 2, label: "Danger!" }
     ]
+    useEffect(() => {
+        axios
+            .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+            .then((res) => {
+                let Data = [...res.data];
+                // console.log("Data Here :", Data);
+                setAllFarmersCrop(Data);
+            })
+            .catch((err) => {
+                console.log("err", err);
+                FailureToast();
+            });
+    }, []);
+
     return (
         <div>
             <br />
@@ -48,8 +83,13 @@ function CropMonitoring() {
             <div style={{ margin: "10px" }}>
                 <Select
                     className="CropMonitoringFarmerNamePlot"
-                    options={category}
                     placeholder="Search Farmer Name"
+                    options={allFarmersCrop}
+                    getOptionLabel={(option) => option.farmerName}
+                    getOptionValue={(option) => option.farmerID}
+                    onChange={(opt) => {
+                        setSelectedFarmerCrop({ FarmerID: opt.farmerID, plot: opt.plot })
+                    }}
                 />
                 <button className="allDiariesButton">
                     <i className="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add
@@ -58,9 +98,78 @@ function CropMonitoring() {
                 <br />
                 <br />
                 <Select
-                    className="CropMonitoringFarmerNamePlot"
-                    options={format}
+
                     placeholder="Select Plot"
+                    className="CropMonitoringFarmerNamePlot"
+                    options={selectedFarmerCrop.plot}
+                    getOptionLabel={(option) =>
+                        "(" + option.plot + ")" + option.farmerName + "-" + option.MHCode
+                    }
+                    getOptionValue={(option) =>
+                        option.MHCode
+                    }
+                    onChange={(event) => {
+                        axios
+                            .get(
+                                "https://immense-beach-88770.herokuapp.com/cropMonitoring/MHCode/" +
+                                event.MHCode
+                            )
+                            .then((res) => {
+                                console.log("Res", res);
+                                let receivedData = res.data;
+
+                                //to sort data according to date
+                                receivedData.sort(function (a, b) {
+                                    return new Date(b.date) - new Date(a.date);
+                                });
+                                setAllCropMonitoring([]);
+                                setFilteredAllCropMonitoring([]);
+                                for (let i = 0; i < receivedData.length; i++) {
+                                    let tempArr = {
+                                        pest: receivedData[i].pest,
+                                        disease: receivedData[i].disease,
+                                        plantHealth: receivedData[i].plantHealth,
+                                        soilHealth: receivedData[i].soilHealth,
+                                        other: receivedData[i].other
+                                    };
+
+                                    for (let item in tempArr) {
+                                        // console.log("in row" + tempArr[item].correctiveAction.length);
+                                        console.log("item " + item)
+                                        // if(tempArr[item].)
+                                        if (tempArr[item].correctiveAction.length) {
+                                            // console.log("item " + item.pestPhoto1)
+                                            setAllCropMonitoring((arr) =>
+                                                arr.concat(
+                                                    <SingleTableRowCropMonitoring
+                                                        date={receivedData[i].date}
+                                                        data={tempArr[item]}
+                                                        operation={item}
+                                                        diaryId={receivedData[i]._id}
+                                                        farmerName={selectedFarmerCrop.farmerName}
+                                                    />
+                                                )
+                                            );
+
+                                            setFilteredAllCropMonitoring((arr) =>
+                                                arr.concat(
+                                                    <SingleTableRowCropMonitoring
+                                                        date={receivedData[i].date}
+                                                        data={tempArr[item]}
+                                                        operation={item}
+                                                        diaryId={receivedData[i]._id}
+                                                        farmerName={selectedFarmerCrop.farmerName}
+                                                    />
+                                                )
+                                            );
+                                        }
+                                    }
+                                }
+                            })
+                            .catch((err) => {
+                                console.log("Err", err);
+                            });
+                    }}
 
                 />
                 <button className="allDiariesButton">
@@ -94,7 +203,7 @@ function CropMonitoring() {
                     backgroundColor="blue"
 
                 />
-                 <Select
+                <Select
                     className="CropMonitoringFarmerNamePlot"
                     options={monitoringParameter}
                     placeholder="Select Plot"
@@ -117,13 +226,13 @@ function CropMonitoring() {
                             <td>Alert Level</td>
                             <td>Reporter</td>
                         </tr>
-                        <SingleTableRowCropMonitoring/>
-                        <SingleTableRowCropMonitoring/>
-                        <SingleTableRowCropMonitoring/>
-                        <SingleTableRowCropMonitoring/>
+                        {/* <SingleTableRowCropMonitoring />
+                        <SingleTableRowCropMonitoring />
+                        <SingleTableRowCropMonitoring />
+                        <SingleTableRowCropMonitoring /> */}
                     </table>
                 </div>
-               
+
             </div>
         </div>
     )
