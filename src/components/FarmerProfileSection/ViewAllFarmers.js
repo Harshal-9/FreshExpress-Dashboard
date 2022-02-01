@@ -237,7 +237,7 @@ function ViewAllFarmers() {
           variety: [],
           tag: [],
         };
-        for (let item in recievedObj) {
+        for (let item in makeDataForOptions) {
           for (let arrItem in recievedObj[item]) {
             // console.log(recievedObj[item][arrItem], item);
             makeDataForOptions[item].push({
