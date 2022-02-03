@@ -1,14 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
-import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
   // console.log("prop", props);
 
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
-
+  const [isAddNewYearTriggered, setIsAddNewYearTriggered] = useState(false);
+  const [newYearVal, setNewYearVal] = useState("");
   const [seasonalAllDataReceived, setSeasonalAllDataReceived] = useState(
     props.seasonalAllData[0]
   );
@@ -67,9 +71,110 @@ function FarmerSeasonalDataCard(props) {
     }
   }
 
+  function handleNewYear(e) {
+    e.preventDefault();
+    let val = e.target.newYearValue.value;
+    if (Number.isInteger(Number(val)) && Number(val) !== 0) {
+      const years = getYears(props.seasonalAllData);
+      console.log(years);
+      for (let yearObj in years) {
+        if (years[yearObj].label === Number(val)) {
+          CustomToast("Year already Exists", "black", "#FFD700");
+          return;
+        }
+      }
+
+      // Inserting New Year
+      // const fd = new FormData();
+      // fd.append("farmerId", props.farmerId);
+      // fd.append("plotId", props.plotId);
+      // fd.append("MHCode", props.MHCode);
+      // fd.append("year", Number(val));
+
+      const dataToSend = {
+        farmerId: props.farmerId,
+        plotId: props.plotId,
+        MHCode: props.MHCode,
+        GGN: "",
+        year: Number(val),
+        cropMilestoneDates: {
+          plantation: "",
+          foundationPruning: "",
+          fruitPruning: "",
+          readyToHarvest: "",
+          actualHarvest: "",
+        },
+        yield: {
+          exportTonnage: 0,
+          localTonnage: 0,
+        },
+        primaryQualityIssuesFaced: [], //to store various issues faced in spreadsheet it is mentioned a true false
+        MRLResults: {
+          maxIndividual: 0, //%value
+          sum: 0, //% value
+          numberOfDetection: 0,
+          redListChemicals: [],
+          MRLReportLink: "", //drive link
+        },
+        qualityJotforms: {
+          preharvestQCLink: "",
+          primaryIssueFaced: "",
+          invardQCLink: "",
+          knittingQCLinks: [],
+          packingQCLinks: [],
+          FGQCLinks: [],
+          onArrivalQCLinks: [],
+        },
+        quality: "",
+      };
+
+      axios
+        .post(
+          "https://immense-beach-88770.herokuapp.com/seasonalData",
+          dataToSend
+        )
+        .then((res) => {
+          UpdateSuccessToast();
+          console.log("Res", res);
+          setTimeout(() => window.location.reload(), 2000);
+        })
+        .catch((err) => {
+          FailureToast();
+          console.log("Err", err);
+        });
+    } else {
+      CustomToast("Enter Valid Year", "black", "#FFD700");
+      setNewYearVal("");
+    }
+  }
+
   return (
     <div className="MyCardColumn" style={{ display: "inline-block" }}>
       <div className="MyCard" style={{ width: "98%" }}>
+        {/* <label>Add New Year : </label> */}
+        {/* Adding New Year  */}
+        <form onSubmit={handleNewYear}>
+          <input
+            type={"text"}
+            name="newYearValue"
+            placeholder="Enter New Year"
+            style={{
+              textAlign: "center",
+              marginRight: "15px",
+            }}
+            value={newYearVal}
+            onChange={(e) => {
+              setNewYearVal(e.value);
+            }}
+          ></input>
+          <button
+            style={{ fontFamily: "verdana", height: "23.5px", width: "100px" }}
+          >
+            Add Year
+          </button>
+        </form>
+        <br />
+        <br />
         <Select
           placeholder="Select a year"
           options={getYears(props.seasonalAllData)}
@@ -522,7 +627,8 @@ function FarmerSeasonalDataCard(props) {
 export default FarmerSeasonalDataCard;
 
 function dateInString(receivedDate) {
-  const myDate = receivedDate.substring(0, 10);
+  let myDate = "";
+  if (receivedDate) myDate = receivedDate.substring(0, 10);
   return myDate;
 }
 

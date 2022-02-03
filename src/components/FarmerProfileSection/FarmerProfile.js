@@ -263,6 +263,9 @@ function FarmerProfile(props) {
       <FarmerSeasonalDataCard
         seasonalAllData={seasonalAllData}
         sendBackSeasonalAllData={sendBackSeasonalAllData}
+        farmerId={selectedFarmer.FarmerID}
+        plotId={plotAllData._id}
+        MHCode={plotAllData.farmInformation.MHCode}
       />
       <br />
       <ToastContainer />
