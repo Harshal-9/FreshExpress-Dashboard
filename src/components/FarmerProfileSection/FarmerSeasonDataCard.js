@@ -11,7 +11,6 @@ function FarmerSeasonalDataCard(props) {
   // console.log("prop", props);
 
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
-  const [isAddNewYearTriggered, setIsAddNewYearTriggered] = useState(false);
   const [newYearVal, setNewYearVal] = useState("");
   const [seasonalAllDataReceived, setSeasonalAllDataReceived] = useState(
     props.seasonalAllData[0]
@@ -74,7 +73,7 @@ function FarmerSeasonalDataCard(props) {
   function handleNewYear(e) {
     e.preventDefault();
     let val = e.target.newYearValue.value;
-    if (Number.isInteger(Number(val)) && Number(val) !== 0) {
+    if (Number.isInteger(Number(val)) && Number(val) > 0) {
       const years = getYears(props.seasonalAllData);
       console.log(years);
       for (let yearObj in years) {
@@ -134,7 +133,11 @@ function FarmerSeasonalDataCard(props) {
           dataToSend
         )
         .then((res) => {
-          UpdateSuccessToast();
+          CustomToast(
+            "Year added successfully ! Page will be reloaded",
+            "black",
+            "#1cd855"
+          );
           console.log("Res", res);
           setTimeout(() => window.location.reload(), 2000);
         })
