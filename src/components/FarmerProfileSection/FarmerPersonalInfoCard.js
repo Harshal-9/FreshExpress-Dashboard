@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./FarmerProfile.css";
 import axios from "axios";
-import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 
 function FarmerPersonalInfoCard(props) {
+  console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const farmerAllData = props.farmerAllData;
@@ -154,7 +158,7 @@ function FarmerPersonalInfoCard(props) {
             )}
             <br />
             <br />
-            {isDisabled ? null : (
+            {!isDisabled && farmerAllData.farmerId !== "" ? (
               <button
                 onClick={(event) => {
                   event.preventDefault();
@@ -183,9 +187,36 @@ function FarmerPersonalInfoCard(props) {
               >
                 Save Changes
               </button>
-            )}
+            ) : null}
+            {isDisabled && farmerAllData.farmerId !== "" ? (
+              <button
+                className="deleteButtonPersonalInfoCard"
+                onClick={() => {
+                  axios
+                    .post(
+                      "https://immense-beach-88770.herokuapp.com/farmers/delete/" +
+                        farmerAllData.farmerId
+                    )
+                    .then((res) => {
+                      CustomToast(
+                        "Farmer deleted Successfully ! Page will be reloaded",
+                        "black",
+                        "#1cd855"
+                      );
+                      console.log("Res", res);
+                    })
+                    .catch((err) => {
+                      FailureToast();
+                      console.log("Err", err);
+                    });
+                }}
+              >
+                <i className="fa fa-trash"></i> Delete Farmer
+              </button>
+            ) : null}
           </form>
         </div>
+        {/* <button className="deleteButtonPersonalInfoCard">Delete Farmer</button> */}
       </div>
     </div>
   );
