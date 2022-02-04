@@ -621,6 +621,35 @@ function FarmerSeasonalDataCard(props) {
               Save Changes
             </button>
           )}
+          {isDisabledSeason && seasonalAllDataReceived.year ? (
+            <button
+              className="deleteButton"
+              onClick={() => {
+                // console.log("deleted", seasonalAllDataReceived._id);
+
+                axios
+                  .post(
+                    "https://immense-beach-88770.herokuapp.com/seasonalData/delete/deleteBySeasonalId/" +
+                      seasonalAllDataReceived._id
+                  )
+                  .then((res) => {
+                    CustomToast(
+                      "Seasonal data deleted successfully ! Page will be reloaded",
+                      "black",
+                      "#1cd855"
+                    );
+                    console.log("Res", res);
+                    setTimeout(() => window.location.reload(), 2000);
+                  })
+                  .catch((err) => {
+                    FailureToast();
+                    console.log("Err", err);
+                  });
+              }}
+            >
+              <i className="fa fa-trash"></i> Delete
+            </button>
+          ) : null}
         </div>
       </div>
     </div>
