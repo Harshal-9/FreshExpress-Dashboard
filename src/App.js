@@ -10,14 +10,14 @@ import AddNewFarmer from "./components/FarmerProfileSection/AddNewFarmer";
 import BroadcastShowAll from "./components/BroadcastSection/BroadcastShowAll";
 import ViewArticle from "./components/BroadcastSection/BroadcastViewArticle";
 import NewBroadcast from "./components/BroadcastSection/NewBroadcast";
-
 import AllDiaries from "./components/Dailydiary/AllDiaries";
 import CropMonitoring from "./components/CropMonitoring/CropMonitoring";
 import CropMonitoringViewEntry from "./components/CropMonitoring/CropMonitoringViewEntry";
 import SingleDiary from "./components/Dailydiary/SingleDiary";
-
 import MRLMonitoring from "./components/MRLMonitoring/MRLMonitoring";
 import MRLMonitoringUpload from "./components/MRLMonitoring/MRLMonitoringUpload";
+import AdminProfile from "./components/admin/AdminProfile";
+import AddDelAdmin from "./components/admin/AddDelAdmin";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -85,6 +85,8 @@ const App = () => {
             path="/MRLMonitoringUpload"
             element={<MRLMonitoringUpload />}
           ></Route>
+          <Route exact path="/adminProfile" element={<AdminProfile />}></Route>
+          <Route exact path="/AddDelAdmin" element={<AddDelAdmin />}></Route>
         </Routes>
       </Router>
     </div>

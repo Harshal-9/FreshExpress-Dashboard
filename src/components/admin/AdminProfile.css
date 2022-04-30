@@ -1,0 +1,8 @@
+.AdminProfileLabel {
+  text-align: left;
+  display: inline-block;
+  width: 150px;
+  color: green;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+}
