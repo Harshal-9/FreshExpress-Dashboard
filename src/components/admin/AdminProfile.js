@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminProfile.css";
 import axios from "axios";
 import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import { ToastContainer } from "react-toastify";
 
 function AdminProfile(props) {
   console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [adminData, setAdminData] = useState({});
+  useEffect(() => {
+    axios
+      .get(
+        "https://immense-beach-88770.herokuapp.com/admins/" +
+          "626d90a967e461b167ff247d"
+      )
+      .then((res) => {
+        console.log("Res", res);
+        setAdminData(res.data);
+      })
+      .catch((err) => {
+        console.log("Err", err);
+      });
+  }, []);
 
   // Function to handle edit of FarmerData form
   function handleEdit(event) {
@@ -50,8 +66,30 @@ function AdminProfile(props) {
                 type="text"
                 disabled={isDisabled}
                 size="75"
-                // value={farmerAllData.name}
-                onChange={(event) => {}}
+                value={adminData.name}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAdminData({
+                    ...adminData,
+                    name: event.target.value,
+                  });
+                }}
+              ></input>
+              <br />
+              <br />
+              <label className="AdminProfileLabel">UserId : </label>
+              <input
+                type="text"
+                disabled={true}
+                size="75"
+                value={adminData.userId}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAdminData({
+                    ...adminData,
+                    userId: event.target.value,
+                  });
+                }}
               ></input>
               <br />
               <br />
@@ -60,8 +98,14 @@ function AdminProfile(props) {
                 type="text"
                 disabled={isDisabled}
                 size="75"
-                // value={farmerAllData.name}
-                onChange={(event) => {}}
+                value={adminData.email}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAdminData({
+                    ...adminData,
+                    email: event.target.value,
+                  });
+                }}
               ></input>
               <br />
               <br />
@@ -70,17 +114,23 @@ function AdminProfile(props) {
                 type="text"
                 disabled={isDisabled}
                 size="75"
-                // value={farmerAllData.name}
-                onChange={(event) => {}}
+                value={adminData.mobileNumber}
+                onChange={(event) => {
+                  console.log(event.target.value);
+                  setAdminData({
+                    ...adminData,
+                    mobileNumber: event.target.value,
+                  });
+                }}
               ></input>
               <br />
               <br />
               <label className="AdminProfileLabel">Role : </label>
               <input
                 type="text"
-                disabled={isDisabled}
+                disabled={true}
                 size="75"
-                // value={farmerAllData.name}
+                value={adminData.role}
                 onChange={(event) => {}}
               ></input>
               <br />
@@ -95,9 +145,10 @@ function AdminProfile(props) {
                     // console.log("Sending Data", tempObj, farmerId);
 
                     axios
-                      .post(
-                        "https://immense-beach-88770.herokuapp.com/farmers/edit/",
-                        {}
+                      .patch(
+                        "https://immense-beach-88770.herokuapp.com/admins/" +
+                          "626d90a967e461b167ff247d",
+                        adminData
                       )
                       .then((res) => {
                         console.log("Response", res);
@@ -116,6 +167,7 @@ function AdminProfile(props) {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
