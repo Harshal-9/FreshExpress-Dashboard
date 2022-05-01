@@ -43,3 +43,19 @@
   border-radius: 5%;
   cursor: pointer;
 }
+
+.AddButton {
+  margin: 0 1.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  background-color: #385aca;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5%;
+  cursor: pointer;
+}

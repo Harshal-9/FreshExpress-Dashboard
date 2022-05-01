@@ -151,6 +151,7 @@ function AddDelAdmin(props) {
               <br />
               <br />
               <button
+                className="AddButton"
                 onClick={(event) => {
                   event.preventDefault();
                   axios
