@@ -26,6 +26,7 @@ const DropdownIndicator = (props) => {
 function SingleFarmerRow(props) {
   let farmerData = props;
 
+  console.log(farmerData);
   const navigate = useNavigate();
   return (
     <tr
@@ -43,7 +44,11 @@ function SingleFarmerRow(props) {
       <td>{farmerData.plotData.address.village}</td>
       <td>{farmerData.plotData.address.taluka}</td>
       <td>{farmerData.plotData.address.district}</td>
-      <td>Pruning Date</td>
+      <td>
+        {farmerData.plotData.farmInformation.fruitPruning
+          ? farmerData.plotData.farmInformation.fruitPruning.substring(0, 10)
+          : ""}
+      </td>
       <td>{farmerData.plotData.farmInformation.plotArea}</td>
       <td>{farmerData.plotData.farmInformation.variety}</td>
       <td>

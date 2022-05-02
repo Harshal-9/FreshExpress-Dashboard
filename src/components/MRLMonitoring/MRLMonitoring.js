@@ -32,7 +32,8 @@ function SinglePesticideRow(props) {
   return (
     <tr
       style={{
-        backgroundColor: props.data.remark === "PASS" ? "#94e664" : "#ff4040",
+        backgroundColor:
+          props.data.remark.toUpperCase() === "PASS" ? "#94e664" : "#ff4040",
       }}
     >
       <td>{props.data.srNo}</td>

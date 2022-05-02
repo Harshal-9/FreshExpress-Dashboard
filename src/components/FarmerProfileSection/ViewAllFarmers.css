@@ -10,7 +10,7 @@ div.AllFarmersScroll {
   width: 1200px;
   overflow: auto;
   white-space: nowrap;
-  height: 600px;
+  height: 350px;
 }
 
 .AllFarmersScroll table {

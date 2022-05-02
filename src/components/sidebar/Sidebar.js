@@ -7,7 +7,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
       <div className="sidebar__title">
         <div className="sidebar__img">
           <img src={logo} alt="logo" />
-          <h1>Fresh Express</h1>
+          <h1 style={{ marginLeft: "20px" }}>Fresh Express</h1>
         </div>
         <i
           onClick={() => closeSidebar()}

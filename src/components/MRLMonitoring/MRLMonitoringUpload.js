@@ -52,10 +52,14 @@ function MRLMonitoringUpload() {
           Upload CSV file for MRL Monitoring
         </h2>
         <br />
-        <label className="MRLUploadLabel" style={{ width: "200px" }}>
+        <label className="MRLUploadLabel" style={{ width: "100px" }}>
           File Name :
         </label>
-        <input disabled={true} value={selectedFileName} />
+        <input
+          disabled={true}
+          value={selectedFileName}
+          style={{ width: "400px" }}
+        />
         {/* <label>{selectedFileName}</label> */}
         <br />
         <br />

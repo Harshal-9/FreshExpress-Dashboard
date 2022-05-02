@@ -6,9 +6,31 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import { MultiSelect } from "react-multi-select-component";
 import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
+  const issueArray = [
+    { label: "Pest", value: "Pest" },
+    { label: "Size", value: "Size" },
+    { label: "Decay", value: "Decay" },
+    { label: "Insect bite decay", value: "Insect bite decay" },
+    { label: "Mold", value: "Mold" },
+    { label: "Internal Browning", value: "Internal Browning" },
+    { label: "Bruising", value: "Bruising" },
+    { label: "Berry drop", value: "Berry drop" },
+    { label: "Thrips", value: "Thrips" },
+    { label: "Black dots", value: "Black dots" },
+    { label: "Stem", value: "Stem" },
+    { label: "Cracking", value: "Cracking" },
+    { label: "Fruit Fly", value: "Fruit Fly" },
+    { label: "Soft berries", value: "Soft berries" },
+    { label: "Shrivel skin", value: "Shrivel skin" },
+    { label: "Cap Stem", value: "Cap Stem" },
+    { label: "Brix", value: "Brix" },
+    { label: "Color", value: "Color" },
+    { label: "MRL", value: "MRL" },
+  ];
   // console.log("prop", props);
   const navigate = useNavigate();
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
@@ -16,7 +38,10 @@ function FarmerSeasonalDataCard(props) {
   const [seasonalAllDataReceived, setSeasonalAllDataReceived] = useState(
     props.seasonalAllData[0]
   );
-
+  const [
+    selectedPrimaryQualityIssuesFaces,
+    setSelectedPrimaryQualityIssuesFaced,
+  ] = useState([]);
   const sendBackSeasonalAllData = props.sendBackSeasonalAllData;
 
   // Function to handle edit of PlotData form
@@ -491,36 +516,74 @@ function FarmerSeasonalDataCard(props) {
                 <br />
                 <br />
                 <label className="FarmerProfileLabel2">Invard QCLink : </label>
-                <input
-                  type="text"
-                  disabled={isDisabledSeason}
-                  size="40"
-                  value={seasonalAllDataReceived.qualityJotforms.invardQCLink}
-                  onChange={(event) => {
-                    const prevData = { ...seasonalAllDataReceived };
-                    prevData.qualityJotforms.invardQCLink = event.target.value;
-                    setSeasonalAllDataReceived(prevData);
-                  }}
-                ></input>
+                {isDisabledSeason ? (
+                  <a
+                    href={seasonalAllDataReceived.qualityJotforms.invardQCLink}
+                    target="_blank"
+                  >
+                    <input
+                      type="text"
+                      disabled={true}
+                      size="40"
+                      value={
+                        seasonalAllDataReceived.qualityJotforms.invardQCLink
+                      }
+                      className="FarmerProfileLink"
+                    ></input>
+                  </a>
+                ) : (
+                  <input
+                    type="text"
+                    disabled={isDisabledSeason}
+                    size="40"
+                    value={seasonalAllDataReceived.qualityJotforms.invardQCLink}
+                    onChange={(event) => {
+                      const prevData = { ...seasonalAllDataReceived };
+                      prevData.qualityJotforms.invardQCLink =
+                        event.target.value;
+                      setSeasonalAllDataReceived(prevData);
+                    }}
+                  ></input>
+                )}
                 <br />
                 <br />
+
                 <label className="FarmerProfileLabel2">
                   Pre Harvest QCLink :
                 </label>
-                <input
-                  type="text"
-                  disabled={isDisabledSeason}
-                  size="40"
-                  value={
-                    seasonalAllDataReceived.qualityJotforms.preharvestQCLink
-                  }
-                  onChange={(event) => {
-                    const prevData = { ...seasonalAllDataReceived };
-                    prevData.qualityJotforms.preharvestQCLink =
-                      event.target.value;
-                    setSeasonalAllDataReceived(prevData);
-                  }}
-                ></input>
+                {isDisabledSeason ? (
+                  <a
+                    href={
+                      seasonalAllDataReceived.qualityJotforms.preharvestQCLink
+                    }
+                    target="_blank"
+                  >
+                    <input
+                      type="text"
+                      disabled={true}
+                      size="40"
+                      value={
+                        seasonalAllDataReceived.qualityJotforms.preharvestQCLink
+                      }
+                      className="FarmerProfileLink"
+                    ></input>
+                  </a>
+                ) : (
+                  <input
+                    type="text"
+                    disabled={isDisabledSeason}
+                    size="40"
+                    value={
+                      seasonalAllDataReceived.qualityJotforms.preharvestQCLink
+                    }
+                    onChange={(event) => {
+                      const prevData = { ...seasonalAllDataReceived };
+                      prevData.qualityJotforms.preharvestQCLink =
+                        event.target.value;
+                      setSeasonalAllDataReceived(prevData);
+                    }}
+                  ></input>
+                )}
                 <br />
                 <br />
               </div>
@@ -601,19 +664,36 @@ function FarmerSeasonalDataCard(props) {
             <label className="FarmerProfileLabel2" style={{ width: "235px" }}>
               Primary Quality Issues Faced :
             </label>
-            <input
-              type="text"
-              disabled={isDisabledSeason}
-              size="40"
-              style={{ width: "49%" }}
-              value={seasonalAllDataReceived.primaryQualityIssuesFaced}
-              onChange={(event) => {
-                const prevData = { ...seasonalAllDataReceived };
-                prevData.primaryQualityIssuesFaced =
-                  event.target.value.split(",");
-                setSeasonalAllDataReceived(prevData);
-              }}
-            ></input>
+            {isDisabledSeason ? (
+              <input
+                type="text"
+                disabled={isDisabledSeason}
+                size="40"
+                style={{ width: "49%" }}
+                value={seasonalAllDataReceived.primaryQualityIssuesFaced}
+                onChange={(event) => {
+                  // const prevData = { ...seasonalAllDataReceived };
+                  // prevData.primaryQualityIssuesFaced =
+                  //   event.target.value.split(",");
+                  // setSeasonalAllDataReceived(prevData);
+                }}
+              ></input>
+            ) : (
+              <MultiSelect
+                className="filter"
+                // options={allFiltersData.village}
+                options={issueArray}
+                value={selectedPrimaryQualityIssuesFaces}
+                onChange={setSelectedPrimaryQualityIssuesFaced}
+                // isLoading={true}
+                // isCreatable={true}
+                // shouldToggleOnHover={true}
+                overrideStrings={{
+                  selectSomeItems: "Select Issues",
+                  allItemsAreSelected: "All Issues selected",
+                }}
+              />
+            )}
             <br />
             <br />
           </form>
@@ -622,14 +702,34 @@ function FarmerSeasonalDataCard(props) {
               onClick={(event) => {
                 event.preventDefault();
                 setIsDisabledSeason(true);
-                console.log(seasonalAllDataReceived);
+
+                let finalIssues = [];
+                for (let item in selectedPrimaryQualityIssuesFaces) {
+                  console.log(selectedPrimaryQualityIssuesFaces[item]);
+                  finalIssues.push(
+                    selectedPrimaryQualityIssuesFaces[item].value
+                  );
+                }
+                const prevData = {
+                  ...seasonalAllDataReceived,
+                };
+                if (
+                  selectedPrimaryQualityIssuesFaces &&
+                  selectedPrimaryQualityIssuesFaces.length !== 0
+                ) {
+                  prevData.primaryQualityIssuesFaced = finalIssues;
+                }
+
+                setSeasonalAllDataReceived(prevData);
+
+                console.log(prevData);
                 //to send data back to farmer Profile
                 // sendBackSeasonalAllData([seasonalAllDataReceived]);
                 axios
                   .post(
                     "https://immense-beach-88770.herokuapp.com/seasonalData/edit/" +
-                      seasonalAllDataReceived._id,
-                    seasonalAllDataReceived
+                      prevData._id,
+                    prevData
                   )
                   .then((data) => {
                     console.log("updated", data);
