@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import UpdateSuccessToast, {
   FailureToast,
@@ -9,7 +10,7 @@ import Popup from "./Popup";
 
 function FarmerSeasonalDataCard(props) {
   // console.log("prop", props);
-
+  const navigate = useNavigate();
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
   const [newYearVal, setNewYearVal] = useState("");
   const [seasonalAllDataReceived, setSeasonalAllDataReceived] = useState(
@@ -127,6 +128,8 @@ function FarmerSeasonalDataCard(props) {
         quality: "",
       };
 
+      console.log("Data", dataToSend);
+
       axios
         .post(
           "https://immense-beach-88770.herokuapp.com/seasonalData",
@@ -139,7 +142,12 @@ function FarmerSeasonalDataCard(props) {
             "#1cd855"
           );
           console.log("Res", res);
-          setTimeout(() => window.location.reload(), 2000);
+          // setTimeout(() => window.location.reload(), 2000);
+          // setTimeout(() => navigate("/FarmerProfile/" + props.MHCode), 2000);
+          setTimeout(
+            () => window.location.assign("/FarmerProfile/" + props.MHCode),
+            2000
+          );
         })
         .catch((err) => {
           FailureToast();
@@ -239,24 +247,6 @@ function FarmerSeasonalDataCard(props) {
               ></input>
               <br />
               <br />
-              <label className="FarmerProfileLabel2">Actual Harvest :</label>
-              <input
-                type="date"
-                style={{ width: "377px", height: "18.4px" }}
-                disabled={isDisabledSeason}
-                size="40"
-                value={dateInString(
-                  seasonalAllDataReceived.cropMilestoneDates.actualHarvest
-                )}
-                onChange={(event) => {
-                  const prevData = { ...seasonalAllDataReceived };
-                  prevData.cropMilestoneDates.actualHarvest =
-                    event.target.value;
-                  setSeasonalAllDataReceived(prevData);
-                }}
-              ></input>
-              <br />
-              <br />
               <label className="FarmerProfileLabel2">Fruit Pruning :</label>
               <input
                 type="date"
@@ -286,6 +276,24 @@ function FarmerSeasonalDataCard(props) {
                 onChange={(event) => {
                   const prevData = { ...seasonalAllDataReceived };
                   prevData.cropMilestoneDates.readyToHarvest =
+                    event.target.value;
+                  setSeasonalAllDataReceived(prevData);
+                }}
+              ></input>
+              <br />
+              <br />
+              <label className="FarmerProfileLabel2">Actual Harvest :</label>
+              <input
+                type="date"
+                style={{ width: "377px", height: "18.4px" }}
+                disabled={isDisabledSeason}
+                size="40"
+                value={dateInString(
+                  seasonalAllDataReceived.cropMilestoneDates.actualHarvest
+                )}
+                onChange={(event) => {
+                  const prevData = { ...seasonalAllDataReceived };
+                  prevData.cropMilestoneDates.actualHarvest =
                     event.target.value;
                   setSeasonalAllDataReceived(prevData);
                 }}
@@ -373,17 +381,32 @@ function FarmerSeasonalDataCard(props) {
               <br />
               <br />
               <label className="FarmerProfileLabel2">MRL Report Link : </label>
-              <input
-                type="text"
-                disabled={isDisabledSeason}
-                size="40"
-                value={seasonalAllDataReceived.MRLResults.MRLReportLink}
-                onChange={(event) => {
-                  const prevData = { ...seasonalAllDataReceived };
-                  prevData.MRLResults.MRLReportLink = event.target.value;
-                  setSeasonalAllDataReceived(prevData);
-                }}
-              ></input>
+              {isDisabledSeason ? (
+                <a
+                  href={seasonalAllDataReceived.MRLResults.MRLReportLink}
+                  target="_blank"
+                >
+                  <input
+                    type="text"
+                    disabled={true}
+                    size="40"
+                    value={seasonalAllDataReceived.MRLResults.MRLReportLink}
+                    className="FarmerProfileLink"
+                  ></input>
+                </a>
+              ) : (
+                <input
+                  type="text"
+                  disabled={isDisabledSeason}
+                  size="40"
+                  value={seasonalAllDataReceived.MRLResults.MRLReportLink}
+                  onChange={(event) => {
+                    const prevData = { ...seasonalAllDataReceived };
+                    prevData.MRLResults.MRLReportLink = event.target.value;
+                    setSeasonalAllDataReceived(prevData);
+                  }}
+                ></input>
+              )}
               <br />
               <br />
               <label className="FarmerProfileLabel2">Export Tonnage : </label>

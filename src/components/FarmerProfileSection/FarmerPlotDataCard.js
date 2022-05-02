@@ -92,7 +92,7 @@ function FarmerPlotDataCard(props) {
               <br />
               <label className="FarmerProfileLabel">Plot Location Link :</label>
               {isDisabledPlot ? (
-                <a href={plotAllData.address.mapLink}>
+                <a href={plotAllData.address.mapLink} target="_blank">
                   <input
                     type="text"
                     disabled={true}

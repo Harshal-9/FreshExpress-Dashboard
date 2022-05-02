@@ -360,7 +360,7 @@ function ViewAllFarmers() {
       </button>
       <br />
       <br />
-      <div className="AllFarmersScroll">
+      <div className="AllFarmersScroll tableScrollbarWidth">
         <table>
           <tr className="AllFarmersHeaderRow">
             <td>Name</td>

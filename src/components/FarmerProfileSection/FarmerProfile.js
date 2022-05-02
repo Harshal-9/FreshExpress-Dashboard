@@ -169,82 +169,92 @@ function FarmerProfile(props) {
       <br />
       <div>
         <div className="FarmerSelectDiv">
-          <Select
-            placeholder="Select Farmer"
-            options={allFarmers}
-            className="FarmerSelect"
-            getOptionLabel={(option) => option.farmerName}
-            getOptionValue={(option) => option.farmerID}
-            onChange={(opt) => {
-              setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
-            }}
-          />
+          {props.flg ? (
+            ""
+          ) : (
+            <Select
+              placeholder="Select Farmer"
+              options={allFarmers}
+              className="FarmerSelect"
+              getOptionLabel={(option) => option.farmerName}
+              getOptionValue={(option) => option.farmerID}
+              onChange={(opt) => {
+                console.log("selected", opt);
+                setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
+              }}
+            />
+          )}
         </div>
 
         <div className="PlotSelectDiv">
-          <Select
-            placeholder="Select Plot"
-            options={selectedFarmer.plot}
-            getOptionLabel={(option) =>
-              "(" +
-              option.plot +
-              ") " +
-              option.farmerName +
-              " - " +
-              option.MHCode
-            }
-            getOptionValue={(option) => option.MHCode}
-            className="PlotSelect"
-            onChange={(event) => {
-              axios
-                .get(
-                  "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
-                    event.MHCode
-                )
-                .then((data) => {
-                  // console.log("Recived by MHCode", data.data, data.data.length);
-                  if (data.data.length) {
-                    let receivedData = data.data[0];
-                    setFarmerAllData({
-                      ...receivedData.personalInformation,
-                      farmerId: receivedData._id,
-                    });
+          {props.flg ? (
+            ""
+          ) : (
+            <Select
+              placeholder="Select Plot"
+              options={selectedFarmer.plot}
+              getOptionLabel={(option) =>
+                "(" +
+                option.plot +
+                ") " +
+                option.farmerName +
+                " - " +
+                option.MHCode
+              }
+              getOptionValue={(option) => option.MHCode}
+              className="PlotSelect"
+              onChange={(event) => {
+                axios
+                  .get(
+                    "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
+                      event.MHCode
+                  )
+                  .then((data) => {
+                    // console.log("Recived by MHCode", data.data, data.data.length);
+                    if (data.data.length) {
+                      let receivedData = data.data[0];
+                      setFarmerAllData({
+                        ...receivedData.personalInformation,
+                        farmerId: receivedData._id,
+                      });
 
-                    for (let i = 0; i < receivedData.plots.length; i++) {
-                      if (
-                        receivedData.plots[i].farmInformation.MHCode ===
-                        event.MHCode
-                      ) {
-                        //setting plot data of selected plot
-                        setPlotAllData({ ...receivedData.plots[i] });
+                      for (let i = 0; i < receivedData.plots.length; i++) {
+                        if (
+                          receivedData.plots[i].farmInformation.MHCode ===
+                          event.MHCode
+                        ) {
+                          //setting plot data of selected plot
+                          setPlotAllData({ ...receivedData.plots[i] });
 
-                        // fetching seasonal data of all years of a selected farmer's selected plot
-                        axios
-                          .get(
-                            "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
-                              receivedData.plots[i]._id
-                          )
-                          .then((data) => {
-                            // console.log("Seasonal data", data.data[0]);
-                            if (data.data.length) setSeasonalAllData(data.data);
-                            else {
-                              console.log(dummyEmptySeasonalAllData);
-                              setSeasonalAllData(dummyEmptySeasonalAllData);
-                            }
-                          })
-                          .catch((err) => {
-                            console.log("Error", err);
-                          });
+                          // fetching seasonal data of all years of a selected farmer's selected plot
+                          axios
+                            .get(
+                              "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
+                                receivedData.plots[i]._id
+                            )
+                            .then((data) => {
+                              // console.log("Seasonal data", data.data[0]);
+                              if (data.data.length)
+                                setSeasonalAllData(data.data);
+                              else {
+                                console.log(dummyEmptySeasonalAllData);
+                                setSeasonalAllData(dummyEmptySeasonalAllData);
+                              }
+                            })
+                            .catch((err) => {
+                              console.log("Error", err);
+                            });
+                        }
                       }
                     }
-                  }
-                })
-                .catch((err) => {
-                  console.log("Error:", err);
-                  FailureToast();
-                });
-            }}
-          />
+                  })
+                  .catch((err) => {
+                    console.log("Error:", err);
+                    FailureToast();
+                  });
+              }}
+            />
+          )}
         </div>
       </div>
       <br />
@@ -263,7 +273,11 @@ function FarmerProfile(props) {
       <FarmerSeasonalDataCard
         seasonalAllData={seasonalAllData}
         sendBackSeasonalAllData={sendBackSeasonalAllData}
-        farmerId={selectedFarmer.FarmerID}
+        farmerId={
+          selectedFarmer.FarmerID
+            ? selectedFarmer.FarmerID
+            : farmerAllData.farmerId
+        }
         plotId={plotAllData._id}
         MHCode={plotAllData.farmInformation.MHCode}
       />

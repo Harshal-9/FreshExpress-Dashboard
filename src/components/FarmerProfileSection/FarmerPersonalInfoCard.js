@@ -134,7 +134,7 @@ function FarmerPersonalInfoCard(props) {
             <br />
             <label className="FarmerProfileLabel">Farm Map Link : </label>
             {isDisabled ? (
-              <a href={farmerAllData.farmMap}>
+              <a href={farmerAllData.farmMap} target="_blank">
                 <input
                   type="url"
                   disabled={true}
