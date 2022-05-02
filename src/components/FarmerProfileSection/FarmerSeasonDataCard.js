@@ -479,75 +479,6 @@ function FarmerSeasonalDataCard(props) {
                 }}
               >
                 <br />
-                <label className="FarmerProfileLabel2">Knitting QCLink :</label>
-                <input
-                  type="button"
-                  value={isDisabledSeason ? "View Links" : "Edit Links"}
-                  style={{ width: "377px", height: "18.4px" }}
-                  onClick={() => {
-                    setSendToPopup({
-                      qualityJotform: "knittingQCLinks",
-                      arr: seasonalAllDataReceived.qualityJotforms
-                        .knittingQCLinks,
-                    });
-                    togglePop();
-                  }}
-                  size="40"
-                ></input>
-                <br />
-                <br />
-                <label className="FarmerProfileLabel2">
-                  On Arrival QCLinks :
-                </label>
-                <input
-                  type="button"
-                  value={isDisabledSeason ? "View Links" : "Edit Links"}
-                  style={{ width: "377px", height: "18.4px" }}
-                  onClick={() => {
-                    setSendToPopup({
-                      qualityJotform: "onArrivalQCLinks",
-                      arr: seasonalAllDataReceived.qualityJotforms
-                        .onArrivalQCLinks,
-                    });
-                    togglePop();
-                  }}
-                  size="40"
-                ></input>
-                <br />
-                <br />
-                <label className="FarmerProfileLabel2">Invard QCLink : </label>
-                {isDisabledSeason ? (
-                  <a
-                    href={seasonalAllDataReceived.qualityJotforms.invardQCLink}
-                    target="_blank"
-                  >
-                    <input
-                      type="text"
-                      disabled={true}
-                      size="40"
-                      value={
-                        seasonalAllDataReceived.qualityJotforms.invardQCLink
-                      }
-                      className="FarmerProfileLink"
-                    ></input>
-                  </a>
-                ) : (
-                  <input
-                    type="text"
-                    disabled={isDisabledSeason}
-                    size="40"
-                    value={seasonalAllDataReceived.qualityJotforms.invardQCLink}
-                    onChange={(event) => {
-                      const prevData = { ...seasonalAllDataReceived };
-                      prevData.qualityJotforms.invardQCLink =
-                        event.target.value;
-                      setSeasonalAllDataReceived(prevData);
-                    }}
-                  ></input>
-                )}
-                <br />
-                <br />
-
                 <label className="FarmerProfileLabel2">
                   Pre Harvest QCLink :
                 </label>
@@ -586,8 +517,55 @@ function FarmerSeasonalDataCard(props) {
                 )}
                 <br />
                 <br />
-              </div>
-              <div className="2" style={{ display: "inline-block" }}>
+                <label className="FarmerProfileLabel2">Invard QCLink : </label>
+                {isDisabledSeason ? (
+                  <a
+                    href={seasonalAllDataReceived.qualityJotforms.invardQCLink}
+                    target="_blank"
+                  >
+                    <input
+                      type="text"
+                      disabled={true}
+                      size="40"
+                      value={
+                        seasonalAllDataReceived.qualityJotforms.invardQCLink
+                      }
+                      className="FarmerProfileLink"
+                    ></input>
+                  </a>
+                ) : (
+                  <input
+                    type="text"
+                    disabled={isDisabledSeason}
+                    size="40"
+                    value={seasonalAllDataReceived.qualityJotforms.invardQCLink}
+                    onChange={(event) => {
+                      const prevData = { ...seasonalAllDataReceived };
+                      prevData.qualityJotforms.invardQCLink =
+                        event.target.value;
+                      setSeasonalAllDataReceived(prevData);
+                    }}
+                  ></input>
+                )}
+                <br />
+                <br />
+
+                <label className="FarmerProfileLabel2">Knitting QCLink :</label>
+                <input
+                  type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
+                  style={{ width: "377px", height: "18.4px" }}
+                  onClick={() => {
+                    setSendToPopup({
+                      qualityJotform: "knittingQCLinks",
+                      arr: seasonalAllDataReceived.qualityJotforms
+                        .knittingQCLinks,
+                    });
+                    togglePop();
+                  }}
+                  size="40"
+                ></input>
+                <br />
                 <br />
                 <label className="FarmerProfileLabel2">Packing QCLink : </label>
                 <input
@@ -606,6 +584,9 @@ function FarmerSeasonalDataCard(props) {
                 ></input>
                 <br />
                 <br />
+              </div>
+              <div className="2" style={{ display: "inline-block" }}>
+                <br />
                 <label className="FarmerProfileLabel2">FG QCLink : </label>
                 <input
                   type="button"
@@ -622,6 +603,26 @@ function FarmerSeasonalDataCard(props) {
                 ></input>
                 <br />
                 <br />
+                <label className="FarmerProfileLabel2">
+                  On Arrival QCLinks :
+                </label>
+                <input
+                  type="button"
+                  value={isDisabledSeason ? "View Links" : "Edit Links"}
+                  style={{ width: "377px", height: "18.4px" }}
+                  onClick={() => {
+                    setSendToPopup({
+                      qualityJotform: "onArrivalQCLinks",
+                      arr: seasonalAllDataReceived.qualityJotforms
+                        .onArrivalQCLinks,
+                    });
+                    togglePop();
+                  }}
+                  size="40"
+                ></input>
+                <br />
+                <br />
+
                 <label className="FarmerProfileLabel2">
                   Primary Issue Faced :
                 </label>
