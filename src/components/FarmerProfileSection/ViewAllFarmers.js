@@ -442,6 +442,17 @@ function ViewAllFarmers() {
           setEndDate(e.target.value);
         }}
       />
+      <button
+        className="exportButton"
+        onClick={() => {
+          window.location.assign(
+            "https://immense-beach-88770.herokuapp.com/farmers/exportFarmers"
+          );
+        }}
+      >
+        <i className="fa fa-download fa-lg" aria-hidden="true"></i> Export All
+        Farmers
+      </button>
 
       <br />
       <br />

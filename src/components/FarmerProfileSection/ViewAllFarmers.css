@@ -79,3 +79,20 @@ div.AllFarmersScroll {
   background-color: #63f163;
   color: black;
 }
+
+.exportButton {
+  /* margin-right: 10%; */
+  /* margin-top: 1%; */
+  margin-left: 30%;
+  height: 38px;
+  padding: 5px;
+  background-color: #265acc;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: large;
+  color: white;
+}
+
+.exportButton:hover {
+  background-color: rgb(226, 226, 104);
+  cursor: pointer;
+}
