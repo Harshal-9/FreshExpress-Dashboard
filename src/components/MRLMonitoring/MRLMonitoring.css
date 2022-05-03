@@ -73,3 +73,30 @@ div.MRLScroll {
   background-color: rgb(226, 226, 104);
   cursor: pointer;
 }
+
+.readymade_main__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.readymadeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70px;
+  padding: 25px;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.readymade_card_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
