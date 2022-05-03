@@ -81,6 +81,15 @@ function FarmerProfile(props) {
         primaryIssueFaced: "",
         invardQCLink: "",
       },
+      reports: {
+        petioleReportUrl: "",
+        petioleReportId: "",
+        soilReportUrl: "",
+        soilReportId: "",
+        waterReportUrl: "",
+        waterReportId: "",
+      },
+
       farmerId: "",
       plotId: "",
       year: null,

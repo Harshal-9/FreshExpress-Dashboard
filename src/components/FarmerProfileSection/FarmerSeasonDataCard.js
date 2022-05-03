@@ -43,6 +43,15 @@ function FarmerSeasonalDataCard(props) {
     setSelectedPrimaryQualityIssuesFaced,
   ] = useState([]);
   const sendBackSeasonalAllData = props.sendBackSeasonalAllData;
+  const [popupClicked, setPopupClicked] = useState(false);
+  const [sendToPopup, setSendToPopup] = useState({
+    qualityJotform: "",
+    arr: [],
+  });
+
+  const [petioleReport, setPetioleReport] = useState({});
+  const [soilReport, setSoilReport] = useState({});
+  const [waterReport, setWaterReport] = useState({});
 
   // Function to handle edit of PlotData form
   function handleEditSeason(event) {
@@ -54,11 +63,6 @@ function FarmerSeasonalDataCard(props) {
     }
   }
 
-  const [popupClicked, setPopupClicked] = useState(false);
-  const [sendToPopup, setSendToPopup] = useState({
-    qualityJotform: "",
-    arr: [],
-  });
   function togglePop() {
     console.log("Called", popupClicked);
     if (popupClicked) setPopupClicked(false);
@@ -94,6 +98,106 @@ function FarmerSeasonalDataCard(props) {
 
       default:
     }
+  }
+
+  function handleReportUpload(event) {
+    const handleChangeSelectedFile = event.target.files[0];
+    console.log(event.target.name);
+
+    const fd = new FormData();
+    if (handleChangeSelectedFile)
+      fd.append(
+        "image",
+        handleChangeSelectedFile,
+        handleChangeSelectedFile.name
+      );
+
+    // Deleting previous image
+    // if (seasonalAllDataReceived.reports.soilReportId)
+
+    // Getting link of uploaded image
+    axios
+      .post(
+        "https://immense-beach-88770.herokuapp.com/uploadFile/REPORTS_FOLDER",
+        fd
+      )
+      .then((res) => {
+        UpdateSuccessToast(
+          "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
+        );
+
+        if (event.target.name === "petioleReports") {
+          setPetioleReport({
+            link: res.data.link,
+            id: res.data.id,
+          });
+
+          axios
+            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+              id: seasonalAllDataReceived.reports.petioleReportId,
+            })
+            .then((res2) => {
+              console.log("Res", res2);
+            })
+            .catch((err) => {
+              console.log("Err", err);
+            });
+
+          const prevData = { ...seasonalAllDataReceived };
+          prevData.reports.petioleReportUrl = res.data.link;
+          prevData.reports.petioleReportId = res.data.id;
+          setSeasonalAllDataReceived(prevData);
+        }
+
+        if (event.target.name === "soilReports") {
+          setSoilReport({
+            link: res.data.link,
+            id: res.data.id,
+          });
+
+          axios
+            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+              id: seasonalAllDataReceived.reports.soilReportId,
+            })
+            .then((res2) => {
+              console.log("Res", res2);
+            })
+            .catch((err) => {
+              console.log("Err", err);
+            });
+
+          const prevData = { ...seasonalAllDataReceived };
+          prevData.reports.soilReportUrl = res.data.link;
+          prevData.reports.soilReportId = res.data.id;
+          setSeasonalAllDataReceived(prevData);
+        }
+
+        if (event.target.name === "waterReports") {
+          setWaterReport({
+            link: res.data.link,
+            id: res.data.id,
+          });
+
+          axios
+            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+              id: seasonalAllDataReceived.reports.waterReportId,
+            })
+            .then((res2) => {
+              console.log("Res", res2);
+            })
+            .catch((err) => {
+              console.log("Err", err);
+            });
+
+          const prevData = { ...seasonalAllDataReceived };
+          prevData.reports.waterReportUrl = res.data.link;
+          prevData.reports.waterReportId = res.data.id;
+          setSeasonalAllDataReceived(prevData);
+        }
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   }
 
   function handleNewYear(e) {
@@ -150,6 +254,15 @@ function FarmerSeasonalDataCard(props) {
           FGQCLinks: [],
           onArrivalQCLinks: [],
         },
+        reports: {
+          petioleReportUrl: "",
+          petioleReportId: "",
+          soilReportUrl: "",
+          soilReportId: "",
+          waterReportUrl: "",
+          waterReportId: "",
+        },
+
         quality: "",
       };
 
@@ -693,6 +806,76 @@ function FarmerSeasonalDataCard(props) {
                   selectSomeItems: "Select Issues",
                   allItemsAreSelected: "All Issues selected",
                 }}
+              />
+            )}
+            <br />
+            <br />
+
+            <label className="FarmerProfileLabel2" style={{ width: "235px" }}>
+              Petiole Reports:
+            </label>
+            {isDisabledSeason ? (
+              <input
+                type="text"
+                disabled={isDisabledSeason}
+                size="40"
+                value={
+                  seasonalAllDataReceived.reports
+                    ? seasonalAllDataReceived.reports.petioleReportUrl
+                    : ""
+                }
+              ></input>
+            ) : (
+              <input
+                type="file"
+                name="petioleReports"
+                onChange={(e) => handleReportUpload(e)}
+              />
+            )}
+            <br />
+            <br />
+            <label className="FarmerProfileLabel2" style={{ width: "235px" }}>
+              Soil Reports:
+            </label>
+            {isDisabledSeason ? (
+              <input
+                type="text"
+                disabled={isDisabledSeason}
+                size="40"
+                value={
+                  seasonalAllDataReceived.reports
+                    ? seasonalAllDataReceived.reports.soilReportUrl
+                    : ""
+                }
+              ></input>
+            ) : (
+              <input
+                type="file"
+                name="soilReports"
+                onChange={(e) => handleReportUpload(e)}
+              />
+            )}
+            <br />
+            <br />
+            <label className="FarmerProfileLabel2" style={{ width: "235px" }}>
+              Water Reports:
+            </label>
+            {isDisabledSeason ? (
+              <input
+                type="text"
+                disabled={isDisabledSeason}
+                size="40"
+                value={
+                  seasonalAllDataReceived.reports
+                    ? seasonalAllDataReceived.reports.waterReportUrl
+                    : ""
+                }
+              ></input>
+            ) : (
+              <input
+                type="file"
+                name="waterReports"
+                onChange={(e) => handleReportUpload(e)}
               />
             )}
             <br />
