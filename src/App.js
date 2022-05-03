@@ -18,6 +18,7 @@ import MRLMonitoring from "./components/MRLMonitoring/MRLMonitoring";
 import MRLMonitoringUpload from "./components/MRLMonitoring/MRLMonitoringUpload";
 import AdminProfile from "./components/admin/AdminProfile";
 import AddDelAdmin from "./components/admin/AddDelAdmin";
+import Main from "./components/FarmerProfileSection/Main";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -34,6 +35,7 @@ const App = () => {
       <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
       <Router>
         <Routes>
+          <Route exact path="/" element={<Main />} />
           <Route exact path="/FarmerProfile" element={<FarmerProfile />} />
           <Route exact path="/ViewAllFarmers" element={<ViewAllFarmers />} />
           <Route

@@ -41,7 +41,10 @@ function AdminProfile(props) {
       <br />
       <div
         className="MyCardColumn"
-        style={{ display: "inline-block", verticalAlign: "top" }}
+        style={{
+          display: "inline-block",
+          verticalAlign: "top",
+        }}
       >
         <div className="MyCard">
           <img

@@ -96,6 +96,44 @@ function MRLMonitoring() {
   });
   const [activePesticideArray, setActivePesticideArray] = useState([]);
 
+  // function to calculate sum of %MRL
+  function mrlPercentSum() {
+    let sum = 0;
+    for (let item in activePesticideArray) {
+      // console.log("H", activePesticideArray[item]);
+      console.log(
+        "NO",
+        (
+          (activePesticideArray[item].props.data.result /
+            activePesticideArray[item].props.data.EUMRL) *
+          100
+        ).toFixed(3)
+      );
+      sum =
+        sum +
+        Number(
+          (
+            (activePesticideArray[item].props.data.result /
+              activePesticideArray[item].props.data.EUMRL) *
+            100
+          ).toFixed(3)
+        );
+      console.log("SUM", sum);
+    }
+    return sum;
+  }
+
+  // function to calculate sum of %MRL
+  function ArFDPercentSum() {
+    let sum = 0;
+    for (let item in activePesticideArray) {
+      if (!isNaN(activePesticideArray[item].props.data.ArFDPercent))
+        sum = sum + Number(activePesticideArray[item].props.data.ArFDPercent);
+      console.log("SUM", sum);
+    }
+    return sum;
+  }
+
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
@@ -246,6 +284,12 @@ function MRLMonitoring() {
                     />
                   )
                 );
+                console.log(
+                  "Here",
+                  <SinglePesticideRow
+                    data={allMRLReports[event.value].chemicals[i]}
+                  />
+                );
               }
             }}
           />
@@ -360,6 +404,44 @@ function MRLMonitoring() {
         </button>
       </div>
       <br /> */}
+      <div>
+        <div className="readymade_main__cards">
+          <div className="readymadeCard">
+            <i
+              className="fa fa-flask fa-2x text-lightblue"
+              aria-hidden="true"
+            ></i>
+            <div className="readymade_card_inner">
+              <p className="text-primary-p">Number of Detections</p>
+              <span className="font-bold text-title">
+                {activePesticideArray.length}
+              </span>
+            </div>
+          </div>
+
+          <div className="readymadeCard">
+            <i
+              className="fa fa-file-text fa-2x text-red"
+              aria-hidden="true"
+            ></i>
+            <div className="readymade_card_inner">
+              <p className="text-primary-p">Total % MRL</p>
+              <span className="font-bold text-title">{mrlPercentSum()}%</span>
+            </div>
+          </div>
+
+          <div className="readymadeCard">
+            <i
+              className="fa fa fa-file-text fa-2x text-yellow"
+              aria-hidden="true"
+            ></i>
+            <div className="readymade_card_inner">
+              <p className="text-primary-p">Total %ArFD</p>
+              <span className="font-bold text-title">{ArFDPercentSum()}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="MRLScroll">
         <table>
           <tbody>

@@ -8,10 +8,22 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
         <i className="fa fa-bars" aria-hidden="true"></i>
       </div>
       <div className="navbar__left">
-        <a href="https://google.com">FE Link 1</a>
-        <a href="#">FE Link 2</a>
-        <a className="active_link" href="#">
-          FE Link 3
+        <a
+          className="active_link"
+          href="https://drive.google.com/drive/folders/185SoakxA4KaBE8nPAQmbTDWSY_xRYidW?usp=sharing"
+          target="_blank"
+        >
+          Farmer GDrive
+        </a>
+        <a className="active_link" href="http://feweather.com/" target="_blank">
+          FE Weather App
+        </a>
+        <a
+          className="active_link"
+          href="https://studio.youtube.com/channel/UCt4vcliazCIWL3Dvq-svaRw"
+          target="_blank"
+        >
+          FE YouTube Studio
         </a>
       </div>
       <div className="navbar__right">
@@ -21,7 +33,7 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
         {/* <a href="#">
           <i className="fa fa-clock-o" aria-hidden="true"></i>
         </a> */}
-        <a href="#!">
+        <a href="/adminProfile">
           <img width="30" src={avatar} alt="avatar" />
         </a>
       </div>

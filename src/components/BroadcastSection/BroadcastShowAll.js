@@ -4,6 +4,11 @@ import "./BroadcastShowAll.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ReactPlayer from "react-player";
+import { ToastContainer } from "react-toastify";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 
 function BroadcastSingleCard(props) {
   const navigate = useNavigate();
@@ -20,11 +25,17 @@ function BroadcastSingleCard(props) {
           data._id
       )
       .then((res) => {
-        // console.log("res", res);
-        window.location.reload();
+        CustomToast(
+          "Article deleted Successfully ! Page will be reloaded",
+          "black",
+          "#1cd855"
+        );
+        console.log("Res", res);
+        setTimeout(() => window.location.reload(), 2000);
       })
       .catch((err) => {
-        console.log("err", err);
+        FailureToast();
+        console.log("Err", err);
       });
   }
 
@@ -371,6 +382,7 @@ function BroadcastShowAll() {
 
         {filteredBroadcastArray}
       </div>
+      <ToastContainer />
     </div>
   );
 }
