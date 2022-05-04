@@ -1,18 +1,21 @@
 .CropMonitoringViewEntryFirst {
     margin: 40px;
-    width:450px;
+    width: 450px;
     display: inline-block;
 }
+
 .CropMonitoringViewEntrySecond {
     margin: 40px;
-    width:550px;
+    width: 550px;
     display: inline-block;
 }
+
 .CropMonitoringViewEntryTable table {
     border-collapse: collapse;
     /* border-style: solid; */
     background-color: #c0eec0;
 }
+
 .CropMonitoringViewEntryTable td {
     border-style: solid;
     text-align: center;
@@ -20,25 +23,73 @@
     border-width: 1px;
     padding: 10px;
 }
+
 .CropMonitoringViewEntryRow td {
-    width:10%;
+    width: 10%;
     padding: 10px;
-  font-size: large;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  background-color: #5b7dc2;
-}
-.SingleTableRowCropMonitoringViewEntryRow {
-    width:10%;
-    padding: 10px;
-  font-size: large;
-  text-align: center;
-  color: black;
-  font-weight: bold;
-  background-color: #abbfe7;
+    font-size: large;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    background-color: #5b7dc2;
 }
 
-.l{
+.SingleTableRowCropMonitoringViewEntryRow {
+    width: 10%;
+    padding: 10px;
+    font-size: large;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    background-color: #abbfe7;
+}
+
+.l {
     display: inline-block;
+}
+
+.diseaseDiv,
+.pestDiv,
+.soilHealthDiv,
+.plantHealthDiv,
+.otherDiv {
+    border-right: 1px solid;
+    width: 45%;
+    margin-right: 20px;
+    margin-left: 20px;
+    /* border-style: solid; */
+}
+
+.diseaseImageDiv,
+.pestImageDiv,
+.soilHealthImageDiv,
+.plantHealthImageDiv,
+.otherImageDiv {
+    display: inline-block;
+    margin: 1px;
+    padding: 1px;
+    vertical-align: top;
+    width: 600px;
+}
+
+.newLine {
+    height: 5px;
+}
+
+.headingView {
+    text-align: center;
+    border-style: solid;
+}
+
+.ExportToExccelButton {
+    margin-left: 50%;
+    height: 38px;
+    padding: 5px;
+    background-color: #31c531;
+    font-family: Verdana,
+        Geneva,
+        Tahoma,
+        sans-serif;
+    font-size: large;
+    color: black;
 }

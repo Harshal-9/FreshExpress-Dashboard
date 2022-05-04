@@ -67,7 +67,7 @@ const App = () => {
           ></Route>
           <Route
             exact
-            path="/CropMonitoringViewEntry"
+            path="/cropMonitoring/:diaryId"
             element={<CropMonitoringViewEntry />}
           ></Route>
           <Route
