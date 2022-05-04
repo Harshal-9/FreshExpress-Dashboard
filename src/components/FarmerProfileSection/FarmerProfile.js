@@ -43,6 +43,8 @@ function FarmerProfile(props) {
     consultantName: "",
     farmMap: "",
     farmerId: "",
+    profileId: "",
+    profileUrl: "",
   });
 
   const [plotAllData, setPlotAllData] = useState({

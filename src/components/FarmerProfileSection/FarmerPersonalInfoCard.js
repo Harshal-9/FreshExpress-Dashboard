@@ -27,6 +27,22 @@ function FarmerPersonalInfoCard(props) {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
         );
+
+        if (farmerAllData.profileId !== "") {
+          axios
+            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+              data: {
+                id: farmerAllData.profileId,
+              },
+            })
+            .then((res2) => {
+              console.log("Res", res2);
+            })
+            .catch((err) => {
+              console.log("Err", err);
+            });
+        }
+
         setSelectedImage({
           link: res.data.link,
           id: res.data.id,

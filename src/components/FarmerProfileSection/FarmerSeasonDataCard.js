@@ -132,17 +132,23 @@ function FarmerSeasonalDataCard(props) {
             id: res.data.id,
           });
 
-          axios
-            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
-              id: seasonalAllDataReceived.reports.petioleReportId,
-            })
-            .then((res2) => {
-              console.log("Res", res2);
-            })
-            .catch((err) => {
-              console.log("Err", err);
-            });
-
+          if (
+            seasonalAllDataReceived.reports &&
+            seasonalAllDataReceived.reports.petioleReportId !== ""
+          ) {
+            axios
+              .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+                data: {
+                  id: seasonalAllDataReceived.reports.petioleReportId,
+                },
+              })
+              .then((res2) => {
+                console.log("Res", res2);
+              })
+              .catch((err) => {
+                console.log("Err", err);
+              });
+          }
           const prevData = { ...seasonalAllDataReceived };
           prevData.reports.petioleReportUrl = res.data.link;
           prevData.reports.petioleReportId = res.data.id;
@@ -154,18 +160,23 @@ function FarmerSeasonalDataCard(props) {
             link: res.data.link,
             id: res.data.id,
           });
-
-          axios
-            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
-              id: seasonalAllDataReceived.reports.soilReportId,
-            })
-            .then((res2) => {
-              console.log("Res", res2);
-            })
-            .catch((err) => {
-              console.log("Err", err);
-            });
-
+          if (
+            seasonalAllDataReceived.reports &&
+            seasonalAllDataReceived.reports.soilReportId !== ""
+          ) {
+            axios
+              .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+                data: {
+                  id: seasonalAllDataReceived.reports.soilReportId,
+                },
+              })
+              .then((res2) => {
+                console.log("Res", res2);
+              })
+              .catch((err) => {
+                console.log("Err", err);
+              });
+          }
           const prevData = { ...seasonalAllDataReceived };
           prevData.reports.soilReportUrl = res.data.link;
           prevData.reports.soilReportId = res.data.id;
@@ -177,18 +188,23 @@ function FarmerSeasonalDataCard(props) {
             link: res.data.link,
             id: res.data.id,
           });
-
-          axios
-            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
-              id: seasonalAllDataReceived.reports.waterReportId,
-            })
-            .then((res2) => {
-              console.log("Res", res2);
-            })
-            .catch((err) => {
-              console.log("Err", err);
-            });
-
+          if (
+            seasonalAllDataReceived.reports &&
+            seasonalAllDataReceived.reports.waterReportId !== ""
+          ) {
+            axios
+              .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+                data: {
+                  id: seasonalAllDataReceived.reports.waterReportId,
+                },
+              })
+              .then((res2) => {
+                console.log("Res", res2);
+              })
+              .catch((err) => {
+                console.log("Err", err);
+              });
+          }
           const prevData = { ...seasonalAllDataReceived };
           prevData.reports.waterReportUrl = res.data.link;
           prevData.reports.waterReportId = res.data.id;
