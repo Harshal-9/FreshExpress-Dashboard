@@ -19,6 +19,7 @@ import MRLMonitoringUpload from "./components/MRLMonitoring/MRLMonitoringUpload"
 import AdminProfile from "./components/admin/AdminProfile";
 import AddDelAdmin from "./components/admin/AddDelAdmin";
 import Main from "./components/FarmerProfileSection/Main";
+import DailyDairyAutomation from "./components/Dailydiary/DailyDairyAutomation";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -89,6 +90,11 @@ const App = () => {
           ></Route>
           <Route exact path="/adminProfile" element={<AdminProfile />}></Route>
           <Route exact path="/AddDelAdmin" element={<AddDelAdmin />}></Route>
+          <Route
+            exact
+            path="/ScheduleDailyDairy"
+            element={<DailyDairyAutomation />}
+          ></Route>
         </Routes>
       </Router>
     </div>
