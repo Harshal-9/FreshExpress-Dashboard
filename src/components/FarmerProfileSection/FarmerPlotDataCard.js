@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./FarmerProfile.css";
 import axios from "axios";
-import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 
 function FarmerPlotDataCard(props) {
   const [isDisabledPlot, setIsDisabledPlot] = useState(true);
@@ -92,7 +95,7 @@ function FarmerPlotDataCard(props) {
               <br />
               <label className="FarmerProfileLabel">Plot Location Link :</label>
               {isDisabledPlot ? (
-                <a href={plotAllData.address.mapLink}>
+                <a href={plotAllData.address.mapLink} target="_blank">
                   <input
                     type="text"
                     disabled={true}
@@ -288,7 +291,36 @@ function FarmerPlotDataCard(props) {
             </div>
             <br />
           </form>
-          {isDisabledPlot ? null : (
+          {isDisabledPlot ? (
+            <button
+              className="deleteButtonPersonalInfoCard"
+              onClick={() => {
+                if (plotAllData.farmInformation.MHCode) {
+                  axios
+                    .post(
+                      "https://immense-beach-88770.herokuapp.com/farmers/delete/plot/" +
+                        plotAllData._id
+                    )
+                    .then((res) => {
+                      CustomToast(
+                        "Plot deleted Successfully ! Page will be reloaded",
+                        "black",
+                        "#1cd855"
+                      );
+                      console.log("Res", res);
+                      setTimeout(() => {
+                        window.location.assign("/FarmerProfile");
+                      }, 2000);
+                    })
+                    .catch((err) => {
+                      console.log("Err", err);
+                    });
+                }
+              }}
+            >
+              <i className="fa fa-trash"></i> Delete Plot
+            </button>
+          ) : (
             <button
               onClick={(event) => {
                 event.preventDefault();

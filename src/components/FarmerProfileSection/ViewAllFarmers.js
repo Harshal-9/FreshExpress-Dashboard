@@ -26,6 +26,7 @@ const DropdownIndicator = (props) => {
 function SingleFarmerRow(props) {
   let farmerData = props;
 
+  console.log(farmerData);
   const navigate = useNavigate();
   return (
     <tr
@@ -43,7 +44,11 @@ function SingleFarmerRow(props) {
       <td>{farmerData.plotData.address.village}</td>
       <td>{farmerData.plotData.address.taluka}</td>
       <td>{farmerData.plotData.address.district}</td>
-      <td>Pruning Date</td>
+      <td>
+        {farmerData.plotData.farmInformation.fruitPruning
+          ? farmerData.plotData.farmInformation.fruitPruning.substring(0, 10)
+          : ""}
+      </td>
       <td>{farmerData.plotData.farmInformation.plotArea}</td>
       <td>{farmerData.plotData.farmInformation.variety}</td>
       <td>
@@ -57,6 +62,10 @@ function SingleFarmerRow(props) {
 
 function ViewAllFarmers() {
   const navigate = useNavigate();
+
+  // for storing date
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   // useStates for Array of components for allFarmerData and filteredData
   const [allFarmersArray, setAllFarmersArray] = useState([]);
@@ -86,6 +95,40 @@ function ViewAllFarmers() {
     tag: [],
   });
 
+  // use state to store map
+  const [mappedValue, setMappedValue] = useState(null);
+
+  // Filter by Date
+  function filterByDate() {
+    if (startDate === "" || endDate === "") return [];
+    const tempArray = [];
+    const newStartDate = new Date(startDate.substring(0, 10));
+    const newEndDate = new Date(endDate.substring(0, 10));
+
+    for (let i = 0; i < allFarmersArray.length; i++) {
+      if (allFarmersArray[i].props.plotData.farmInformation.fruitPruning) {
+        if (
+          newStartDate <=
+            new Date(
+              allFarmersArray[
+                i
+              ].props.plotData.farmInformation.fruitPruning.substring(0, 10)
+            ) &&
+          newEndDate >=
+            new Date(
+              allFarmersArray[
+                i
+              ].props.plotData.farmInformation.fruitPruning.substring(0, 10)
+            )
+        ) {
+          tempArray.push(allFarmersArray[i]);
+        }
+      }
+    }
+    console.log("Temp", tempArray);
+    return tempArray;
+  }
+
   // function to handle farmerName filter
   function handleFarmerFilter(event) {
     const tempArr = [];
@@ -106,8 +149,9 @@ function ViewAllFarmers() {
     setFilteredArray(tempArr);
   }
 
-  // function to handle GGN filter
+  // function to handle MHCode filter
   function handleMHCodeFilter(event) {
+    console.log("All", allFarmersArray);
     const tempArr = [];
     for (let i = 0; i < allFarmersArray.length; i++) {
       if (
@@ -120,6 +164,11 @@ function ViewAllFarmers() {
 
   // function to handle all filters Intersection
   function handleFilterIntersection(event) {
+    // filter By Date (This is individual so it is not considered inside intersection and it is given priority over other intersection )
+    if (startDate !== "" && endDate !== "") {
+      setFilteredArray(filterByDate());
+      return;
+    }
     let tempTagArray = [];
     let tempVillageArray = [];
     let tempVarietyArray = [];
@@ -237,7 +286,7 @@ function ViewAllFarmers() {
           variety: [],
           tag: [],
         };
-        for (let item in recievedObj) {
+        for (let item in makeDataForOptions) {
           for (let arrItem in recievedObj[item]) {
             // console.log(recievedObj[item][arrItem], item);
             makeDataForOptions[item].push({
@@ -252,13 +301,34 @@ function ViewAllFarmers() {
       .catch((err) => {
         console.log("Err", err);
       });
+
+    axios
+      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .then((data) => {
+        let receivedData = data.data;
+        console.log(receivedData);
+
+        const GGNMappedFamilyName = new Map();
+
+        for (let item in receivedData) {
+          console.log(item, receivedData[item]);
+          GGNMappedFamilyName.set(
+            receivedData[item].GGN,
+            receivedData[item].familyName
+          );
+        }
+        console.log("Our map", GGNMappedFamilyName);
+        setMappedValue(GGNMappedFamilyName);
+      })
+      .catch((err) => {
+        console.log("Err", err);
+      });
   }, []);
 
   return (
     <div className="viewAllFarmersMainDiv">
       <br />
-      <h2>ALL FARMERS</h2>
-      <br />
+      <h2 style={{ backgroundColor: "#63F163" }}>ALL FARMERS</h2>
       <br />
       <Select
         className="searching"
@@ -279,8 +349,12 @@ function ViewAllFarmers() {
         placeholder="Search GGN"
         components={{ DropdownIndicator }}
         options={allFiltersData.GGN}
+        getOptionLabel={(option) =>
+          option.label + "-" + mappedValue.get(option.label)
+        }
         value={selectedGGNValue}
         onChange={(event) => {
+          console.log("event", event);
           setSelectedGGNValue(event);
           // GGN ko select kiya toh baki dono ko clear karne ke liye
           setSelectedFarmerValue(null);
@@ -341,6 +415,47 @@ function ViewAllFarmers() {
       />
       <br />
       <br />
+      <label htmlFor="myDate">
+        <b>
+          <big>Pruning Date Range : </big>
+        </b>
+      </label>
+      <input
+        className="broadcastDate"
+        type="date"
+        id="myDate"
+        name="myDate"
+        value={startDate}
+        onChange={(e) => {
+          // console.log(e.target.value);
+          setStartDate(e.target.value);
+        }}
+      />
+      <p style={{ display: "inline-block" }}> &nbsp; to &nbsp;</p>
+      <input
+        className="broadcastDate"
+        type="date"
+        id="myDate"
+        name="myDate"
+        value={endDate}
+        onChange={(e) => {
+          setEndDate(e.target.value);
+        }}
+      />
+      <button
+        className="exportButton"
+        onClick={() => {
+          window.location.assign(
+            "https://immense-beach-88770.herokuapp.com/farmers/exportFarmers"
+          );
+        }}
+      >
+        <i className="fa fa-download fa-lg" aria-hidden="true"></i> Export All
+        Farmers
+      </button>
+
+      <br />
+      <br />
       <button className="applyFilterButton" onClick={handleFilterIntersection}>
         Apply
       </button>
@@ -354,13 +469,15 @@ function ViewAllFarmers() {
           setSelectedFarmerValue(null);
           setSelectedGGNValue(null);
           setSelectedMHCodeValue(null);
+          setStartDate("");
+          setEndDate("");
         }}
       >
         Clear
       </button>
       <br />
       <br />
-      <div className="AllFarmersScroll">
+      <div className="AllFarmersScroll tableScrollbarWidth">
         <table>
           <tr className="AllFarmersHeaderRow">
             <td>Name</td>

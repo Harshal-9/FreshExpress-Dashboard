@@ -212,10 +212,19 @@ function AddNewFarmer() {
       <br />
       <div className="MyCardColumn" style={{ display: "inline-block" }}>
         <div className="MyCard">
-          <p style={{ color: "red" }}>
+          {/* <p style={{ color: "red" }}>
             (<b>NOTE</b> : Farmer who is Family head should have Family Name
             same as his name )
-          </p>
+          </p> */}
+          <marquee
+            style={{ border: "black 2px solid", color: "red" }}
+            direction="left"
+            // behavior="alternate"
+          >
+            (<b>NOTE</b> : Farmer who is Family head should have Family Name
+            same as his name )
+          </marquee>
+
           <br />
           <img
             src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="

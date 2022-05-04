@@ -3,9 +3,11 @@ import "./MRLMonitoringUpload.css";
 import { CustomToast } from "../Toasts/AllToasts";
 import uploadImg from "../../assets/uploadImg.gif";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function MRLMonitoringUpload() {
+  const navigate = useNavigate();
   const [selectedFileName, setSelectedFileName] = useState("No File Selected");
 
   function handleSubmit(event) {
@@ -43,14 +45,21 @@ function MRLMonitoringUpload() {
         }}
       >
         <br />
+        {/* <div style={{ textAlign: "right" }}>
+          <button className="MRLMonitoringButton">Download Template</button>
+        </div> */}
         <h2 style={{ textAlign: "center" }}>
           Upload CSV file for MRL Monitoring
         </h2>
         <br />
-        <label className="MRLUploadLabel" style={{ width: "200px" }}>
+        <label className="MRLUploadLabel" style={{ width: "100px" }}>
           File Name :
         </label>
-        <input disabled={true} value={selectedFileName} />
+        <input
+          disabled={true}
+          value={selectedFileName}
+          style={{ width: "400px" }}
+        />
         {/* <label>{selectedFileName}</label> */}
         <br />
         <br />
@@ -99,12 +108,19 @@ function MRLMonitoringUpload() {
           </button>
           <button
             className="MRLMonitoringButton"
-            style={{ backgroundColor: "#cc4233" }}
+            style={{ backgroundColor: "#cc4233", marginRight: "50px" }}
             type="reset"
             onClick={() => setSelectedFileName("No File Selected")}
           >
             Cancel
           </button>
+          <a
+            className="MRLMonitoringButton"
+            style={{ backgroundColor: "#2A91FB" }}
+            href="https://drive.google.com/uc?id=12SmKHRH73YpZuu_N73rMRisMe_el-0Ov&export=download"
+          >
+            <i className="fa fa-download"></i> Template
+          </a>
         </form>
       </div>
       <ToastContainer />

@@ -7,7 +7,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
       <div className="sidebar__title">
         <div className="sidebar__img">
           <img src={logo} alt="logo" />
-          <h1>Fresh Express</h1>
+          <h1 style={{ marginLeft: "20px" }}>Fresh Express</h1>
         </div>
         <i
           onClick={() => closeSidebar()}
@@ -20,16 +20,16 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
       <div className="sidebar__menu">
         <div className="sidebar__link active_menu_link">
           <i className="fa fa-home"></i>
-          <a href="#">Dashboard</a>
+          <a href="/">Dashboard</a>
         </div>
         <h2>Admin Profile</h2>
         <div className="sidebar__link">
           <i className="fa fa-user-circle-o" aria-hidden="true"></i>
-          <a href="#">View profile</a>
+          <a href="/adminProfile">View profile</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user-plus" aria-hidden="true"></i>
-          <a href="#">Add new Admin</a>
+          <a href="/AddDelAdmin">Add new/Delete Admin</a>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user-o" aria-hidden="true"></i>
@@ -39,7 +39,9 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <h2>Daily Diary</h2>
         <div className="sidebar__link">
           <i className="fa fa-plus"></i>
-          <a href="https://dzbt3.csb.app/">Add New</a>
+          <a href="https://dzbt3.csb.app/" target="_blank">
+            Add New
+          </a>
         </div>
         {/* <div className="sidebar__link">
           <i className="fa fa-info"></i>
@@ -75,10 +77,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-image"></i>
           <a href="/MRLMonitoring">MRL Monitoring</a>
         </div>
-        <div className="sidebar__link">
+        {/* <div className="sidebar__link">
           <i className="fa fa-file-text"></i>
           <a href="#">Seasonal Reports</a>
-        </div>
+        </div> */}
 
         {/* <h2>Crop Monitoring</h2>
         <div className="sidebar__link">

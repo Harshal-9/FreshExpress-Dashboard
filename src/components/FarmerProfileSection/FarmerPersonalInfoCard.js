@@ -1,10 +1,66 @@
 import React, { useState } from "react";
 import "./FarmerProfile.css";
 import axios from "axios";
-import UpdateSuccessToast, { FailureToast } from "../Toasts/AllToasts";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 
 function FarmerPersonalInfoCard(props) {
+  const handleFileChange = (event) => {
+    const handleChangeSelectedFile = event.target.files[0];
+    const fd = new FormData();
+    if (handleChangeSelectedFile)
+      fd.append(
+        "image",
+        handleChangeSelectedFile,
+        handleChangeSelectedFile.name
+      );
+
+    // Getting link of uploaded image
+    axios
+      .post(
+        "https://immense-beach-88770.herokuapp.com/uploadFile/PROFILE_FOLDER",
+        fd
+      )
+      .then((res) => {
+        UpdateSuccessToast(
+          "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
+        );
+
+        if (farmerAllData.profileId !== "") {
+          axios
+            .delete(" https://immense-beach-88770.herokuapp.com/uploadFile", {
+              data: {
+                id: farmerAllData.profileId,
+              },
+            })
+            .then((res2) => {
+              console.log("Res", res2);
+            })
+            .catch((err) => {
+              console.log("Err", err);
+            });
+        }
+
+        setSelectedImage({
+          link: res.data.link,
+          id: res.data.id,
+        });
+        sendBackFarmerAllData({
+          ...farmerAllData,
+          profileId: res.data.id,
+          profileUrl: res.data.link,
+        });
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+
+  console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const farmerAllData = props.farmerAllData;
   const sendBackFarmerAllData = props.sendBackFarmerAllData;
@@ -19,16 +75,33 @@ function FarmerPersonalInfoCard(props) {
     }
   }
 
+  console.log(props);
+
   return (
     <div className="MyCardColumn" style={{ display: "inline-block" }}>
       <div className="MyCard">
-        <img
-          src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
-          width="250px"
-          height="300px"
-          alt="FarmerImg"
-          style={{ display: "inline-block", margin: "10px" }}
-        ></img>
+        {props.farmerAllData.profileId ? (
+          <iframe
+            title="img"
+            src={
+              "https://drive.google.com/file/d/" +
+              props.farmerAllData.profileId +
+              "/preview"
+            }
+            width="250px"
+            height="300px"
+            alt="FarmerImg"
+            style={{ display: "inline-block", margin: "10px" }}
+          />
+        ) : (
+          <img
+            src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
+            width="250px"
+            height="300px"
+            alt="FarmerImg"
+            style={{ display: "inline-block", margin: "10px" }}
+          ></img>
+        )}
         <div style={{ display: "inline-block" }}>
           <div style={{ textAlign: "right" }}>
             <i
@@ -130,7 +203,7 @@ function FarmerPersonalInfoCard(props) {
             <br />
             <label className="FarmerProfileLabel">Farm Map Link : </label>
             {isDisabled ? (
-              <a href={farmerAllData.farmMap}>
+              <a href={farmerAllData.farmMap} target="_blank">
                 <input
                   type="url"
                   disabled={true}
@@ -154,7 +227,23 @@ function FarmerPersonalInfoCard(props) {
             )}
             <br />
             <br />
-            {isDisabled ? null : (
+            {!isDisabled && farmerAllData.farmerId !== "" ? (
+              <>
+                <label className="FarmerProfileLabel">Upload Image :</label>
+                <input
+                  type="file"
+                  alt="select Image"
+                  size="80"
+                  value={farmerAllData.farmMap}
+                  onChange={handleFileChange}
+                ></input>
+                <br />
+                <br />
+              </>
+            ) : (
+              ""
+            )}
+            {!isDisabled && farmerAllData.farmerId !== "" ? (
               <button
                 onClick={(event) => {
                   event.preventDefault();
@@ -183,9 +272,36 @@ function FarmerPersonalInfoCard(props) {
               >
                 Save Changes
               </button>
-            )}
+            ) : null}
+            {isDisabled && farmerAllData.farmerId !== "" ? (
+              <button
+                className="deleteButtonPersonalInfoCard"
+                onClick={() => {
+                  axios
+                    .post(
+                      "https://immense-beach-88770.herokuapp.com/farmers/delete/" +
+                        farmerAllData.farmerId
+                    )
+                    .then((res) => {
+                      CustomToast(
+                        "Farmer deleted Successfully ! Page will be reloaded",
+                        "black",
+                        "#1cd855"
+                      );
+                      console.log("Res", res);
+                    })
+                    .catch((err) => {
+                      FailureToast();
+                      console.log("Err", err);
+                    });
+                }}
+              >
+                <i className="fa fa-trash"></i> Delete Farmer
+              </button>
+            ) : null}
           </form>
         </div>
+        {/* <button className="deleteButtonPersonalInfoCard">Delete Farmer</button> */}
       </div>
     </div>
   );
