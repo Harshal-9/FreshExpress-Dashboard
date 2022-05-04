@@ -293,6 +293,7 @@ function FarmerPlotDataCard(props) {
           </form>
           {isDisabledPlot ? (
             <button
+              className="deleteButtonPersonalInfoCard"
               onClick={() => {
                 if (plotAllData.farmInformation.MHCode) {
                   axios
@@ -317,7 +318,7 @@ function FarmerPlotDataCard(props) {
                 }
               }}
             >
-              Delete Plot
+              <i className="fa fa-trash"></i> Delete Plot
             </button>
           ) : (
             <button
