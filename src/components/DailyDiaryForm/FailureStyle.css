@@ -1,0 +1,48 @@
+.FailureMainDiv {
+    text-align: center;
+    padding: 40px 0;
+    background: #dcf1f1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* background-color: #dcf1f1; */
+}
+
+.FailureH1DD {
+    color: #ff3333;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.failureParaDD {
+    color: #f78484;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+.crossDD {
+    color: #ff3333;
+    /* color: purple; */
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+}
+
+.card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #c8d0d8;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.FailureDD {
+    border-radius: 200px;
+    height: 200px;
+    width: 200px;
+    background: #f5bcbc;
+    margin: 0 auto;
+}

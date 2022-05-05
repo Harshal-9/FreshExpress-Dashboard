@@ -20,6 +20,9 @@ import AdminProfile from "./components/admin/AdminProfile";
 import AddDelAdmin from "./components/admin/AddDelAdmin";
 import Main from "./components/FarmerProfileSection/Main";
 import DailyDairyAutomation from "./components/Dailydiary/DailyDairyAutomation";
+import DailyDiaryFormApp from "./components/DailyDiaryForm/DailyDiaryFormApp";
+import Success from "./components/DailyDiaryForm/Success";
+import Failure from "./components/DailyDiaryForm/Failure";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -61,6 +64,11 @@ const App = () => {
             path="/BroadcastShowAll"
             element={<BroadcastShowAll />}
           />
+          <Route
+            exact
+            path="/DailyDiaryForm"
+            element={<DailyDiaryFormApp />}
+          />
           {/* <Route exact path="/viewArticle" element={<ViewArticle />} /> */}
           <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
           <Route
@@ -94,6 +102,16 @@ const App = () => {
             exact
             path="/ScheduleDailyDairy"
             element={<DailyDairyAutomation />}
+          ></Route>
+          <Route
+            exact
+            path="/success"
+            element={<Success />}
+          ></Route>
+          <Route
+            exact
+            path="/Failure"
+            element={<Failure />}
           ></Route>
         </Routes>
       </Router>
