@@ -6,3 +6,8 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
 }
+
+.selectRole {
+  width: 82%;
+  display: inline-block;
+}

@@ -178,7 +178,17 @@ function toDegrees(s) {
     result,
     Number(result[0]) + Number(result[1]) / 60 + Number(result[2]) / 3600
   );
-  return Number(result[0]) + Number(result[1]) / 60 + Number(result[2]) / 3600;
+  let sum = 0;
+  if (isNaN(Number(result[0]))) sum += 0;
+  else sum += Number(result[0]);
+
+  if (isNaN(Number(result[1]))) sum += 0;
+  else sum += Number(result[1]) / 60;
+
+  if (isNaN(Number(result[2]))) sum += 0;
+  else sum += Number(result[2]) / 3660;
+
+  return sum;
 }
 // 17°01'42.9"N
 

@@ -136,24 +136,41 @@ function AddDelAdmin(props) {
               <br />
               <br />
               <label className="AdminProfileLabel">Role : </label>
-              <input
-                type="text"
-                size="75"
+              <Select
+                className="selectRole"
+                placeholder="Select Role"
+                options={[
+                  { label: "Admin", value: "admin" },
+                  { label: "Super Admin", value: "superAdmin" },
+                ]}
                 value={newAdminData.role}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  console.log(event.value);
                   setNewAdminData({
                     ...newAdminData,
-                    role: event.target.value,
+                    role: event.value,
                   });
                 }}
-              ></input>
+              />
               <br />
               <br />
               <button
                 className="AddButton"
                 onClick={(event) => {
                   event.preventDefault();
+
+                  for (let item in newAdminData) {
+                    // console.log("T", item, newAdminData[item]);
+                    if (newAdminData[item] === "") {
+                      CustomToast(
+                        item + " cannot be empty",
+                        "black",
+                        "#FFD700"
+                      );
+                      return;
+                    }
+                  }
+
                   axios
                     .post(
                       "https://immense-beach-88770.herokuapp.com/admins",
