@@ -52,12 +52,16 @@ function FarmerSeasonalDataCard(props) {
   const [petioleReport, setPetioleReport] = useState({});
   const [soilReport, setSoilReport] = useState({});
   const [waterReport, setWaterReport] = useState({});
-
+  const [selectedYear, setSelectedYear] = useState(null);
   // Function to handle edit of PlotData form
   function handleEditSeason(event) {
     event.preventDefault();
-    if (isDisabledSeason) {
-      setIsDisabledSeason(false);
+    if (selectedYear) {
+      if (isDisabledSeason) {
+        setIsDisabledSeason(false);
+      } else {
+        setIsDisabledSeason(true);
+      }
     } else {
       setIsDisabledSeason(true);
     }
@@ -345,6 +349,7 @@ function FarmerSeasonalDataCard(props) {
           options={getYears(props.seasonalAllData)}
           onChange={(event) => {
             // console.log(event);
+            setSelectedYear(event.value);
             setSeasonalAllDataReceived(props.seasonalAllData[event.value]);
           }}
         />

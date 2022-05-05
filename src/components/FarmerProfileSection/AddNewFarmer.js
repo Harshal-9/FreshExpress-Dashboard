@@ -22,6 +22,7 @@ function AddNewFarmer() {
     let farmerName = event.target.farmerName.value;
     let plotNumber = event.target.plotNumber.value;
     let MHCode = event.target.MHCode.value;
+    let userId = event.target.userId.value;
 
     // checking for duplicate MHCode
     for (let item in allMHCode) {
@@ -62,6 +63,7 @@ function AddNewFarmer() {
       personalInformation: {
         name: farmerName,
         familyName: familyName,
+        userId: userId,
         mobileNumber: "",
         email: "",
         GGN: GGN,
@@ -238,6 +240,10 @@ function AddNewFarmer() {
             <form onSubmit={handleFormSubmit1}>
               <label className="FarmerProfileLabel2">Farmer Name : </label>
               <input name="farmerName" type="text" size="80"></input>
+              <br />
+              <br />
+              <label className="FarmerProfileLabel2">User Id : </label>
+              <input name="userId" type="text" size="80"></input>
               <br />
               <br />
               <label className="FarmerProfileLabel2">Plot Number : </label>

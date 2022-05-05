@@ -234,7 +234,7 @@ function FarmerPersonalInfoCard(props) {
                   type="file"
                   alt="select Image"
                   size="80"
-                  value={farmerAllData.farmMap}
+                  value={farmerAllData.selectedImage}
                   onChange={handleFileChange}
                 ></input>
                 <br />
