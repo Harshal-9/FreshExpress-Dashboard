@@ -831,16 +831,26 @@ function FarmerSeasonalDataCard(props) {
               Petiole Reports:
             </label>
             {isDisabledSeason ? (
-              <input
-                type="text"
-                disabled={isDisabledSeason}
-                size="40"
-                value={
+              <a
+                href={
                   seasonalAllDataReceived.reports
                     ? seasonalAllDataReceived.reports.petioleReportUrl
                     : ""
                 }
-              ></input>
+                target="_blank"
+              >
+                <input
+                  type="text"
+                  className="FarmerProfileLink"
+                  disabled={isDisabledSeason}
+                  size="40"
+                  value={
+                    seasonalAllDataReceived.reports
+                      ? seasonalAllDataReceived.reports.petioleReportUrl
+                      : ""
+                  }
+                ></input>
+              </a>
             ) : (
               <input
                 type="file"
@@ -854,16 +864,26 @@ function FarmerSeasonalDataCard(props) {
               Soil Reports:
             </label>
             {isDisabledSeason ? (
-              <input
-                type="text"
-                disabled={isDisabledSeason}
-                size="40"
-                value={
+              <a
+                href={
                   seasonalAllDataReceived.reports
                     ? seasonalAllDataReceived.reports.soilReportUrl
                     : ""
                 }
-              ></input>
+                target="_blank"
+              >
+                <input
+                  type="text"
+                  className="FarmerProfileLink"
+                  disabled={isDisabledSeason}
+                  size="40"
+                  value={
+                    seasonalAllDataReceived.reports
+                      ? seasonalAllDataReceived.reports.soilReportUrl
+                      : ""
+                  }
+                ></input>
+              </a>
             ) : (
               <input
                 type="file"
@@ -877,16 +897,26 @@ function FarmerSeasonalDataCard(props) {
               Water Reports:
             </label>
             {isDisabledSeason ? (
-              <input
-                type="text"
-                disabled={isDisabledSeason}
-                size="40"
-                value={
+              <a
+                href={
                   seasonalAllDataReceived.reports
                     ? seasonalAllDataReceived.reports.waterReportUrl
                     : ""
                 }
-              ></input>
+                target="_blank"
+              >
+                <input
+                  type="text"
+                  disabled={isDisabledSeason}
+                  className="FarmerProfileLink"
+                  size="40"
+                  value={
+                    seasonalAllDataReceived.reports
+                      ? seasonalAllDataReceived.reports.waterReportUrl
+                      : ""
+                  }
+                ></input>
+              </a>
             ) : (
               <input
                 type="file"

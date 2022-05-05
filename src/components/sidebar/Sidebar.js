@@ -52,6 +52,11 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <a href="/AllDiaries">All Diaries</a>
         </div>
 
+        <div className="sidebar__link">
+          <i className="fa fa-calendar-check-o" aria-hidden="true"></i>
+          <a href="/ScheduleDailyDairy">Schedule Daily Diaries</a>
+        </div>
+
         <h2>All Farmers</h2>
         <div className="sidebar__link">
           <i className="fa fa-user-circle" aria-hidden="true"></i>
@@ -69,10 +74,10 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-tree"></i>
           <a href="/CropMonitoring">Crop Monitoring</a>
         </div>
-        <div className="sidebar__link">
+        {/* <div className="sidebar__link">
           <i className="fa fa-line-chart"></i>
           <a href="/CropMonitoringViewEntry">Reports</a>
-        </div>
+        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-image"></i>
           <a href="/MRLMonitoring">MRL Monitoring</a>
