@@ -56,11 +56,11 @@ function DailyDairyAutomation() {
   }, []);
 
   return (
-    <div style={{ marginLeft: "25%", marginRight: "25%", textAlign: "center" }}>
+    <div className="handleDailyDiaryAutomation" >
       <br />
       <form onSubmit={handleSubmit}>
         <div className="uploadFileDiv">
-          <label htmlFor="uploadedFile">Select CSV file :</label>
+          <label htmlFor="uploadedFile">Select CSV file :&nbsp;&nbsp;</label>
           <input type="file" accept=".csv" name="uploadedFile"></input>
         </div>
         <br />
@@ -80,7 +80,7 @@ function DailyDairyAutomation() {
         />
         <br />
         <br />
-        <button type="submit">Upload</button>
+        <button className="dailyDiaryAutomationSubmitButton" type="submit">Upload</button>
         <br />
         <br />
         <h3 style={{ marginLeft: "5%", marginRight: "5%" }}>{sendTo}</h3>

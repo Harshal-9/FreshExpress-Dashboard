@@ -8,3 +8,36 @@
   /* margin-left: 25%;
   margin-right: 25%; */
 }
+
+.handleDailyDiaryAutomation {
+
+  border-style: solid;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  text-align: center;
+
+}
+
+.dailyDiaryAutomationSubmitButton {
+  background-color: rgb(41, 232, 41);
+  width: 200px;
+  height: 30px;
+
+}
+
+.dailyDiaryAutomationSubmitButton:hover {
+  background-color: rgb(155, 244, 155);
+}
+
+.DDAMultiSelect {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.uploadFileDiv {
+  margin-top: 20%;
+  margin-left: 5%;
+  margin-right: 2%;
+}
