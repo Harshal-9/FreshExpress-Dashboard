@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "./LoginPage.css"
 
 function LoginPage(props) {
   function handleSubmit(event) {
@@ -38,24 +39,33 @@ function LoginPage(props) {
   });
 
   return (
-    <div className="LoginMainDiv">
-      <form onSubmit={handleSubmit}>
-        <p>Username : </p>
-        <input type="text" name="username" />
-        <p>Password : </p>
-        <input type="password" name="password" />
+    <div className="mainLogin">
+      <p className="sign">Sign In</p>
+      <form className="form1" onSubmit={handleSubmit}>
+        {/* <p>Username : </p> */}
+        <input className="userName" placeholder="Username" type="text" name="username" />
+        <br />
+        <br />
+        {/* <p>Password : </p> */}
+        <input className="password" placeholder="Password" type="password" name="password" />
+        <br />
+        <br />
         <button
           // onClick={() => {
           // props.setMyState(true);
           // }}
+          className="submit"
           type="submit"
         >
           Submit
         </button>
         <br />
-        <a href="/">
-          <u>Forgot Password</u>
-        </a>
+        <br />
+        <p className="forgot">
+          <a className="anchorForgot" href="/">
+            <u> Forgot Password?</u>
+          </a>
+        </p>
       </form>
     </div>
   );

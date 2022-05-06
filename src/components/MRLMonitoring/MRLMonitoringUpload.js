@@ -72,7 +72,7 @@ function MRLMonitoringUpload() {
                 ? "MRLMonitoringUploadInput"
                 : "MRLMonitoringUploadInputSuccess"
             }
-            //   style={{ background: `url(${uploadImg})` }}
+          //   style={{ background: `url(${uploadImg})` }}
           >
             {/* {selectedFileName} */}
             {/* <br />

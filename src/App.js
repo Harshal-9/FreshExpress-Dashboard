@@ -38,10 +38,11 @@ const App = () => {
   };
 
   const [isLogin, setIsLogin] = useState(false);
-  return (
-    <div className="container">
-      {isLogin ? (
-        <>
+  return (<div>
+    {isLogin ? (
+      <>
+        <div className="container">
+
           <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
           {/* <Main /> */}
           <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
@@ -127,11 +128,12 @@ const App = () => {
               <Route exact path="/Failure" element={<Failure />}></Route>
             </Routes>
           </Router>
-        </>
-      ) : (
-        <LoginPage setMyState={setMyState} />
-      )}
-    </div>
+        </div>
+      </>
+    ) : (
+      <LoginPage setMyState={setMyState} />
+    )}
+  </div>
   );
 };
 

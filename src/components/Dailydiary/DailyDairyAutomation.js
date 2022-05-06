@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./DailyDairyAutomation.css";
 
+
 function DailyDairyAutomation() {
+
+
   const [selectedMHCode, setSelectedMHCodes] = useState([]);
   const [options, setOptions] = useState([]);
   const [sendTo, setSendTo] = useState("");
@@ -57,6 +60,13 @@ function DailyDairyAutomation() {
 
   return (
     <div className="handleDailyDiaryAutomation" >
+      <marquee
+        style={{ border: "black 2px solid", color: "red" }}
+        direction="left"
+      // behavior="alternate"
+      >
+        (<b>NOTE</b> : Select Farmers MH Code who's fruit pruning data is present.. )
+      </marquee>
       <br />
       <form onSubmit={handleSubmit}>
         <div className="uploadFileDiv">
@@ -81,6 +91,13 @@ function DailyDairyAutomation() {
         <br />
         <br />
         <button className="dailyDiaryAutomationSubmitButton" type="submit">Upload</button>
+        <a
+          className="MRLMonitoringButton"
+          style={{ backgroundColor: "#2A91FB" }}
+          href="https://drive.google.com/uc?id=12SmKHRH73YpZuu_N73rMRisMe_el-0Ov&export=download"
+        >
+          <i className="fa fa-download"></i> Template
+        </a>
         <br />
         <br />
         <h3 style={{ marginLeft: "5%", marginRight: "5%" }}>{sendTo}</h3>
