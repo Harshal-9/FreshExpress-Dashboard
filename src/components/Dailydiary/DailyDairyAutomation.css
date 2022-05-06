@@ -21,9 +21,22 @@
 }
 
 .dailyDiaryAutomationSubmitButton {
-  background-color: rgb(41, 232, 41);
+  /* background-color: rgb(41, 232, 41);
   width: 200px;
-  height: 30px;
+  height: 30px; */
+  margin: 0 1.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5%;
+  cursor: pointer;
 
 }
 

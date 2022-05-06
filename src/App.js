@@ -26,7 +26,6 @@ import Failure from "./components/DailyDiaryForm/Failure";
 import LoginPage from "./components/Login/LoginPage";
 import Logout from "./components/Logout";
 
-import axios from "axios";
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -34,10 +33,6 @@ const App = () => {
   };
   const closeSidebar = () => {
     setsidebarOpen(false);
-  };
-
-  const setMyState = (data) => {
-    setLoginData(data);
   };
 
   const [loginData, setLoginData] = useState({ isLogin: false, data: {} });
