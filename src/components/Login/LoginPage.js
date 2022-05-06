@@ -51,26 +51,40 @@ function LoginPage(props) {
   }, []);
 
   return (
-    <div className="LoginMainDiv">
+    <div style={{ display: "block", width: "100%" }}>
       {showPage ? (
-        <form onSubmit={handleSubmit}>
-          <p>Username : </p>
-          <input type="text" name="username" />
-          <p>Password : </p>
-          <input type="password" name="password" />
-          <button
-            // onClick={() => {
-            // props.setMyState(true);
-            // }}
-            type="submit"
-          >
-            Submit
-          </button>
-          <br />
-          <a href="/">
-            <u>Forgot Password</u>
-          </a>
-        </form>
+        <div className="mainLogin">
+          <p className="sign">Sign In</p>
+
+          <form className="form1" onSubmit={handleSubmit}>
+            <input
+              className="userName"
+              placeholder="Username"
+              type="text"
+              name="username"
+            />
+            <br />
+            <br />
+            <input
+              className="password"
+              placeholder="Password"
+              type="password"
+              name="password"
+            />
+            <br />
+            <br />
+            <button type="submit" className="submit">
+              Submit
+            </button>
+            <br />
+            <br />
+            <p className="forgot">
+              <a className="anchorForgot" href="/">
+                <u> Forgot Password?</u>
+              </a>
+            </p>
+          </form>
+        </div>
       ) : (
         <div className="loadingDiv"></div>
       )}

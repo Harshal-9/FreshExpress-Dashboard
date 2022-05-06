@@ -24,7 +24,7 @@ function Logout() {
       <h3>Are you sure you want to logout ?</h3>
       <br />
       <button onClick={() => handleDelete(navigate)}>YES</button>
-      <button onClick={() => navigate("/dashboard")}>NO</button>
+      <button onClick={() => navigate("/")}>NO</button>
     </div>
   );
 }
