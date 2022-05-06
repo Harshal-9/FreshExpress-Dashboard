@@ -1,33 +1,33 @@
 .SuccessMainDiv {
-    text-align: center;
-    padding: 40px 0;
-    background: #dcf1f1;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* background-color: #dcf1f1; */
+  text-align: center;
+  padding: 40px 0;
+  background: #dcf1f1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* background-color: #dcf1f1; */
 }
 
 .SuccessH1DD {
-    color: #88b04b;
+  color: #88b04b;
 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 900;
-    font-size: 40px;
-    margin-bottom: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  margin-bottom: 10px;
 }
 
-p {
+/* p {
     color: #404f5e;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
     margin: 0;
-}
+} */
 
 .checkmarkDD {
-    color: #9abc66;
-    /* color: purple; */
-    font-size: 100px;
-    line-height: 200px;
-    margin-left: -15px;
+  color: #9abc66;
+  /* color: purple; */
+  font-size: 100px;
+  line-height: 200px;
+  margin-left: -15px;
 }
 
 /* i {
@@ -37,18 +37,18 @@ p {
   margin-left: -15px;
 } */
 .card {
-    background: white;
-    padding: 60px;
-    border-radius: 4px;
-    box-shadow: 0 2px 3px #c8d0d8;
-    display: inline-block;
-    margin: 0 auto;
+  background: white;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px #c8d0d8;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 .SuccessDD {
-    border-radius: 200px;
-    height: 200px;
-    width: 200px;
-    background: #ebf0f5;
-    margin: 0 auto;
+  border-radius: 200px;
+  height: 200px;
+  width: 200px;
+  background: #ebf0f5;
+  margin: 0 auto;
 }

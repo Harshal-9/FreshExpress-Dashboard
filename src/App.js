@@ -23,7 +23,7 @@ import DailyDairyAutomation from "./components/Dailydiary/DailyDairyAutomation";
 import DailyDiaryFormApp from "./components/DailyDiaryForm/DailyDiaryFormApp";
 import Success from "./components/DailyDiaryForm/Success";
 import Failure from "./components/DailyDiaryForm/Failure";
-
+import LoginPage from "./components/Login/LoginPage";
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -32,89 +32,105 @@ const App = () => {
   const closeSidebar = () => {
     setsidebarOpen(false);
   };
+
+  const setMyState = (data) => {
+    setIsLogin(true);
+  };
+
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="container">
-      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      {/* <Main /> */}
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Main />} />
-          <Route exact path="/FarmerProfile" element={<FarmerProfile />} />
-          <Route exact path="/ViewAllFarmers" element={<ViewAllFarmers />} />
-          <Route
-            exact
-            path="/FarmerProfile/:MHCodeFromParams"
-            element={<FarmerProfile flg="1" />}
-          />
-          <Route exact path="/NewFarmer" element={<AddNewFarmer />} />
-          <Route
-            exact
-            path="/BroadcastShowAll"
-            element={<BroadcastShowAll />}
-          />
-          <Route
-            exact
-            path="/viewArticle/:broadcastId"
-            element={<ViewArticle />}
-          />
-          <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
-          <Route
-            exact
-            path="/BroadcastShowAll"
-            element={<BroadcastShowAll />}
-          />
-          <Route
-            exact
-            path="/DailyDiaryForm"
-            element={<DailyDiaryFormApp />}
-          />
-          {/* <Route exact path="/viewArticle" element={<ViewArticle />} /> */}
-          <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
-          <Route
-            exact
-            path="/CropMonitoring"
-            element={<CropMonitoring />}
-          ></Route>
-          <Route
-            exact
-            path="/cropMonitoring/:diaryId"
-            element={<CropMonitoringViewEntry />}
-          ></Route>
-          <Route
-            exact
-            path="/dairy/:dailyDiaryId"
-            element={<SingleDiary />}
-          ></Route>
-          <Route
-            exact
-            path="/MRLMonitoring"
-            element={<MRLMonitoring />}
-          ></Route>
-          <Route
-            exact
-            path="/MRLMonitoringUpload"
-            element={<MRLMonitoringUpload />}
-          ></Route>
-          <Route exact path="/adminProfile" element={<AdminProfile />}></Route>
-          <Route exact path="/AddDelAdmin" element={<AddDelAdmin />}></Route>
-          <Route
-            exact
-            path="/ScheduleDailyDairy"
-            element={<DailyDairyAutomation />}
-          ></Route>
-          <Route
-            exact
-            path="/success"
-            element={<Success />}
-          ></Route>
-          <Route
-            exact
-            path="/Failure"
-            element={<Failure />}
-          ></Route>
-        </Routes>
-      </Router>
+      {isLogin ? (
+        <>
+          <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+          {/* <Main /> */}
+          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+          <Router>
+            <Routes>
+              <Route exact path="/Dashboard" element={<Main />} />
+              <Route exact path="/FarmerProfile" element={<FarmerProfile />} />
+              <Route
+                exact
+                path="/ViewAllFarmers"
+                element={<ViewAllFarmers />}
+              />
+              <Route
+                exact
+                path="/FarmerProfile/:MHCodeFromParams"
+                element={<FarmerProfile flg="1" />}
+              />
+              <Route exact path="/NewFarmer" element={<AddNewFarmer />} />
+              <Route
+                exact
+                path="/BroadcastShowAll"
+                element={<BroadcastShowAll />}
+              />
+              <Route
+                exact
+                path="/viewArticle/:broadcastId"
+                element={<ViewArticle />}
+              />
+              <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
+              <Route
+                exact
+                path="/BroadcastShowAll"
+                element={<BroadcastShowAll />}
+              />
+              <Route
+                exact
+                path="/DailyDiaryForm"
+                element={<DailyDiaryFormApp />}
+              />
+              {/* <Route exact path="/viewArticle" element={<ViewArticle />} /> */}
+              <Route exact path="/AllDiaries" element={<AllDiaries />}></Route>
+              <Route
+                exact
+                path="/CropMonitoring"
+                element={<CropMonitoring />}
+              ></Route>
+              <Route
+                exact
+                path="/cropMonitoring/:diaryId"
+                element={<CropMonitoringViewEntry />}
+              ></Route>
+              <Route
+                exact
+                path="/dairy/:dailyDiaryId"
+                element={<SingleDiary />}
+              ></Route>
+              <Route
+                exact
+                path="/MRLMonitoring"
+                element={<MRLMonitoring />}
+              ></Route>
+              <Route
+                exact
+                path="/MRLMonitoringUpload"
+                element={<MRLMonitoringUpload />}
+              ></Route>
+              <Route
+                exact
+                path="/adminProfile"
+                element={<AdminProfile />}
+              ></Route>
+              <Route
+                exact
+                path="/AddDelAdmin"
+                element={<AddDelAdmin />}
+              ></Route>
+              <Route
+                exact
+                path="/ScheduleDailyDairy"
+                element={<DailyDairyAutomation />}
+              ></Route>
+              <Route exact path="/success" element={<Success />}></Route>
+              <Route exact path="/Failure" element={<Failure />}></Route>
+            </Routes>
+          </Router>
+        </>
+      ) : (
+        <LoginPage setMyState={setMyState} />
+      )}
     </div>
   );
 };
