@@ -1,7 +1,7 @@
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
 
-const Sidebar = ({ sidebarOpen, closeSidebar }) => {
+const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -27,10 +27,14 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
           <i className="fa fa-user-circle-o" aria-hidden="true"></i>
           <a href="/adminProfile">View profile</a>
         </div>
-        <div className="sidebar__link">
-          <i className="fa fa-user-plus" aria-hidden="true"></i>
-          <a href="/AddDelAdmin">Add new/Delete Admin</a>
-        </div>
+        {loginData.userType === "superAdmin" ? (
+          <div className="sidebar__link">
+            <i className="fa fa-user-plus" aria-hidden="true"></i>
+            <a href="/AddDelAdmin">Add new/Delete Admin</a>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="sidebar__link">
           <i className="fa fa-user-o" aria-hidden="true"></i>
           <a href="/NewFarmer">Add new Farmer</a>
@@ -39,9 +43,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         <h2>Daily Diary</h2>
         <div className="sidebar__link">
           <i className="fa fa-plus"></i>
-          <a href="/DailyDiaryForm" >
-            Add New
-          </a>
+          <a href="/DailyDiaryForm">Add New</a>
         </div>
         {/* <div className="sidebar__link">
           <i className="fa fa-info"></i>
@@ -139,7 +141,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }) => {
         </div>
         <div className="sidebar__logout">
           <i className="fa fa-power-off"></i>
-          <a href="#">Log out</a>
+          <a href="/logout">Logout</a>
         </div>
       </div>
     </div>

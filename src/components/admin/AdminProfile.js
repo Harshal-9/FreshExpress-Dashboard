@@ -12,18 +12,22 @@ function AdminProfile(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [adminData, setAdminData] = useState({});
   useEffect(() => {
-    axios
-      .get(
-        "https://immense-beach-88770.herokuapp.com/admins/" +
-          "626d90a967e461b167ff247d"
-      )
-      .then((res) => {
-        console.log("Res", res);
-        setAdminData(res.data);
-      })
-      .catch((err) => {
-        console.log("Err", err);
-      });
+    console.log("In useeffect", props);
+
+    if (props) {
+      axios
+        .get(
+          "https://immense-beach-88770.herokuapp.com/admins/" +
+            props.loginData.mongoId
+        )
+        .then((res) => {
+          console.log("Res", res);
+          setAdminData(res.data);
+        })
+        .catch((err) => {
+          console.log("Err", err);
+        });
+    }
   }, []);
 
   // Function to handle edit of FarmerData form

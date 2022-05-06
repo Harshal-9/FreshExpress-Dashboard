@@ -6,107 +6,107 @@
 .h1DD,
 .tableDD,
 .buttonDD {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align: center;
-    color: purple;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  color: purple;
 }
 
 .headingDD {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .myTable {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .farmerDropDD,
 select {
-    width: 150px;
+  width: 150px;
 }
 
 #farmerdd {
-    color: red;
-    display: inline-block;
+  color: red;
+  display: inline-block;
 }
 
 .AppDD {
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .textInputDD {
-    /* background-color: red; */
-    /* height: 33px; */
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+  /* background-color: red; */
+  /* height: 33px; */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .tdDD {
-    height: 60px;
-    /* border-bottom: 1px solid black; */
-    border: 2px solid grey;
-    padding: 0;
-    width: 25%;
+  height: 60px;
+  /* border-bottom: 1px solid black; */
+  border: 2px solid grey;
+  padding: 0;
+  width: 25%;
 }
 
 .thDD {
-    border: 2px solid grey;
-    width: 25%;
+  border: 2px solid grey;
+  width: 25%;
 }
 
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 .reactSelectDD {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    color: orange;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  color: orange;
 }
 
 .PseudoBody {
-    padding-top: 20px;
-    padding-bottom: 40px;
-    background-color: #dcf1f1;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: #dcf1f1;
 }
 
 .descriptionDD {
-    width: 90%;
-    height: 150px;
-    margin-bottom: 30px;
-    resize: vertical;
+  width: 90%;
+  height: 150px;
+  margin-bottom: 30px;
+  resize: vertical;
 }
 
 .plotDropDD {
-    width: 150px;
-    display: inline-block;
-    color: red;
+  width: 150px;
+  display: inline-block;
+  color: red;
 }
 
 .submitButtonDD {
-    font-family: Verdana;
-    border: 0;
-    border-radius: 5%;
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 170px;
-    height: 50px;
-    background-color: #16aa52;
-    color: white;
+  font-family: Verdana;
+  border: 0;
+  border-radius: 5%;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 170px;
+  height: 50px;
+  background-color: #16aa52;
+  color: white;
 }
 
 .submitButton:hover {
-    background-color: #00732f;
-    cursor: pointer;
+  background-color: #00732f;
+  cursor: pointer;
 }
 
 label {
-    font-weight: bold;
+  /* font-weight: bold; */
 }

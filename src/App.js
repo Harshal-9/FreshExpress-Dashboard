@@ -24,6 +24,9 @@ import DailyDiaryFormApp from "./components/DailyDiaryForm/DailyDiaryFormApp";
 import Success from "./components/DailyDiaryForm/Success";
 import Failure from "./components/DailyDiaryForm/Failure";
 import LoginPage from "./components/Login/LoginPage";
+import Logout from "./components/Logout";
+
+import axios from "axios";
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
   const openSidebar = () => {
@@ -34,20 +37,23 @@ const App = () => {
   };
 
   const setMyState = (data) => {
-    setIsLogin(true);
+    setLoginData(data);
   };
 
-  const [isLogin, setIsLogin] = useState(false);
+  const [loginData, setLoginData] = useState({ isLogin: false, data: {} });
   return (
     <div className="container">
-      {isLogin ? (
+      {loginData.isLogin ? (
         <>
           <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-          {/* <Main /> */}
-          <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+          <Sidebar
+            sidebarOpen={sidebarOpen}
+            closeSidebar={closeSidebar}
+            loginData={loginData.data}
+          />
           <Router>
             <Routes>
-              <Route exact path="/Dashboard" element={<Main />} />
+              <Route exact path="/" element={<Main />} />
               <Route exact path="/FarmerProfile" element={<FarmerProfile />} />
               <Route
                 exact
@@ -68,7 +74,7 @@ const App = () => {
               <Route
                 exact
                 path="/viewArticle/:broadcastId"
-                element={<ViewArticle />}
+                element={<ViewArticle loginData={loginData.data} />}
               />
               <Route exact path="/NewBroadcast" element={<NewBroadcast />} />
               <Route
@@ -111,12 +117,12 @@ const App = () => {
               <Route
                 exact
                 path="/adminProfile"
-                element={<AdminProfile />}
+                element={<AdminProfile loginData={loginData.data} />}
               ></Route>
               <Route
                 exact
                 path="/AddDelAdmin"
-                element={<AddDelAdmin />}
+                element={<AddDelAdmin loginData={loginData.data} />}
               ></Route>
               <Route
                 exact
@@ -125,11 +131,12 @@ const App = () => {
               ></Route>
               <Route exact path="/success" element={<Success />}></Route>
               <Route exact path="/Failure" element={<Failure />}></Route>
+              <Route exact path="/logout" element={<Logout />}></Route>
             </Routes>
           </Router>
         </>
       ) : (
-        <LoginPage setMyState={setMyState} />
+        <LoginPage setLoginData={setLoginData} />
       )}
     </div>
   );

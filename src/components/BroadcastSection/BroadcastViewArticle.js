@@ -13,13 +13,13 @@ function SingleChat(props) {
 
   function handleAnswerPost(event) {
     event.preventDefault();
-    chat.adminName = "AdminName";
+    chat.adminName = props.userId;
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/broadcasts/insertAnswer/" +
-        broadcastId +
-        "/" +
-        chat._id,
+          broadcastId +
+          "/" +
+          chat._id,
         chat
       )
       .then((res) => {
@@ -70,7 +70,7 @@ function SingleChat(props) {
           <input
             type="text"
             disabled="true"
-            value={chat.adminName.length === 0 ? "AdminName" : chat.adminName}
+            value={chat.adminName.length === 0 ? props.userId : chat.adminName}
           />
           <br />
           <label className="viewArticleSecondLabel" htmlFor="">
@@ -95,9 +95,8 @@ function SingleChat(props) {
   );
 }
 
-function ViewArticle() {
-
-
+function ViewArticle({ loginData }) {
+  console.log("LoginData", loginData);
   function getNameForFarmers(farmerId) {
     const farmer = farmersIdMapping.find(
       (mappingObject) => mappingObject.id === farmerId
@@ -126,25 +125,24 @@ function ViewArticle() {
   const [chatArray, setChatArray] = useState([]);
   const [sentTo, setSentTo] = useState([]);
   useEffect(() => {
-    const tempArray = [];
+    const tempArray = new Map();
 
     axios
       .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
       .then((res) => {
         for (let i = 0; i < res.data.length; i++) {
-          tempArray.push({
-            id: res.data[i].farmerID,
-            name: res.data[i].farmerName,
-          });
+          tempArray.set(res.data[i].farmerID, res.data[i].farmerName);
         }
         setFarmersIdMapping(tempArray);
 
+        console.log("TEMP ARR", tempArray);
         axios
           .get(
-            "https://immense-beach-88770.herokuapp.com/broadcasts/" + broadcastId
+            "https://immense-beach-88770.herokuapp.com/broadcasts/" +
+              broadcastId
           )
           .then((res1) => {
-
+            console.log("RES1", res1);
             setBroadcastData(res1.data);
             let arrayToReturn = [];
             if (res1.data.tags.length > 0) {
@@ -152,34 +150,35 @@ function ViewArticle() {
               for (let i = 0; i < tags.length; i++) {
                 arrayToReturn.push({
                   value: tags[i],
-                  label: tags[i]
+                  label: tags[i],
                 });
               }
             } else if (res1.data.farmers.length > 0) {
               const farmers = res1.data.farmers;
               for (let i = 0; i < farmers.length; i++) {
                 arrayToReturn.push({
-                  value: tempArray.find(
-                    (mappingObject) => mappingObject.id === farmers[i]
-                  ),
-                  label: tempArray.find(
-                    (mappingObject) => mappingObject.id === farmers[i]
-                  )
+                  value: tempArray.get(farmers[i]),
+                  label: tempArray.get(farmers[i]),
                 });
               }
             }
-            setSentTo(arrayToReturn)
+            setSentTo(arrayToReturn);
             // console.log(res.data);
             const tempChatArray = [];
             for (let i = 0; i < res1.data.chats.length; i++) {
-              tempChatArray.push(<SingleChat chat={res1.data.chats[i]} />);
+              tempChatArray.push(
+                <SingleChat
+                  chat={res1.data.chats[i]}
+                  userId={loginData.userId}
+                />
+              );
             }
             setChatArray(tempChatArray);
           })
+
           .catch((err) => {
             console.log("Error is here", err);
           });
-
       })
       .catch((err) => {
         console.log("Error is here", err);
@@ -340,14 +339,11 @@ function ViewArticle() {
             <div className="ScrollSentTo">
               {broadcastData.toAllFarmers ? (
                 <p style={{ display: "inline-block" }}>All Farmers</p>
-              ) : (<>
-                {/* {GetFarmersAndTags()} */}
-                < Select
-                  options={sentTo}
-                  placeholder="Sent To :"
-                />
-              </>
-
+              ) : (
+                <>
+                  {/* {GetFarmersAndTags()} */}
+                  <Select options={sentTo} placeholder="Sent To :" />
+                </>
               )}
               <br />
             </div>

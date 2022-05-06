@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import "./LoginPage.css";
 function LoginPage(props) {
+  const [showPage, setShowPage] = useState(false);
   function handleSubmit(event) {
     event.preventDefault();
     console.log(event);
@@ -16,6 +17,12 @@ function LoginPage(props) {
       })
       .then((res) => {
         console.log("Result", res);
+        if (res.data.loggedIn) {
+          props.setLoginData({ isLogin: true, data: res.data.data });
+        } else {
+          setShowPage(true);
+          props.setLoginData({ isLogin: false, data: {} });
+        }
       })
       .catch((err) => {
         console.log("Err", err);
@@ -30,33 +37,42 @@ function LoginPage(props) {
       .then((res) => {
         console.log("Res", res);
 
-        // if(res.)
+        if (res.data.loggedIn) {
+          props.setLoginData({ isLogin: true, data: res.data.data });
+        } else {
+          props.setLoginData({ isLogin: false, data: {} });
+          setShowPage(true);
+        }
       })
       .catch((err) => {
         console.log("Err", err);
       });
-  });
+  }, []);
 
   return (
     <div className="LoginMainDiv">
-      <form onSubmit={handleSubmit}>
-        <p>Username : </p>
-        <input type="text" name="username" />
-        <p>Password : </p>
-        <input type="password" name="password" />
-        <button
-          // onClick={() => {
-          // props.setMyState(true);
-          // }}
-          type="submit"
-        >
-          Submit
-        </button>
-        <br />
-        <a href="/">
-          <u>Forgot Password</u>
-        </a>
-      </form>
+      {showPage ? (
+        <form onSubmit={handleSubmit}>
+          <p>Username : </p>
+          <input type="text" name="username" />
+          <p>Password : </p>
+          <input type="password" name="password" />
+          <button
+            // onClick={() => {
+            // props.setMyState(true);
+            // }}
+            type="submit"
+          >
+            Submit
+          </button>
+          <br />
+          <a href="/">
+            <u>Forgot Password</u>
+          </a>
+        </form>
+      ) : (
+        <div className="loadingDiv"></div>
+      )}
     </div>
   );
 }
