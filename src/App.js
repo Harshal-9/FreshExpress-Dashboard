@@ -25,6 +25,7 @@ import Success from "./components/DailyDiaryForm/Success";
 import Failure from "./components/DailyDiaryForm/Failure";
 import LoginPage from "./components/Login/LoginPage";
 import Logout from "./components/Logout";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);
@@ -124,6 +125,12 @@ const App = () => {
                 path="/ScheduleDailyDairy"
                 element={<DailyDairyAutomation />}
               ></Route>
+              <Route
+                exact
+                path="/resetPassword"
+                element={<ResetPassword />}
+              ></Route>
+
               <Route exact path="/success" element={<Success />}></Route>
               <Route exact path="/Failure" element={<Failure />}></Route>
               <Route exact path="/logout" element={<Logout />}></Route>

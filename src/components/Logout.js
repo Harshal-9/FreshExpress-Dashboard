@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-function handleDelete(navigate) {
+import "./Logout.css";
+function handleClick(navigate) {
   axios
     .get("https://immense-beach-88770.herokuapp.com/logout", {
       withCredentials: true,
     })
     .then((res) => {
       console.log(res);
-      //   navigate("/dashboard");
       window.location.reload();
     })
     .catch((err) => {
@@ -20,11 +19,16 @@ function handleDelete(navigate) {
 function Logout() {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="mainLogout">
+      <br />
       <h3>Are you sure you want to logout ?</h3>
       <br />
-      <button onClick={() => handleDelete(navigate)}>YES</button>
-      <button onClick={() => navigate("/")}>NO</button>
+      <button className="logoutYES" onClick={() => handleClick(navigate)}>
+        YES
+      </button>
+      <button className="logoutNO" onClick={() => navigate("/")}>
+        NO
+      </button>
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import "./LoginPage.css";
+import UpdateSuccessToast, {
+  FailureToast,
+  CustomToast,
+} from "../Toasts/AllToasts";
 
 function LoginPage(props) {
   const [showPage, setShowPage] = useState(false);
@@ -20,13 +25,16 @@ function LoginPage(props) {
         console.log("Result", res);
         if (res.data.loggedIn) {
           props.setLoginData({ isLogin: true, data: res.data.data });
+          window.location.assign("/");
         } else {
           setShowPage(true);
           props.setLoginData({ isLogin: false, data: {} });
+          CustomToast("Invalid Credentials !", "white", "red");
         }
       })
       .catch((err) => {
         console.log("Err", err);
+        CustomToast("User does not exists !", "white", "red");
       });
   }
 
@@ -88,6 +96,7 @@ function LoginPage(props) {
       ) : (
         <div className="loadingDiv"></div>
       )}
+      <ToastContainer />
     </div>
   );
 }

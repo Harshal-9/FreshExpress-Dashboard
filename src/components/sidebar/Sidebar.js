@@ -39,24 +39,9 @@ const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
           <i className="fa fa-user-o" aria-hidden="true"></i>
           <a href="/NewFarmer">Add new Farmer</a>
         </div>
-
-        <h2>Daily Diary</h2>
         <div className="sidebar__link">
-          <i className="fa fa-plus"></i>
-          <a href="/DailyDiaryForm">Add New</a>
-        </div>
-        {/* <div className="sidebar__link">
-          <i className="fa fa-info"></i>
-          <a href="#">View Diary</a>
-        </div> */}
-        <div className="sidebar__link">
-          <i className="fa fa-tasks" aria-hidden="true"></i>
-          <a href="/AllDiaries">All Diaries</a>
-        </div>
-
-        <div className="sidebar__link">
-          <i className="fa fa-calendar-check-o" aria-hidden="true"></i>
-          <a href="/ScheduleDailyDairy">Schedule Daily Diaries</a>
+          <i className="fa fa-unlock-alt" aria-hidden="true"></i>
+          <a href="/resetPassword">Reset Passwords</a>
         </div>
 
         <h2>All Farmers</h2>
@@ -129,6 +114,25 @@ const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
           <i className="fa fa-power-off"></i>
           <a href="#">Log out</a>
         </div> */}
+
+        <h2>Daily Diary</h2>
+        <div className="sidebar__link">
+          <i className="fa fa-plus"></i>
+          <a href="/DailyDiaryForm">Add New</a>
+        </div>
+        {/* <div className="sidebar__link">
+          <i className="fa fa-info"></i>
+          <a href="#">View Diary</a>
+        </div> */}
+        <div className="sidebar__link">
+          <i className="fa fa-tasks" aria-hidden="true"></i>
+          <a href="/AllDiaries">All Diaries</a>
+        </div>
+
+        <div className="sidebar__link">
+          <i className="fa fa-calendar-check-o" aria-hidden="true"></i>
+          <a href="/ScheduleDailyDairy">Schedule Daily Diaries</a>
+        </div>
 
         <h2>Resource Broadasting</h2>
         <div className="sidebar__link">

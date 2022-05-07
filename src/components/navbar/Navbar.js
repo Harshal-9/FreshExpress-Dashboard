@@ -30,9 +30,13 @@ const Navbar = ({ sidebarOpen, openSidebar }) => {
         {/* <a href="https://google.com">
           <i className="fa fa-search" aria-hidden="true"></i>
         </a> */}
-        {/* <a href="#">
-          <i className="fa fa-clock-o" aria-hidden="true"></i>
-        </a> */}
+        <a href="/logout">
+          <i
+            className="fa fa-sign-out text-blue"
+            aria-hidden="true"
+            style={{ backgroundColor: "red", color: "white" }}
+          ></i>
+        </a>
         <a href="/adminProfile">
           <img width="30" src={avatar} alt="avatar" />
         </a>
