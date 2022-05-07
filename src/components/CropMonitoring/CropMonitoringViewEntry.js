@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./CropMonitoringViewEntry.css";
 
+//function to show disease data if any present
+
 function ShowDiseaseOperation(props) {
-    // console.log("Show disease " + props.allDiseaseData)
     return (
-        // <div className="SingleTableRowCropMonitoringViewEntryRow">
         <div>
             <h3>Disease Data :</h3>
             <br />
@@ -24,13 +24,13 @@ function ShowDiseaseOperation(props) {
                 {props.allDiseaseData}
             </table>
         </div>
-        // </div>
     )
 }
+
+// function to show pest data if any present
+
 function ShowPestOperation(props) {
-    // console.log("Show disease " + props.allDiseaseData)
     return (
-        // <div className="SingleTableRowCropMonitoringViewEntryRow">
         <div>
             <h3>Pest Data :</h3>
             <br />
@@ -48,13 +48,13 @@ function ShowPestOperation(props) {
                 {props.allPestData}
             </table>
         </div>
-        // </div>
     )
 }
+
+// function to show  soilhealth data if any present
+
 function ShowSoilHealthOperation(props) {
-    // console.log("Show disease " + props.allDiseaseData)
     return (
-        // <div className="SingleTableRowCropMonitoringViewEntryRow">
         <div>
             <h3>Soil Health Data :</h3>
             <br />
@@ -70,13 +70,13 @@ function ShowSoilHealthOperation(props) {
                 {props.allSoilData}
             </table>
         </div>
-        // </div>
     )
 }
+
+// function to show plantHealth operation if any present
+
 function ShowPlantHealthOperation(props) {
-    // console.log("Show disease " + props.allDiseaseData)
     return (
-        // <div className="SingleTableRowCropMonitoringViewEntryRow">
         <div>
             <h3>Plant Health Data :</h3>
             <br />
@@ -84,13 +84,13 @@ function ShowPlantHealthOperation(props) {
             <br />
             <p>Corrective Action :{props.correctiveAction}</p>
         </div>
-        // </div>
     )
 }
+
+// function to show other operation data
+
 function ShowOtherOperation(props) {
-    // console.log("Show disease " + props.allDiseaseData)
     return (
-        // <div className="SingleTableRowCropMonitoringViewEntryRow">
         <div>
             <h3>Other Data :</h3>
             <br />
@@ -100,14 +100,16 @@ function ShowOtherOperation(props) {
             <br />
             <p>Description : {props.description}</p>
         </div>
-        // </div>
     )
 }
 
+//main component
+
 function CropMonitoringViewEntry(props) {
-    // console.log(props);
+
+    //displaying disease data
+
     function SingleDiseaseRow({ rowData }) {
-        console.log("OBJECT nd " + rowData)
         return (
             <tr className="SingleTableRowCropMonitoringViewEntryRow">
                 <td>{rowData.chemical}</td>
@@ -115,8 +117,10 @@ function CropMonitoringViewEntry(props) {
             </tr>
         );
     }
+
+    //displaying pest data
+
     function SinglePestRow({ rowData }) {
-        console.log("OBJECT " + rowData)
         return (
             <tr className="SingleTableRowCropMonitoringViewEntryRow">
                 <td>{rowData.chemical}</td>
@@ -124,6 +128,8 @@ function CropMonitoringViewEntry(props) {
             </tr>
         );
     }
+
+    // displaying soil data
 
     function SingleSoilRow({ rowData }) {
         console.log("OBJECT " + rowData)
@@ -142,34 +148,27 @@ function CropMonitoringViewEntry(props) {
     const [pestImage, setPestImage] = useState([]);
     const [soilHealthData, setSoilHealthData] = useState([]);
     const [soilHealthImage, setSoilHealthImage] = useState([]);
-    // const [plantHealthData, setPlantHealthData] = useState([]);
     const [plantHealthImage, setPlantHealthImage] = useState([]);
-    // const [otherData, setOtherData] = useState([]);
     const [otherImage, setOtherImage] = useState([]);
-    // console.log("CropID " + diaryId);
     useEffect(() => {
         axios.get("https://immense-beach-88770.herokuapp.com/cropMonitoring/data/" + diaryId)
             .then((data) => {
                 console.log("data", data.data);
-                // console.log("Image nikhil " + diseaseImage.length)
                 setCropDetails(data.data)
 
                 //setting disease data
                 let tempData = [];
                 let tempDiseaseData = data.data.disease.correctiveAction;
+
                 if (tempDiseaseData.length) {
                     for (let i in tempDiseaseData) {
-                        console.log("Inside here nikhil " + tempDiseaseData[i].chemical)
-                        // tempData.push(<SingleDiseaseRow rowData={tempDiseaseData[i]} />);
                         setDiseaseData((arr) =>
                             arr.concat(<SingleDiseaseRow rowData={tempDiseaseData[i]} />)
                         );
                     }
-                    // setDiseaseData(tempData);
+                    //setting disease image array
                     for (let i = 1; i <= 2; i++) {
-                        console.log("fucing data", data.data.disease);
                         if (data.data.disease["diseasePhoto" + i]) {
-                            // console.log("Image " + data.data.disease["diseasePhoto" + i])
                             setDiseaseImage((arr) =>
                                 arr.concat(
                                     <a
@@ -194,18 +193,19 @@ function CropMonitoringViewEntry(props) {
                         }
                     }
 
-                    // console.log("Disease data " + diseaseData)
                 }
 
                 //setting pest data
                 let tempPestData = data.data.pest.correctiveAction;
                 if (tempPestData.length) {
                     for (let i in tempPestData) {
-                        // console.log("Inside")
                         setPestData((arr) =>
                             arr.concat(<SinglePestRow rowData={tempPestData[i]} />)
                         );
                     }
+
+                    //setting pest image array
+
                     for (let i = 1; i <= 2; i++) {
                         if (data.data.pest["pestPhoto" + i]) {
                             // console.log("Image " + i)
@@ -233,21 +233,21 @@ function CropMonitoringViewEntry(props) {
                         }
                     }
 
-                    // console.log("Disease data " + diseaseData)
                 }
 
                 //setting soilData
                 let tempSoilData = data.data.soilHealth.correctiveAction;
                 if (tempSoilData.length) {
                     for (let i in tempSoilData) {
-                        // console.log("Inside")
                         setSoilHealthData((arr) =>
                             arr.concat(<SingleSoilRow rowData={tempSoilData[i]} />)
                         );
                     }
+
+                    //setting soilHealth image array
+
                     for (let i = 1; i <= 2; i++) {
                         if (data.data.soilHealth["soilHealthPhoto" + i]) {
-                            // console.log("Image " + i)
                             setSoilHealthImage((arr) =>
                                 arr.concat(
                                     <a
@@ -272,13 +272,14 @@ function CropMonitoringViewEntry(props) {
                         }
                     }
 
-                    // console.log("Disease data " + diseaseData)
                 }
                 //setting plantHealth data
                 if (data.data.plantHealth) {
+
+                    //setting plantHealth image array
+
                     for (let i = 1; i <= 2; i++) {
                         if (data.data.plantHealth["plantHealthPhoto" + i]) {
-                            // console.log("Image " + i)
                             setPlantHealthImage((arr) =>
                                 arr.concat(
                                     <a
@@ -303,7 +304,9 @@ function CropMonitoringViewEntry(props) {
                         }
                     }
                 }
-                //setting other data
+
+                //setting other data and image
+
                 if (data.data.other) {
                     for (let i = 1; i <= 2; i++) {
                         if (data.data.other["otherPhoto" + i]) {
@@ -332,9 +335,6 @@ function CropMonitoringViewEntry(props) {
                         }
                     }
                 }
-                // console.log("Disease data " + diseaseData)
-                // }
-                // console.log("Disease length " + diseaseData.length)
 
             })
             .catch((err) => {
@@ -353,7 +353,6 @@ function CropMonitoringViewEntry(props) {
             {
                 cropDetials ? (
                     <>
-                        {/* <div className="CropMonitoringViewEntryFirst"> */}
                         <div className="headingView">
                             <h3 style={{ display: "inline-block" }}>Reporter Name :&nbsp;{cropDetials.reporter}</h3>
                             <br />
@@ -362,6 +361,8 @@ function CropMonitoringViewEntry(props) {
                         <br />
                         <hr />
                         <br />
+
+                        {/* if disease data is present setting disease data */}
                         {diseaseData.length ? (
                             <>
                                 <div className="diseaseDiv" style={{ display: "inline-block" }}>
@@ -380,6 +381,7 @@ function CropMonitoringViewEntry(props) {
                         <br />
                         <hr className="newLine" />
                         {
+                            // if pest data is present setting pest data
                             pestData.length ? (
                                 <>
                                     <div className="pestDiv" style={{ display: "inline-block" }}>
@@ -400,6 +402,8 @@ function CropMonitoringViewEntry(props) {
                         <br /><br />
                         <hr className="newLine" />
                         {
+                            // if soilHealth data is present setting soilHealth data
+
                             soilHealthData.length ? (
                                 <>
                                     <div className="soilHealthDiv" style={{ display: "inline-block" }}>
@@ -417,6 +421,7 @@ function CropMonitoringViewEntry(props) {
                         <br /><br />
                         <hr className="newLine" />
                         {
+                            // if plantHealth data is present setting plantHealth data
                             cropDetials.plantHealth ? (
                                 <>
                                     <div className="plantHealthDiv" style={{ display: "inline-block" }}>
@@ -433,6 +438,7 @@ function CropMonitoringViewEntry(props) {
                         }
                         <hr className="newLine" />
                         {
+                            // if other data is present setting other data
                             cropDetials.other ? (
                                 <>
                                     <div className="otherDiv" style={{ display: "inline-block" }}>
@@ -448,16 +454,10 @@ function CropMonitoringViewEntry(props) {
                                 </>
                             ) : null
                         }
-                        {/* </div> */}
                     </>
 
                 ) : null
             }
-
-            {/* <div className="CropMonitoringViewEntrySecond">
-                {diseaseImage}
-                {pestImage}
-            </div> */}
         </div >
     )
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 
+// This component is used to set data in soil work table
+
 function SoilWork(props) {
     const func = props.getSoilData;
     const rowNo = props.rowNo;

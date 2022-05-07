@@ -5,6 +5,9 @@ import FarmWorkTable from "./FarmWorkTable";
 import SoilWorkTable from "./SoilWorkTable";
 import MaintenanceTable from "./MaintenanceTable";
 
+//This component is used to handle which radio button was clicked..
+// If radio button placed on Fertilizer table is clicked then data related to fertilizer must be displayed
+
 function RadioButton(props) {
     const [isClicked, renderPage] = useState(false);
 
@@ -45,6 +48,7 @@ function RadioButton(props) {
             </div>
             <br />
             <div>
+                {/* Since five radio buttonns are present five conditions are handled and according to that repectivve data is displayed */}
                 {isClicked === true ? (
                     props.type === 1 ? (
                         <SprayingTable getFromSprayingTable={getFromSprayingTable} />

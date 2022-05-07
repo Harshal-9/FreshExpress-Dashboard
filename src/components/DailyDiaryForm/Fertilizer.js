@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 
+// Component to show different fertilizer data
+
 function SetFertilizer(props) {
     const func = props.getFertilizerData;
     const rowNo = props.rowNo;

@@ -1,17 +1,16 @@
 import React from "react";
 import Select from "react-select";
 
+// Component to set plot data in plot dropdown
 function PlotDropdown(props) {
     console.log("Plot", props.plotsFromFarmer);
 
     const getPlot = props.getPlot;
 
     const handleChange = (opt) => {
-        // console.log("Option", opt);
         getPlot({ PlotID: opt.plot, FarmerID: opt.farmerId });
     };
 
-    // let temp = props.plotsFromFarmer.plot;
 
     const data = props.plotsFromFarmer.plot
         ? [
@@ -30,13 +29,11 @@ function PlotDropdown(props) {
             }
         ];
 
-    // console.log(data);
 
     return (
         <div>
             <label htmlFor="plotdd">Select plot : </label>
             <Select
-                // defaultValue={data[0]}
                 id="plotdd"
                 className="plotDropDD"
                 options={data}

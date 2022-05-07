@@ -2,8 +2,6 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router";
-import { ToastContainer } from "react-toastify";
 import { FailureToast } from "../Toasts/AllToasts";
 import Select from "react-select";
 import "./CropMonitoring.css";
@@ -11,10 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 function SingleTableRowCropMonitoring(props) {
     let cropData = props;
-    let rowsData = [];
     const navigate = useNavigate();
     let i = 0;
-    // console.log("hi " + props.data.severityType);
+
     return (
         <tr
             className="SingleTableRowCropMonitoring"
@@ -31,6 +28,8 @@ function SingleTableRowCropMonitoring(props) {
         </tr>
     );
 }
+
+
 function CropMonitoring() {
     function handleFilteredIntersection(event) {
         let dateTempArr = [];
@@ -63,24 +62,21 @@ function CropMonitoring() {
     }
 
     //filter by monitoring parameter
+
     function filterByMonitoring() {
         let tempArr = [];
-        // console.log("InsideFilter Label" + monitoringParameterFilter.label);
-        // console.log("length " + allCropMonitoring.props);
         for (let i = 0; i < allCropMonitoring.length; i++) {
-            // console.log("InsideFilter " + allCropMonitoring[i].props.operation);
             if (monitoringParameterFilter && monitoringParameterFilter.label == allCropMonitoring[i].props.operation) {
-                // console.log("done");
                 tempArr.push(allCropMonitoring[i]);
             }
         }
         return tempArr;
     }
+
     //filter by reporter
+
     function filterByReporter() {
         let tempArr = [];
-        // console.log("Reporter " + props.reporter);
-        // console.log("Reporter name " + reporterFilter.value)
         for (let i = 0; i < allCropMonitoring.length; i++) {
             if (reporterFilter && reporterFilter.value == allCropMonitoring[i].props.reporter) {
                 tempArr.push(allCropMonitoring[i])
@@ -89,8 +85,8 @@ function CropMonitoring() {
         return tempArr;
     }
     //filter by alert level
+
     function filterByAlertLevel() {
-        // console.log("hi " + props.data.severityType);
         let tempArr = [];
         for (let i = 0; i < allCropMonitoring.length; i++) {
             if (alertFilter && alertFilter.label == allCropMonitoring[i].props.data.severityType) {
@@ -99,18 +95,16 @@ function CropMonitoring() {
         }
         return tempArr;
     }
+
     //filter by date
+
     function filterByDate() {
         if (startDate == "" || endDate == "") return [];
         const tempArr = [];
-        // console.log("Start date " + startDate.target.value)
-        // console.log("End date " + endDate.value)
 
         const newStartDate = new Date(startDate.target.value.substring(0, 10));
         const newEndDate = new Date(endDate.target.value.substring(0, 10));
-        // console.log("InsideDate " + allCropMonitoring[0].props.date);
         for (let i = 0; i < allCropMonitoring.length; i++) {
-            // console.log("InsideDate " + allCropMonitoring[i].props.date);
             if (newStartDate <= new Date(allCropMonitoring[i].props.date.substring(0, 10)) &&
                 newEndDate >= new Date(allCropMonitoring[i].props.date.substring(0, 10))
             ) {
@@ -161,12 +155,13 @@ function CropMonitoring() {
         { value: 2, label: "Danger" }
     ]
 
+    //getting farmerID,plot and farmer name
+
     useEffect(() => {
         axios
             .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
             .then((res) => {
                 let Data = [...res.data];
-                // console.log("Data Here :", Data);
                 setAllFarmersCrop(Data);
             })
             .catch((err) => {
@@ -182,6 +177,7 @@ function CropMonitoring() {
                 Crop Monitoring
             </h2>
             <br />
+            {/* selecting farmername in crop monitoring */}
             <div style={{ margin: "10px" }}>
                 <Select
                     className="CropMonitoringFarmerNamePlot"
@@ -193,12 +189,9 @@ function CropMonitoring() {
                         setSelectedFarmerCrop({ FarmerID: opt.farmerID, plot: opt.plot })
                     }}
                 />
-                {/* <button className="allDiariesButton">
-                    <i className="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add
-                    Operation
-                </button> */}
                 <br />
                 <br />
+                {/* selecting plot in crop monitoring */}
                 <Select
 
                     placeholder="Select Plot"
@@ -211,6 +204,9 @@ function CropMonitoring() {
                         option.MHCode
                     }
                     onChange={(event) => {
+
+                        //request for getting aall crop monitoring data
+
                         axios
                             .get(
                                 "https://immense-beach-88770.herokuapp.com/cropMonitoring/MHCode/" +
@@ -246,7 +242,6 @@ function CropMonitoring() {
                                 setFilteredAllCropMonitoring([]);
 
                                 for (let i = 0; i < receivedData.length; i++) {
-                                    // console.log("Severity check " + receivedData[i].pest.severityType)
                                     let tempArr = {
                                         pest: receivedData[i].pest,
                                         disease: receivedData[i].disease,
@@ -254,18 +249,11 @@ function CropMonitoring() {
                                         soilHealth: receivedData[i].soilHealth,
                                         other: receivedData[i].other
                                     };
-                                    // let tempArr = [
-                                    //     { pest: receivedData[i].pest },
-                                    //     { disease: receivedData[i].disease },
-                                    //     { plantHealth: receivedData[i].plantHealth },
-                                    //     { soilHealth: receivedData[i].soilHealth },
-                                    //     { other: receivedData[i].other }
-                                    // ];
                                     for (let item in tempArr) {
-                                        // console.log("severity Type " + tempArr[item].severityType)
-                                        //if severity type is mentioned then only data is printed
                                         if (tempArr[item].severityType) {
-                                            // console.log("item in loop " + item)
+
+                                            //setting all to in useState
+
                                             setAllCropMonitoring((arr) =>
                                                 arr.concat(
                                                     <SingleTableRowCropMonitoring
@@ -278,6 +266,8 @@ function CropMonitoring() {
                                                     />
                                                 )
                                             );
+
+                                            //this usestate is to set filtered data
 
                                             setFilteredAllCropMonitoring((arr) =>
                                                 arr.concat(
@@ -302,9 +292,6 @@ function CropMonitoring() {
                     }}
 
                 />
-                <button className="ExportToExccelButton">
-                    <i className="fa fa-download fa-lg" aria-hidden="true"></i> Export Excel
-                </button>
                 <br />
                 <br />
                 <h2 style={{ marginLeft: "20px" }}>Filters :</h2>
@@ -314,6 +301,9 @@ function CropMonitoring() {
                 <label style={{ marginLeft: "305px" }}>Monitoring Parameter : </label>
                 <label style={{ marginLeft: "200px" }}>Reporter : </label>
                 <br />
+
+                {/* selecting date for filter */}
+
                 <input className="cropMonitoringDate"
                     type="date"
                     id="myDate"
@@ -334,6 +324,9 @@ function CropMonitoring() {
                         setEndDate(e);
                     }}
                 />
+
+                {/* Selecting monitoring parameter for filter */}
+
                 <Select
                     className="CropMonitoringFarmerNamePlot"
                     options={monitoringParameter}
@@ -346,6 +339,9 @@ function CropMonitoring() {
                     }}
 
                 />
+
+                {/* Selecting Reportname for filter */}
+
                 <Select
                     className="CropMonitoringFarmerNamePlot"
                     options={reporterName}
@@ -360,6 +356,9 @@ function CropMonitoring() {
                 <br />
                 <label style={{ marginLeft: "10px" }}>Alert Level </label>
                 <br />
+
+                {/* Selecting alert level for filter */}
+
                 <Select
                     className="CropMonitoringFarmerNamePlot"
                     options={alert}
@@ -371,12 +370,18 @@ function CropMonitoring() {
                 <br />
                 <br />
                 <div style={{ textAlign: "center" }}>
+
+                    {/* Applying filter */}
+
                     <button
                         className="applyFilterButton"
                         onClick={() => { handleFilteredIntersection() }}
                     >
                         Apply
                     </button>
+
+                    {/* Removing selected filter */}
+
                     <button
                         className="applyFilterClearButton"
                         onClick={() => {
@@ -402,10 +407,6 @@ function CropMonitoring() {
                             <td>Reporter</td>
                         </tr>
                         {filteredAllCropMonitoring}
-                        {/* {<SingleTableRowCropMonitoring />
-                            <SingleTableRowCropMonitoring />
-                            <SingleTableRowCropMonitoring />
-                        } */}
                     </table>
                 </div>
 

@@ -123,13 +123,14 @@ function NewBroadcast() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    //check if farmers or tags are selected or not
 
     if (
       !checkBox &&
       selectedFarmerArray.length === 0 &&
       selectedTagsArray.length === 0
     ) {
-      CustomToast("select Farmer and Tags", "black", "#FFD700");
+      CustomToast("Select Farmer and Tags", "black", "#FFD700");
 
       return;
     }
@@ -198,11 +199,11 @@ function NewBroadcast() {
       .catch((err) => {
         console.log("err", err);
       });
-    // UpdateSuccessToast("Data Submitted successfully successfully !");
   }
 
   return (
     <div>
+      {/* to display main components of new broadcast */}
       <div className="newBroadcast">
         <img
           src="https://tse2.mm.bing.net/th?id=OIP.4SzuLKFt1oMqJo1hBncSBgHaDV&pid=Api&P=0&w=354&h=160"
@@ -212,6 +213,7 @@ function NewBroadcast() {
           style={{ display: "inline-block", margin: "10px" }}
         ></img>
         <br />
+        {/* //selecting format */}
         <Select
           className="NewBroadcastSelect"
           options={format}
@@ -220,6 +222,7 @@ function NewBroadcast() {
             setSelected(opt.value);
           }}
         />
+        {/* code to add topic */}
         <form action="">
           <label className="newBroadcastLabel" htmlFor="">
             Enter Topic :{" "}
@@ -234,6 +237,7 @@ function NewBroadcast() {
             }}
           />
           <br />
+          {/* code to add category */}
           <Select
             className="NewBroadcastSelect"
             options={dropdownCategories}
@@ -242,6 +246,7 @@ function NewBroadcast() {
               setCategory(opt.value);
             }}
           />
+          {/* code to add new category */}
           {!category ? (
             <>
               <br />
@@ -257,6 +262,7 @@ function NewBroadcast() {
               />
             </>
           ) : null}
+          {/* if format selected is youtube then disable pdf andd image option ...Similar for pdf and jpg */}
           {selected === "youtube" ? (
             <>
               <br />
@@ -273,6 +279,7 @@ function NewBroadcast() {
             </>
           ) : null}
           <br />
+          {/* To take input of description */}
           <label className="newBroadcastLabeltextArea">
             Enter Description :
           </label>
@@ -288,7 +295,7 @@ function NewBroadcast() {
               setFinalData(tempObject);
             }}
           ></textarea>
-
+          {/* If selected format is pdf */}
           {selected === "pdf" ? (
             <>
               <br />
@@ -323,7 +330,7 @@ function NewBroadcast() {
               ) : null}
             </>
           ) : null}
-
+          {/* If selected format is jpg */}
           {selected === "jpg" ? (
             <>
               <br />
@@ -370,6 +377,7 @@ function NewBroadcast() {
           />
           <p className="newBroadcastLabel">To All Farmers </p>
           <br />
+          {/* Code to handle for whom to send the article i.e. farmer name or according to tags.Also have option to send article to all farmers */}
           {!checkBox ? (
             <>
               {selectedFarmerArray.length === 0 ? (

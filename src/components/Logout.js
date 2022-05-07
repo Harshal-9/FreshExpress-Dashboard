@@ -15,7 +15,7 @@ function handleClick(navigate) {
       console.log("Err", err);
     });
 }
-
+//Component to handle logout button
 function Logout() {
   const navigate = useNavigate();
   return (

@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 
+// Component to set spraying data 
+
 function Spraying(props) {
     const func = props.getSprayingData;
     const rowNo = props.rowNo;

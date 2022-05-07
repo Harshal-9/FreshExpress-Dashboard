@@ -1,6 +1,8 @@
 import "./Navbar.css";
 import avatar from "../../assets/avatar.svg";
 
+//contains all the content of navbar
+
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (
     <nav className="navbar">

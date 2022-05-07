@@ -1,6 +1,8 @@
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
 
+//this component is used to show content of sidebar
+
 const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
@@ -53,77 +55,20 @@ const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
           <i className="fa fa-user-circle" aria-hidden="true"></i>
           <a href="/ViewAllFarmers">All Farmers</a>
         </div>
-        {/* <div className="sidebar__link">
-          <i className="fa fa-street-view"></i>
-          <a href="#">View Plots</a>
-        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-tree"></i>
           <a href="/CropMonitoring">Crop Monitoring</a>
         </div>
-        {/* <div className="sidebar__link">
-          <i className="fa fa-line-chart"></i>
-          <a href="/CropMonitoringViewEntry">Reports</a>
-        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-image"></i>
           <a href="/MRLMonitoring">MRL Monitoring</a>
         </div>
-        {/* <div className="sidebar__link">
-          <i className="fa fa-file-text"></i>
-          <a href="#">Seasonal Reports</a>
-        </div> */}
-
-        {/* <h2>Crop Monitoring</h2>
-        <div className="sidebar__link">
-          <i className="fa fa-money"></i>
-          <a href="#">Payroll</a>
-        </div>
-        <div className="sidebar__link">
-          <i className="fa fa-briefcase"></i>
-          <a href="#">Paygrade</a>
-        </div> */}
-        {/* <div className="sidebar__logout">
-          <i className="fa fa-power-off"></i>
-          <a href="#">Log out</a>
-        </div> */}
-        {/* <h2>Reports</h2>
-        <div className="sidebar__link">
-          <i className="fa fa-money"></i>
-          <a href="#">Payroll</a>
-        </div>
-        <div className="sidebar__link">
-          <i className="fa fa-briefcase"></i>
-          <a href="#">Paygrade</a>
-        </div> */}
-        {/* <div className="sidebar__logout">
-          <i className="fa fa-power-off"></i>
-          <a href="#">Log out</a>
-        </div> */}
-
-        {/* <h2>MRL Monitoring</h2>
-        <div className="sidebar__link">
-          <i className="fa fa-money"></i>
-          <a href="#">Payroll</a>
-        </div>
-        <div className="sidebar__link">
-          <i className="fa fa-briefcase"></i>
-          <a href="#">Paygrade</a>
-        </div> */}
-        {/* <div className="sidebar__logout">
-          <i className="fa fa-power-off"></i>
-          <a href="#">Log out</a>
-        </div> */}
 
         <h2>Daily Diary</h2>
         <div className="sidebar__link">
           <i className="fa fa-plus"></i>
           <a href="/DailyDiaryForm">Add New</a>
         </div>
-        {/* <div className="sidebar__link">
-          <i className="fa fa-info"></i>
-          <a href="#">View Diary</a>
-        </div> */}
         <div className="sidebar__link">
           <i className="fa fa-tasks" aria-hidden="true"></i>
           <a href="/AllDiaries">All Diaries</a>

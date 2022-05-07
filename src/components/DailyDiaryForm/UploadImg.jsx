@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 
+
+// This component is used to set image that are uploaded in any of the operation in daily diary form
 function UploadImg(props) {
     // Handling functional props for passing the link
 

@@ -10,19 +10,23 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 
+//function to show individual broadcast component
+
 function BroadcastSingleCard(props) {
   const navigate = useNavigate();
   const data = props.data;
 
+  //if view button is clicked then navigating to viewSingle article page
   function handleViewClick() {
     navigate("/viewArticle/" + data._id);
   }
 
+  //function to delete broadcast
   function handleBroadcastDelete() {
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/broadcasts/delete/" +
-          data._id
+        data._id
       )
       .then((res) => {
         CustomToast(
@@ -51,6 +55,8 @@ function BroadcastSingleCard(props) {
         className="MyCardColumn"
         style={{ display: "inline-block", height: "auto" }}
       >
+        {/* dividing data according to pdf,image,youtube */}
+
         <div className="MyCard" style={{ width: "100%", height: "100%" }}>
           {data.format === "jpg" ? (
             <img
@@ -72,7 +78,6 @@ function BroadcastSingleCard(props) {
               }
               width="300px"
               height="150px"
-              //   allow="autoplay"
               title="PDF"
             ></iframe>
           )}
@@ -80,7 +85,6 @@ function BroadcastSingleCard(props) {
           <br />
           <br />
           <label className="broadcastLabel">Topic :</label>
-          {/* <label className="broadcastLabelData">{data.topic}</label> */}
           <input
             className="broadcastLabelData"
             value={data.topic}
@@ -88,7 +92,6 @@ function BroadcastSingleCard(props) {
           />
           <br />
           <label className="broadcastLabel">Category :</label>
-          {/* <label className="broadcastLabelData">{data.category}</label> */}
           <input
             className="broadcastLabelData"
             value={data.category}
@@ -97,14 +100,6 @@ function BroadcastSingleCard(props) {
           <br />
           <label className="broadcastLabel">Date :</label>
 
-          {/* <label className="broadcastLabelData">
-            {new Date(data.date)
-              .toJSON()
-              .slice(0, 10)
-              .split("-")
-              .reverse()
-              .join("/")}
-          </label> */}
 
           <input
             className="broadcastLabelData"
@@ -135,7 +130,10 @@ function BroadcastSingleCard(props) {
   );
 }
 
+//main broadcast component
 function BroadcastShowAll() {
+
+  //function to handle multiple filters
   function handleFilterIntersection(event) {
     let categoriesTempArr = [];
     let formatTempArr = [];
@@ -158,7 +156,7 @@ function BroadcastShowAll() {
     setFilteredBroadcastArray(finalResult);
   }
 
-  // Filter by operation
+  // Filter by categories
   function filterByCategories() {
     let tempArr = [];
     if (!selectedCategory) return tempArr;
@@ -183,9 +181,9 @@ function BroadcastShowAll() {
     for (let i = 0; i < allBroadcastArray.length; i++) {
       if (
         newStartDate <=
-          new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
+        new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
         newEndDate >=
-          new Date(allBroadcastArray[i].props.data.date.substring(0, 10))
+        new Date(allBroadcastArray[i].props.data.date.substring(0, 10))
       ) {
         tempArray.push(allBroadcastArray[i]);
       }
@@ -193,7 +191,7 @@ function BroadcastShowAll() {
     return tempArray;
   }
 
-  //Filter by status
+  //Filter by format
   function filterByFormat() {
     //when state is not selected.
     let tempArr = [];
@@ -209,6 +207,8 @@ function BroadcastShowAll() {
     }
     return tempArr;
   }
+
+  //function to hanndle sort
 
   function handleSort(event) {
     switch (event.value) {
@@ -241,14 +241,6 @@ function BroadcastShowAll() {
   const [filteredBroadcastArray, setFilteredBroadcastArray] = useState([]);
   const [dropdownCategoryArray, setDropdownCategoryArray] = useState([]);
 
-  // const category = [
-  //   { value: 0, label: "Pest & Disease" },
-  //   { value: 1, label: "Soil Nutrition" },
-  //   { value: 2, label: "Plant Health" },
-  //   { value: 3, label: "Good Practices" },
-  //   { value: 4, label: "Export Marketing" },
-  //   { value: 5, label: "Mangesh Bhaskar" },
-  // ];
   const format = [
     { value: "pdf", label: "PDF" },
     { value: "youtube", label: "Youtube video" },
@@ -265,10 +257,11 @@ function BroadcastShowAll() {
   }
 
   useEffect(() => {
+
+    //request to get broadcast data
     axios
       .get("https://immense-beach-88770.herokuapp.com/broadcasts")
       .then((res) => {
-        // console.log("result is here", res);
         const tempArray = [];
         const temp = [];
         for (let i = 0; i < res.data.length; i++) {
@@ -282,6 +275,7 @@ function BroadcastShowAll() {
         console.log(err);
       });
 
+    //request to get filter data
     axios
       .get("https://immense-beach-88770.herokuapp.com/filters")
       .then((res) => {
@@ -306,6 +300,7 @@ function BroadcastShowAll() {
         <label style={{ marginLeft: "310px" }}>Categories : </label>
         <label style={{ marginLeft: "150px" }}>Format : </label>
         <br />
+        {/* selecting date  */}
         <input
           className="broadcastDate"
           type="date"
@@ -328,12 +323,15 @@ function BroadcastShowAll() {
             setEndDate(e.target.value);
           }}
         />
+        {/* //selecting category */}
         <Select
           className="broadcastSelect"
           options={dropdownCategoryArray}
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e)}
         />
+
+        {/* selecting format */}
         <Select
           className="broadcastSelect"
           options={format}

@@ -8,6 +8,7 @@ function FertilizerTable(props) {
     var obtainedData = { row1: {}, row2: {}, row3: {}, row4: {}, row5: {} };
 
     function getFertilizerData(data) {
+        // Switches cases to display data in five rows
         switch (data.RowNo) {
             case "1":
                 switch (data.ColumnNo) {
@@ -84,6 +85,7 @@ function FertilizerTable(props) {
     }
     return (
         <div>
+            {/* Taken input of hours of irrigation */}
             <h3 style={{ display: "inline-block" }}>
                 Enter Number of hours of irrigation :
             </h3>
@@ -98,6 +100,7 @@ function FertilizerTable(props) {
             <br />
 
             <table className="myTable">
+                {/* Displaying fertilizer ,quantity,image data in table .For five rows */}
                 <tr>
                     <th className="thDD" style={{ textAlign: "center" }}>
                         Fertilizer

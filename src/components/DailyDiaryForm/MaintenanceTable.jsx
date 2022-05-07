@@ -8,6 +8,7 @@ function MaintenanceTable(props) {
     var obtainedData = { row1: {}, row2: {}, row3: {}, row4: {}, row5: {} };
 
     function getMaintenanceData(data) {
+        //setting maintenance data in all five rows
         switch (data.RowNo) {
             case "1":
                 switch (data.ColumnNo) {
@@ -86,6 +87,7 @@ function MaintenanceTable(props) {
 
     return (
         <div>
+            {/* Displaying maintenance data in below five rows */}
             <table className="myTable">
                 <tr>
                     <th className="thDD" style={{ textAlign: "center" }}>

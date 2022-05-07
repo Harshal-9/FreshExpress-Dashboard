@@ -2,12 +2,16 @@ import React from "react";
 import FarmWork from "./FarmWork";
 import UploadImg from "./UploadImg";
 
+
+//component that displays all the content of farm work
 function FarmWorkTable(props) {
     var getFromFarmWorkTable = props.getFromFarmWorkTable;
 
     var obtainedData = { row1: {}, row2: {}, row3: {}, row4: {}, row5: {} };
 
+
     function getFarmWorkData(data) {
+        //since there are five rows available in this table we have handled five cases
         switch (data.RowNo) {
             case "1":
                 switch (data.ColumnNo) {
@@ -81,12 +85,12 @@ function FarmWorkTable(props) {
 
             default:
         }
-        // obtainedData.MaintainData = data;
     }
 
     return (
         <div>
             <table className="myTable">
+                {/* Five rows are displayed with help of below code */}
                 <tr>
                     <th className="thDD" style={{ textAlign: "center" }}>
                         Work

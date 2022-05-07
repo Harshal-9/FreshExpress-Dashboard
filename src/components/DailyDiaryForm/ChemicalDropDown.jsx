@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 
+//initializing fertilizerdata
+
 const fertilizerData = [
     { value: 0, label: "None" },
     { value: 1, label: "Calcium" },
@@ -21,6 +23,8 @@ const fertilizerData = [
     { value: 16, label: "Fertica (Ferrous)" },
     { value: 17, label: "Sodium Molybdenum" }
 ];
+
+//initializing fungicideData
 
 const fungicideData = [
     { value: 0, label: "None" },
@@ -71,6 +75,9 @@ const fungicideData = [
     { value: 45, label: "Tata Eshan" }
 ];
 
+
+//initializing insectcideData
+
 const insectcideData = [
     { value: 0, label: "None" },
     { value: 1, label: "Buprofezin" },
@@ -93,6 +100,8 @@ const insectcideData = [
     { value: 18, label: "Hotshot" },
     { value: 19, label: "Tata Rilon" }
 ];
+//initializing organicData
+
 
 const organicData = [
     { value: 0, label: "None" },
@@ -160,6 +169,9 @@ const organicData = [
     { value: 62, label: "Agrogen" }
 ];
 
+//initializing plantGrowthRegulatorData
+
+
 const plantGrowthRegulatorData = [
     { value: 0, label: "None" },
     { value: 1, label: "Ambition" },
@@ -185,13 +197,14 @@ const plantGrowthRegulatorData = [
     { value: 21, label: "FE Kelp" }
 ];
 
+
+//function to sent dropdown data according to selected option
 function ChemicalDropDown(props) {
     const selectedType = props.selectedType;
     const func = props.getSprayingData;
     const rowNo = props.rowNo;
     const columnNo = props.columnNo;
 
-    // console.log(selectedType);
 
     function getArray() {
         switch (selectedType) {

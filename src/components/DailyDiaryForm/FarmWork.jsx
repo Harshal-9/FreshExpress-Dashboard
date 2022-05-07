@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 
+
+// function to display farmwork options
 function FarmWork(props) {
     const func = props.getFarmWorkData;
     const rowNo = props.rowNo;

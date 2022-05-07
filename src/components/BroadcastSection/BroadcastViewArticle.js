@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import Select from "react-select";
+
+// below two functions are to handle chat in broadcast section
 function SingleChat(props) {
   const { broadcastId } = useParams();
   const [chat, setChat] = useState(props.chat);
@@ -17,9 +19,9 @@ function SingleChat(props) {
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/broadcasts/insertAnswer/" +
-          broadcastId +
-          "/" +
-          chat._id,
+        broadcastId +
+        "/" +
+        chat._id,
         chat
       )
       .then((res) => {
@@ -34,6 +36,7 @@ function SingleChat(props) {
 
   return (
     <div>
+      {/* below is the code for displaying chat section */}
       <div className="commentsFirst">
         <div style={{ display: "inline-block", margin: "10px" }}>
           <img
@@ -96,7 +99,7 @@ function SingleChat(props) {
 }
 
 function ViewArticle({ loginData }) {
-  console.log("LoginData", loginData);
+  //function to get farmer name from farmer ID
   function getNameForFarmers(farmerId) {
     const farmer = farmersIdMapping.find(
       (mappingObject) => mappingObject.id === farmerId
@@ -127,6 +130,7 @@ function ViewArticle({ loginData }) {
   useEffect(() => {
     const tempArray = new Map();
 
+    // getting farmerID to extract farmername
     axios
       .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
       .then((res) => {
@@ -134,15 +138,14 @@ function ViewArticle({ loginData }) {
           tempArray.set(res.data[i].farmerID, res.data[i].farmerName);
         }
         setFarmersIdMapping(tempArray);
-
-        console.log("TEMP ARR", tempArray);
+        //to get all broadcast data
         axios
           .get(
             "https://immense-beach-88770.herokuapp.com/broadcasts/" +
-              broadcastId
+            broadcastId
           )
           .then((res1) => {
-            console.log("RES1", res1);
+            //setting main data to usestate
             setBroadcastData(res1.data);
             let arrayToReturn = [];
             if (res1.data.tags.length > 0) {
@@ -162,8 +165,8 @@ function ViewArticle({ loginData }) {
                 });
               }
             }
+            //setting data of for whom article is sent to usestate
             setSentTo(arrayToReturn);
-            // console.log(res.data);
             const tempChatArray = [];
             for (let i = 0; i < res1.data.chats.length; i++) {
               tempChatArray.push(
@@ -173,6 +176,7 @@ function ViewArticle({ loginData }) {
                 />
               );
             }
+            //setting chat data to usestate
             setChatArray(tempChatArray);
           })
 
@@ -184,41 +188,6 @@ function ViewArticle({ loginData }) {
         console.log("Error is here", err);
       });
   }, []);
-
-  // to get farmers for its id
-
-  // function getNameForFarmers(farmerId) {
-  //   const farmer = farmersIdMapping.find(
-  //     (mappingObject) => mappingObject.id === farmerId
-  //   );
-  //   return farmer ? farmer.name : "";
-  // }
-  //have to do styling.
-  // function GetFarmersAndTags() {
-
-  //   const arrayToReturn = [];
-  //   if (broadcastData.tags.length > 0) {
-  //     const tags = broadcastData.tags;
-  //     for (let i = 0; i < tags.length; i++) {
-  //       arrayToReturn.push({
-  //         value: tags[i],
-  //         label: tags[i]
-  //       });
-  //     }
-  //   } else if (broadcastData.farmers.length > 0) {
-  //     const farmers = broadcastData.farmers;
-  //     for (let i = 0; i < farmers.length; i++) {
-  //       arrayToReturn.push({
-  //         value: getNameForFarmers(farmers[i]),
-  //         label: getNameForFarmers(farmers[i])
-  //       });
-  //     }
-  //   }
-
-  //   setSentTo(arrayToReturn)
-  //   console.log("Sent to " + sentTo)
-
-  // }
 
   return (
     <div className="viewArticleMain">
@@ -233,6 +202,8 @@ function ViewArticle({ loginData }) {
       </h1>
       <div className="viewArticleFirst">
         <div className="viewArticleImage">
+
+          {/* setting data by checking whether it is image,youtube video or pdf */}
           {broadcastData.format === "jpg" ? (
             <img
               src={
@@ -266,6 +237,7 @@ function ViewArticle({ loginData }) {
         </div>
         <hr />
         <div className="viewArticleFirstContent">
+          {/* displaying broadcast topic */}
           <h4 style={{ display: "inline-block" }}>Topic :&nbsp;</h4>
           <p
             style={{
@@ -278,6 +250,7 @@ function ViewArticle({ loginData }) {
           </p>
           <br />
           <br />
+          {/* displaying broadcast category */}
           <h4 style={{ display: "inline-block" }}>Category :&nbsp;</h4>
           <p
             style={{
@@ -290,6 +263,7 @@ function ViewArticle({ loginData }) {
           </p>
           <br />
           <br />
+          {/* displaying broadcast date */}
           <h4 style={{ display: "inline-block" }}>Date :&nbsp;</h4>
           <p style={{ display: "inline-block" }}>
             {new Date(broadcastData.date).toLocaleDateString("en-US", {
@@ -317,7 +291,7 @@ function ViewArticle({ loginData }) {
           <br />
           <h4>Analytics :</h4>
           <br />
-          <p>
+          {/* <p>
             <ul style={{ marginLeft: "20px" }}>
               <li>
                 Total number of recipients :{" "}
@@ -328,11 +302,12 @@ function ViewArticle({ loginData }) {
                 {broadcastData.analytics.numberOfUniqueViews}
               </li>
             </ul>
-          </p>
+          </p> */}
           <br />
           <hr />
           <div>
             <br />
+            {/* Displaying data : to whom article is sent */}
             <h4>Sent To :&nbsp;</h4>
             <br />
             <br />

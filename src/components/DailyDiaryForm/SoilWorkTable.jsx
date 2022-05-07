@@ -3,10 +3,12 @@ import SoilWork from "./SoilWork";
 import UploadImg from "./UploadImg";
 
 function SoilWorkTable(props) {
+
     const getFromSoilTable = props.getFromSoilTable;
     var obtainedData = { row1: {}, row2: {}, row3: {}, row4: {}, row5: {} };
 
     function getSoilData(data) {
+        // Since five rows are present setting data in five rows using switch cases
         switch (data.RowNo) {
             case "1":
                 switch (data.ColumnNo) {
@@ -78,6 +80,7 @@ function SoilWorkTable(props) {
     }
     return (
         <div>
+            {/* Displaying data in table in form of five rows */}
             <table className="myTable">
                 <tr>
                     <th className="thDD" style={{ textAlign: "center" }}>

@@ -25,6 +25,7 @@ function SprayingTable(props) {
 
     function getSprayingData(data) {
         switch (data.RowNo) {
+            // Setting data in five rows that are to be displayed
             case "1":
                 switch (data.ColumnNo) {
                     case "1":
@@ -157,6 +158,7 @@ function SprayingTable(props) {
     return (
         <div>
             <table className="myTable">
+                {/* Displaying data in form of five rows */}
                 <tr>
                     <th className="thDD" style={{ textAlign: "center" }}>
                         Type

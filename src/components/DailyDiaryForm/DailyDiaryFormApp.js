@@ -26,6 +26,8 @@ function DailyDiaryFormApp() {
     const [gotoFailure, setGotoFailure] = useState(false);
     const navigate = useNavigate();
 
+
+
     function getFarmer(data) {
         temp = finalDataObj;
         temp.Farmer = { FarmerID: data.FarmerID };
@@ -44,10 +46,8 @@ function DailyDiaryFormApp() {
     }
 
     const key = [1, 2, 3, 4, 5];
-
+    // finding  which radio button is selected and accordding to that setting object and showing tables
     function getFromRadio(data) {
-        // console.log("In App : ", data);
-        // console.log(data.type);
 
         switch (data.Type) {
             case 1:
@@ -91,13 +91,15 @@ function DailyDiaryFormApp() {
                 <h1 className="headingDD">Farmer's Digital Diary</h1>
                 <br />
                 <hr /> <br />
-
+                {/* Dropdown to select farmer */}
                 <FarmerDropdown getFarmer={getFarmer} />
                 <br />
                 <hr /> <br />
+                {/* Dropdown to select plot */}
                 <PlotDropdown getPlot={getPlot} plotsFromFarmer={plotsFromFarmer} />
                 <br />
                 <hr /> <br />
+                {/* Code to select date */}
                 <label htmlFor="myDate">Select a Date : </label>
                 <input
                     onChange={(event) => {
@@ -112,36 +114,42 @@ function DailyDiaryFormApp() {
                 <br />
                 <hr />
                 <br />
+                {/* Radiobutton to check if spraying was done */}
                 <h3>Was any spraying done today?</h3>
                 <br />
                 <RadioButton type={key[0]} getFromRadio={getFromRadio} />
                 <br />
                 <hr />
                 <br />
+                {/* Radiobutton to check fertilization and irrigation done or not.. */}
                 <h3>Was any fertilization + irrigation done today?</h3>
                 <br />
                 <RadioButton type={key[1]} getFromRadio={getFromRadio} />
                 <br />
                 <hr />
                 <br />
+                {/* Radio button to check whether other work wass done */}
                 <h3>Was any work done in farm?</h3>
                 <br />
                 <RadioButton type={key[2]} getFromRadio={getFromRadio} />
                 <br />
                 <hr />
                 <br />
+                {/* Radio button to check whether soil work was done or not */}
                 <h3>Any soil work done today?</h3>
                 <br />
                 <RadioButton type={key[3]} getFromRadio={getFromRadio} />
                 <br />
                 <hr />
                 <br />
+                {/* Radio button to check whether maintenance work was done or not */}
                 <h3>Any maintenance work done today?</h3>
                 <br />
                 <RadioButton type={key[4]} getFromRadio={getFromRadio} />
                 <br />
                 <hr />
                 <br />
+                {/* Radio button to check whether other work was done or not */}
                 <h3>Any other work to be done?</h3>
                 <br />
                 <br />
@@ -156,9 +164,8 @@ function DailyDiaryFormApp() {
                 <hr />
                 <button
                     className="submitButtonDD"
+                    // farmer name ,plot and date are compulsory if they are not filled show error
                     onClick={() => {
-                        // console.log(finalDataObj);
-
                         if (
                             finalDataObj.Farmer.FarmerID === "" ||
                             finalDataObj.Plot.PlotID === "" ||
@@ -168,10 +175,9 @@ function DailyDiaryFormApp() {
                             finalDataObj.Date.ProposedDate === "None"
                         ) {
                             alert("Select Plot,Farmer and Date !");
-                            // window.location.href = "/";
-                            // return <Redirect to="/" />;
                             setValid(false);
                         } else {
+                            // if all those required fields are selected then post the data
                             axios
                                 .post(
                                     "https://immense-beach-88770.herokuapp.com/dailyDiary",

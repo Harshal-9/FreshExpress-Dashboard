@@ -1,6 +1,9 @@
 import React from "react";
 import Select from "react-select";
 
+
+//Component to set maintenance data 
+
 function SetMaintenance(props) {
     const func = props.getMaintenanceData;
     const rowNo = props.rowNo;

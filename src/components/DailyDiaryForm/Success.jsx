@@ -2,6 +2,8 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import "./SuccessStyle.css";
 
+
+// Component to display success message if data is sent succcessfully
 function Success() {
   return (
     <div className="SuccessMainDiv">
@@ -12,17 +14,6 @@ function Success() {
         <h1 className="SuccessH1DD">Success</h1>
         <p>We received your form data !</p>
         <br />
-        {/* <Link to="/">
-        <button
-          style={{
-            color: "#88b04b",
-            fontFamily: "Verdana",
-            font: "bold"
-          }}
-        >
-          Submit another form
-        </button>
-      </Link> */}
       </div>
     </div>
   );
