@@ -61,38 +61,41 @@ function LoginPage(props) {
   return (
     <div style={{ display: "block", width: "100%" }}>
       {showPage ? (
-        <div className="mainLogin">
-          <p className="sign">Sign In</p>
+        <>
+          <h1 className="FEHeading">FRESH EXPRESS</h1>
+          <div className="mainLogin">
+            <p className="sign">Sign In</p>
 
-          <form className="form1" onSubmit={handleSubmit}>
-            <input
-              className="userName"
-              placeholder="Username"
-              type="text"
-              name="username"
-            />
-            <br />
-            <br />
-            <input
-              className="password"
-              placeholder="Password"
-              type="password"
-              name="password"
-            />
-            <br />
-            <br />
-            <button type="submit" className="submit">
-              Submit
-            </button>
-            <br />
-            <br />
-            <p className="forgot">
-              <a className="anchorForgot" href="/">
-                <u> Forgot Password?</u>
-              </a>
-            </p>
-          </form>
-        </div>
+            <form className="form1" onSubmit={handleSubmit}>
+              <input
+                className="userName"
+                placeholder="Username"
+                type="text"
+                name="username"
+              />
+              <br />
+              <br />
+              <input
+                className="password"
+                placeholder="Password"
+                type="password"
+                name="password"
+              />
+              <br />
+              <br />
+              <button type="submit" className="submit">
+                Submit
+              </button>
+              <br />
+              <br />
+              <p className="forgot">
+                <a className="anchorForgot" href="/">
+                  <u> Forgot Password?</u>
+                </a>
+              </p>
+            </form>
+          </div>
+        </>
       ) : (
         <div className="loadingDiv"></div>
       )}
