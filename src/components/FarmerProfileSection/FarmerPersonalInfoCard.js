@@ -89,7 +89,7 @@ function FarmerPersonalInfoCard(props) {
               "/preview"
             }
             width="250px"
-            height="300px"
+            height="325px"
             alt="FarmerImg"
             style={{ display: "inline-block", margin: "10px" }}
           />
@@ -97,7 +97,7 @@ function FarmerPersonalInfoCard(props) {
           <img
             src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
             width="250px"
-            height="300px"
+            height="325px"
             alt="FarmerImg"
             style={{ display: "inline-block", margin: "10px" }}
           ></img>
@@ -126,6 +126,16 @@ function FarmerPersonalInfoCard(props) {
             ></input>
             <br />
             <br />
+            <label className="FarmerProfileLabel">Farmer UserId : </label>
+            <input
+              type="text"
+              disabled={true}
+              size="80"
+              value={farmerAllData.userId}
+            ></input>
+            <br />
+            <br />
+
             <label className="FarmerProfileLabel">Family Name : </label>
             <input
               type="text"

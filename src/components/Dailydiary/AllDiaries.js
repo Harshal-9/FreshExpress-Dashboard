@@ -290,7 +290,7 @@ function AllDiaries() {
   const [selectedSprayingType, setSelectedSprayingType] = useState(null);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
@@ -329,7 +329,10 @@ function AllDiaries() {
           });
         }}
       />
-      <button className="allDiariesButton">
+      <button
+        className="allDiariesButton"
+        onClick={() => navigate("/DailyDiaryForm")}
+      >
         <i className="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add
         Operation
       </button>
@@ -521,7 +524,7 @@ function AllDiaries() {
       <hr />
 
       <br />
-      <div className="AllDiariesScroll">
+      <div className="AllDiariesScroll tableScrollbarWidth">
         <table>
           <tbody>
             <tr className="AllDiariesHeaderRow">

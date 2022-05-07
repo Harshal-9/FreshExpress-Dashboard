@@ -331,7 +331,11 @@ function MRLMonitoring() {
             <input
               style={{ width: "377px", height: "18.4px" }}
               disabled={true}
-              value={activeMRLReport.dateOfSampling.slice(0, 10)}
+              value={
+                activeMRLReport.dateOfSampling
+                  ? activeMRLReport.dateOfSampling.slice(0, 10)
+                  : ""
+              }
               size="40"
             ></input>
             <br /> <br />

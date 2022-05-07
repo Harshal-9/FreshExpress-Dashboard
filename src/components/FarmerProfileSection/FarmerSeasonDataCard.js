@@ -56,7 +56,8 @@ function FarmerSeasonalDataCard(props) {
   // Function to handle edit of PlotData form
   function handleEditSeason(event) {
     event.preventDefault();
-    if (selectedYear) {
+    console.log("selectedYear", selectedYear);
+    if (selectedYear !== null) {
       if (isDisabledSeason) {
         setIsDisabledSeason(false);
       } else {
@@ -348,7 +349,7 @@ function FarmerSeasonalDataCard(props) {
           placeholder="Select a year"
           options={getYears(props.seasonalAllData)}
           onChange={(event) => {
-            // console.log(event);
+            console.log(event);
             setSelectedYear(event.value);
             setSeasonalAllDataReceived(props.seasonalAllData[event.value]);
           }}
