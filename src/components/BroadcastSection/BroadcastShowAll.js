@@ -26,7 +26,7 @@ function BroadcastSingleCard(props) {
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/broadcasts/delete/" +
-        data._id
+          data._id
       )
       .then((res) => {
         CustomToast(
@@ -58,21 +58,15 @@ function BroadcastSingleCard(props) {
           height: "auto",
         }}
       >
-<<<<<<< HEAD
-        {/* dividing data according to pdf,image,youtube */}
-
-        <div className="MyCard" style={{ width: "100%", height: "100%" }}>
-=======
         <div
           className="MyCard"
           style={{
             width: "100%",
             height: "100%",
-            backgroundColor: "#31C531",
+            // backgroundColor: "#31C531",
             borderRadius: "5px",
           }}
         >
->>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
           {data.format === "jpg" ? (
             <img
               src={
@@ -115,7 +109,6 @@ function BroadcastSingleCard(props) {
           <br />
           <label className="broadcastLabel">Date :</label>
 
-
           <input
             className="broadcastLabelData"
             value={new Date(data.date)
@@ -147,7 +140,6 @@ function BroadcastSingleCard(props) {
 
 //main broadcast component
 function BroadcastShowAll() {
-
   //function to handle multiple filters
   function handleFilterIntersection(event) {
     let categoriesTempArr = [];
@@ -196,9 +188,9 @@ function BroadcastShowAll() {
     for (let i = 0; i < allBroadcastArray.length; i++) {
       if (
         newStartDate <=
-        new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
+          new Date(allBroadcastArray[i].props.data.date.substring(0, 10)) &&
         newEndDate >=
-        new Date(allBroadcastArray[i].props.data.date.substring(0, 10))
+          new Date(allBroadcastArray[i].props.data.date.substring(0, 10))
       ) {
         tempArray.push(allBroadcastArray[i]);
       }
@@ -272,7 +264,6 @@ function BroadcastShowAll() {
   }
 
   useEffect(() => {
-
     //request to get broadcast data
     axios
       .get("https://immense-beach-88770.herokuapp.com/broadcasts")
