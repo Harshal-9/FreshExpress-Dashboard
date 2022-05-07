@@ -1,11 +1,7 @@
 import "./Navbar.css";
 import avatar from "../../assets/avatar.svg";
 
-<<<<<<< HEAD
-//contains all the content of navbar
-=======
 // This component is for Navbar
->>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
 
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (

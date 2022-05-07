@@ -8,7 +8,6 @@ import axios from "axios";
 import { FailureToast, CustomToast } from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
 
-
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
 const CaretDownIcon = () => {
@@ -67,8 +66,8 @@ function SingleDiaryRow(props) {
       for (; i < diaryData.data.details.length; i++) {
         rowsData.push(
           diaryData.data.details[i].category +
-          " --> " +
-          diaryData.data.details[i].chemical
+            " --> " +
+            diaryData.data.details[i].chemical
         );
       }
       for (; i < 5; i++) rowsData.push("");
@@ -139,14 +138,13 @@ function SingleDiaryRow(props) {
 function AllDiaries() {
   // All filters below
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // function to handle all filters Intersection
   function handleFilterIntersection(event) {
     let operationTempArr = [];
     let statusTempArr = [];
     let proposedDateTempArr = [];
     let sprayingTempArr = [];
-
 
     operationTempArr = filterByOperation();
     statusTempArr = filterByStatus();
@@ -167,11 +165,11 @@ function AllDiaries() {
 
     // finding intersection
     let finalData = [
-      operationTempArr,
-      statusTempArr,
-      proposedDateTempArr,
-      sprayingTempArr,
-    ],
+        operationTempArr,
+        statusTempArr,
+        proposedDateTempArr,
+        sprayingTempArr,
+      ],
       finalResult = finalData.reduce((a, b) => a.filter((c) => b.includes(c)));
 
     // console.log("Result", finalResult);
@@ -205,9 +203,9 @@ function AllDiaries() {
     for (let i = 0; i < allDiariesArray.length; i++) {
       if (
         newStartDate <=
-        new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) &&
+          new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) &&
         newEndDate >=
-        new Date(allDiariesArray[i].props.proposedDate.substring(0, 10))
+          new Date(allDiariesArray[i].props.proposedDate.substring(0, 10))
       ) {
         tempArray.push(allDiariesArray[i]);
       }
@@ -228,7 +226,7 @@ function AllDiaries() {
           if (
             selectedSprayingType &&
             allDiariesArray[i].props.data.details[j].category ===
-            selectedSprayingType.label
+              selectedSprayingType.label
           ) {
             tempArr.push(allDiariesArray[i]);
             break;
@@ -257,13 +255,13 @@ function AllDiaries() {
         if (
           selectedStatus.value === "upcoming" &&
           new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) >=
-          new Date()
+            new Date()
         ) {
           tempArr.push(allDiariesArray[i]);
         } else if (
           selectedStatus.value === "overdue" &&
           new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) <
-          new Date()
+            new Date()
         ) {
           tempArr.push(allDiariesArray[i]);
         }
@@ -271,11 +269,8 @@ function AllDiaries() {
     }
     return tempArr;
   }
-<<<<<<< HEAD
 
   //Rutikesh
-=======
->>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
 
   // useStates
   const [allFarmers, setAllFarmers] = useState({
@@ -329,16 +324,11 @@ function AllDiaries() {
           });
         }}
       />
-<<<<<<< HEAD
-      <button className="allDiariesButton"
-        onClick={() => {
-          navigate("/DailyDiaryForm")
-        }}
-=======
       <button
         className="allDiariesButton"
-        onClick={() => navigate("/DailyDiaryForm")}
->>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
+        onClick={() => {
+          navigate("/DailyDiaryForm");
+        }}
       >
         <i className="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add
         Operation
@@ -360,7 +350,7 @@ function AllDiaries() {
           axios
             .get(
               "https://immense-beach-88770.herokuapp.com/dailyDiary/MHCode/" +
-              e.MHCode
+                e.MHCode
             )
             .then((data) => {
               let receivedData = data.data;

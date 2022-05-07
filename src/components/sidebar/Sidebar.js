@@ -1,12 +1,7 @@
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
 
-<<<<<<< HEAD
-//this component is used to show content of sidebar
-
-=======
 // This component is for sidebar
->>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
 const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
