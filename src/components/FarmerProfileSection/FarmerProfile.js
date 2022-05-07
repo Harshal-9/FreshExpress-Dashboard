@@ -8,7 +8,8 @@ import { FailureToast } from "../Toasts/AllToasts";
 import FarmerPersonalInfo from "./FarmerPersonalInfoCard";
 import FarmerPlotDataCard from "./FarmerPlotDataCard";
 import FarmerSeasonalDataCard from "./FarmerSeasonDataCard";
-
+import { CustomToast } from "../Toasts/AllToasts";
+// This component contains all components of farmer profile page
 function FarmerProfile(props) {
   const { MHCodeFromParams } = useParams();
   const [allFarmers, setAllFarmers] = useState({
@@ -109,6 +110,7 @@ function FarmerProfile(props) {
     // console.log(props.flg);
 
     if (props.flg) {
+      // Fetching data for a particular plot when we land here from
       axios
         .get(
           "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
@@ -131,7 +133,7 @@ function FarmerProfile(props) {
                 MHCodeFromParams
               ) {
                 // console.log("Matched");
-                console.log(receivedData.plots[i]);
+                // console.log(receivedData.plots[i]);
                 setPlotAllData({ ...receivedData.plots[i] });
                 break;
               }
@@ -147,17 +149,18 @@ function FarmerProfile(props) {
                 // console.log("Seasonal data", data.data[0]);
                 if (data.data.length) setSeasonalAllData(data.data);
                 else {
-                  console.log(dummyEmptySeasonalAllData);
+                  // console.log(dummyEmptySeasonalAllData);
                   setSeasonalAllData(dummyEmptySeasonalAllData);
                 }
               })
               .catch((err) => {
-                console.log("Error", err);
+                // console.log("Error", err);
+                CustomToast("Error" + err, "white", "red");
               });
           }
         })
         .catch((err) => {
-          console.log("Error:", err);
+          // console.log("Error:", err);
           FailureToast();
         });
     }
@@ -170,7 +173,7 @@ function FarmerProfile(props) {
         setAllFarmers(Data);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         FailureToast();
       });
   }, []);
@@ -190,7 +193,7 @@ function FarmerProfile(props) {
               getOptionLabel={(option) => option.farmerName}
               getOptionValue={(option) => option.farmerID}
               onChange={(opt) => {
-                console.log("selected", opt);
+                // console.log("selected", opt);
                 setSelectedFarmer({ FarmerID: opt.farmerID, plot: opt.plot });
               }}
             />
@@ -248,19 +251,20 @@ function FarmerProfile(props) {
                               if (data.data.length)
                                 setSeasonalAllData(data.data);
                               else {
-                                console.log(dummyEmptySeasonalAllData);
+                                // console.log(dummyEmptySeasonalAllData);
                                 setSeasonalAllData(dummyEmptySeasonalAllData);
                               }
                             })
                             .catch((err) => {
-                              console.log("Error", err);
+                              // console.log("Error", err);
+                              CustomToast("Error" + err, "white", "red");
                             });
                         }
                       }
                     }
                   })
                   .catch((err) => {
-                    console.log("Error:", err);
+                    // console.log("Error:", err);
                     FailureToast();
                   });
               }}

@@ -9,7 +9,9 @@ import UpdateSuccessToast, {
 import { MultiSelect } from "react-multi-select-component";
 import Popup from "./Popup";
 
+// This component is used for adding and deleting the admin
 function FarmerSeasonalDataCard(props) {
+  // Data for select of primary quality issue faced
   const issueArray = [
     { label: "Pest", value: "Pest" },
     { label: "Size", value: "Size" },
@@ -31,7 +33,8 @@ function FarmerSeasonalDataCard(props) {
     { label: "Color", value: "Color" },
     { label: "MRL", value: "MRL" },
   ];
-  // console.log("prop", props);
+
+  // Use states
   const navigate = useNavigate();
   const [isDisabledSeason, setIsDisabledSeason] = useState(true);
   const [newYearVal, setNewYearVal] = useState("");
@@ -53,10 +56,11 @@ function FarmerSeasonalDataCard(props) {
   const [soilReport, setSoilReport] = useState({});
   const [waterReport, setWaterReport] = useState({});
   const [selectedYear, setSelectedYear] = useState(null);
+
   // Function to handle edit of PlotData form
   function handleEditSeason(event) {
     event.preventDefault();
-    console.log("selectedYear", selectedYear);
+    // console.log("selectedYear", selectedYear);
     if (selectedYear !== null) {
       if (isDisabledSeason) {
         setIsDisabledSeason(false);
@@ -68,16 +72,18 @@ function FarmerSeasonalDataCard(props) {
     }
   }
 
+  // to turn on or off the popup
   function togglePop() {
-    console.log("Called", popupClicked);
+    // console.log("Called", popupClicked);
     if (popupClicked) setPopupClicked(false);
     else {
       setPopupClicked(true);
     }
   }
 
+  // Get data from popup
   function dataFromPopup(receivedData) {
-    console.log("Obtained here", receivedData);
+    // console.log("Obtained here", receivedData);
     let tempData = { ...seasonalAllDataReceived };
 
     switch (receivedData.data) {
@@ -105,9 +111,9 @@ function FarmerSeasonalDataCard(props) {
     }
   }
 
+  // Handle file upload of reports
   function handleReportUpload(event) {
     const handleChangeSelectedFile = event.target.files[0];
-    console.log(event.target.name);
 
     const fd = new FormData();
     if (handleChangeSelectedFile)
@@ -148,10 +154,11 @@ function FarmerSeasonalDataCard(props) {
                 },
               })
               .then((res2) => {
-                console.log("Res", res2);
+                // console.log("Res", res2);
               })
               .catch((err) => {
-                console.log("Err", err);
+                // console.log("Err", err);
+                CustomToast("Error" + err, "white", "red");
               });
           }
           const prevData = { ...seasonalAllDataReceived };
@@ -176,10 +183,11 @@ function FarmerSeasonalDataCard(props) {
                 },
               })
               .then((res2) => {
-                console.log("Res", res2);
+                // console.log("Res", res2);
               })
               .catch((err) => {
-                console.log("Err", err);
+                // console.log("Err", err);
+                CustomToast("Error" + err, "white", "red");
               });
           }
           const prevData = { ...seasonalAllDataReceived };
@@ -204,10 +212,11 @@ function FarmerSeasonalDataCard(props) {
                 },
               })
               .then((res2) => {
-                console.log("Res", res2);
+                // console.log("Res", res2);
               })
               .catch((err) => {
-                console.log("Err", err);
+                // console.log("Err", err);
+                CustomToast("Error" + err, "white", "red");
               });
           }
           const prevData = { ...seasonalAllDataReceived };
@@ -217,7 +226,8 @@ function FarmerSeasonalDataCard(props) {
         }
       })
       .catch((err) => {
-        console.log("error", err);
+        // console.log("error", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }
 
@@ -226,7 +236,7 @@ function FarmerSeasonalDataCard(props) {
     let val = e.target.newYearValue.value;
     if (Number.isInteger(Number(val)) && Number(val) > 0) {
       const years = getYears(props.seasonalAllData);
-      console.log(years);
+      // console.log(years);
       for (let yearObj in years) {
         if (years[yearObj].label === Number(val)) {
           CustomToast("Year already Exists", "black", "#FFD700");
@@ -287,7 +297,7 @@ function FarmerSeasonalDataCard(props) {
         quality: "",
       };
 
-      console.log("Data", dataToSend);
+      // console.log("Data", dataToSend);
 
       axios
         .post(
@@ -300,7 +310,7 @@ function FarmerSeasonalDataCard(props) {
             "black",
             "#1cd855"
           );
-          console.log("Res", res);
+          // console.log("Res", res);
           // setTimeout(() => window.location.reload(), 2000);
           // setTimeout(() => navigate("/FarmerProfile/" + props.MHCode), 2000);
           setTimeout(
@@ -310,7 +320,7 @@ function FarmerSeasonalDataCard(props) {
         })
         .catch((err) => {
           FailureToast();
-          console.log("Err", err);
+          // console.log("Err", err);
         });
     } else {
       CustomToast("Enter Valid Year", "black", "#FFD700");
@@ -349,7 +359,7 @@ function FarmerSeasonalDataCard(props) {
           placeholder="Select a year"
           options={getYears(props.seasonalAllData)}
           onChange={(event) => {
-            console.log(event);
+            // console.log(event);
             setSelectedYear(event.value);
             setSeasonalAllDataReceived(props.seasonalAllData[event.value]);
           }}
@@ -786,7 +796,7 @@ function FarmerSeasonalDataCard(props) {
                   onChange={(event) => {
                     const prevData = { ...seasonalAllDataReceived };
                     // const prevData = seasonalAllDataReceived;
-                    console.log(event.target.value);
+                    // console.log(event.target.value);
                     prevData.quality = event.target.value;
                     setSeasonalAllDataReceived(prevData);
                   }}
@@ -941,7 +951,7 @@ function FarmerSeasonalDataCard(props) {
 
                 let finalIssues = [];
                 for (let item in selectedPrimaryQualityIssuesFaces) {
-                  console.log(selectedPrimaryQualityIssuesFaces[item]);
+                  // console.log(selectedPrimaryQualityIssuesFaces[item]);
                   finalIssues.push(
                     selectedPrimaryQualityIssuesFaces[item].value
                   );
@@ -958,7 +968,7 @@ function FarmerSeasonalDataCard(props) {
 
                 setSeasonalAllDataReceived(prevData);
 
-                console.log(prevData);
+                // console.log(prevData);
                 //to send data back to farmer Profile
                 // sendBackSeasonalAllData([seasonalAllDataReceived]);
                 axios
@@ -968,11 +978,11 @@ function FarmerSeasonalDataCard(props) {
                     prevData
                   )
                   .then((data) => {
-                    console.log("updated", data);
+                    // console.log("updated", data);
                     UpdateSuccessToast();
                   })
                   .catch((err) => {
-                    console.log("Error", err);
+                    // console.log("Error", err);
                     FailureToast();
                   });
               }}
@@ -997,12 +1007,12 @@ function FarmerSeasonalDataCard(props) {
                       "black",
                       "#1cd855"
                     );
-                    console.log("Res", res);
+                    // console.log("Res", res);
                     setTimeout(() => window.location.reload(), 2000);
                   })
                   .catch((err) => {
                     FailureToast();
-                    console.log("Err", err);
+                    // console.log("Err", err);
                   });
               }}
             >
@@ -1017,12 +1027,14 @@ function FarmerSeasonalDataCard(props) {
 
 export default FarmerSeasonalDataCard;
 
+// convert date into string
 function dateInString(receivedDate) {
   let myDate = "";
   if (receivedDate) myDate = receivedDate.substring(0, 10);
   return myDate;
 }
 
+// function to extract years
 function getYears(receivedDataFromBackend) {
   const years = [];
   for (let i = 0; i < receivedDataFromBackend.length; i++) {

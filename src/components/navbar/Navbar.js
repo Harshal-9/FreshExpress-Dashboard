@@ -1,6 +1,8 @@
 import "./Navbar.css";
 import avatar from "../../assets/avatar.svg";
 
+// This component is for Navbar
+
 const Navbar = ({ sidebarOpen, openSidebar }) => {
   return (
     <nav className="navbar">

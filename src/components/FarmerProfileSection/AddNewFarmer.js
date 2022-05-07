@@ -8,6 +8,7 @@ import UpdateSuccessToast, {
 } from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
 
+// This component is used for adding new farmer
 function AddNewFarmer() {
   const navigate = useNavigate();
   const [selectedGGN, setSelectGGN] = useState(null);
@@ -302,6 +303,7 @@ function AddNewFarmer() {
         </div>
       </div>
 
+      {/* Below div is for for adding new plot in existing farmer  */}
       <div className="MyCardColumn" style={{ display: "inline-block" }}>
         <div className="MyCard">
           <p style={{ fontSize: "medium" }}>Add New Plot for existing Farmer</p>

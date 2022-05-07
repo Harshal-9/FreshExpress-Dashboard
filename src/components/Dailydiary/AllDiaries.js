@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import axios from "axios";
-import { FailureToast } from "../Toasts/AllToasts";
+import { FailureToast, CustomToast } from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
 
 // Below functions for adding search icon in reactselect
@@ -59,7 +59,8 @@ function SingleDiaryRow(props) {
 
   let rowsData = [];
   let i = 0;
-  // console.log(props.operation);
+
+  // Switch Case to extract data based on particular operation
   switch (props.operation) {
     case "spraying":
       for (; i < diaryData.data.details.length; i++) {
@@ -109,7 +110,6 @@ function SingleDiaryRow(props) {
     <tr
       className="IndividualDiaryRow"
       onClick={() => {
-        // navigate("/dairy/" + diaryData.diaryId);
         navigate("/dairy/" + diaryData.diaryId, {
           state: { farmerName: diaryData.farmerName },
         });
@@ -157,10 +157,10 @@ function AllDiaries() {
       proposedDateTempArr = [...allDiariesArray];
     if (selectedSprayingType === null) sprayingTempArr = [...allDiariesArray];
 
-    console.log("operation", operationTempArr);
-    console.log("status", statusTempArr);
-    console.log("proposedDate", proposedDateTempArr);
-    console.log("Spraying", sprayingTempArr);
+    // console.log("operation", operationTempArr);
+    // console.log("status", statusTempArr);
+    // console.log("proposedDate", proposedDateTempArr);
+    // console.log("Spraying", sprayingTempArr);
 
     // finding intersection
     let finalData = [
@@ -171,21 +171,20 @@ function AllDiaries() {
       ],
       finalResult = finalData.reduce((a, b) => a.filter((c) => b.includes(c)));
 
-    console.log("Result", finalResult);
+    // console.log("Result", finalResult);
     setFilteredDiariesArray(finalResult);
   }
 
   // Filter by operation
   function filterByOperation() {
     let tempArr = [];
-    console.log("Selected operation : ", selectedOperation);
+    // console.log("Selected operation : ", selectedOperation);
     for (let i = 0; i < allDiariesArray.length; i++) {
       // console.log("op", allDiariesArray[i].props.operation);
       if (
         selectedOperation &&
         allDiariesArray[i].props.operation === selectedOperation.value
       ) {
-        console.log("Hi");
         tempArr.push(allDiariesArray[i]);
       }
     }
@@ -240,7 +239,6 @@ function AllDiaries() {
   }
 
   //Filter by status
-  //Rutikesh Todo:
   function filterByStatus() {
     //when state is not selected.
     if (!selectedStatus) return [];
@@ -258,23 +256,18 @@ function AllDiaries() {
           new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) >=
             new Date()
         ) {
-          // console.log(i, "upc");
           tempArr.push(allDiariesArray[i]);
         } else if (
           selectedStatus.value === "overdue" &&
           new Date(allDiariesArray[i].props.proposedDate.substring(0, 10)) <
             new Date()
         ) {
-          // console.log(i, "ovd");
           tempArr.push(allDiariesArray[i]);
         }
       }
     }
-    // console.log("after status filter", tempArr);
-    // setFilteredDiariesArray(tempArr);
     return tempArr;
   }
-  //Rutikesh
 
   // useStates
   const [allFarmers, setAllFarmers] = useState({
@@ -301,7 +294,6 @@ function AllDiaries() {
         setAllFarmers(Data);
       })
       .catch((err) => {
-        console.log("err", err);
         FailureToast();
       });
   }, []);
@@ -349,7 +341,7 @@ function AllDiaries() {
         }
         getOptionValue={(option) => option.MHCode}
         onChange={(e) => {
-          // console.log(e);
+          // Getting all daily daries of particular plot
           axios
             .get(
               "https://immense-beach-88770.herokuapp.com/dailyDiary/MHCode/" +
@@ -357,7 +349,6 @@ function AllDiaries() {
             )
             .then((data) => {
               let receivedData = data.data;
-              console.log("Response:", receivedData);
 
               setAllDiariesArray([]);
               setFilteredDiariesArray([]);
@@ -409,7 +400,7 @@ function AllDiaries() {
               }
             })
             .catch((err) => {
-              console.log("Error:", err);
+              CustomToast("Error" + err, "white", "red");
             });
         }}
       />

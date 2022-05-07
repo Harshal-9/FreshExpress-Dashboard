@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Popup.css";
 
+// Popup component
 function Popup(props) {
   function SingleLi(dataKiLink) {
     return (
@@ -39,7 +40,7 @@ function Popup(props) {
   }
 
   useEffect(() => {
-    console.log("trigggered");
+    // console.log("trigggered");
     for (let i = 0; i < props.dataToPopup.arr.length; i++) {
       setModifiedData((myArr) => myArr.concat(props.dataToPopup.arr[i]));
     }

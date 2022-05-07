@@ -24,9 +24,8 @@ const DropdownIndicator = (props) => {
   );
 };
 
+// This component is used for adding and deleting the admin
 function AddDelAdmin({ loginData }) {
-  // console.log(props);
-
   const [adminsList, setAdminsList] = useState([]);
   const [selectedAdmin, setSelectedAdmin] = useState({});
   const [popup, setPopup] = useState(false);
@@ -37,16 +36,16 @@ function AddDelAdmin({ loginData }) {
     role: "",
     userId: "",
   });
+
+  // Fetching list of admins
   useEffect(() => {
-    console.log("At start");
     axios
       .get("https://immense-beach-88770.herokuapp.com/admins")
       .then((res) => {
-        console.log("Res", res);
         setAdminsList(res.data);
       })
       .catch((err) => {
-        console.log("Err", err);
+        CustomToast("Error:" + err, "white", "red");
       });
   }, []);
 
@@ -82,7 +81,7 @@ function AddDelAdmin({ loginData }) {
                     size="75"
                     value={newAdminData.name}
                     onChange={(event) => {
-                      console.log(event.target.value);
+                      // console.log(event.target.value);
                       setNewAdminData({
                         ...newAdminData,
                         name: event.target.value,
@@ -97,7 +96,7 @@ function AddDelAdmin({ loginData }) {
                     size="75"
                     value={newAdminData.userId}
                     onChange={(event) => {
-                      console.log(event.target.value);
+                      // console.log(event.target.value);
                       setNewAdminData({
                         ...newAdminData,
                         userId: event.target.value,
@@ -113,7 +112,7 @@ function AddDelAdmin({ loginData }) {
                     size="75"
                     value={newAdminData.email}
                     onChange={(event) => {
-                      console.log(event.target.value);
+                      // console.log(event.target.value);
                       setNewAdminData({
                         ...newAdminData,
                         email: event.target.value,
@@ -128,7 +127,7 @@ function AddDelAdmin({ loginData }) {
                     size="75"
                     value={newAdminData.mobileNumber}
                     onChange={(event) => {
-                      console.log(event.target.value);
+                      // console.log(event.target.value);
                       setNewAdminData({
                         ...newAdminData,
                         mobileNumber: event.target.value,
@@ -147,7 +146,7 @@ function AddDelAdmin({ loginData }) {
                     ]}
                     value={newAdminData.role}
                     onChange={(event) => {
-                      console.log(event.value);
+                      // console.log(event.value);
                       setNewAdminData({
                         ...newAdminData,
                         role: event.value,
@@ -173,18 +172,19 @@ function AddDelAdmin({ loginData }) {
                         }
                       }
 
+                      // Adding New admin
                       axios
                         .post(
                           "https://immense-beach-88770.herokuapp.com/admins",
                           newAdminData
                         )
                         .then((res) => {
-                          console.log("Response", res);
+                          // console.log("Response", res);
                           UpdateSuccessToast();
                           setTimeout(() => window.location.reload(), 2000);
                         })
                         .catch((err) => {
-                          console.log("Error", err);
+                          // console.log("Error", err);
                           FailureToast();
                         });
                     }}
@@ -196,6 +196,7 @@ function AddDelAdmin({ loginData }) {
               <br />
               <br />
               <br />
+              {/* Deleting admin  */}
               <h2 style={{ textAlign: "center", backgroundColor: "#cdd4ea" }}>
                 DELETE EXISTNG ADMIN
               </h2>
@@ -209,7 +210,7 @@ function AddDelAdmin({ loginData }) {
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.userId}
                 onChange={(e) => {
-                  console.log(e);
+                  // console.log(e);
                   setSelectedAdmin(e);
                 }}
               />
@@ -219,7 +220,6 @@ function AddDelAdmin({ loginData }) {
                 style={{ marginLeft: "1%" }}
                 onClick={() => {
                   setPopup(true);
-                  console.log("qw");
                 }}
               ></i>
               <br />
@@ -244,7 +244,7 @@ function AddDelAdmin({ loginData }) {
                             selectedAdmin._id
                         )
                         .then((res) => {
-                          console.log("Res", res);
+                          // console.log("Res", res);
                           CustomToast(
                             "Farmer deleted Successfully ! Page will be reloaded",
                             "black",
@@ -253,7 +253,7 @@ function AddDelAdmin({ loginData }) {
                           setTimeout(() => window.location.reload(), 2000);
                         })
                         .catch((err) => {
-                          console.log("Err", err);
+                          // console.log("Err", err);
                         });
                     }}
                     className="DeleteButton"

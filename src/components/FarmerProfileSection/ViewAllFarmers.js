@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { MultiSelect } from "react-multi-select-component";
-
+import { CustomToast } from "../Toasts/AllToasts";
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
 const CaretDownIcon = () => {
@@ -26,7 +26,7 @@ const DropdownIndicator = (props) => {
 function SingleFarmerRow(props) {
   let farmerData = props;
 
-  console.log(farmerData);
+  // console.log(farmerData);
   const navigate = useNavigate();
   return (
     <tr
@@ -60,6 +60,7 @@ function SingleFarmerRow(props) {
   );
 }
 
+// component to show all farmers
 function ViewAllFarmers() {
   const navigate = useNavigate();
 
@@ -125,7 +126,7 @@ function ViewAllFarmers() {
         }
       }
     }
-    console.log("Temp", tempArray);
+    // console.log("Temp", tempArray);
     return tempArray;
   }
 
@@ -151,7 +152,7 @@ function ViewAllFarmers() {
 
   // function to handle MHCode filter
   function handleMHCodeFilter(event) {
-    console.log("All", allFarmersArray);
+    // console.log("All", allFarmersArray);
     const tempArr = [];
     for (let i = 0; i < allFarmersArray.length; i++) {
       if (
@@ -221,16 +222,16 @@ function ViewAllFarmers() {
     if (selectedMultiSelectTag.length === 0)
       tempTagArray = [...allFarmersArray];
 
-    console.log("Variety Based : ", tempVarietyArray);
-    console.log("Village Based : ", tempVillageArray);
-    console.log("Tag based : ", tempTagArray);
+    // console.log("Variety Based : ", tempVarietyArray);
+    // console.log("Village Based : ", tempVillageArray);
+    // console.log("Tag based : ", tempTagArray);
 
     const intersectionData = [tempVillageArray, tempVarietyArray, tempTagArray];
     const result = intersectionData.reduce((a, b) =>
       a.filter((c) => b.includes(c))
     );
 
-    console.log("FinalData", result);
+    // console.log("FinalData", result);
     setFilteredArray(result);
   }
 
@@ -266,7 +267,8 @@ function ViewAllFarmers() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        CustomToast("Error" + err, "white", "red");
       });
 
     // for getting all fiters data from backend
@@ -299,29 +301,31 @@ function ViewAllFarmers() {
         setAllFiltersData(makeDataForOptions);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
 
     axios
       .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
       .then((data) => {
         let receivedData = data.data;
-        console.log(receivedData);
+        // console.log(receivedData);
 
         const GGNMappedFamilyName = new Map();
 
         for (let item in receivedData) {
-          console.log(item, receivedData[item]);
+          // console.log(item, receivedData[item]);
           GGNMappedFamilyName.set(
             receivedData[item].GGN,
             receivedData[item].familyName
           );
         }
-        console.log("Our map", GGNMappedFamilyName);
+        // console.log("Our map", GGNMappedFamilyName);
         setMappedValue(GGNMappedFamilyName);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }, []);
 
@@ -354,7 +358,7 @@ function ViewAllFarmers() {
         }
         value={selectedGGNValue}
         onChange={(event) => {
-          console.log("event", event);
+          // console.log("event", event);
           setSelectedGGNValue(event);
           // GGN ko select kiya toh baki dono ko clear karne ke liye
           setSelectedFarmerValue(null);

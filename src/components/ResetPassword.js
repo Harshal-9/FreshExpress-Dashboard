@@ -61,7 +61,7 @@ function ResetPassword() {
     <div>
       <br />
       <br />
-      <div className="resetMainDiv">
+      <div className="resetMainDiv" style={{ backgroundColor: "#CDD4EA" }}>
         <h3>Reset Password</h3>
         <br />
         <br />

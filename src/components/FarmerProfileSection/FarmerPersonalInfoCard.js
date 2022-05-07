@@ -6,7 +6,9 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 
+// This component is used for showing farmers personal data
 function FarmerPersonalInfoCard(props) {
+  // Handle image change
   const handleFileChange = (event) => {
     const handleChangeSelectedFile = event.target.files[0];
     const fd = new FormData();
@@ -36,10 +38,11 @@ function FarmerPersonalInfoCard(props) {
               },
             })
             .then((res2) => {
-              console.log("Res", res2);
+              // console.log("Res", res2);
             })
             .catch((err) => {
-              console.log("Err", err);
+              // console.log("Err", err);
+              CustomToast("Error" + err, "white", "red");
             });
         }
 
@@ -54,11 +57,11 @@ function FarmerPersonalInfoCard(props) {
         });
       })
       .catch((err) => {
-        console.log("error", err);
+        // console.log("error", err);
+        CustomToast("Error" + err, "white", "red");
       });
   };
 
-  console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -74,8 +77,6 @@ function FarmerPersonalInfoCard(props) {
       setIsDisabled(true);
     }
   }
-
-  console.log(props);
 
   return (
     <div className="MyCardColumn" style={{ display: "inline-block" }}>
@@ -271,11 +272,11 @@ function FarmerPersonalInfoCard(props) {
                       }
                     )
                     .then((res) => {
-                      console.log("Response", res);
+                      // console.log("Response", res);
                       UpdateSuccessToast();
                     })
                     .catch((err) => {
-                      console.log("Error", err);
+                      // console.log("Error", err);
                       FailureToast();
                     });
                 }}
@@ -298,11 +299,11 @@ function FarmerPersonalInfoCard(props) {
                         "black",
                         "#1cd855"
                       );
-                      console.log("Res", res);
+                      // console.log("Res", res);
                     })
                     .catch((err) => {
                       FailureToast();
-                      console.log("Err", err);
+                      // console.log("Err", err);
                     });
                 }}
               >

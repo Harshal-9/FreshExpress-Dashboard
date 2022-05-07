@@ -6,6 +6,7 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 
+// This component is used for Editing and deleting plot of a farmer
 function FarmerPlotDataCard(props) {
   const [isDisabledPlot, setIsDisabledPlot] = useState(true);
 
@@ -307,13 +308,14 @@ function FarmerPlotDataCard(props) {
                         "black",
                         "#1cd855"
                       );
-                      console.log("Res", res);
+                      // console.log("Res", res);
                       setTimeout(() => {
                         window.location.assign("/FarmerProfile");
                       }, 2000);
                     })
                     .catch((err) => {
-                      console.log("Err", err);
+                      // console.log("Err", err);
+                      CustomToast("Error" + err, "white", "red");
                     });
                 }
               }}
@@ -353,7 +355,7 @@ function FarmerPlotDataCard(props) {
 
                 // Disabling all inputs on clicking button
                 setIsDisabledPlot(true);
-                console.log("Data of plot to submit : ", plotAllData);
+                // console.log("Data of plot to submit : ", plotAllData);
 
                 axios
                   .post(
@@ -362,11 +364,11 @@ function FarmerPlotDataCard(props) {
                     plotAllData
                   )
                   .then((res) => {
-                    console.log("res", res);
+                    // console.log("res", res);
                     UpdateSuccessToast();
                   })
                   .catch((err) => {
-                    console.log("err", err);
+                    // console.log("err", err);
                     FailureToast();
                   });
               }}

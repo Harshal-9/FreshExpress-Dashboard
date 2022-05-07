@@ -59,10 +59,23 @@ function LoginPage(props) {
   }, []);
 
   return (
-    <div style={{ display: "block", width: "100%" }}>
+    <div
+      className="LoginBackground"
+      style={{ display: "block", width: "100%" }}
+    >
       {showPage ? (
         <>
-          <h1 className="FEHeading">FRESH EXPRESS</h1>
+          <div className="upperDiv">
+            <img
+              src="https://lh3.googleusercontent.com/d/1h_-I5hSBA5T5WEHDq-NmmLi55DyHE7w_=s220?authuser=0"
+              alt="FE_IMG"
+              style={{ display: "inline-block" }}
+              // height="50px"
+            />
+            {/* <h1 style={{ display: "inline-block" }} className="FEHeading">
+              FRESH EXPRESS
+            </h1> */}
+          </div>
           <div className="mainLogin">
             <p className="sign">Sign In</p>
 
