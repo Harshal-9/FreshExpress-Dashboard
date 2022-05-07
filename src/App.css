@@ -6,3 +6,8 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 2.5px;
 }
+
+body {
+  /* background: linear-gradient(to right, #5fd4de, #0094b9); */
+  /* background-color: #c0eec0; */
+}

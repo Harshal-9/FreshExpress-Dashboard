@@ -2,10 +2,9 @@ import "./Main.css";
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
-import Select from "react-select";
-// import hello from "../../assets/hello.svg";
-// import Chart from "../charts/Chart";
+import { CustomToast } from "../Toasts/AllToasts";
 
+// Component is used for displaying Maps on dashboard
 function Main() {
   const [arrayOfCoordinates, setArrayOfCoordinates] = useState([]);
   const [arrayOfMarkers, setArrayOfMarkers] = useState([]);
@@ -15,10 +14,11 @@ function Main() {
   const [totalNumberofArticles, setTotalNumberofArticles] = useState(0);
 
   useEffect(() => {
+    // Getting all farmers and then extracting the coordinates
     axios
       .get("https://immense-beach-88770.herokuapp.com/farmers/")
       .then((res) => {
-        console.log("Res", res);
+        // console.log("Res", res);
         let arr = [];
         let farmerNames = [];
         let MHCodes = [];
@@ -28,7 +28,6 @@ function Main() {
 
         for (let item of res.data) {
           farmerCnt++;
-          console.log("I", item);
           // farmerName = item.personalInformation.name;
           if (item.plots && item.plots.length > 0) {
             plotCnt += item.plots.length;
@@ -52,7 +51,7 @@ function Main() {
             }
           }
         }
-        console.log("Coordinates", arr);
+        // console.log("Coordinates", arr);
         let converted = [];
 
         for (let item of arr) {
@@ -62,7 +61,7 @@ function Main() {
 
           converted.push([val1, val2]);
         }
-        console.log("Converted", converted);
+        // console.log("Converted", converted);
         setArrayOfCoordinates(converted);
         let arrayOfComponent = [];
 
@@ -77,24 +76,26 @@ function Main() {
           );
         }
 
-        console.log("A", arrayOfComponent);
         setArrayOfMarkers(arrayOfComponent);
         setFarmersCount(farmerCnt);
         setTotalPlotArea(plotArea);
         setPlotsCount(plotCnt);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
 
+    // To get no of articles
     axios
       .get("https://immense-beach-88770.herokuapp.com/broadcasts/")
       .then((res) => {
-        console.log("Res", res.data.length);
+        // console.log("Res", res.data.length);
         setTotalNumberofArticles(res.data.length);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }, []);
 
@@ -171,12 +172,13 @@ function Main() {
 
 export default Main;
 
+// convert coordinate to degrees
 function toDegrees(s) {
   const result = s.split(/[°'"]/);
-  console.log(
-    result,
-    Number(result[0]) + Number(result[1]) / 60 + Number(result[2]) / 3600
-  );
+  // console.log(
+  //   result,
+  //   Number(result[0]) + Number(result[1]) / 60 + Number(result[2]) / 3600
+  // );
   let sum = 0;
   if (isNaN(Number(result[0]))) sum += 0;
   else sum += Number(result[0]);

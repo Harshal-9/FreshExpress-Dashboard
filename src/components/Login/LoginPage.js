@@ -59,40 +59,56 @@ function LoginPage(props) {
   }, []);
 
   return (
-    <div style={{ display: "block", width: "100%" }}>
+    <div
+      className="LoginBackground"
+      style={{ display: "block", width: "100%" }}
+    >
       {showPage ? (
-        <div className="mainLogin">
-          <p className="sign">Sign In</p>
+        <>
+          <div className="upperDiv">
+            <img
+              src="https://lh3.googleusercontent.com/d/1h_-I5hSBA5T5WEHDq-NmmLi55DyHE7w_=s220?authuser=0"
+              alt="FE_IMG"
+              style={{ display: "inline-block" }}
+              // height="50px"
+            />
+            {/* <h1 style={{ display: "inline-block" }} className="FEHeading">
+              FRESH EXPRESS
+            </h1> */}
+          </div>
+          <div className="mainLogin">
+            <p className="sign">Sign In</p>
 
-          <form className="form1" onSubmit={handleSubmit}>
-            <input
-              className="userName"
-              placeholder="Username"
-              type="text"
-              name="username"
-            />
-            <br />
-            <br />
-            <input
-              className="password"
-              placeholder="Password"
-              type="password"
-              name="password"
-            />
-            <br />
-            <br />
-            <button type="submit" className="submit">
-              Submit
-            </button>
-            <br />
-            <br />
-            <p className="forgot">
-              <a className="anchorForgot" href="/">
-                <u> Forgot Password?</u>
-              </a>
-            </p>
-          </form>
-        </div>
+            <form className="form1" onSubmit={handleSubmit}>
+              <input
+                className="userName"
+                placeholder="Username"
+                type="text"
+                name="username"
+              />
+              <br />
+              <br />
+              <input
+                className="password"
+                placeholder="Password"
+                type="password"
+                name="password"
+              />
+              <br />
+              <br />
+              <button type="submit" className="submit">
+                Submit
+              </button>
+              <br />
+              <br />
+              <p className="forgot">
+                <a className="anchorForgot" href="/">
+                  <u> Forgot Password?</u>
+                </a>
+              </p>
+            </form>
+          </div>
+        </>
       ) : (
         <div className="loadingDiv"></div>
       )}

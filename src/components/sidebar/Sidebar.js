@@ -1,8 +1,12 @@
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
 
+<<<<<<< HEAD
 //this component is used to show content of sidebar
 
+=======
+// This component is for sidebar
+>>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
 const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
   return (
     <div className={sidebarOpen ? "sidebar_responsive" : ""} id="sidebar">
@@ -29,22 +33,25 @@ const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
           <i className="fa fa-user-circle-o" aria-hidden="true"></i>
           <a href="/adminProfile">View profile</a>
         </div>
-        {loginData.userType === "superAdmin" ? (
-          <div className="sidebar__link">
-            <i className="fa fa-user-plus" aria-hidden="true"></i>
-            <a href="/AddDelAdmin">Add new/Delete Admin</a>
-          </div>
-        ) : (
-          ""
-        )}
         <div className="sidebar__link">
           <i className="fa fa-user-o" aria-hidden="true"></i>
           <a href="/NewFarmer">Add new Farmer</a>
         </div>
-        <div className="sidebar__link">
-          <i className="fa fa-unlock-alt" aria-hidden="true"></i>
-          <a href="/resetPassword">Reset Passwords</a>
-        </div>
+
+        {loginData.userType === "superAdmin" ? (
+          <>
+            <div className="sidebar__link">
+              <i className="fa fa-user-plus" aria-hidden="true"></i>
+              <a href="/AddDelAdmin">Add new/Delete Admin</a>
+            </div>
+            <div className="sidebar__link">
+              <i className="fa fa-unlock-alt" aria-hidden="true"></i>
+              <a href="/resetPassword">Reset Passwords</a>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
 
         <h2>All Farmers</h2>
         <div className="sidebar__link">

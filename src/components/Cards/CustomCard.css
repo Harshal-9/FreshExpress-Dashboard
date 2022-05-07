@@ -1,14 +1,12 @@
-/* * {
-  box-sizing: border-box;
-} */
+/* This file provides styles for custom cards */
 
 /* Float four columns side by side */
 .MyCardColumn {
   /* float: left; */
   width: 100%;
   /* padding: 0 10px; */
-  display: inline-block; 
-  text-align: center; 
+  display: inline-block;
+  text-align: center;
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -43,4 +41,3 @@
   display: inline-block;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
-

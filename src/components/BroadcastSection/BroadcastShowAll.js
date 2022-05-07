@@ -53,11 +53,26 @@ function BroadcastSingleCard(props) {
     >
       <div
         className="MyCardColumn"
-        style={{ display: "inline-block", height: "auto" }}
+        style={{
+          display: "inline-block",
+          height: "auto",
+        }}
       >
+<<<<<<< HEAD
         {/* dividing data according to pdf,image,youtube */}
 
         <div className="MyCard" style={{ width: "100%", height: "100%" }}>
+=======
+        <div
+          className="MyCard"
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#31C531",
+            borderRadius: "5px",
+          }}
+        >
+>>>>>>> 69452faab78486226a541a9bc77158ce2e2d485a
           {data.format === "jpg" ? (
             <img
               src={

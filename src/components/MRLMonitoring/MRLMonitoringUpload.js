@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./MRLMonitoringUpload.css";
 import { CustomToast } from "../Toasts/AllToasts";
-import uploadImg from "../../assets/uploadImg.gif";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// This component is used for uploading CSV for MRL reports
 function MRLMonitoringUpload() {
-  const navigate = useNavigate();
   const [selectedFileName, setSelectedFileName] = useState("No File Selected");
 
+  // Handle submit of file
   function handleSubmit(event) {
     event.preventDefault();
     const fd = new FormData();
@@ -18,6 +18,7 @@ function MRLMonitoringUpload() {
       event.target.allMRLReportsFile.files[0],
       event.target.allMRLReportsFile.files[0].name
     );
+    // posting csv to backend
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/mrlReports/uploadCSV",
@@ -40,14 +41,9 @@ function MRLMonitoringUpload() {
           textAlign: "center",
           margin: "5% 25%",
           padding: "1%",
-          //   borderStyle: "solid",
-          //   borderWidth: "thin",
         }}
       >
         <br />
-        {/* <div style={{ textAlign: "right" }}>
-          <button className="MRLMonitoringButton">Download Template</button>
-        </div> */}
         <h2 style={{ textAlign: "center" }}>
           Upload CSV file for MRL Monitoring
         </h2>
@@ -60,10 +56,8 @@ function MRLMonitoringUpload() {
           value={selectedFileName}
           style={{ width: "400px" }}
         />
-        {/* <label>{selectedFileName}</label> */}
         <br />
         <br />
-        {/* <label className="MRLLabel">Select CSV File : </label> */}
         <form onSubmit={handleSubmit}>
           <label
             htmlFor="uploadedFile"
@@ -72,12 +66,7 @@ function MRLMonitoringUpload() {
                 ? "MRLMonitoringUploadInput"
                 : "MRLMonitoringUploadInputSuccess"
             }
-          //   style={{ background: `url(${uploadImg})` }}
-          >
-            {/* {selectedFileName} */}
-            {/* <br />
-          <i className="fa fa-file fa-5x" aria-hidden="true"></i> */}
-          </label>
+          ></label>
           <input
             type="file"
             name="allMRLReportsFile"
@@ -87,7 +76,6 @@ function MRLMonitoringUpload() {
             style={{ color: "transparent" }}
             onChange={(event) => {
               if (event.target.files[0]) {
-                // console.log(event.target.files[0].name);
                 setSelectedFileName(event.target.files[0].name);
               } else setSelectedFileName("No File Selected");
             }}

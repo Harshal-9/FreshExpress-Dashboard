@@ -7,25 +7,27 @@ import UpdateSuccessToast, {
 } from "../Toasts/AllToasts";
 import { ToastContainer } from "react-toastify";
 
+// This component is used for Viewing and Editing the admin profile
 function AdminProfile(props) {
-  console.log(props);
+  // console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
   const [adminData, setAdminData] = useState({});
+
   useEffect(() => {
-    console.log("In useeffect", props);
+    // console.log("In useeffect", props);
 
     if (props) {
+      // Fetching the details of admin from the admin Id obtained from props
       axios
         .get(
           "https://immense-beach-88770.herokuapp.com/admins/" +
             props.loginData.mongoId
         )
         .then((res) => {
-          console.log("Res", res);
           setAdminData(res.data);
         })
         .catch((err) => {
-          console.log("Err", err);
+          CustomToast("Error" + err, "white", "red");
         });
     }
   }, []);
@@ -50,13 +52,16 @@ function AdminProfile(props) {
           verticalAlign: "top",
         }}
       >
-        <div className="MyCard">
+        <div className="MyCard" style={{ backgroundColor: "#CDD4EA" }}>
           <img
             src="https://www.pngitem.com/pimgs/m/146-1468465_early-signs-of-conception-user-profile-icon-hd.png"
             width="175px"
             height="175px"
             alt="AdminImg"
-            style={{ display: "inline-block", margin: "10px" }}
+            style={{
+              display: "inline-block",
+              margin: "10px",
+            }}
           ></img>
           <br />
           <div style={{ display: "inline-block" }}>
@@ -75,7 +80,7 @@ function AdminProfile(props) {
                 size="75"
                 value={adminData.name}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   setAdminData({
                     ...adminData,
                     name: event.target.value,
@@ -91,7 +96,7 @@ function AdminProfile(props) {
                 size="75"
                 value={adminData.userId}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   setAdminData({
                     ...adminData,
                     userId: event.target.value,
@@ -107,7 +112,7 @@ function AdminProfile(props) {
                 size="75"
                 value={adminData.email}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   setAdminData({
                     ...adminData,
                     email: event.target.value,
@@ -123,7 +128,7 @@ function AdminProfile(props) {
                 size="75"
                 value={adminData.mobileNumber}
                 onChange={(event) => {
-                  console.log(event.target.value);
+                  // console.log(event.target.value);
                   setAdminData({
                     ...adminData,
                     mobileNumber: event.target.value,
@@ -148,9 +153,7 @@ function AdminProfile(props) {
                     event.preventDefault();
                     setIsDisabled(true);
 
-                    // const { farmerId, ...tempObj } = farmerAllData;
-                    // console.log("Sending Data", tempObj, farmerId);
-
+                    // Sending patch request to edit the data of admin
                     axios
                       .patch(
                         "https://immense-beach-88770.herokuapp.com/admins/" +
@@ -158,11 +161,11 @@ function AdminProfile(props) {
                         adminData
                       )
                       .then((res) => {
-                        console.log("Response", res);
+                        // console.log("Response", res);
                         UpdateSuccessToast();
                       })
                       .catch((err) => {
-                        console.log("Error", err);
+                        // console.log("Error", err);
                         FailureToast();
                       });
                   }}

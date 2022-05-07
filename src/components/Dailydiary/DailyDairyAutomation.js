@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./DailyDairyAutomation.css";
+import { CustomToast } from "../Toasts/AllToasts";
 
-
+// This component is used for automating/creating daily daries for multiple MHCodes
 function DailyDairyAutomation() {
-
-
   const [selectedMHCode, setSelectedMHCodes] = useState([]);
   const [options, setOptions] = useState([]);
   const [sendTo, setSendTo] = useState("");
@@ -27,25 +26,28 @@ function DailyDairyAutomation() {
 
     fd.append("MHCodes", tempData.join(","));
 
+    // posting the sheet to selected MHCode
     axios
       .post(
         "https://immense-beach-88770.herokuapp.com/dailyDiaryAutomation",
         fd
       )
       .then((res) => {
-        console.log("Res", res);
+        // console.log("Res", res);
         setSendTo(res.data.message);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }
 
   useEffect(() => {
+    // Making request to get list of all MHCodes for dropdown
     axios
       .get("https://immense-beach-88770.herokuapp.com/filters")
       .then((res) => {
-        console.log("Res", res.data[0].MHCode);
+        // console.log("Res", res.data[0].MHCode);
         let tempArr = [];
 
         for (let item of res.data[0].MHCode) {
@@ -54,18 +56,20 @@ function DailyDairyAutomation() {
         setOptions(tempArr);
       })
       .catch((err) => {
-        console.log("Err", err);
+        // console.log("Err", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }, []);
 
   return (
-    <div className="handleDailyDiaryAutomation" >
+    <div className="handleDailyDiaryAutomation">
       <marquee
         style={{ border: "black 2px solid", color: "red" }}
         direction="left"
-      // behavior="alternate"
+        // behavior="alternate"
       >
-        (<b>NOTE</b> : Select Farmers MH Code who's fruit pruning data is present.. )
+        (<b>NOTE</b> : Select Farmers MH Code who's fruit pruning data is
+        present.. )
       </marquee>
       <br />
       <form onSubmit={handleSubmit}>
@@ -80,7 +84,7 @@ function DailyDairyAutomation() {
           options={options}
           value={selectedMHCode}
           onChange={(e) => {
-            console.log("Here", e);
+            // console.log("Here", e);
             setSelectedMHCodes(e);
           }}
           overrideStrings={{
@@ -90,11 +94,13 @@ function DailyDairyAutomation() {
         />
         <br />
         <br />
-        <button className="dailyDiaryAutomationSubmitButton" type="submit">Upload</button>
+        <button className="dailyDiaryAutomationSubmitButton" type="submit">
+          Upload
+        </button>
         <a
           className="MRLMonitoringButton"
           style={{ backgroundColor: "#2A91FB" }}
-          href="https://drive.google.com/uc?id=12SmKHRH73YpZuu_N73rMRisMe_el-0Ov&export=download"
+          href="https://drive.google.com/uc?id=1lOGWLWsyd2-yAqPotBix-XBo0mITUdY_&export=download"
         >
           <i className="fa fa-download"></i> Template
         </a>

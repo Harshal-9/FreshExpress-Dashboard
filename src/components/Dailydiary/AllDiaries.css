@@ -5,7 +5,7 @@ div.AllDiariesScroll {
   width: 1200px;
   overflow: auto;
   white-space: nowrap;
-  height: 600px;
+  height: 350px;
 }
 
 .AllDiariesScroll table {

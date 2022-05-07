@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import { CustomToast } from "../Toasts/AllToasts";
 import "./SingleDiary.css";
 
 // function to get completion status
@@ -239,13 +240,14 @@ function SingleDiary(props) {
   );
 
   useEffect(() => {
+    // Fetching particular daily dairy
     axios
       .get(
         "https://immense-beach-88770.herokuapp.com/dailyDiary/diary/" +
           dailyDiaryId
       )
       .then((receivedDiary) => {
-        console.log("Received Diary", receivedDiary);
+        // console.log("Received Diary", receivedDiary);
         setDiaryDetails(receivedDiary);
 
         //setting spraying data
@@ -423,7 +425,8 @@ function SingleDiary(props) {
         //
       })
       .catch((err) => {
-        console.log("Error", err);
+        // console.log("Error", err);
+        CustomToast("Error" + err, "white", "red");
       });
   }, []);
 

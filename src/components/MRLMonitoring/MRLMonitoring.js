@@ -10,7 +10,6 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
-
 import "./MRLMonitoring.css";
 
 // Below functions for adding search icon in reactselect
@@ -28,7 +27,7 @@ const DropdownIndicator = (props) => {
 
 // Single Pesticide details row component
 function SinglePesticideRow(props) {
-  console.log(props.data);
+  // console.log(props.data);
   return (
     <tr
       style={{
@@ -52,6 +51,7 @@ function SinglePesticideRow(props) {
   );
 }
 
+// This component is used for MRL Monitoring
 function MRLMonitoring() {
   const navigate = useNavigate();
 
@@ -101,14 +101,6 @@ function MRLMonitoring() {
     let sum = 0;
     for (let item in activePesticideArray) {
       // console.log("H", activePesticideArray[item]);
-      console.log(
-        "NO",
-        (
-          (activePesticideArray[item].props.data.result /
-            activePesticideArray[item].props.data.EUMRL) *
-          100
-        ).toFixed(3)
-      );
       sum =
         sum +
         Number(
@@ -118,7 +110,7 @@ function MRLMonitoring() {
             100
           ).toFixed(3)
         );
-      console.log("SUM", sum);
+      // console.log("SUM", sum);
     }
     return sum;
   }
@@ -129,7 +121,7 @@ function MRLMonitoring() {
     for (let item in activePesticideArray) {
       if (!isNaN(activePesticideArray[item].props.data.ArFDPercent))
         sum = sum + Number(activePesticideArray[item].props.data.ArFDPercent);
-      console.log("SUM", sum);
+      // console.log("SUM", sum);
     }
     return sum;
   }
@@ -144,7 +136,7 @@ function MRLMonitoring() {
         setAllFarmers(Data);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         FailureToast();
       });
   }, []);
@@ -181,7 +173,7 @@ function MRLMonitoring() {
                     activeMRLReport._id
                 )
                 .then((res) => {
-                  console.log("Res", res);
+                  // console.log("Res", res);
                   CustomToast(
                     "Record Deleted Successfully!",
                     "black",
@@ -192,7 +184,8 @@ function MRLMonitoring() {
                   }, 2000);
                 })
                 .catch((err) => {
-                  console.log("Err", err);
+                  // console.log("Err", err);
+                  CustomToast("Error" + err, "white", "red");
                 });
             }}
           >
@@ -233,17 +226,19 @@ function MRLMonitoring() {
             onChange={(event) => {
               // console.log(event);
 
+              // Getting MRL Report of particular farm
               axios
                 .get(
                   "https://immense-beach-88770.herokuapp.com/mrlReports/MHCode/" +
                     event.MHCode
                 )
                 .then((res) => {
-                  console.log("Res", res);
+                  // console.log("Res", res);
                   setAllMRLReports(res.data);
                 })
                 .catch((err) => {
-                  console.log("Err", err);
+                  // console.log("Err", err);
+                  CustomToast("Error" + err, "white", "red");
                 });
             }}
           />
@@ -283,12 +278,6 @@ function MRLMonitoring() {
                       data={allMRLReports[event.value].chemicals[i]}
                     />
                   )
-                );
-                console.log(
-                  "Here",
-                  <SinglePesticideRow
-                    data={allMRLReports[event.value].chemicals[i]}
-                  />
                 );
               }
             }}
@@ -331,7 +320,11 @@ function MRLMonitoring() {
             <input
               style={{ width: "377px", height: "18.4px" }}
               disabled={true}
-              value={activeMRLReport.dateOfSampling.slice(0, 10)}
+              value={
+                activeMRLReport.dateOfSampling
+                  ? activeMRLReport.dateOfSampling.slice(0, 10)
+                  : ""
+              }
               size="40"
             ></input>
             <br /> <br />
@@ -392,18 +385,6 @@ function MRLMonitoring() {
 
       {/* Card ends here  */}
 
-      {/* <br />
-      <div style={{ textAlign: "center" }}>
-        <button
-          className="MRLDeleteButton"
-          onClick={() => {
-            navigate("/MRLMonitoringUpload");
-          }}
-        >
-          <i className="fa fa-trash fa-lg" aria-hidden="true"></i> Delete Report
-        </button>
-      </div>
-      <br /> */}
       <div>
         <div className="readymade_main__cards">
           <div className="readymadeCard">

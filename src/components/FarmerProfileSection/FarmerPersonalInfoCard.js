@@ -6,7 +6,9 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 
+// This component is used for showing farmers personal data
 function FarmerPersonalInfoCard(props) {
+  // Handle image change
   const handleFileChange = (event) => {
     const handleChangeSelectedFile = event.target.files[0];
     const fd = new FormData();
@@ -36,10 +38,11 @@ function FarmerPersonalInfoCard(props) {
               },
             })
             .then((res2) => {
-              console.log("Res", res2);
+              // console.log("Res", res2);
             })
             .catch((err) => {
-              console.log("Err", err);
+              // console.log("Err", err);
+              CustomToast("Error" + err, "white", "red");
             });
         }
 
@@ -54,11 +57,11 @@ function FarmerPersonalInfoCard(props) {
         });
       })
       .catch((err) => {
-        console.log("error", err);
+        // console.log("error", err);
+        CustomToast("Error" + err, "white", "red");
       });
   };
 
-  console.log(props);
   const [isDisabled, setIsDisabled] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -75,8 +78,6 @@ function FarmerPersonalInfoCard(props) {
     }
   }
 
-  console.log(props);
-
   return (
     <div className="MyCardColumn" style={{ display: "inline-block" }}>
       <div className="MyCard">
@@ -89,7 +90,7 @@ function FarmerPersonalInfoCard(props) {
               "/preview"
             }
             width="250px"
-            height="300px"
+            height="325px"
             alt="FarmerImg"
             style={{ display: "inline-block", margin: "10px" }}
           />
@@ -97,7 +98,7 @@ function FarmerPersonalInfoCard(props) {
           <img
             src="https://media.istockphoto.com/photos/indian-farmer-at-onion-field-picture-id1092520698?k=20&m=1092520698&s=612x612&w=0&h=azmC9S6SiHTXVh-dmUFD7JJ0QF_pjxmudCjkBM9UAuE="
             width="250px"
-            height="300px"
+            height="325px"
             alt="FarmerImg"
             style={{ display: "inline-block", margin: "10px" }}
           ></img>
@@ -126,6 +127,16 @@ function FarmerPersonalInfoCard(props) {
             ></input>
             <br />
             <br />
+            <label className="FarmerProfileLabel">Farmer UserId : </label>
+            <input
+              type="text"
+              disabled={true}
+              size="80"
+              value={farmerAllData.userId}
+            ></input>
+            <br />
+            <br />
+
             <label className="FarmerProfileLabel">Family Name : </label>
             <input
               type="text"
@@ -261,11 +272,11 @@ function FarmerPersonalInfoCard(props) {
                       }
                     )
                     .then((res) => {
-                      console.log("Response", res);
+                      // console.log("Response", res);
                       UpdateSuccessToast();
                     })
                     .catch((err) => {
-                      console.log("Error", err);
+                      // console.log("Error", err);
                       FailureToast();
                     });
                 }}
@@ -288,11 +299,11 @@ function FarmerPersonalInfoCard(props) {
                         "black",
                         "#1cd855"
                       );
-                      console.log("Res", res);
+                      // console.log("Res", res);
                     })
                     .catch((err) => {
                       FailureToast();
-                      console.log("Err", err);
+                      // console.log("Err", err);
                     });
                 }}
               >
