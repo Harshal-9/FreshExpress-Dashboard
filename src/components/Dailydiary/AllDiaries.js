@@ -292,7 +292,7 @@ function AllDiaries() {
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -350,7 +350,11 @@ function AllDiaries() {
         onChange={(e) => {
           // Getting all daily daries of particular plot
           axios
-            .get(process.env.BACKEND_URL + "/dailyDiary/MHCode/" + e.MHCode)
+            .get(
+              process.env.REACT_APP_BACKEND_URL +
+                "/dailyDiary/MHCode/" +
+                e.MHCode
+            )
             .then((data) => {
               let receivedData = data.data;
 

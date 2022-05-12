@@ -22,7 +22,7 @@ function MRLMonitoringUpload() {
     );
     // posting csv to backend
     axios
-      .post(process.env.BACKEND_URL + "/mrlReports/uploadCSV", fd)
+      .post(process.env.REACT_APP_BACKEND_URL + "/mrlReports/uploadCSV", fd)
       .then((res) => {
         CustomToast(res.data.message, "white", "#4CAF50");
       })

@@ -7,7 +7,7 @@ dotenv.config();
 
 function handleClick(navigate) {
   axios
-    .get(process.env.BACKEND_URL + "/logout", {
+    .get(process.env.REACT_APP_BACKEND_URL + "/logout", {
       withCredentials: true,
     })
     .then((res) => {

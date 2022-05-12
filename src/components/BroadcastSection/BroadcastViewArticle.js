@@ -20,7 +20,7 @@ function SingleChat(props) {
     chat.adminName = props.userId;
     axios
       .post(
-        process.env.BACKEND_URL +
+        process.env.REACT_APP_BACKEND_URL +
           "/broadcasts/insertAnswer/" +
           broadcastId +
           "/" +
@@ -135,7 +135,7 @@ function ViewArticle({ loginData }) {
 
     // getting farmerID to extract farmername
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         for (let i = 0; i < res.data.length; i++) {
           tempArray.set(res.data[i].farmerID, res.data[i].farmerName);
@@ -143,7 +143,7 @@ function ViewArticle({ loginData }) {
         setFarmersIdMapping(tempArray);
         //to get all broadcast data
         axios
-          .get(process.env.BACKEND_URL + "/broadcasts/" + broadcastId)
+          .get(process.env.REACT_APP_BACKEND_URL + "/broadcasts/" + broadcastId)
           .then((res1) => {
             //setting main data to usestate
             setBroadcastData(res1.data);

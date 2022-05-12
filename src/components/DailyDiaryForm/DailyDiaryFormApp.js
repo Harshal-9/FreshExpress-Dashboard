@@ -172,7 +172,7 @@ function DailyDiaryFormApp() {
             } else {
               // if all those required fields are selected then post the data
               axios
-                .post(process.env.BACKEND_URL + "/dailyDiary", {
+                .post(process.env.REACT_APP_BACKEND_URL + "/dailyDiary", {
                   data: finalDataObj,
                 })
                 .then((res) => {

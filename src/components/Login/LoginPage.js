@@ -20,7 +20,7 @@ function LoginPage(props) {
     fd.append("password", event.target.password.value);
 
     axios
-      .post(process.env.BACKEND_URL + "/login", fd, {
+      .post(process.env.REACT_APP_BACKEND_URL + "/login", fd, {
         withCredentials: true,
       })
       .then((res) => {
@@ -41,10 +41,8 @@ function LoginPage(props) {
   }
 
   useEffect(() => {
-    console.log(process.env.BACKEND_URL + "/login");
-    console.log(process.env);
     axios
-      .get(process.env.BACKEND_URL + "/login", {
+      .get(process.env.REACT_APP_BACKEND_URL + "/login", {
         withCredentials: true,
       })
       .then((res) => {

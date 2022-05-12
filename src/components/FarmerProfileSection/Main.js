@@ -18,7 +18,7 @@ function Main() {
   useEffect(() => {
     // Getting all farmers and then extracting the coordinates
     axios
-      .get(process.env.BACKEND_URL + "/farmers/")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/")
       .then((res) => {
         // console.log("Res", res);
         let arr = [];
@@ -90,7 +90,7 @@ function Main() {
 
     // To get no of articles
     axios
-      .get(process.env.BACKEND_URL + "/broadcasts/")
+      .get(process.env.REACT_APP_BACKEND_URL + "/broadcasts/")
       .then((res) => {
         // console.log("Res", res.data.length);
         setTotalNumberofArticles(res.data.length);

@@ -36,7 +36,7 @@ function NewBroadcast() {
   useEffect(() => {
     // to get data for tags dropdown
     axios
-      .get(process.env.BACKEND_URL + "/filters")
+      .get(process.env.REACT_APP_BACKEND_URL + "/filters")
       .then((res) => {
         //settings tags in dropdown
         const tags = [];
@@ -60,7 +60,7 @@ function NewBroadcast() {
       });
     //To get data for farmers dropdown
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         const data = []; //to store options of farmer dropdown
         for (let i = 0; i < res.data.length; i++) {
@@ -90,7 +90,7 @@ function NewBroadcast() {
 
     // Getting link of uploaded image
     axios
-      .post(process.env.BACKEND_URL + "/uploadFile", fd)
+      .post(process.env.REACT_APP_BACKEND_URL + "/uploadFile", fd)
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -109,7 +109,7 @@ function NewBroadcast() {
   function handleDelete(e) {
     e.preventDefault();
     axios
-      .delete(process.env.BACKEND_URL + "/uploadFile", {
+      .delete(process.env.REACT_APP_BACKEND_URL + "/uploadFile", {
         data: {
           id: selectedFile.id,
         },
@@ -190,7 +190,7 @@ function NewBroadcast() {
     }
     console.log("data to send", dataToSend);
     axios
-      .post(process.env.BACKEND_URL + "/broadcasts", dataToSend)
+      .post(process.env.REACT_APP_BACKEND_URL + "/broadcasts", dataToSend)
       .then((res) => {
         console.log("response", res);
         UpdateSuccessToast("New Article added successfully !");

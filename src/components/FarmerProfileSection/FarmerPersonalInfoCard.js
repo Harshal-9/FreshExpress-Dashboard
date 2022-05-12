@@ -23,7 +23,10 @@ function FarmerPersonalInfoCard(props) {
 
     // Getting link of uploaded image
     axios
-      .post(process.env.BACKEND_URL + "/uploadFile/PROFILE_FOLDER", fd)
+      .post(
+        process.env.REACT_APP_BACKEND_URL + "/uploadFile/PROFILE_FOLDER",
+        fd
+      )
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -264,7 +267,9 @@ function FarmerPersonalInfoCard(props) {
 
                   axios
                     .post(
-                      process.env.BACKEND_URL + "/farmers/edit/" + farmerId,
+                      process.env.REACT_APP_BACKEND_URL +
+                        "/farmers/edit/" +
+                        farmerId,
                       {
                         personalInformation: tempObj,
                       }
@@ -288,7 +293,7 @@ function FarmerPersonalInfoCard(props) {
                 onClick={() => {
                   axios
                     .post(
-                      process.env.BACKEND_URL +
+                      process.env.REACT_APP_BACKEND_URL +
                         "/farmers/delete/" +
                         farmerAllData.farmerId
                     )

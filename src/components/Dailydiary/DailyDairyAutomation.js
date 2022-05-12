@@ -30,7 +30,7 @@ function DailyDairyAutomation() {
 
     // posting the sheet to selected MHCode
     axios
-      .post(process.env.BACKEND_URL + "/dailyDiaryAutomation", fd)
+      .post(process.env.REACT_APP_BACKEND_URL + "/dailyDiaryAutomation", fd)
       .then((res) => {
         // console.log("Res", res);
         setSendTo(res.data.message);
@@ -44,7 +44,7 @@ function DailyDairyAutomation() {
   useEffect(() => {
     // Making request to get list of all MHCodes for dropdown
     axios
-      .get(process.env.BACKEND_URL + "/filters")
+      .get(process.env.REACT_APP_BACKEND_URL + "/filters")
       .then((res) => {
         // console.log("Res", res.data[0].MHCode);
         let tempArr = [];

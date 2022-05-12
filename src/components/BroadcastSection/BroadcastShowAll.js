@@ -26,7 +26,7 @@ function BroadcastSingleCard(props) {
   //function to delete broadcast
   function handleBroadcastDelete() {
     axios
-      .post(process.env.BACKEND_URL + "/broadcasts/delete/" + data._id)
+      .post(process.env.REACT_APP_BACKEND_URL + "/broadcasts/delete/" + data._id)
       .then((res) => {
         CustomToast(
           "Article deleted Successfully ! Page will be reloaded",
@@ -265,7 +265,7 @@ function BroadcastShowAll() {
   useEffect(() => {
     //request to get broadcast data
     axios
-      .get(process.env.BACKEND_URL + "/broadcasts")
+      .get(process.env.REACT_APP_BACKEND_URL + "/broadcasts")
       .then((res) => {
         const tempArray = [];
         const temp = [];
@@ -281,7 +281,7 @@ function BroadcastShowAll() {
       });
 
     //request to get filter data
-    axios.get(process.env.BACKEND_URL + "/filters").then((res) => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + "/filters").then((res) => {
       const tempCategory = [];
       for (let i = 0; i < res.data[0].broadcastCategory.length; i++) {
         tempCategory.push({

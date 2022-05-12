@@ -115,7 +115,11 @@ function FarmerProfile(props) {
     if (props.flg) {
       // Fetching data for a particular plot when we land here from
       axios
-        .get(process.env.BACKEND_URL + "/farmers/MHCode/" + MHCodeFromParams)
+        .get(
+          process.env.REACT_APP_BACKEND_URL +
+            "/farmers/MHCode/" +
+            MHCodeFromParams
+        )
         .then((data) => {
           // console.log("Recived by MHCode", data.data, data.data.length);
           if (data.data.length) {
@@ -142,7 +146,7 @@ function FarmerProfile(props) {
             // fetching the seasonal data of plot from which we landed on profile page
             axios
               .get(
-                process.env.BACKEND_URL +
+                process.env.REACT_APP_BACKEND_URL +
                   "/seasonalData/plots/" +
                   receivedData.plots[i]._id
               )
@@ -167,7 +171,7 @@ function FarmerProfile(props) {
     }
     // get request for getting farmer and his corresponding plots
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -221,7 +225,9 @@ function FarmerProfile(props) {
               onChange={(event) => {
                 axios
                   .get(
-                    process.env.BACKEND_URL + "/farmers/MHCode/" + event.MHCode
+                    process.env.REACT_APP_BACKEND_URL +
+                      "/farmers/MHCode/" +
+                      event.MHCode
                   )
                   .then((data) => {
                     // console.log("Recived by MHCode", data.data, data.data.length);
@@ -243,7 +249,7 @@ function FarmerProfile(props) {
                           // fetching seasonal data of all years of a selected farmer's selected plot
                           axios
                             .get(
-                              process.env.BACKEND_URL +
+                              process.env.REACT_APP_BACKEND_URL +
                                 "/seasonalData/plots/" +
                                 receivedData.plots[i]._id
                             )

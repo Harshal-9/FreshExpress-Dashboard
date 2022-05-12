@@ -46,7 +46,7 @@ function UploadImg(props) {
 
     // Getting link of uploaded image
     axios
-      .post(process.env.BACKEND_URL + "/uploadFile", fd)
+      .post(process.env.REACT_APP_BACKEND_URL + "/uploadFile", fd)
       .then((res) => {
         console.log("result", res);
         console.log(res.data.link);
@@ -69,7 +69,7 @@ function UploadImg(props) {
 
   function handleDelete() {
     axios
-      .delete(process.env.BACKEND_URL + "/uploadFile", {
+      .delete(process.env.REACT_APP_BACKEND_URL + "/uploadFile", {
         data: {
           id: metadata.id,
         },

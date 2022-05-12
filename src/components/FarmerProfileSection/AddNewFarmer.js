@@ -99,7 +99,7 @@ function AddNewFarmer() {
 
     //posting the new farmer data
     axios
-      .post(process.env.BACKEND_URL + "/farmers", dataToSend)
+      .post(process.env.REACT_APP_BACKEND_URL + "/farmers", dataToSend)
       .then((res) => {
         console.log("Response", res);
         UpdateSuccessToast();
@@ -157,7 +157,7 @@ function AddNewFarmer() {
 
     axios
       .post(
-        process.env.BACKEND_URL +
+        process.env.REACT_APP_BACKEND_URL +
           "/farmers/plots/addPlot/" +
           selectedFarmer.value,
         dataToSend
@@ -175,7 +175,7 @@ function AddNewFarmer() {
 
   useEffect(() => {
     // for getting all GGNs from backend
-    axios.get(process.env.BACKEND_URL + "/filters").then((data) => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + "/filters").then((data) => {
       const recievedObj = data.data[0];
       const tempGGN = [];
       const tempMHCode = [];
@@ -194,7 +194,7 @@ function AddNewFarmer() {
     });
 
     // for getting all farmers
-    axios.get(process.env.BACKEND_URL + "/farmers").then((data) => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + "/farmers").then((data) => {
       let receivedData = data.data;
 
       const tempFarmersArr = [];

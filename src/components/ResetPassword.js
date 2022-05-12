@@ -26,7 +26,7 @@ function ResetPassword() {
     }
 
     axios
-      .post(process.env.BACKEND_URL + "/login/forgotPassword", {
+      .post(process.env.REACT_APP_BACKEND_URL + "/login/forgotPassword", {
         userId: selectedUser.value,
         password: event.target.newPassword.value,
       })
@@ -41,7 +41,7 @@ function ResetPassword() {
 
   useEffect(() => {
     axios
-      .get(process.env.BACKEND_URL + "/login/usernames")
+      .get(process.env.REACT_APP_BACKEND_URL + "/login/usernames")
       .then((res) => {
         console.log("Res", res);
 

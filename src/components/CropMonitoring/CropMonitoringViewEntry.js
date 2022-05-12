@@ -153,7 +153,9 @@ function CropMonitoringViewEntry(props) {
   const [otherImage, setOtherImage] = useState([]);
   useEffect(() => {
     axios
-      .get(process.env.BACKEND_URL + "/cropMonitoring/data/" + diaryId)
+      .get(
+        process.env.REACT_APP_BACKEND_URL + "/cropMonitoring/data/" + diaryId
+      )
       .then((data) => {
         console.log("data", data.data);
         setCropDetails(data.data);

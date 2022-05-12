@@ -244,7 +244,9 @@ function SingleDiary(props) {
   useEffect(() => {
     // Fetching particular daily dairy
     axios
-      .get(process.env.BACKEND_URL + "/dailyDiary/diary/" + dailyDiaryId)
+      .get(
+        process.env.REACT_APP_BACKEND_URL + "/dailyDiary/diary/" + dailyDiaryId
+      )
       .then((receivedDiary) => {
         // console.log("Received Diary", receivedDiary);
         setDiaryDetails(receivedDiary);

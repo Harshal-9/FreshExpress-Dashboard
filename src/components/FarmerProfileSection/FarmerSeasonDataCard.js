@@ -130,7 +130,10 @@ function FarmerSeasonalDataCard(props) {
 
     // Getting link of uploaded image
     axios
-      .post(process.env.BACKEND_URL + "/uploadFile/REPORTS_FOLDER", fd)
+      .post(
+        process.env.REACT_APP_BACKEND_URL + "/uploadFile/REPORTS_FOLDER",
+        fd
+      )
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -299,7 +302,7 @@ function FarmerSeasonalDataCard(props) {
       // console.log("Data", dataToSend);
 
       axios
-        .post(process.env.BACKEND_URL + "/seasonalData", dataToSend)
+        .post(process.env.REACT_APP_BACKEND_URL + "/seasonalData", dataToSend)
         .then((res) => {
           CustomToast(
             "Year added successfully ! Page will be reloaded",
@@ -969,7 +972,7 @@ function FarmerSeasonalDataCard(props) {
                 // sendBackSeasonalAllData([seasonalAllDataReceived]);
                 axios
                   .post(
-                    process.env.BACKEND_URL +
+                    process.env.REACT_APP_BACKEND_URL +
                       "/seasonalData/edit/" +
                       prevData._id,
                     prevData
@@ -995,7 +998,7 @@ function FarmerSeasonalDataCard(props) {
 
                 axios
                   .post(
-                    process.env.BACKEND_URL +
+                    process.env.REACT_APP_BACKEND_URL +
                       "/seasonalData/delete/deleteBySeasonalId/" +
                       seasonalAllDataReceived._id
                   )

@@ -131,7 +131,7 @@ function MRLMonitoring() {
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -171,7 +171,7 @@ function MRLMonitoring() {
             onClick={() => {
               axios
                 .post(
-                  process.env.BACKEND_URL +
+                  process.env.REACT_APP_BACKEND_URL +
                     "/mrlReports/delete/" +
                     activeMRLReport._id
                 )
@@ -232,7 +232,9 @@ function MRLMonitoring() {
               // Getting MRL Report of particular farm
               axios
                 .get(
-                  process.env.BACKEND_URL + "/mrlReports/MHCode/" + event.MHCode
+                  process.env.REACT_APP_BACKEND_URL +
+                    "/mrlReports/MHCode/" +
+                    event.MHCode
                 )
                 .then((res) => {
                   // console.log("Res", res);

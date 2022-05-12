@@ -42,7 +42,7 @@ function AddDelAdmin({ loginData }) {
   // Fetching list of admins
   useEffect(() => {
     axios
-      .get(process.env.BACKEND_URL + "/admins")
+      .get(process.env.REACT_APP_BACKEND_URL + "/admins")
       .then((res) => {
         setAdminsList(res.data);
       })
@@ -176,7 +176,7 @@ function AddDelAdmin({ loginData }) {
 
                       // Adding New admin
                       axios
-                        .post(process.env.BACKEND_URL + "/admins", newAdminData)
+                        .post(process.env.REACT_APP_BACKEND_URL + "/admins", newAdminData)
                         .then((res) => {
                           // console.log("Response", res);
                           UpdateSuccessToast();
@@ -239,7 +239,7 @@ function AddDelAdmin({ loginData }) {
                     onClick={() => {
                       axios
                         .delete(
-                          process.env.BACKEND_URL +
+                          process.env.REACT_APP_BACKEND_URL +
                             "/admins/" +
                             selectedAdmin._id
                         )

@@ -21,7 +21,11 @@ function AdminProfile(props) {
     if (props) {
       // Fetching the details of admin from the admin Id obtained from props
       axios
-        .get(process.env.BACKEND_URL + "/admins/" + props.loginData.mongoId)
+        .get(
+          process.env.REACT_APP_BACKEND_URL +
+            "/admins/" +
+            props.loginData.mongoId
+        )
         .then((res) => {
           setAdminData(res.data);
         })
@@ -155,7 +159,7 @@ function AdminProfile(props) {
                     // Sending patch request to edit the data of admin
                     axios
                       .patch(
-                        process.env.BACKEND_URL +
+                        process.env.REACT_APP_BACKEND_URL +
                           "/admins/" +
                           "626d90a967e461b167ff247d",
                         adminData

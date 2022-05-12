@@ -12,7 +12,7 @@ function FarmerDropdown(props) {
 
   useEffect(() => {
     axios
-      .get(process.env.BACKEND_URL + "/farmers/plots")
+      .get(process.env.REACT_APP_BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         console.log(Data);

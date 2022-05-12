@@ -301,7 +301,7 @@ function FarmerPlotDataCard(props) {
                 if (plotAllData.farmInformation.MHCode) {
                   axios
                     .post(
-                      process.env.BACKEND_URL +
+                      process.env.REACT_APP_BACKEND_URL +
                         "/farmers/delete/plot/" +
                         plotAllData._id
                     )
@@ -362,7 +362,7 @@ function FarmerPlotDataCard(props) {
 
                 axios
                   .post(
-                    process.env.BACKEND_URL +
+                    process.env.REACT_APP_BACKEND_URL +
                       "/farmers/plots/edit/" +
                       plotAllData._id,
                     plotAllData

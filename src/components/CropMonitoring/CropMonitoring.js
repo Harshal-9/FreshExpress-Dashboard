@@ -161,7 +161,7 @@ function CropMonitoring() {
 
     useEffect(() => {
         axios
-            .get(process.env.BACKEND_URL+"/farmers/plots")
+            .get(process.env.REACT_APP_BACKEND_URL+"/farmers/plots")
             .then((res) => {
                 let Data = [...res.data];
                 setAllFarmersCrop(Data);
@@ -211,7 +211,7 @@ function CropMonitoring() {
 
                         axios
                             .get(
-                                process.env.BACKEND_URL+"/cropMonitoring/MHCode/" +
+                                process.env.REACT_APP_BACKEND_URL+"/cropMonitoring/MHCode/" +
                                 event.MHCode
                             )
                             .then((res) => {
