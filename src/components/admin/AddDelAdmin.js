@@ -10,6 +10,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
@@ -40,7 +42,7 @@ function AddDelAdmin({ loginData }) {
   // Fetching list of admins
   useEffect(() => {
     axios
-      .get("https://immense-beach-88770.herokuapp.com/admins")
+      .get(process.env.BACKEND_URL + "/admins")
       .then((res) => {
         setAdminsList(res.data);
       })
@@ -174,10 +176,7 @@ function AddDelAdmin({ loginData }) {
 
                       // Adding New admin
                       axios
-                        .post(
-                          "https://immense-beach-88770.herokuapp.com/admins",
-                          newAdminData
-                        )
+                        .post(process.env.BACKEND_URL + "/admins", newAdminData)
                         .then((res) => {
                           // console.log("Response", res);
                           UpdateSuccessToast();
@@ -240,7 +239,8 @@ function AddDelAdmin({ loginData }) {
                     onClick={() => {
                       axios
                         .delete(
-                          "https://immense-beach-88770.herokuapp.com/admins/" +
+                          process.env.BACKEND_URL +
+                            "/admins/" +
                             selectedAdmin._id
                         )
                         .then((res) => {

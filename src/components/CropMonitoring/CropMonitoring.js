@@ -6,6 +6,8 @@ import { FailureToast } from "../Toasts/AllToasts";
 import Select from "react-select";
 import "./CropMonitoring.css";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 function SingleTableRowCropMonitoring(props) {
     let cropData = props;
@@ -159,7 +161,7 @@ function CropMonitoring() {
 
     useEffect(() => {
         axios
-            .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+            .get(process.env.BACKEND_URL+"/farmers/plots")
             .then((res) => {
                 let Data = [...res.data];
                 setAllFarmersCrop(Data);
@@ -209,7 +211,7 @@ function CropMonitoring() {
 
                         axios
                             .get(
-                                "https://immense-beach-88770.herokuapp.com/cropMonitoring/MHCode/" +
+                                process.env.BACKEND_URL+"/cropMonitoring/MHCode/" +
                                 event.MHCode
                             )
                             .then((res) => {

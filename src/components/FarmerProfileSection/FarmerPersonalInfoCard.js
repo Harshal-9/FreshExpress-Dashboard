@@ -5,6 +5,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for showing farmers personal data
 function FarmerPersonalInfoCard(props) {
@@ -21,10 +23,7 @@ function FarmerPersonalInfoCard(props) {
 
     // Getting link of uploaded image
     axios
-      .post(
-        "https://immense-beach-88770.herokuapp.com/uploadFile/PROFILE_FOLDER",
-        fd
-      )
+      .post(process.env.BACKEND_URL + "/uploadFile/PROFILE_FOLDER", fd)
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -265,8 +264,7 @@ function FarmerPersonalInfoCard(props) {
 
                   axios
                     .post(
-                      "https://immense-beach-88770.herokuapp.com/farmers/edit/" +
-                        farmerId,
+                      process.env.BACKEND_URL + "/farmers/edit/" + farmerId,
                       {
                         personalInformation: tempObj,
                       }
@@ -290,7 +288,8 @@ function FarmerPersonalInfoCard(props) {
                 onClick={() => {
                   axios
                     .post(
-                      "https://immense-beach-88770.herokuapp.com/farmers/delete/" +
+                      process.env.BACKEND_URL +
+                        "/farmers/delete/" +
                         farmerAllData.farmerId
                     )
                     .then((res) => {

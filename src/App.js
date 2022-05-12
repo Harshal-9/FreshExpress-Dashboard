@@ -26,6 +26,8 @@ import Failure from "./components/DailyDiaryForm/Failure";
 import LoginPage from "./components/Login/LoginPage";
 import Logout from "./components/Logout";
 import ResetPassword from "./components/ResetPassword";
+import dotenv from "dotenv";
+dotenv.config();
 
 const App = () => {
   const [sidebarOpen, setsidebarOpen] = useState(false);

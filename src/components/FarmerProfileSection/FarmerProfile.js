@@ -9,6 +9,9 @@ import FarmerPersonalInfo from "./FarmerPersonalInfoCard";
 import FarmerPlotDataCard from "./FarmerPlotDataCard";
 import FarmerSeasonalDataCard from "./FarmerSeasonDataCard";
 import { CustomToast } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
+
 // This component contains all components of farmer profile page
 function FarmerProfile(props) {
   const { MHCodeFromParams } = useParams();
@@ -112,10 +115,7 @@ function FarmerProfile(props) {
     if (props.flg) {
       // Fetching data for a particular plot when we land here from
       axios
-        .get(
-          "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
-            MHCodeFromParams
-        )
+        .get(process.env.BACKEND_URL + "/farmers/MHCode/" + MHCodeFromParams)
         .then((data) => {
           // console.log("Recived by MHCode", data.data, data.data.length);
           if (data.data.length) {
@@ -142,7 +142,8 @@ function FarmerProfile(props) {
             // fetching the seasonal data of plot from which we landed on profile page
             axios
               .get(
-                "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
+                process.env.BACKEND_URL +
+                  "/seasonalData/plots/" +
                   receivedData.plots[i]._id
               )
               .then((data) => {
@@ -166,7 +167,7 @@ function FarmerProfile(props) {
     }
     // get request for getting farmer and his corresponding plots
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -220,8 +221,7 @@ function FarmerProfile(props) {
               onChange={(event) => {
                 axios
                   .get(
-                    "https://immense-beach-88770.herokuapp.com/farmers/MHCode/" +
-                      event.MHCode
+                    process.env.BACKEND_URL + "/farmers/MHCode/" + event.MHCode
                   )
                   .then((data) => {
                     // console.log("Recived by MHCode", data.data, data.data.length);
@@ -243,7 +243,8 @@ function FarmerProfile(props) {
                           // fetching seasonal data of all years of a selected farmer's selected plot
                           axios
                             .get(
-                              "https://immense-beach-88770.herokuapp.com/seasonalData/plots/" +
+                              process.env.BACKEND_URL +
+                                "/seasonalData/plots/" +
                                 receivedData.plots[i]._id
                             )
                             .then((data) => {

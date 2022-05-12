@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import axios from "axios";
 import { CustomToast } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Component is used for displaying Maps on dashboard
 function Main() {
@@ -16,7 +18,7 @@ function Main() {
   useEffect(() => {
     // Getting all farmers and then extracting the coordinates
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/")
+      .get(process.env.BACKEND_URL + "/farmers/")
       .then((res) => {
         // console.log("Res", res);
         let arr = [];
@@ -88,7 +90,7 @@ function Main() {
 
     // To get no of articles
     axios
-      .get("https://immense-beach-88770.herokuapp.com/broadcasts/")
+      .get(process.env.BACKEND_URL + "/broadcasts/")
       .then((res) => {
         // console.log("Res", res.data.length);
         setTotalNumberofArticles(res.data.length);

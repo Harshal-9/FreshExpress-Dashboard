@@ -6,6 +6,8 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 import { ToastContainer } from "react-toastify";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for Viewing and Editing the admin profile
 function AdminProfile(props) {
@@ -19,10 +21,7 @@ function AdminProfile(props) {
     if (props) {
       // Fetching the details of admin from the admin Id obtained from props
       axios
-        .get(
-          "https://immense-beach-88770.herokuapp.com/admins/" +
-            props.loginData.mongoId
-        )
+        .get(process.env.BACKEND_URL + "/admins/" + props.loginData.mongoId)
         .then((res) => {
           setAdminData(res.data);
         })
@@ -156,7 +155,8 @@ function AdminProfile(props) {
                     // Sending patch request to edit the data of admin
                     axios
                       .patch(
-                        "https://immense-beach-88770.herokuapp.com/admins/" +
+                        process.env.BACKEND_URL +
+                          "/admins/" +
                           "626d90a967e461b167ff247d",
                         adminData
                       )

@@ -11,6 +11,8 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 import "./MRLMonitoring.css";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
@@ -129,7 +131,7 @@ function MRLMonitoring() {
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -169,7 +171,8 @@ function MRLMonitoring() {
             onClick={() => {
               axios
                 .post(
-                  "https://immense-beach-88770.herokuapp.com/mrlReports/delete/" +
+                  process.env.BACKEND_URL +
+                    "/mrlReports/delete/" +
                     activeMRLReport._id
                 )
                 .then((res) => {
@@ -229,8 +232,7 @@ function MRLMonitoring() {
               // Getting MRL Report of particular farm
               axios
                 .get(
-                  "https://immense-beach-88770.herokuapp.com/mrlReports/MHCode/" +
-                    event.MHCode
+                  process.env.BACKEND_URL + "/mrlReports/MHCode/" + event.MHCode
                 )
                 .then((res) => {
                   // console.log("Res", res);

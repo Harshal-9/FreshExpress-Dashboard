@@ -8,6 +8,8 @@ import UpdateSuccessToast, {
 } from "../Toasts/AllToasts";
 import { MultiSelect } from "react-multi-select-component";
 import Popup from "./Popup";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for adding and deleting the admin
 function FarmerSeasonalDataCard(props) {
@@ -128,10 +130,7 @@ function FarmerSeasonalDataCard(props) {
 
     // Getting link of uploaded image
     axios
-      .post(
-        "https://immense-beach-88770.herokuapp.com/uploadFile/REPORTS_FOLDER",
-        fd
-      )
+      .post(process.env.BACKEND_URL + "/uploadFile/REPORTS_FOLDER", fd)
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -300,10 +299,7 @@ function FarmerSeasonalDataCard(props) {
       // console.log("Data", dataToSend);
 
       axios
-        .post(
-          "https://immense-beach-88770.herokuapp.com/seasonalData",
-          dataToSend
-        )
+        .post(process.env.BACKEND_URL + "/seasonalData", dataToSend)
         .then((res) => {
           CustomToast(
             "Year added successfully ! Page will be reloaded",
@@ -973,7 +969,8 @@ function FarmerSeasonalDataCard(props) {
                 // sendBackSeasonalAllData([seasonalAllDataReceived]);
                 axios
                   .post(
-                    "https://immense-beach-88770.herokuapp.com/seasonalData/edit/" +
+                    process.env.BACKEND_URL +
+                      "/seasonalData/edit/" +
                       prevData._id,
                     prevData
                   )
@@ -998,7 +995,8 @@ function FarmerSeasonalDataCard(props) {
 
                 axios
                   .post(
-                    "https://immense-beach-88770.herokuapp.com/seasonalData/delete/deleteBySeasonalId/" +
+                    process.env.BACKEND_URL +
+                      "/seasonalData/delete/deleteBySeasonalId/" +
                       seasonalAllDataReceived._id
                   )
                   .then((res) => {

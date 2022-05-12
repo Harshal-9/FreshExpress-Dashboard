@@ -1,5 +1,7 @@
 import "./Sidebar.css";
 import logo from "../../assets/logo.png";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is for sidebar
 const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
@@ -58,12 +60,12 @@ const Sidebar = ({ sidebarOpen, closeSidebar, loginData }) => {
           <a href="/ViewAllFarmers">All Farmers</a>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-tree"></i>
-          <a href="/CropMonitoring">Crop Monitoring</a>
-        </div>
-        <div className="sidebar__link">
           <i className="fa fa-image"></i>
           <a href="/MRLMonitoring">MRL Monitoring</a>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-tree"></i>
+          <a href="/CropMonitoring">Crop Monitoring</a>
         </div>
 
         <h2>Daily Diary</h2>

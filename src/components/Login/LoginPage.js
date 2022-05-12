@@ -6,6 +6,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 function LoginPage(props) {
   const [showPage, setShowPage] = useState(false);
@@ -18,7 +20,7 @@ function LoginPage(props) {
     fd.append("password", event.target.password.value);
 
     axios
-      .post("https://immense-beach-88770.herokuapp.com/login", fd, {
+      .post(process.env.BACKEND_URL + "/login", fd, {
         withCredentials: true,
       })
       .then((res) => {
@@ -39,8 +41,10 @@ function LoginPage(props) {
   }
 
   useEffect(() => {
+    console.log(process.env.BACKEND_URL + "/login");
+    console.log(process.env);
     axios
-      .get("https://immense-beach-88770.herokuapp.com/login", {
+      .get(process.env.BACKEND_URL + "/login", {
         withCredentials: true,
       })
       .then((res) => {

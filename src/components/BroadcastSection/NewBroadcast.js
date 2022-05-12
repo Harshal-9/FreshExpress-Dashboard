@@ -8,6 +8,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 function NewBroadcast() {
   const [selected, setSelected] = useState("");
@@ -34,7 +36,7 @@ function NewBroadcast() {
   useEffect(() => {
     // to get data for tags dropdown
     axios
-      .get("https://immense-beach-88770.herokuapp.com/filters")
+      .get(process.env.BACKEND_URL + "/filters")
       .then((res) => {
         //settings tags in dropdown
         const tags = [];
@@ -58,7 +60,7 @@ function NewBroadcast() {
       });
     //To get data for farmers dropdown
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((res) => {
         const data = []; //to store options of farmer dropdown
         for (let i = 0; i < res.data.length; i++) {
@@ -88,7 +90,7 @@ function NewBroadcast() {
 
     // Getting link of uploaded image
     axios
-      .post("https://immense-beach-88770.herokuapp.com/uploadFile", fd)
+      .post(process.env.BACKEND_URL + "/uploadFile", fd)
       .then((res) => {
         UpdateSuccessToast(
           "File : " + handleChangeSelectedFile.name + " uploaded successfully !"
@@ -107,7 +109,7 @@ function NewBroadcast() {
   function handleDelete(e) {
     e.preventDefault();
     axios
-      .delete("https://immense-beach-88770.herokuapp.com/uploadFile", {
+      .delete(process.env.BACKEND_URL + "/uploadFile", {
         data: {
           id: selectedFile.id,
         },
@@ -188,7 +190,7 @@ function NewBroadcast() {
     }
     console.log("data to send", dataToSend);
     axios
-      .post("https://immense-beach-88770.herokuapp.com/broadcasts", dataToSend)
+      .post(process.env.BACKEND_URL + "/broadcasts", dataToSend)
       .then((res) => {
         console.log("response", res);
         UpdateSuccessToast("New Article added successfully !");

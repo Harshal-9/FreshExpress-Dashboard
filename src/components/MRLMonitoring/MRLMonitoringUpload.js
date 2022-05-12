@@ -4,6 +4,8 @@ import { CustomToast } from "../Toasts/AllToasts";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for uploading CSV for MRL reports
 function MRLMonitoringUpload() {
@@ -20,10 +22,7 @@ function MRLMonitoringUpload() {
     );
     // posting csv to backend
     axios
-      .post(
-        "https://immense-beach-88770.herokuapp.com/mrlReports/uploadCSV",
-        fd
-      )
+      .post(process.env.BACKEND_URL + "/mrlReports/uploadCSV", fd)
       .then((res) => {
         CustomToast(res.data.message, "white", "#4CAF50");
       })

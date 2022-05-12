@@ -7,6 +7,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import axios from "axios";
 import { FailureToast, CustomToast } from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
@@ -290,7 +292,7 @@ function AllDiaries() {
   useEffect(() => {
     // get request for getting farmer and his corresponding plots
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((res) => {
         let Data = [...res.data];
         // console.log("Data Here :", Data);
@@ -348,10 +350,7 @@ function AllDiaries() {
         onChange={(e) => {
           // Getting all daily daries of particular plot
           axios
-            .get(
-              "https://immense-beach-88770.herokuapp.com/dailyDiary/MHCode/" +
-                e.MHCode
-            )
+            .get(process.env.BACKEND_URL + "/dailyDiary/MHCode/" + e.MHCode)
             .then((data) => {
               let receivedData = data.data;
 

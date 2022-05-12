@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ViewAllFarmers.css";
-
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { MultiSelect } from "react-multi-select-component";
 import { CustomToast } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
+
 // Below functions for adding search icon in reactselect
 library.add(faSearch);
 const CaretDownIcon = () => {
@@ -238,7 +240,7 @@ function ViewAllFarmers() {
   useEffect(() => {
     // for getting all farmers from backend
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers")
+      .get(process.env.BACKEND_URL + "/farmers")
       .then((data) => {
         let receivedData = data.data;
 
@@ -273,7 +275,7 @@ function ViewAllFarmers() {
 
     // for getting all fiters data from backend
     axios
-      .get("https://immense-beach-88770.herokuapp.com/filters")
+      .get(process.env.BACKEND_URL + "/filters")
       .then((data) => {
         // console.log("Data", data.data[0]);
         setAllFiltersData(data.data[0]);
@@ -306,7 +308,7 @@ function ViewAllFarmers() {
       });
 
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((data) => {
         let receivedData = data.data;
         // console.log(receivedData);
@@ -450,7 +452,7 @@ function ViewAllFarmers() {
         className="exportButton"
         onClick={() => {
           window.location.assign(
-            "https://immense-beach-88770.herokuapp.com/farmers/exportFarmers"
+            process.env.BACKEND_URL + "/farmers/exportFarmers"
           );
         }}
       >

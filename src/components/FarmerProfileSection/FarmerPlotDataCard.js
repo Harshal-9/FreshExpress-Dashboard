@@ -5,6 +5,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for Editing and deleting plot of a farmer
 function FarmerPlotDataCard(props) {
@@ -299,7 +301,8 @@ function FarmerPlotDataCard(props) {
                 if (plotAllData.farmInformation.MHCode) {
                   axios
                     .post(
-                      "https://immense-beach-88770.herokuapp.com/farmers/delete/plot/" +
+                      process.env.BACKEND_URL +
+                        "/farmers/delete/plot/" +
                         plotAllData._id
                     )
                     .then((res) => {
@@ -359,7 +362,8 @@ function FarmerPlotDataCard(props) {
 
                 axios
                   .post(
-                    "https://immense-beach-88770.herokuapp.com/farmers/plots/edit/" +
+                    process.env.BACKEND_URL +
+                      "/farmers/plots/edit/" +
                       plotAllData._id,
                     plotAllData
                   )

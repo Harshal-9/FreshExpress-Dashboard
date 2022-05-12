@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import Select from "react-select";
+import dotenv from "dotenv";
+dotenv.config();
 
 // below two functions are to handle chat in broadcast section
 function SingleChat(props) {
@@ -18,10 +20,11 @@ function SingleChat(props) {
     chat.adminName = props.userId;
     axios
       .post(
-        "https://immense-beach-88770.herokuapp.com/broadcasts/insertAnswer/" +
-        broadcastId +
-        "/" +
-        chat._id,
+        process.env.BACKEND_URL +
+          "/broadcasts/insertAnswer/" +
+          broadcastId +
+          "/" +
+          chat._id,
         chat
       )
       .then((res) => {
@@ -132,7 +135,7 @@ function ViewArticle({ loginData }) {
 
     // getting farmerID to extract farmername
     axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers/plots")
+      .get(process.env.BACKEND_URL + "/farmers/plots")
       .then((res) => {
         for (let i = 0; i < res.data.length; i++) {
           tempArray.set(res.data[i].farmerID, res.data[i].farmerName);
@@ -140,10 +143,7 @@ function ViewArticle({ loginData }) {
         setFarmersIdMapping(tempArray);
         //to get all broadcast data
         axios
-          .get(
-            "https://immense-beach-88770.herokuapp.com/broadcasts/" +
-            broadcastId
-          )
+          .get(process.env.BACKEND_URL + "/broadcasts/" + broadcastId)
           .then((res1) => {
             //setting main data to usestate
             setBroadcastData(res1.data);
@@ -202,7 +202,6 @@ function ViewArticle({ loginData }) {
       </h1>
       <div className="viewArticleFirst">
         <div className="viewArticleImage">
-
           {/* setting data by checking whether it is image,youtube video or pdf */}
           {broadcastData.format === "jpg" ? (
             <img
@@ -289,7 +288,6 @@ function ViewArticle({ loginData }) {
           <br />
           <hr />
           <br />
-          <h4>Analytics :</h4>
           <br />
           {/* <p>
             <ul style={{ marginLeft: "20px" }}>

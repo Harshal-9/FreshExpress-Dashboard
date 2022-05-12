@@ -7,6 +7,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "./Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 function ResetPassword() {
   const [options, setOptions] = useState([]);
@@ -24,7 +26,7 @@ function ResetPassword() {
     }
 
     axios
-      .post("https://immense-beach-88770.herokuapp.com/login/forgotPassword", {
+      .post(process.env.BACKEND_URL + "/login/forgotPassword", {
         userId: selectedUser.value,
         password: event.target.newPassword.value,
       })
@@ -39,7 +41,7 @@ function ResetPassword() {
 
   useEffect(() => {
     axios
-      .get("https://immense-beach-88770.herokuapp.com/login/usernames")
+      .get(process.env.BACKEND_URL + "/login/usernames")
       .then((res) => {
         console.log("Res", res);
 

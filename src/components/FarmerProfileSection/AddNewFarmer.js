@@ -7,6 +7,8 @@ import UpdateSuccessToast, {
   CustomToast,
 } from "../Toasts/AllToasts";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 // This component is used for adding new farmer
 function AddNewFarmer() {
@@ -97,7 +99,7 @@ function AddNewFarmer() {
 
     //posting the new farmer data
     axios
-      .post("https://immense-beach-88770.herokuapp.com/farmers", dataToSend)
+      .post(process.env.BACKEND_URL + "/farmers", dataToSend)
       .then((res) => {
         console.log("Response", res);
         UpdateSuccessToast();
@@ -155,7 +157,8 @@ function AddNewFarmer() {
 
     axios
       .post(
-        "https://immense-beach-88770.herokuapp.com/farmers/plots/addPlot/" +
+        process.env.BACKEND_URL +
+          "/farmers/plots/addPlot/" +
           selectedFarmer.value,
         dataToSend
       )
@@ -172,42 +175,38 @@ function AddNewFarmer() {
 
   useEffect(() => {
     // for getting all GGNs from backend
-    axios
-      .get("https://immense-beach-88770.herokuapp.com/filters")
-      .then((data) => {
-        const recievedObj = data.data[0];
-        const tempGGN = [];
-        const tempMHCode = [];
-        for (let i in recievedObj.GGN) {
-          tempGGN.push({
-            label: recievedObj.GGN[i],
-            value: recievedObj.GGN[i],
-          });
-        }
-        for (let i in recievedObj.MHCode) {
-          tempMHCode.push(recievedObj.MHCode[i]);
-        }
+    axios.get(process.env.BACKEND_URL + "/filters").then((data) => {
+      const recievedObj = data.data[0];
+      const tempGGN = [];
+      const tempMHCode = [];
+      for (let i in recievedObj.GGN) {
+        tempGGN.push({
+          label: recievedObj.GGN[i],
+          value: recievedObj.GGN[i],
+        });
+      }
+      for (let i in recievedObj.MHCode) {
+        tempMHCode.push(recievedObj.MHCode[i]);
+      }
 
-        setAllGGN(tempGGN);
-        setAllMHCode(tempMHCode);
-      });
+      setAllGGN(tempGGN);
+      setAllMHCode(tempMHCode);
+    });
 
     // for getting all farmers
-    axios
-      .get("https://immense-beach-88770.herokuapp.com/farmers")
-      .then((data) => {
-        let receivedData = data.data;
+    axios.get(process.env.BACKEND_URL + "/farmers").then((data) => {
+      let receivedData = data.data;
 
-        const tempFarmersArr = [];
-        for (let i = 0; i < receivedData.length; i++) {
-          // console.log(receivedData[i]);
-          tempFarmersArr.push({
-            label: receivedData[i].personalInformation.name,
-            value: receivedData[i]._id,
-          });
-        }
-        setAllFarmers(tempFarmersArr);
-      });
+      const tempFarmersArr = [];
+      for (let i = 0; i < receivedData.length; i++) {
+        // console.log(receivedData[i]);
+        tempFarmersArr.push({
+          label: receivedData[i].personalInformation.name,
+          value: receivedData[i]._id,
+        });
+      }
+      setAllFarmers(tempFarmersArr);
+    });
   }, []);
 
   return (

@@ -9,6 +9,8 @@ import UpdateSuccessToast, {
   FailureToast,
   CustomToast,
 } from "../Toasts/AllToasts";
+import dotenv from "dotenv";
+dotenv.config();
 
 //function to show individual broadcast component
 
@@ -24,10 +26,7 @@ function BroadcastSingleCard(props) {
   //function to delete broadcast
   function handleBroadcastDelete() {
     axios
-      .post(
-        "https://immense-beach-88770.herokuapp.com/broadcasts/delete/" +
-          data._id
-      )
+      .post(process.env.BACKEND_URL + "/broadcasts/delete/" + data._id)
       .then((res) => {
         CustomToast(
           "Article deleted Successfully ! Page will be reloaded",
@@ -266,7 +265,7 @@ function BroadcastShowAll() {
   useEffect(() => {
     //request to get broadcast data
     axios
-      .get("https://immense-beach-88770.herokuapp.com/broadcasts")
+      .get(process.env.BACKEND_URL + "/broadcasts")
       .then((res) => {
         const tempArray = [];
         const temp = [];
@@ -282,18 +281,16 @@ function BroadcastShowAll() {
       });
 
     //request to get filter data
-    axios
-      .get("https://immense-beach-88770.herokuapp.com/filters")
-      .then((res) => {
-        const tempCategory = [];
-        for (let i = 0; i < res.data[0].broadcastCategory.length; i++) {
-          tempCategory.push({
-            value: res.data[0].broadcastCategory[i],
-            label: res.data[0].broadcastCategory[i],
-          });
-        }
-        setDropdownCategoryArray(tempCategory);
-      });
+    axios.get(process.env.BACKEND_URL + "/filters").then((res) => {
+      const tempCategory = [];
+      for (let i = 0; i < res.data[0].broadcastCategory.length; i++) {
+        tempCategory.push({
+          value: res.data[0].broadcastCategory[i],
+          label: res.data[0].broadcastCategory[i],
+        });
+      }
+      setDropdownCategoryArray(tempCategory);
+    });
   }, []);
 
   return (

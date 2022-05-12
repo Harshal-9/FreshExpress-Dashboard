@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { CustomToast } from "../Toasts/AllToasts";
 import "./SingleDiary.css";
+import dotenv from "dotenv";
+dotenv.config();
 
 // function to get completion status
 function getCompletionStatus(dateReceived) {
@@ -242,10 +244,7 @@ function SingleDiary(props) {
   useEffect(() => {
     // Fetching particular daily dairy
     axios
-      .get(
-        "https://immense-beach-88770.herokuapp.com/dailyDiary/diary/" +
-          dailyDiaryId
-      )
+      .get(process.env.BACKEND_URL + "/dailyDiary/diary/" + dailyDiaryId)
       .then((receivedDiary) => {
         // console.log("Received Diary", receivedDiary);
         setDiaryDetails(receivedDiary);

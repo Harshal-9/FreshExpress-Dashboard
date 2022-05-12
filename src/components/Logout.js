@@ -2,9 +2,12 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Logout.css";
+import dotenv from "dotenv";
+dotenv.config();
+
 function handleClick(navigate) {
   axios
-    .get("https://immense-beach-88770.herokuapp.com/logout", {
+    .get(process.env.BACKEND_URL + "/logout", {
       withCredentials: true,
     })
     .then((res) => {
