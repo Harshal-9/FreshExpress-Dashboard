@@ -3,7 +3,7 @@
 //Components in Frontend
 <h3>Daily Diary Form</h3>
 <br/>
-<p This component is used for creating daily diary form .This form is used to schedule various works for farmers.The work is scheduled by admins.Admin has to select farmer name ,plot associated with that farmer and respective dates ...these fields are mandatory./>
+<p> This component is used for creating daily diary form .This form is used to schedule various works for farmers.The work is scheduled by admins.Admin has to select farmer name ,plot associated with that farmer and respective dates ...these fields are mandatory.</p>
 
 <br/>
 <h3>Daily Diary</h3>
